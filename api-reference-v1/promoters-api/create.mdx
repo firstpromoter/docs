@@ -1,0 +1,12 @@
+---
+title: 'Create a new promoter'
+openapi: 'openapi-promoters POST /create'
+---
+
+Use this endpoint to create new promoters using the API. The response will return the newly added promoter as JSON.
+
+Probably the most important value from the response is "auth_token", which is a unique key auto-generated on creation and can be used to automatically log in your promoters to their dashboard. Learn more
+
+<Note>
+ If this call is successful and you enabled "Promoter sign up accepted" emails for the campaign, it will start sending emails to the promoter. To skip the emails, set the skip_email_notification parameter to "true".
+</Note>

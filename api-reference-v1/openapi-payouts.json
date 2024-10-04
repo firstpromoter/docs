@@ -1,0 +1,838 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "FirstPromoter Payouts API",
+    "description": "The Payouts API lets you to list and change the payouts status of your promoters.",
+    "license": {
+      "name": "MIT"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://firstpromoter.com/api/v1/payouts"
+    }
+  ],
+  "security": [
+    {
+      "apiKeyAuth": []
+    }
+  ],
+  "paths": {
+    "/list": {
+      "get": {
+        "description": "With this endpoint you can list all payouts of a promoter, campaign or entire account using the API. <Tip>**HTTP Request** <br/><br/> `GET https://firstpromoter.com/api/v1/payouts/list`</Tip>",
+        "parameters": [
+          {
+            "name": "promoter_id",
+            "in": "query",
+            "description": "List all payouts assigned to a promoter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "campaign_id",
+            "in": "query",
+            "description": "List all payouts of a campaign",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Filter payouts by status.",
+            "schema": {
+              "type": "string",
+              "enum": ["pending", "processing", "completed"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 2709255
+                      },
+                      "status": {
+                        "type": "string",
+                        "example": "completed"
+                      },
+                      "amount": {
+                        "type": "integer",
+                        "example": 12
+                      },
+                      "date_paid": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-09-04T15:23:20.630Z"
+                      },
+                      "due_date": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": null
+                      },
+                      "unit": {
+                        "type": "string",
+                        "example": "points"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-09-04T15:23:16.392Z"
+                      },
+                      "has_issues": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "reward": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 140362
+                          },
+                          "amount": {
+                            "type": "integer",
+                            "example": 0
+                          },
+                          "type": {
+                            "type": "string",
+                            "example": "per_promotion"
+                          },
+                          "unit": {
+                            "type": "string",
+                            "example": "points"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "Points"
+                          },
+                          "per_of_sale": {
+                            "type": "integer",
+                            "example": 0
+                          },
+                          "default_promo_code": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": null
+                          }
+                        }
+                      },
+                      "promoter": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 8736661
+                          },
+                          "status": {
+                            "type": "string",
+                            "example": "active"
+                          },
+                          "cust_id": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": null
+                          },
+                          "email": {
+                            "type": "string",
+                            "example": "test+demo2@mail.com"
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2024-08-21T17:08:40.500Z"
+                          },
+                          "temp_password": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": "api@test1A0"
+                          },
+                          "default_promotion_id": {
+                            "type": "integer",
+                            "example": 10008220
+                          },
+                          "pref": {
+                            "type": "string",
+                            "example": "2ejxve3"
+                          },
+                          "default_ref_id": {
+                            "type": "string",
+                            "example": "i4fth"
+                          },
+                          "note": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": null
+                          },
+                          "w8_form_url": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": null
+                          },
+                          "w9_form_url": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": null
+                          },
+                          "parent_promoter_id": {
+                            "type": "integer",
+                            "nullable": true,
+                            "example": null
+                          },
+                          "earnings_balance": {
+                            "type": "object",
+                            "properties": {
+                              "cash": {
+                                "type": "integer",
+                                "example": 28800
+                              },
+                              "points": {
+                                "type": "integer",
+                                "example": 24
+                              },
+                              "free_months": {
+                                "type": "integer",
+                                "example": 3
+                              }
+                            }
+                          },
+                          "current_balance": {
+                            "type": "object",
+                            "properties": {
+                              "cash": {
+                                "type": "integer",
+                                "example": 28800
+                              },
+                              "points": {
+                                "type": "integer",
+                                "example": -24
+                              },
+                              "free_months": {
+                                "type": "integer",
+                                "example": -3
+                              }
+                            }
+                          },
+                          "paid_balance": {
+                            "type": "object",
+                            "properties": {
+                              "points": {
+                                "type": "integer",
+                                "example": 48
+                              },
+                              "free_months": {
+                                "type": "integer",
+                                "example": 6
+                              }
+                            }
+                          },
+                          "auth_token": {
+                            "type": "string",
+                            "example": "pDdv3MnxH86p8s2WxJfMpSJfsYNV6SxX"
+                          }
+                        }
+                      },
+                      "campaign": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 26127
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "Make Campaign"
+                          },
+                          "landing_url": {
+                            "type": "string",
+                            "example": "https://lastechworld.com"
+                          },
+                          "description": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": null
+                          },
+                          "private": {
+                            "type": "boolean",
+                            "example": false
+                          },
+                          "color": {
+                            "type": "string",
+                            "example": "#26a69a"
+                          },
+                          "default_webhook_url": {
+                            "type": "string",
+                            "example": "https://hook.eu1.make.com/mw5u7tb7mnopiriozq8nb6wbeb82omrd"
+                          },
+                          "auto_approve_rewards": {
+                            "type": "boolean",
+                            "example": true
+                          },
+                          "auto_approve_promoters": {
+                            "type": "boolean",
+                            "example": true
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/create": {
+      "post": {
+        "description": "This call allows you to create a payout for a specific promoter for the entire unpaid amount.",
+        "parameters": [
+          {
+            "name": "promoter_email",
+            "in": "query",
+            "required": true,
+            "description": "`required if promoter_id is null` \n\n Email of the promoter",
+            "schema": {
+              "type": "string",
+              "format": "email"
+            }
+          },
+          {
+            "name": "promoter_id",
+            "in": "query",
+            "description": "`required if promoter_email is null` \n\n Id of the promoter to assign the payout",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "The payout status",
+            "schema": {
+              "type": "string",
+              "enum": ["pending", "processing", "completed"]
+            }
+          },
+          {
+            "name": "campaign_id",
+            "in": "query",
+            "description": "For what campaign to create the payout. If is null, we'll take the promoter's default",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 2710287
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "pending"
+                    },
+                    "amount": {
+                      "type": "integer",
+                      "example": 3000
+                    },
+                    "date_paid": {
+                      "type": "string",
+                      "format": "date-time",
+                      "nullable": true,
+                      "example": null
+                    },
+                    "due_date": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2024-10-11T00:00:00.000Z"
+                    },
+                    "unit": {
+                      "type": "string",
+                      "example": "cash"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2024-09-12T14:02:53.135Z"
+                    },
+                    "has_issues": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "reward": {
+                      "type": "object",
+                      "nullable": true,
+                      "example": null
+                    },
+                    "promoter": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 8262622
+                        },
+                        "status": {
+                          "type": "string",
+                          "example": "active"
+                        },
+                        "cust_id": {
+                          "type": "string",
+                          "example": ""
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "test@promoter.com"
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2024-05-27T17:43:38.935Z"
+                        },
+                        "temp_password": {
+                          "type": "string",
+                          "example": "xsKyiS"
+                        },
+                        "default_promotion_id": {
+                          "type": "integer",
+                          "example": 9441115
+                        },
+                        "pref": {
+                          "type": "string",
+                          "example": "w4wfj9q"
+                        },
+                        "default_ref_id": {
+                          "type": "string",
+                          "example": "testxeak1xz1"
+                        },
+                        "note": {
+                          "type": "string",
+                          "example": "This is a test promoter. You can use it to test the integration."
+                        },
+                        "w8_form_url": {
+                          "type": "string",
+                          "nullable": true,
+                          "example": null
+                        },
+                        "w9_form_url": {
+                          "type": "string",
+                          "nullable": true,
+                          "example": null
+                        },
+                        "parent_promoter_id": {
+                          "type": "integer",
+                          "nullable": true,
+                          "example": null
+                        },
+                        "earnings_balance": {
+                          "type": "object",
+                          "properties": {
+                            "cash": {
+                              "type": "integer",
+                              "example": 23000
+                            }
+                          }
+                        },
+                        "current_balance": {
+                          "type": "object",
+                          "properties": {
+                            "cash": {
+                              "type": "integer",
+                              "example": 23000
+                            }
+                          }
+                        },
+                        "paid_balance": {
+                          "type": "object",
+                          "nullable": true,
+                          "example": null
+                        },
+                        "auth_token": {
+                          "type": "string",
+                          "example": "bFahsKx8v9_zL9sPTZCDH8JnQAbTeDpy"
+                        }
+                      }
+                    },
+                    "campaign": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 15161
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "Test new campaign"
+                        },
+                        "landing_url": {
+                          "type": "string",
+                          "example": "http://testmax.maxwelladapoe1.com/"
+                        },
+                        "description": {
+                          "type": "string",
+                          "example": ""
+                        },
+                        "private": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "color": {
+                          "type": "string",
+                          "example": "#00bcd4"
+                        },
+                        "default_webhook_url": {
+                          "type": "string",
+                          "example": ""
+                        },
+                        "auto_approve_rewards": {
+                          "type": "boolean",
+                          "example": true
+                        },
+                        "auto_approve_promoters": {
+                          "type": "boolean",
+                          "example": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "You need to pass either promoter_email or promoter_id."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/update": {
+      "put": {
+        "description": "This call allows you to change the status of the payout. For ex. you can mark the payout as completed once the payout is paid.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "description": "ID of payout inside FirstPromoter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "The new payout status.",
+            "schema": {
+              "type": "string",
+              "enum": ["pending", "processing", "completed"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 2710287
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "completed"
+                    },
+                    "amount": {
+                      "type": "integer",
+                      "example": 3000
+                    },
+                    "date_paid": {
+                      "type": "string",
+                      "format": "date-time",
+                      "nullable": true,
+                      "example": null
+                    },
+                    "due_date": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2024-10-11T00:00:00.000Z"
+                    },
+                    "unit": {
+                      "type": "string",
+                      "example": "cash"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2024-09-12T14:02:53.135Z"
+                    },
+                    "has_issues": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "reward": {
+                      "type": "object",
+                      "nullable": true,
+                      "example": null
+                    },
+                    "promoter": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 8262622
+                        },
+                        "status": {
+                          "type": "string",
+                          "example": "active"
+                        },
+                        "cust_id": {
+                          "type": "string",
+                          "example": ""
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "test@promoter.com"
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2024-05-27T17:43:38.935Z"
+                        },
+                        "temp_password": {
+                          "type": "string",
+                          "example": "xsKyiS"
+                        },
+                        "default_promotion_id": {
+                          "type": "integer",
+                          "example": 9441115
+                        },
+                        "pref": {
+                          "type": "string",
+                          "example": "w4wfj9q"
+                        },
+                        "default_ref_id": {
+                          "type": "string",
+                          "example": "testxeak1xz1"
+                        },
+                        "note": {
+                          "type": "string",
+                          "example": "This is a test promoter. You can use it to test the integration."
+                        },
+                        "w8_form_url": {
+                          "type": "string",
+                          "nullable": true,
+                          "example": null
+                        },
+                        "w9_form_url": {
+                          "type": "string",
+                          "nullable": true,
+                          "example": null
+                        },
+                        "parent_promoter_id": {
+                          "type": "integer",
+                          "nullable": true,
+                          "example": null
+                        },
+                        "earnings_balance": {
+                          "type": "object",
+                          "properties": {
+                            "cash": {
+                              "type": "integer",
+                              "example": 23000
+                            }
+                          }
+                        },
+                        "current_balance": {
+                          "type": "object",
+                          "properties": {
+                            "cash": {
+                              "type": "integer",
+                              "example": 23000
+                            }
+                          }
+                        },
+                        "paid_balance": {
+                          "type": "object",
+                          "nullable": true,
+                          "example": null
+                        },
+                        "auth_token": {
+                          "type": "string",
+                          "example": "bFahsKx8v9_zL9sPTZCDH8JnQAbTeDpy"
+                        }
+                      }
+                    },
+                    "campaign": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 15161
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "Test new campaign"
+                        },
+                        "landing_url": {
+                          "type": "string",
+                          "example": "http://testmax.maxwelladapoe1.com/"
+                        },
+                        "description": {
+                          "type": "string",
+                          "example": ""
+                        },
+                        "private": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "color": {
+                          "type": "string",
+                          "example": "#00bcd4"
+                        },
+                        "default_webhook_url": {
+                          "type": "string",
+                          "example": ""
+                        },
+                        "auto_approve_rewards": {
+                          "type": "boolean",
+                          "example": true
+                        },
+                        "auto_approve_promoters": {
+                          "type": "boolean",
+                          "example": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Payment not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "You need to find the payout by id."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Plant": {
+        "required": ["name"],
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "The name of the plant",
+            "type": "string"
+          },
+          "tag": {
+            "description": "Tag to specify the type",
+            "type": "string"
+          }
+        }
+
+      },
+      "NewPlant": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Plant"
+          },
+          {
+            "required": ["id"],
+            "type": "object",
+            "properties": {
+              "id": {
+                "description": "Identification number of the plant",
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ]
+      },
+      "Error": {
+        "required": ["error", "message"],
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-KEY"
+      }
+    }
+  }
+}

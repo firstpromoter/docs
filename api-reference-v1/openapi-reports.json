@@ -1,0 +1,535 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "title": "FirstPromoter Reports API",
+      "description": "The Reports API allow you to retrieve aggregated data of your affiliate performance across 18 data points.",
+      "license": {
+        "name": "MIT"
+      },
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "https://firstpromoter.com/api/v1/reports"
+      }
+    ],
+    "security": [
+      {
+        "apiKeyAuth": []
+      }
+    ],
+    "paths": {
+      "/overview": {
+        "get": {
+          "description": "<Note>With this endpoint you can get an overview across all your campaigns and promoters. Data is updated every `15 minutes`</Note><Tip>**HTTP Request** <br/> `GET https://firstpromoter.com/api/v1/reports/overview` </Tip>",
+          "parameters": [
+            {
+              "name": "selected_fields[]",
+              "in": "query",
+              "description": "An array of fields to return on the response. By default selected fields are `revenue_amount`, `clicks_count`, `referrals_count`, `customers_count`.",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "revenue_amount",
+                    "clicks_count",
+                    "referrals_count",
+                    "customers_count",
+                    "active_customers",
+                    "monthly_churn",
+                    "net_revenue_amount",
+                    "sales_count",
+                    "refunds_count",
+                    "cancelled_customers_count",
+                    "promoter_earnings_amount",
+                    "non_link_customers",
+                    "referrals_to_customers_cr",
+                    "3m_epc",
+                    "6m_epc",
+                    "clicks_to_customers_cr",
+                    "clicks_to_referrals_cr",
+                    "promoter_paid_amount"
+                  ]
+                }
+              },
+              "style": "form",
+              "explode": true,
+              "allowReserved": true
+            },
+            {
+              "name": "sort",
+              "in": "query",
+              "description": "Field used for sorting. If is not passed it takes the first field from `selected_fields[]`",
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "revenue_amount",
+                  "clicks_count",
+                  "referrals_count",
+                  "customers_count",
+                  "active_customers",
+                  "monthly_churn",
+                  "net_revenue_amount",
+                  "sales_count",
+                  "refunds_count",
+                  "cancelled_customers_count",
+                  "promoter_earnings_amount",
+                  "non_link_customers",
+                  "referrals_to_customers_cr",
+                  "3m_epc",
+                  "6m_epc",
+                  "clicks_to_customers_cr",
+                  "clicks_to_referrals_cr",
+                  "promoter_paid_amount"
+                ]
+              }
+            },
+            {
+              "name": "sort_dir",
+              "in": "query",
+              "description": "Sorting direction. By default is `desc`.",
+              "schema": {
+                "type": "string",
+                "enum": ["asc", "desc"]
+              }
+            },
+            {
+              "name": "group_by",
+              "in": "query",
+              "description": "Period to group by. By default is `month`. For day grouping, reporting period span is limitd at `90 days`",
+              "schema": {
+                "type": "string",
+                "enum": ["day", "month", "year"]
+              }
+            },
+            {
+              "name": "start_date",
+              "in": "query",
+              "description": "Beginning of reporting period. Default is set as `12 months ago`",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "end_date",
+              "in": "query",
+              "description": "End of reporting period. Default is set as `today`",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Overview report response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Report"
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Authentication Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AuthenticationError"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Unprocessable Entity",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnprocessableEntity"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/campaigns": {
+        "get": {
+          "description": "<Note>With this endpoint you can get the report data grouped by campaigns. Data is updated every `15 minutes`</Note><Tip>**HTTP Request** <br/> `GET https://firstpromoter.com/api/v1/reports/campaigns` </Tip>",
+          "parameters": [
+            {
+              "name": "selected_fields[]",
+              "in": "query",
+              "description": "An array of fields to return on the response. By default selected fields are `revenue_amount`, `clicks_count`, `referrals_count`, `customers_count`.",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "revenue_amount",
+                    "clicks_count",
+                    "referrals_count",
+                    "customers_count",
+                    "active_customers",
+                    "monthly_churn",
+                    "net_revenue_amount",
+                    "sales_count",
+                    "refunds_count",
+                    "cancelled_customers_count",
+                    "promoter_earnings_amount",
+                    "non_link_customers",
+                    "referrals_to_customers_cr",
+                    "3m_epc",
+                    "6m_epc",
+                    "clicks_to_customers_cr",
+                    "clicks_to_referrals_cr",
+                    "promoter_paid_amount"
+                  ]
+                }
+              },
+              "style": "form",
+              "explode": true,
+              "allowReserved": true
+            },
+            {
+              "name": "group_by",
+              "in": "query",
+              "description": "Period to group by. By default is month. For day grouping, reporting period span is limitd at `90 days`",
+              "schema": {
+                "type": "string",
+                "enum": ["day", "month", "year"]
+              }
+            },
+            {
+              "name": "start_date",
+              "in": "query",
+              "description": "Beginning of reporting period. Default is set as `12 months ago`",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "end_date",
+              "in": "query",
+              "description": "End of reporting period. Default is set as `today`",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Campaign report response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/CampaignReport"
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Authentication Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AuthenticationError"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Unprocessable Entity",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnprocessableEntity"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/promoters": {
+        "get": {
+          "description": "<Note>With this endpoint you can get the report data grouped by promoters. Data is updated once a day, at midnight. This endpoint supports pagination, similar with other endpoints, by passing `page` param.<br/><br/>If you want to iterate through all promoters, you **must start with** `page=1` and continue to next pages based on header pagination links from the response. The paginated promoters are always ordered by the total revenue made (not the revenue brought during the selected period).<br/><br/>If **page param is ommited**, we'll return **top 50 promoters** by **revenue amount** on the selected period. You can get the **top 50 promoters** sorted by a different metric using the `top_50` parameter.</Note><Tip> **HTTP Request** <br/> `GET https://firstpromoter.com/api/v1/reports/promoters`</Tip>",
+          "parameters": [
+            {
+              "name": "selected_fields[]",
+              "in": "query",
+              "description": "An array of fields to return on the response. By default selected fields are `revenue_amount`, `clicks_count`, `referrals_count`, `customers_count`",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "revenue_amount",
+                    "clicks_count",
+                    "referrals_count",
+                    "customers_count",
+                    "active_customers",
+                    "monthly_churn",
+                    "net_revenue_amount",
+                    "sales_count",
+                    "refunds_count",
+                    "cancelled_customers_count",
+                    "promoter_earnings_amount",
+                    "non_link_customers",
+                    "referrals_to_customers_cr",
+                    "3m_epc",
+                    "6m_epc",
+                    "clicks_to_customers_cr",
+                    "clicks_to_referrals_cr",
+                    "promoter_paid_amount"
+                  ]
+                }
+              },
+              "style": "form",
+              "explode": true,
+              "allowReserved": true
+            },
+            {
+
+              "name": "promoter_ids[]",
+              "in": "query",
+              "description": "An array of ids of the selected Promoters. If omitted, all Promoters will be returned",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "name": "group_by",
+              "in": "query",
+              "description": "Period to group by. By default is `month`. For day grouping, reporting period span is limitd at `90 days`",
+              "schema": {
+                "type": "string",
+                "enum": ["day", "month", "year"]
+              }
+            },
+            {
+              "name": "top_50",
+              "in": "query",
+              "description": "Show the top 50 promoters by selected metric. By default is `revenue_amount` but it can be any value passed on `selected_fields[]`.",
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "revenue_amount",
+                  "clicks_count",
+                  "referrals_count",
+                  "customers_count",
+                  "active_customers",
+                  "monthly_churn",
+                  "net_revenue_amount",
+                  "sales_count",
+                  "refunds_count",
+                  "cancelled_customers_count",
+                  "promoter_earnings_amount",
+                  "non_link_customers",
+                  "referrals_to_customers_cr",
+                  "3m_epc",
+                  "6m_epc",
+                  "clicks_to_customers_cr",
+                  "clicks_to_referrals_cr",
+                  "promoter_paid_amount"
+                ]
+              }
+            },
+            {
+              "name": "start_date",
+              "in": "query",
+              "description": "Beginning of reporting period. Default is set as `12 months ago`",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "end_date",
+              "in": "query",
+              "description": "End of reporting period. Default is set as `today`",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Promoter report response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/PromoterReport"
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Authentication Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AuthenticationError"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Unprocessable Entity",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnprocessableEntity"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Report": {
+          "type": "object",
+          "properties": {
+            "revenue_amount": {
+              "type": "string",
+              "example": "$613.17"
+            },
+            "clicks_count": {
+              "type": "number",
+              "example": 100
+            },
+            "referrals_count": {
+              "type": "number",
+              "example": 60
+            },
+            "customers_count": {
+              "type": "number",
+              "example": 30
+            },
+            "period": {
+              "type": "string",
+              "example": "Sep 2024"
+            }
+          }
+        },
+        "CampaignReport": {
+          "type": "object",
+          "properties": {
+            "campaign_name": {
+              "description": "Name of the campaign",
+              "type": "string",
+              "example": "Test Campaign"
+            },
+            "campaign_id": {
+              "description": "ID of the Campaign",
+              "type": "number",
+              "example": 18519
+            },
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Report"
+              }
+            },
+            "revenue_amount": {
+              "type": "string",
+              "example": "$613.17"
+            },
+            "clicks_count": {
+              "type": "number",
+              "example": 100
+            },
+            "referrals_count": {
+              "type": "number",
+              "example": 60
+            },
+            "customers_count": {
+              "type": "number",
+              "example": 30
+            }
+          }
+        },
+        "PromoterReport": {
+          "type": "object",
+          "properties": {
+            "promoter_name": {
+              "description": "Promoter's name",
+              "type": "string",
+              "example": "Test Promoter"
+            },
+            "promoter_id": {
+              "description": "ID of the promoter",
+              "type": "number",
+              "example": 5487437
+            },
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Report"
+              }
+            },
+            "revenue_amount": {
+              "type": "string",
+              "example": "$613.17"
+            },
+            "clicks_count": {
+              "type": "number",
+              "example": 100
+            },
+            "referrals_count": {
+              "type": "number",
+              "example": 60
+            },
+            "customers_count": {
+              "type": "number",
+              "example": 30
+            }
+          }
+        },
+        "UnprocessableEntity": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "example": "Selected Fields invalid !"
+            },
+            "code": {
+              "type": "string",
+              "example": "invalid_params"
+            }
+          }
+        },
+        "AuthenticationError": {
+          "type": "string",
+          "example": "Bad credentials"
+        }
+      },
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer"
+        },
+        "apiKeyAuth": {
+          "type": "apiKey",
+          "in": "header",
+          "name": "X-API-KEY"
+        }
+      }
+    }
+  }
+  

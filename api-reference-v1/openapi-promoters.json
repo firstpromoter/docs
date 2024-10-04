@@ -1,0 +1,1962 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "FirstPromoter Promoters API",
+    "description": "The Promoters API endpoint allows you to manage your affiliates/promoters through API calls. The most important use case is to automatically create promoter accounts for your customers.",
+    "license": {
+      "name": "MIT"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://firstpromoter.com/api/v1/promoters"
+    }
+  ],
+  "security": [
+    {
+      "apiKeyAuth": []
+    }
+  ],
+  "paths": {
+    "/create": {
+      "post": {
+        "description": "Use this endpoint to create new promoters using the API. The response will return the newly added promoter as JSON. Probably the most important value from the response is `auth_token`, which is a unique key auto-generated on creation and can be used to automatically log in your promoters to their dashboard. [Learn more](https://help.firstpromoter.com/faq/how-to-embed-the-promoter-dashboard-inside-your-website-and-log-your-users-in-automatically). <Note> If this call is successful and you enabled `Promoter sign up accepted` emails for the campaign, it will start sending emails to the promoter. To skip the emails, set the `skip_email_notification` parameter to `true`</Note><Tip>**HTTP Request** <br/><br/> `POST https://firstpromoter.com/api/v1/promoters/create`</Tip>",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "description": "Promoter's email",
+            "schema": {
+              "type": "string",
+              "format": "email"
+            }
+          },
+          {
+            "name": "first_name",
+            "in": "query",
+            "description": "Promoter's first name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "last_name",
+            "in": "query",
+            "description": "Promoter's last name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cust_id",
+            "in": "query",
+            "description": "Your customer's user ID inside your application/system for the promoter. It will be avaliable in the webhooks to identify the promoter in your system if you subscribe for FirstPromoter webhooks.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ref_id",
+            "in": "query",
+            "description": "Referral ID. If this is blank an ID is assigned based on the first name. Can be only `lower-case letters` , `numbers` , `-`(hyphen) and `_`(underscore)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "promo_code",
+            "in": "query",
+            "description": "Unique promo code from your billing provider to assign to this affiliate for coupon tracking. This is also known as the `Coupon Code` or `Coupon ID`",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "customer_promo_code",
+            "in": "query",
+            "description": "Customer promo code from your billing provider to assign to this affiliate for coupon tracking. This is also known as `discount code` or `promotion code` or `display code`. This is the code your customer(s) can use on the checkout form/page.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "campaign_id",
+            "in": "query",
+            "description": "The ID of the campaign to assign the promoter to. On the campaigns sections you can see the id as `camp_id` query parameter on 'Promoter Sign Up page URL'. If there is no `camp_id` it means the campaign is the default campaign and this parameter is not required.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "temp_password",
+            "in": "query",
+            "description": "A temporary password promoters can use to log in to their dashboard if you don't use authentication tokens(`auth_token`) to sign promoters in automatically.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "landing_url",
+            "in": "query",
+            "description": "You can set up a custom landing page url for this promoter. The referral id will be appended to it, unless the `url_tracking` parameter(below) is used.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "url_tracking",
+            "in": "query",
+            "description": "Set `true` to enable direct url tracking feature. FirstPromoter will do the tracking based on `landing_url`(above) without requiring the referral id to be appended to the url. The `landing_url` needs to be unique for each promoter. Default is `false`. ",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "website",
+            "in": "query",
+            "description": "Promoter's website ",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "paypal_email",
+            "in": "query",
+            "description": "Promoter's Paypal email address",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "avatar_url",
+            "in": "query",
+            "description": "URL of the profile picture promoters can see on their dashboard",
+            "schema": {
+              "type": "string"
+            }
+          },
+
+          {
+            "name": "parent_promoter_id",
+            "in": "query",
+            "description": "Id of the parent if the promoter is a sub-affiliate",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "parent_promoter_email",
+            "in": "query",
+            "description": "Email of the parent promoter if the promoter is a sub-affiliate",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "linkedin_url",
+            "in": "query",
+            "description": "Promoter's linkedin url",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "twitter_url",
+            "in": "query",
+            "description": "Promoter's twitter url",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "facebook_url",
+            "in": "query",
+            "description": "Promoter's facebook url",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "instagram_url",
+            "in": "query",
+            "description": "Promoter's instagram url",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "youtube_url",
+            "in": "query",
+            "description": "Promoter's youtube url",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "description": "Promoter's country",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "company_name",
+            "in": "query",
+            "description": "Promoter's company name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "phone_number",
+            "in": "query",
+            "description": "Promoter's phone number",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address",
+            "in": "query",
+            "description": "Promoter's address",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "note",
+            "in": "query",
+            "description": "A note/description of promoter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "created_at",
+            "in": "query",
+            "description": "ISO date string of the date of the signup event",
+            "schema": {
+              "type": "string"
+            }
+          },
+
+          {
+            "name": "skip_email_notification",
+            "in": "query",
+            "description": "Set this to `true` to skip email notifications. Default is `false`.",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Promoters created response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Promoter"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "422 Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/update": {
+      "put": {
+        "description": "You can identify promoters by: `id`, `cust_id`, `auth_token` or `ref_id`(referral id). You need to pass at least one of these parameters.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "description": "Promoter's ID inside FirstPromoter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "description": "Promoter's email",
+            "schema": {
+              "type": "string",
+              "format": "email"
+            }
+          },
+          {
+            "name": "first_name",
+            "in": "query",
+            "description": "Promoter's first name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "last_name",
+            "in": "query",
+            "description": "Promoter's last name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cust_id",
+            "in": "query",
+            "description": "Your customer's user ID inside your application/system for the promoter. It will be available in the webhooks to identify the promoter in your system if you subscribe for FirstPromoter webhooks.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "new_cust_id",
+            "in": "query",
+            "description": "Your customer's new user ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ref_id",
+            "in": "query",
+            "description": "Referral ID. If this is blank an ID is assigned based on the first name. Can be only `lower-case letters`, `numbers`, `-`(hyphen) and `_`(underscore)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "new_ref_id",
+            "in": "query",
+            "description": "The new referral ID. Can be only `lower-case letters`, `numbers`, `-`(hyphen) and `_`(underscore)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "auth_token",
+            "in": "query",
+            "description": "Authetication token generated when the promoter was created",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "promo_code",
+            "in": "query",
+            "description": "Unique promo code from your billing provider to assign to this affiliate for coupon tracking. This is also known as the `Coupon Code` or `Coupon ID`",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "customer_promo_code",
+            "in": "query",
+            "description": "Customer promo code from your billing provider to assign to this affiliate for coupon tracking. This is also known as `discount code` or `promotion code` or `display code`. This is the code your customer(s) can use on the checkout form/page.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "campaign_id",
+            "in": "query",
+            "description": "The ID of the campaign to assign the promoter to. On the campaigns sections you can see the id as 'camp_id' query parameter on 'Promoter Sign Up page URL'. If there is no 'camp_id' it means the campaign is the default campaign and this parameter is not required.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "temp_password",
+            "in": "query",
+            "description": "A temporary password promoters can use to log in to their dashboard if you don't use authentication tokens(auth_token) to sign promoters in automatically.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "landing_url",
+            "in": "query",
+            "description": "You can set up a custom landing page url for this promoter. The referral id will be appended to it, unless the 'url_tracking' parameter(below) is used.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "url_tracking",
+            "in": "query",
+            "description": "Set `true` to enable direct url tracking feature. FirstPromoter will do the tracking based on `landing_url`(above) without requiring the referral id to be appended to the url. The `landing_url` needs to be unique for each promoter. Default is `false`. ",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "website",
+            "in": "query",
+            "description": "Promoter's website ",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "paypal_email",
+            "in": "query",
+            "description": "Promoter's Paypal email address",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "avatar_url",
+            "in": "query",
+            "description": "URL of the profile picture promoters can see on their dashboard",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "parent_promoter_email",
+            "in": "query",
+            "description": "Parent promoter email when promoter is a sub-affiliate",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "linkedin_url",
+            "in": "query",
+            "description": "Promoter's linkedin url",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "twitter_url",
+            "in": "query",
+            "description": "Promoter's twitter url",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "facebook_url",
+            "in": "query",
+            "description": "Promoter's facebook url",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "instagram_url",
+            "in": "query",
+            "description": "Promoter's instagram url",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "youtube_url",
+            "in": "query",
+            "description": "Promoter's youtube url",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "description": "Promoter's country",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "phone_number",
+            "in": "query",
+            "description": "Promoter's phone number",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address",
+            "in": "query",
+            "description": "Promoter's address",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "note",
+            "in": "query",
+            "description": "A note/description of promoter",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                    "$ref": "#/components/schemas/Promoter"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                   "$ref": "#/components/schemas/AuthenticationError",
+                  "example": "Bad credentials"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityErrorType1",
+                  "example": {
+                    "error": "Promoter not found."
+                  }
+                }
+              }
+            }
+          }, 
+          "422": {
+            "description": "Unprocessable Entity Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityErrorType1",
+                  "example": {
+                    "error": "You need to find the promoter either by id, cust_id, auth_token, ref_id, promoter_email or promo_code"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/show": {
+      "get": {
+        "description": "You can identify promoters by: `id` , `cust_id` , `auth_token` , `promoter_email` or `ref_id`(referral id). You need to pass at least one of these parameters.<Tip>**HTTP Request** <br/> `GET https://firstpromoter.com/api/v1/promoters/show`</Tip>",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "`required if promoter_email, ref_id, auth_token or cust_id is null` \n\n `The promoter's ID inside FirstPromoter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "promoter_email",
+            "in": "query",
+            "description": "`required if id, ref_id, auth_token or cust_id is null` \n \n The promoter's email",
+            "schema": {
+              "type": "string",
+              "format": "email"
+            }
+          },
+          {
+            "name": "cust_id",
+            "in": "query",
+            "description": "`required if id, ref_id, auth_token or promoter_email is null` \n \n Your customer's user ID inside your application/system for the promoter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ref_id",
+            "in": "query",
+            "description": "`required if the promoter_email,auth_token, id or cust_id is null` \n\n Referral ID.",            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "auth_token",
+            "in": "query",
+            "description": "`required if the promoter_email, id, ref_id or cust_id is null` \n\n Authentication token generated when the promoter was created",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Show promoters response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Promoter"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError",
+                  "example": "Bad credentials"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityErrorType1",
+                  "example": {
+                    "error": "Promoter not found."
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityErrorType1",
+                  "example": {
+                    "error": "You need to find the promoter either by id, cust_id, auth_token, ref_id, promoter_email or promo_code"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/delete": {
+      "delete": {
+        "description": "You can identify promoters by: `id` , `cust_id` , `auth_token` , `promoter_email` or `ref_id`(referral id). You need to pass at least one of these parameters.<Tip>**HTTP Request** <br/> `DELETE https://firstpromoter.com/api/v1/promoters/delete`</Tip>",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The promoter's ID inside FirstPromoter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cust_id",
+            "in": "query",
+            "description": "Your customer's user ID inside your application/system for the promoter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ref_id",
+            "in": "query",
+            "description": "Referral ID. If this is blank an ID is assigned based on the first name. Can be only `lower-case letters`, `numbers`, `-`(hyphen) and `_`(underscore)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "auth_token",
+            "in": "query",
+            "description": "Authentication token generated when the promoter was created",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Show promoters response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageResponse",
+                  "example": {
+                    "message": "Promoter removed."
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError",
+                  "example": "Bad credentials"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityErrorType1",
+                  "example": {
+                    "error": "Promoter not found."
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityErrorType1",
+                  "example": {
+                    "error": "You need to find the promoter either by id, cust_id, auth_token, ref_id or promoter_email"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/list": {
+      "get": {
+        "description": "Use this endpoint to list your promoters using the API. The response will return the promoters as JSON array.<Note> Pagination details are held on response headers. Add `--include` option on `curl` request to see the pagination details format and links to next pages.</Note><Tip>**HTTP Request** <br/> `GET https://firstpromoter.com/api/v1/promoters/list`</Tip>",
+        "parameters": [
+          {
+            "name": "campaign_id",
+            "in": "query",
+            "description": "List all promoters accepted to a specific campaign.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List Promoters response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Promoter"
+                  },
+                  "example": [
+                    {
+                      "id": 8815216,
+                      "status": "active",
+                      "cust_id": null,
+                      "email": "mintly@mailinator.com",
+                      "created_at": "2024-09-11T14:20:50.403Z",
+                      "temp_password": "1y-JxB",
+                      "default_promotion_id": 10116083,
+                      "pref": "y3fvz4o",
+                      "default_ref_id": "heubv",
+                      "note": null,
+                      "w8_form_url": null,
+                      "w9_form_url": null,
+                      "parent_promoter_id": null,
+                      "earnings_balance": null,
+                      "current_balance": null,
+                      "paid_balance": null,
+                      "auth_token": "X9edc-csF56dt8qB6KwcDyPhVdMUtWXY",
+                      "profile": {
+                        "id": 8862106,
+                        "first_name": null,
+                        "last_name": null,
+                        "website": null,
+                        "company_name": null,
+                        "phone_number": null,
+                        "address": null,
+                        "vat_id": null,
+                        "country": null,
+                        "paypal_email": null,
+                        "avatar_url": null,
+                        "description": null,
+                        "social_accounts": {}
+                      },
+                      "promotions": [
+                        {
+                          "id": 10116083,
+                          "status": "offer_running",
+                          "ref_id": "heubv",
+                          "promo_code": null,
+                          "customer_promo_code": null,
+                          "target_reached_at": null,
+                          "promoter_id": 8815216,
+                          "campaign_id": 26127,
+                          "referral_link": "https://lastechworld.com?fpr=heubv",
+                          "current_offer": {
+                            "id": 140358,
+                            "name": "1 free subscription months",
+                            "amount": 1,
+                            "unit": "free_months",
+                            "default_promo_code": ""
+                          },
+                          "current_referral_reward": {
+                            "id": 140359,
+                            "amount": 1,
+                            "type": "per_referral",
+                            "unit": "free_months",
+                            "name": "1 free subscription months",
+                            "per_of_sale": 0,
+                            "default_promo_code": ""
+                          },
+                          "current_promotion_reward": null,
+                          "current_target_reward": null,
+                          "campaign_name": "Make Campaign",
+                          "hidden": false,
+                          "visitors_count": 0,
+                          "leads_count": 0,
+                          "customers_count": 0,
+                          "refunds_count": 0,
+                          "cancellations_count": 0,
+                          "sales_count": 0,
+                          "sales_total": 0,
+                          "refunds_total": 0,
+                          "active_customers_count": 0
+                        }
+                      ]
+                    },
+                    {
+                      "id": 8809547,
+                      "status": "active",
+                      "cust_id": null,
+                      "email": "prince+grace@mailinator.com",
+                      "created_at": "2024-09-09T22:01:16.909Z",
+                      "temp_password": "yx4_LJ",
+                      "default_promotion_id": 10108807,
+                      "pref": "udicfs6",
+                      "default_ref_id": "ljysw",
+                      "note": null,
+                      "w8_form_url": null,
+                      "w9_form_url": null,
+                      "parent_promoter_id": null,
+                      "earnings_balance": null,
+                      "current_balance": null,
+                      "paid_balance": null,
+                      "auth_token": "kitwmn6ER9RzfZ5Mn9Ksv8PFxnpAzwBT",
+                      "profile": {
+                        "id": 8856384,
+                        "first_name": null,
+                        "last_name": null,
+                        "website": null,
+                        "company_name": null,
+                        "phone_number": null,
+                        "address": null,
+                        "vat_id": null,
+                        "country": null,
+                        "paypal_email": null,
+                        "avatar_url": null,
+                        "description": null,
+                        "social_accounts": {}
+                      },
+                      "promotions": [
+                        {
+                          "id": 10108807,
+                          "status": "offer_running",
+                          "ref_id": "ljysw",
+                          "promo_code": null,
+                          "customer_promo_code": null,
+                          "target_reached_at": null,
+                          "promoter_id": 8809547,
+                          "campaign_id": 26127,
+                          "referral_link": "https://lastechworld.com?fpr=ljysw",
+                          "current_offer": {
+                            "id": 140358,
+                            "name": "1 free subscription months",
+                            "amount": 1,
+                            "unit": "free_months",
+                            "default_promo_code": ""
+                          },
+                          "current_referral_reward": {
+                            "id": 140359,
+                            "amount": 1,
+                            "type": "per_referral",
+                            "unit": "free_months",
+                            "name": "1 free subscription months",
+                            "per_of_sale": 0,
+                            "default_promo_code": ""
+                          },
+                          "current_promotion_reward": null,
+                          "current_target_reward": null,
+                          "campaign_name": "Make Campaign",
+                          "hidden": false,
+                          "visitors_count": 0,
+                          "leads_count": 0,
+                          "customers_count": 0,
+                          "refunds_count": 0,
+                          "cancellations_count": 0,
+                          "sales_count": 0,
+                          "sales_total": 0,
+                          "refunds_total": 0,
+                          "active_customers_count": 0
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError",
+                  "example": "Bad credentials"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityErrorType1",
+                  "example": {
+                    "error": "Campaign not found."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/move_to_campaign": {
+      "post": {
+        "description": "This endpoint will change the campaign of the promoter with another one, keeping the referral id the same(affiliate won't need to update the referral link). It's the same function to move the promoter to another campaign from the UI. More details of how it works [here](https://help.firstpromoter.com/en/articles/2509650-moving-promoters-from-one-campaign-to-another).<br/><br/>You can identify promoters by: `id`, `cust_id`, `auth_token`, `promoter_email` or `ref_id`(referral id).<Tip> **HTTP Request** <br/> `POST https://firstpromoter.com/api/v1/promoters/move_to_campaign` </Tip>",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Promoter's ID inside FirstPromoter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "promoter_email",
+            "in": "query",
+            "description": "Email of the promoter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cust_id",
+            "in": "query",
+            "description": "Assigned customer/user ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ref_id",
+            "in": "query",
+            "description": "Referral ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "auth_token",
+            "in": "query",
+            "description": "Authentication token generated when the promoter was created",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "destination_campaign_id",
+            "in": "query",
+            "required": true,
+            "description": "ID of the campaign to switch/move to. It can be found on the url bar when editing the campaign",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "source_campaign_id",
+            "in": "query",   
+            "required": true,
+            "description": "Only needed if the promoter is added to multiple campaigns. You can use this parameter to specify which campaign to change. If none is specified if will use as source the default campaign.",
+         
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Promoter",
+                  "example": {
+                    "id": 6481069,
+                    "status": "active",
+                    "cust_id": "",
+                    "email": "jiba@mailinator.com",
+                    "created_at": "2023-08-16T14:22:50.157Z",
+                    "temp_password": null,
+                    "default_promotion_id": 10122438,
+                    "pref": "2uvc08x",
+                    "default_ref_id": "tvo16",
+                    "note": null,
+                    "w8_form_url": null,
+                    "w9_form_url": null,
+                    "parent_promoter_id": null,
+                    "earnings_balance": null,
+                    "current_balance": null,
+                    "paid_balance": null,
+                    "auth_token": "xMx1xEzDAs_GPAxyBEMCGbEs1wGJsUzR",
+                    "profile": {
+                      "id": 6518856,
+                      "first_name": "Macaulay",
+                      "last_name": null,
+                      "website": null,
+                      "company_name": null,
+                      "phone_number": null,
+                      "address": null,
+                      "vat_id": null,
+                      "country": null,
+                      "paypal_email": null,
+                      "avatar_url": null,
+                      "description": null,
+                      "social_accounts": {}
+                    },
+                    "promotions": [
+                      {
+                        "id": 10122438,
+                        "status": "offer_running",
+                        "ref_id": "tvo16",
+                        "promo_code": null,
+                        "customer_promo_code": null,
+                        "target_reached_at": null,
+                        "promoter_id": 6481069,
+                        "campaign_id": 26127,
+                        "referral_link": "https://lastechworld.com?fpr=tvo16",
+                        "current_offer": {
+                          "id": 140358,
+                          "name": "1 free subscription months",
+                          "amount": 1,
+                          "unit": "free_months",
+                          "default_promo_code": ""
+                        },
+                        "current_referral_reward": {
+                          "id": 140359,
+                          "amount": 1,
+                          "type": "per_referral",
+                          "unit": "free_months",
+                          "name": "1 free subscription months",
+                          "per_of_sale": 0,
+                          "default_promo_code": ""
+                        },
+                        "current_promotion_reward": null,
+                        "current_target_reward": null,
+                        "campaign_name": "Make Campaign",
+                        "hidden": false,
+                        "visitors_count": 0,
+                        "leads_count": 0,
+                        "customers_count": 0,
+                        "refunds_count": 0,
+                        "cancellations_count": 0,
+                        "sales_count": 0,
+                        "sales_total": 0,
+                        "refunds_total": 0,
+                        "active_customers_count": 0
+                      },
+                      {
+                        "id": 7061492,
+                        "status": "offer_inactive",
+                        "ref_id": "2hpqscnv",
+                        "promo_code": null,
+                        "customer_promo_code": null,
+                        "target_reached_at": null,
+                        "promoter_id": 6481069,
+                        "campaign_id": 18747,
+                        "referral_link": "https://lastechworld.com?fpr=2hpqscnv",
+                        "current_offer": null,
+                        "current_referral_reward": {
+                          "id": 94230,
+                          "amount": 0,
+                          "type": "per_referral",
+                          "unit": "cash",
+                          "name": "20% recurring commission",
+                          "per_of_sale": 20,
+                          "default_promo_code": ""
+                        },
+                        "current_promotion_reward": null,
+                        "current_target_reward": null,
+                        "campaign_name": "Publishers \u0026 marketing Partners",
+                        "hidden": true,
+                        "visitors_count": 0,
+                        "leads_count": 1,
+                        "customers_count": 1,
+                        "refunds_count": 2,
+                        "cancellations_count": 3,
+                        "sales_count": 2,
+                        "sales_total": 72400,
+                        "refunds_total": -72400,
+                        "active_customers_count": 0
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError",
+                  "example": "Bad credentials"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityErrorType1",
+                  "example": {
+                    "error": "Promoter not found."
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityErrorType1",
+                  "example": {
+                    "error": "You need to find the promoter either by id, cust_id, auth_token, ref_id or promoter_email"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/add_to_campaign": {
+      "post": {
+        "description": "Use this endpoint to add a promoter to another campaign. Your promoter will have multiple campaigns to promoter, each campaign with its own promotion, referral link and referral id.<br/>You can identify promoters by: `id`, `cust_id`, `auth_token`, `promoter_email` or `ref_id` (referral id).<Tip> **HTTP Request** <br/> `POST https://firstpromoter.com/api/v1/promoters/add_to_campaign` </Tip>",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Promoter's ID inside FirstPromoter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "promoter_email",
+            "in": "query",
+            "description": "Email of the promoter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cust_id",
+            "in": "query",
+            "description": "Assigned customer/user ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ref_id",
+            "in": "query",
+            "description": "Referral ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "auth_token",
+            "in": "query",
+            "description": "Authentication token generated when the promoter was created",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "campaign_id",
+            "in": "query",
+            "required": true,
+            "description": "ID of the campaign to add the promoter to. It can be found on the url bar when editing the campaign",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Add to campaign response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Promoter",
+                  "example": {
+                    "id": 5594994,
+                    "status": "active",
+                    "cust_id": null,
+                    "email": "wopomipu@mailinator.com",
+                    "created_at": "2023-04-04T12:30:23.250Z",
+                    "temp_password": "Pa$$w0rd!",
+                    "default_promotion_id": 6041923,
+                    "pref": "jme34om",
+                    "default_ref_id": "cd5de",
+                    "note": null,
+                    "w8_form_url": null,
+                    "w9_form_url": null,
+                    "parent_promoter_id": null,
+                    "earnings_balance": { "cash": 30000 },
+                    "current_balance": { "credits": -150 },
+                    "paid_balance": { "cash": 30000, "credits": 150 },
+                    "auth_token": "cxXz22oP5xNG2bFcXzo13N8HQ91RYed2",
+                    "profile": {
+                      "id": 5629748,
+                      "first_name": "Raven",
+                      "last_name": "Moore",
+                      "website": null,
+                      "company_name": null,
+                      "phone_number": null,
+                      "address": null,
+                      "vat_id": null,
+                      "country": null,
+                      "paypal_email": "nyhuxigyn@mailinator.com",
+                      "avatar_url": null,
+                      "description": null,
+                      "social_accounts": {}
+                    },
+                    "promotions": [
+                      {
+                        "id": 10122408,
+                        "status": "offer_inactive",
+                        "ref_id": "s7rxl",
+                        "promo_code": null,
+                        "customer_promo_code": null,
+                        "target_reached_at": null,
+                        "promoter_id": 5594994,
+                        "campaign_id": 18747,
+                        "referral_link": "https://lastechworld.com?fpr=s7rxl",
+                        "current_offer": null,
+                        "current_referral_reward": {
+                          "id": 94230,
+                          "amount": 0,
+                          "type": "per_referral",
+                          "unit": "cash",
+                          "name": "20% recurring commission",
+                          "per_of_sale": 20,
+                          "default_promo_code": ""
+                        },
+                        "current_promotion_reward": null,
+                        "current_target_reward": null,
+                        "campaign_name": "Publishers \u0026 marketing Partners",
+                        "hidden": false,
+                        "visitors_count": 0,
+                        "leads_count": 0,
+                        "customers_count": 0,
+                        "refunds_count": 0,
+                        "cancellations_count": 0,
+                        "sales_count": 0,
+                        "sales_total": 0,
+                        "refunds_total": 0,
+                        "active_customers_count": 0
+                      },
+                      {
+                        "id": 10122364,
+                        "status": "offer_running",
+                        "ref_id": "4us60",
+                        "promo_code": null,
+                        "customer_promo_code": null,
+                        "target_reached_at": null,
+                        "promoter_id": 5594994,
+                        "campaign_id": 26127,
+                        "referral_link": "https://lastechworld.com?fpr=4us60",
+                        "current_offer": {
+                          "id": 140358,
+                          "name": "1 free subscription months",
+                          "amount": 1,
+                          "unit": "free_months",
+                          "default_promo_code": ""
+                        },
+                        "current_referral_reward": {
+                          "id": 140359,
+                          "amount": 1,
+                          "type": "per_referral",
+                          "unit": "free_months",
+                          "name": "1 free subscription months",
+                          "per_of_sale": 0,
+                          "default_promo_code": ""
+                        },
+                        "current_promotion_reward": null,
+                        "current_target_reward": null,
+                        "campaign_name": "Make Campaign",
+                        "hidden": false,
+                        "visitors_count": 0,
+                        "leads_count": 0,
+                        "customers_count": 0,
+                        "refunds_count": 0,
+                        "cancellations_count": 0,
+                        "sales_count": 0,
+                        "sales_total": 0,
+                        "refunds_total": 0,
+                        "active_customers_count": 0
+                      },
+                      {
+                        "id": 6041923,
+                        "status": "offer_running",
+                        "ref_id": "cd5de",
+                        "promo_code": "",
+                        "customer_promo_code": "",
+                        "target_reached_at": null,
+                        "promoter_id": 5594994,
+                        "campaign_id": 18519,
+                        "referral_link": "https://partner.lastechworld.com?fpr=cd5de",
+                        "current_offer": {
+                          "id": 96412,
+                          "name": "75 credits",
+                          "amount": 75,
+                          "unit": "credits",
+                          "default_promo_code": ""
+                        },
+                        "current_referral_reward": {
+                          "id": 93868,
+                          "amount": null,
+                          "type": "per_referral",
+                          "unit": "cash",
+                          "name": "15% recurring commission",
+                          "per_of_sale": 15,
+                          "default_promo_code": null
+                        },
+                        "current_promotion_reward": null,
+                        "current_target_reward": null,
+                        "campaign_name": "TechScenario12Campaign-1",
+                        "hidden": false,
+                        "visitors_count": 1,
+                        "leads_count": 1,
+                        "customers_count": 1,
+                        "refunds_count": 0,
+                        "cancellations_count": 0,
+                        "sales_count": 2,
+                        "sales_total": 250000,
+                        "refunds_total": 0,
+                        "active_customers_count": 1
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError",
+                  "example": "Bad credentials"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityErrorType1",
+                  "example": {
+                    "error": "Promoter not found."
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityErrorType1",
+                  "example": {
+                    "error": "You need to find the promoter either by id, cust_id, auth_token, ref_id or promoter_email"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/refresh_token": {
+      "put": {
+        "description": "Resetting authentication token(`auth_token`) which is used to automatically sign in your promoters(if you use this feature) is not required, but can be used to enhance the security of the promoter dashboard. You can set up a cron job to call the API endpoint and store the new `auth_token` from the response.<br/>You can identify promoters by: `id`, `cust_id` or `auth_token`. Only one is required.<br/><Tip> **HTTP Request** <br/> `PUT https://firstpromoter.com/api/v1/promoters/refresh_token` </Tip>",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Promoter's ID inside FirstPromoter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "promoter_email",
+            "in": "query",
+            "description": "Email of the promoter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cust_id",
+            "in": "query",
+            "description": "Assigned customer/user ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ref_id",
+            "in": "query",
+            "description": "Referral ID'",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "auth_token",
+            "in": "query",
+            "description": "Authentication token generated when the promoter was created",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Refresh Token response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "auth_token": {
+                      "type": "string",
+                      "example": "4ktxi8sUeevM6BkNR1XXt2G5EAqCzhSu"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError",
+                  "example": "Bad credentials"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityErrorType1",
+                  "example": {
+                    "error": "Promoter not found."
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityErrorType1",
+                  "example": {
+                    "error": "You need to find the promoter either by id, cust_id, auth_token, ref_id or promoter_email"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SocialAccounts": {
+        "type": "object",
+        "properties": {
+          "twitter": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "description": "Promoter's twitter url",
+                "type": "string"
+              }
+            }
+          },
+          "youtube": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "description": "Promoter's youtube url",
+                "type": "string"
+              }
+            }
+          },
+          "facebook": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "description": "Promoter's fackbook url",
+                "type": "string"
+              }
+            }
+          },
+          "linkedin": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "description": "Promoter's linkedin url",
+                "type": "string"
+              }
+            }
+          },
+          "instagram": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "description": "Promoter's instagram url",
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "PromoterProfile": {
+        "type": "object",
+        "properties": {
+          "first_name": {
+            "description": "Promoter's first name",
+            "type": "string"
+          },
+          "last_name": {
+            "description": "Promoter's last name",
+            "type": "string"
+          },
+          "website": {
+            "description": "Promoter's website",
+            "type": "string"
+          },
+          "company_name": {
+            "description": "Promoter's campany name",
+            "type": "string"
+          },
+          "phone_number": {
+            "description": "Promoter's phone number",
+            "type": "string"
+          },
+          "address": {
+            "description": "Promoter's address",
+            "type": "string"
+          },
+          "vat_id": {
+            "description": "Promoter's vat id",
+            "type": "string"
+          },
+          "country": {
+            "description": "Promoter's country",
+            "type": "string"
+          },
+          "paypal_email": {
+            "description": "Promoter's Paypal email address",
+            "type": "string"
+          },
+          "avatar_url": {
+            "description": "URL of the profile picture promoters can see on their dashboard",
+            "type": "string"
+          },
+          "description": {
+            "description": "A note/description of promoter",
+            "type": "string"
+          },
+          "social_accounts": {
+            "$ref": "#/components/schemas/SocialAccounts"
+          }
+        }
+      },
+      "Promotion": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "ID of the promotion.",
+            "type": "number"
+          },
+          "status": {
+            "description": "Current offer status.",
+            "type": "string"
+          },
+          "ref_id": {
+            "type": "string"
+          },
+          "promo_code": {
+            "description": " Unique promo code from your billing provider to assign to this affiliate for coupon tracking. This is also known as the `Coupon Code` or `Coupon ID`",
+            "type": "string"
+          },
+          "customer_promo_code": {
+            "description": "Customer promo code from your billing provider assigned to this affiliate for coupon tracking. This is also known as `discount code` or `promotion code` or `display code`. This is the code your customer(s) used on the checkout form/page.",
+            "type": "string"
+          },
+          "target_reached_at": {
+            "type": "object"
+          },
+          "promoter_id": {
+            "description": "ID of the promoter/affiliate.",
+            "type": "number"
+          },
+          "campaign_id": {
+            "description": "ID of the campaign where the promotion runs.",
+            "type": "number"
+          },
+          "referral_link": {
+            "description": "Promoter's referral link",
+            "type": "string"
+          },
+          "current_offer": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "description": "The reward id",
+                "type": "number"
+              },
+              "name": {
+                "description": "The reward name",
+                "type": "string"
+              },
+              "amount": {
+                "description": "The reward amount",
+                "type": "number"
+              },
+              "unit": {
+                "description": "The reward unit (e.g., 'credits', 'free_months', 'cash').",
+                "type": "string"
+              },
+              "default_promo_code": {
+                "type": "string"
+              }
+            }
+          },
+          "current_referral_reward": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "amount": {
+                "type": "number"
+              },
+              "unit": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "per_of_sale": {
+                "type": "number"
+              },
+              "default_promo_code": {
+                "type": "string"
+              }
+            }
+          },
+          "current_promotion_reward": {
+            "type": "object"
+          },
+          "current_target_reward": {
+            "type": "object"
+          },
+          "campaign_name": {
+            "type": "string"
+          },
+          "hidden": {
+            "type": "boolean"
+          },
+          "visitors_count": {
+            "type": "number"
+          },
+          "leads_count": {
+            "type": "number"
+          },
+          "customers_count": {
+            "type": "number"
+          },
+          "refunds_count": {
+            "type": "number"
+          },
+          "cancellations_count": {
+            "type": "number"
+          },
+          "sales_count": {
+            "type": "number"
+          },
+          "sales_total": {
+            "type": "number"
+          },
+          "refunds_total": {
+            "type": "number"
+          },
+          "active_customers_count": {
+            "type": "number"
+          }
+        }
+      },
+      "Promoter": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The promoter's ID inside FirstPromoter",
+            "type": "integer"
+          },
+          "status": {
+            "description": "Promoter's status",
+            "type": "string",
+            "enum": ["approved", "pending", "denied"]
+          },
+          "cust_id": {
+            "description": "Your customer's user ID inside your application/system for the promoter. This will be included in the webhook event and can be used to identify the promoter in your system if you scribscibe for FirstPromoter's webhooks.",
+            "type": "string"
+          },
+          "email": {
+            "description": "Promoter's email",
+            "type": "string"
+          },
+          "created_at": {
+            "description": "ISO date string when the promoter signed up",
+            "type": "string"
+          },
+          "temp_password": {
+            "description": "A temporary password the promoter can use to log in to their dashboard if you don't use authentication tokens(`auth_token`) to sign promoters in automatically.",
+            "type": "string"
+          },
+          "default_promotion_id": {
+            "description": "Promoter's default promotion id",
+            "type": "number",
+            "example": 128833
+          },
+          "pref": {
+            "description": "Promoter's parent referral id.",
+            "type": "string"
+          },
+          "default_ref_id": {
+            "description": "Promoter's default referral id",
+            "type": "string"
+          },
+          "note": {
+            "description": "A note/description of promoter",
+            "type": "string"
+          },
+          "w8_form_url": {
+            "description": "The w8 form url",
+            "type": "string"
+          },
+          "w9_form_url": {
+            "description": "The w9 form url",
+            "type": "string"
+          },
+          "parent_promoter_id": {
+            "description": "Parent promoter id",
+            "type": "string"
+          },
+          "earnings_balance": {
+            "description": "Promoter's earnings balance. This object can contain `cash`, `credits`, `discount_per` ",
+            "type": "object",
+            "properties": {
+              "cash": {
+                "description": "The cash earnings",
+                "type": "integer",
+                "example": 3000
+              },
+              "credits": {
+                "description": "The earning credits",
+                "type": "integer",
+                "example": 300
+              },
+              "discount_per": {
+                "description": "The earning discount percentage",
+                "type": "integer",
+                "example": 30
+              }
+            }
+          },
+          "current_balance": {
+            "description": "Promoter's current balance. This object can contain `cash`, `credits`, `discount_per` ",
+            "type": "object",
+            "properties": {
+              "cash": {
+                "description": "The current cash balance",
+                "type": "integer",
+                "example": 1000
+              },
+              "credits": {
+                "description": "The current credits",
+                "type": "integer",
+                "example": 200
+              },
+              "discount_per": {
+                "description": "The current discount percentage",
+                "type": "integer",
+                "example": 15
+              }
+            }
+          },
+          "paid_balance": {
+            "description": "Promoter's paid balance. This object can contain `cash`, `credits`, `discount_per`",
+            "type": "object",
+            "properties": {
+              "cash": {
+                "description": "The cash paid",
+                "type": "integer",
+                "example": 2000
+              },
+              "credits": {
+                "description": "The credits given",
+                "type": "integer",
+                "example": 100
+              },
+              "discount_per": {
+                "description": "The discount percentage given",
+                "type": "integer",
+                "example": 15
+              }
+            }
+          },
+          "auth_token": {
+            "description": "Authentication token generated when the promoter was created",
+            "type": "string"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/PromoterProfile"
+          },
+          "promotions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Promotion"
+            }
+          }
+        }
+      },
+      "UnprocessableEntityError": {
+        "required": ["company_user.user.email", "message"],
+        "type": "object",
+        "properties": {
+          "company_user.user.email": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "promotions": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "UnprocessableEntityErrorType1": {
+        "required": ["error"],
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "MessageResponse": {
+        "required": ["message"],
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "AuthenticationError": {
+            "type": "string"
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-KEY"
+      }
+    }
+  }
+}

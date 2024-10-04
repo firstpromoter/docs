@@ -1,86 +1,34 @@
 ---
-title: 'Quickstart'
-description: 'Start building awesome documentation in under 5 minutes'
+title: "Quickstart"
+description: "Start building your awesome affiliate referral program in minutes."
 ---
 
-## Setup your development
+### Steps
 
-Learn how to update your docs locally and deploy them to the public.
+<Steps>
+  <Step title="Create an account">
+     [Click here](https://new.firstpromoter.com/company/signup) to create an Admin account. If you already have an account, [Login here](https://login.firstpromoter.com/)
 
-### Edit and preview
-
-<AccordionGroup>
-  <Accordion icon="github" title="Clone your docs locally">
-    During the onboarding process, we created a repository on your Github with
-    your docs content. You can find this repository on our
-    [dashboard](https://dashboard.mintlify.com). To clone the repository
-    locally, follow these
-    [instructions](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
-    in your terminal.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Preview changes">
-    Previewing helps you make sure your changes look as intended. We built a
-    command line interface to render these changes locally. 1. Install the
-    [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the
-    documentation changes locally with this command: ``` npm i -g mintlify ```
-    2. Run the following command at the root of your documentation (where
-    `mint.json` is): ``` mintlify dev ```
-  </Accordion>
-</AccordionGroup>
-
-### Deploy your changes
-
-<AccordionGroup>
-
-<Accordion icon="message-bot" title="Install our Github app">
-  Our Github app automatically deploys your changes to your docs site, so you
-  don't need to manage deployments yourself. You can find the link to install on
-  your [dashboard](https://dashboard.mintlify.com). Once the bot has been
-  successfully installed, there should be a check mark next to the commit hash
-  of the repo.
-</Accordion>
-<Accordion icon="rocket" title="Push your changes">
-  [Commit and push your changes to
-  Git](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository#about-git-push)
-  for your changes to update in your docs site. If you push and don't see that
-  the Github app successfully deployed your changes, you can also manually
-  update your docs through our [dashboard](https://dashboard.mintlify.com).
-</Accordion>
-
-</AccordionGroup>
-
-## Update your docs
-
-Add content directly in your files with MDX syntax and React components. You can use any of our components, or even build your own.
-
-<CardGroup>
-
-<Card title="Style Your Docs" icon="paintbrush" href="/settings/global">
-  Add flair to your docs with personalized branding.
-</Card>
-
-<Card
-  title="Add API Endpoints"
-  icon="square-code"
-  href="/api-playground/configuration"
->
-  Implement your OpenAPI spec and enable API user interaction.
-</Card>
-
-<Card
-  title="Integrate Analytics"
-  icon="chart-mixed"
-  href="/analytics/supported-integrations"
->
-  Draw insights from user interactions with your documentation.
-</Card>
-
-<Card
-  title="Host on a Custom Domain"
-  icon="browser"
-  href="/settings/custom-domain/subdomain"
->
-  Keep your docs on your own website's subdomain.
-</Card>
-
-</CardGroup>
+       <Note>
+       If you are a new user you will need to complete the onboarding process.
+      Go through the onboarding process which requires you to create an Campaign, connect your billing provider and integrate your website
+        </Note>
+  </Step>
+  
+  <Step title="Integrate your billing provider">
+    Connect your billing provider to FirstPromoter. This will enable FirstPromoter to automatically track or receive sales, refunds, upgrades or upsells and cancellations data/record from any of the [supported billing providers](/integrations/billing).<br/><Note>**NB:** For a billing provider that is not supported by default, there is an option to use our [API](/integrations/billing/api)</Note>
+  </Step>
+  <Step title="Integrate your website">
+    Install or add our ready-made scripts/pixels to your website's [platform supported](/integrations/tracking/platform). We also provide [universal scripts or API for custom built websites or apps](/integrations/tracking/custom). 
+    <Tip>Integrating the tracking script into your website enables you to track clicks and referrals (thus, it enables you to send the lead's or referral's details such as the `email` or `uid` to FirstPromoter). This integration also enables FirstPromoter to track sales from your connected billing provider by matching the referral details to sales or transactions data received from your billing provider. [Learn more about our tracking script here](/script-docs/fpr-js-docs)</Tip>
+    <Note>
+        You can also track sales with `Coupon Codes`. This option is available for users who want `No-Code` or `No-Scripts` integration or don't want to track referrals using referral links . [Learn more](https://help.firstpromoter.com/en/articles/8971002-how-to-track-sales-with-coupon-codes-in-firstpromoter)
+     </Note>
+  </Step>
+  <Step title="Test your integrations">
+    Test all parts of your integration to make sure everything is tracking. 
+    - Clicks tracking
+    - Referral tracking
+    - Sales tracking
+  </Step>
+</Steps>

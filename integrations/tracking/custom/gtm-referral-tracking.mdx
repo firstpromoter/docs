@@ -1,0 +1,66 @@
+---
+title: "GTM - Referral tracking script"
+description: "Setting up / implementing your Referral tracking in Google Tag Manager (GTM)"
+---
+
+`Difficulty: Intermediate` <br/>
+`Developer Required: Yes`
+
+<Tip> 
+This guide assumes that you have already set up GTM to work on your website and as well setup the [Main tracking script](/integrations/tracking/custom/gtm-main-tracking).
+</Tip> 
+
+With FirstPromoter, you can setup Referral tracking using our Google Tag Manager option. However, this setup requires the [GTM - Main tracking script](/integrations/tracking/custom/gtm-main-tracking) to be in place in order for the referral tracking to work as expected.
+This setup mainly requires you to add `Referral tracking script` implementation into your GTM to enable sending details about the referrals to FirstPromoter using the script. Depending on the complexity of your website, it would be ideal to have a developer assist you with the setup.
+
+<Note>
+Adding your `Referral tracking script` implementation in GTM, requires the same steps/ procedures used in adding the [Main tracking script](/integrations/tracking/custom/gtm-main-tracking).
+</Note>
+
+To track the referrals, you'll need to make a request FirstPromoter to capture the lead. This can mainly be done by calling the `fpr` JavaScript function defined by the `Main tracking script` and inserting the `email` of the user/lead/customer:
+`fpr("referral",{email:"<user-email>"})`
+
+If you can't use the email for privacy reasons, there's another option using `uid`, `fpr("referral",{uid:"<user-id-in-database>"})`
+
+<Note>
+**NB:** Depending on your setup, you **may not** be able to add the Referral tracking script to GTM as it may have to be embedded into your code.  For use cases where capturing is done on an opt in form it may be possible.
+</Note>
+
+You need to ensure the `Main tracking script` accessible on this page as well. The below scripts should be placed or called underneath the `Main tracking script`.
+
+<span style={{color: "#ff0033", fontWeight: "bold"}}>Depending on your setup, you may need to have a way of getting the email and passing it to the script.</span>
+
+```javascript
+<script>
+var email= "<actual user email goes here>";
+window.fpr("referral",{email});
+</script>
+```
+
+If you're using a checkout plugin or service that appends the email to the thank-you page like `https://website.com/thank-you?email=user@email.com`, you can grab the email from the url and pass  it to the fpr function as shown below 
+
+```javascript
+<script>
+function getParam(param){
+  return new URLSearchParams(window.location.search).get(param);
+}
+fpr("referral",{email: getParam("email")})
+</script>
+```
+
+For JavaScript framework like React, Vue, Angular, Ember, Stimulus, etc... you can make the call on the success callback function or even on the onClick handler.
+```javascript
+<script>
+//... the success callback:
+(function(response){
+var email=response.data.email;
+window.fpr("referral",{email: email})
+}) 
+</script>
+```
+
+<Note>NB: If you're performing a redirect after calling the function, please double-check it, as redirection blocks any ongoing requests in most browsers (in this case it might be better have a delay or put the script on the redirected page instead).</Note>
+
+
+   
+    

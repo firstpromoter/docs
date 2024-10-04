@@ -1,0 +1,379 @@
+---
+title: "Fulfilment Pending"
+---
+
+In case you have the "Auto-approve rewards" checked for the campaign, the webhook will be fired right after the reward is attributed.
+
+To utilize the 'fulfilment_pending' webhook in FirstPromoter, follow these steps:
+
+## How to respond to this webhook call:
+
+Respond with status 200 if you fulfilled the reward on your end.
+
+Respond with a 2xx status (except 200) to keep the fulfilment marked as pending on FirstPromoter's end.
+
+Respond with any other status to indicate an error (FirstPromoter will retry for 7 times during the day).
+
+<ResponseField name="Event" type="Event Object">
+  <Expandable title="properties">
+    <ResponseField name="id" type="string">
+      The Id of the event
+    </ResponseField>
+    <ResponseField name="type" type="string">
+      Indicates the webhook event type, such as `fulfilment_pending`.
+    </ResponseField>
+    <ResponseField name="created_at" type="string">
+      Timestamp of when the event occurred.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="Data" type="Data Object">
+  <Expandable title="properties">
+    <ResponseField name="id" type="number">
+    The Id of the reward
+    </ResponseField>
+    <ResponseField name="status" type="string">
+      The status of the reward. 
+    </ResponseField>
+
+      <ResponseField name="amount" type="number">
+    The reward amount
+    </ResponseField>
+         <ResponseField name="unit" type="string">
+    The  unit of the reward
+    </ResponseField>
+    <ResponseField name="created_at" type="string">
+      The date and time the reward was created
+    </ResponseField>
+    <ResponseField name="has_issues" type="boolean">
+      Whether the reward has issues
+    </ResponseField>
+
+
+
+    <ResponseField name="reward" type="Reward Object">
+      <Expandable title="properties">
+        <ResponseField name="id" type="number">
+          The Id of the reward
+        </ResponseField>
+        <ResponseField name="amount" type="number">
+          The reward amount
+        </ResponseField>
+        <ResponseField name="type" type="string">
+          The type of the reward
+        </ResponseField>
+        <ResponseField name="unit" type="string">
+          The unit of the reward
+        </ResponseField>
+        <ResponseField name="name" type="string">
+          The name of the reward
+        </ResponseField>
+        <ResponseField name="per_of_sale" type="number">
+          The per of sale of the reward
+        </ResponseField>
+        <ResponseField name="default_promo_code" type="string">
+          The default promo code of the reward
+        </ResponseField>
+      </Expandable>
+
+ </ResponseField>
+
+    <ResponseField name="promoter" type="Promoter Object">
+      <Expandable title="properties">
+        <ResponseField name="id" type="number">
+          The Id of the promoter
+        </ResponseField>
+        <ResponseField name="status" type="string">
+          The status of the promoter
+        </ResponseField>
+           <ResponseField name="cust_id" type="string">
+          The customer id of the promoter
+        </ResponseField>
+        <ResponseField name="email" type="string">
+          The email of the promoter
+        </ResponseField>
+        <ResponseField name="created_at" type="string">
+          The date the promoter was created
+        </ResponseField>
+        <ResponseField name="temp_password" type="string">
+          The temporary password of the promoter
+        </ResponseField>
+        <ResponseField name="default_promotion_id" type="number">
+          The default promotion id of the promoter
+        </ResponseField>
+        <ResponseField name="pref" type="string">
+          The pref of the promoter
+        </ResponseField>
+        <ResponseField name="default_ref_id" type="string">
+          The default referral id of the promoter
+        </ResponseField>
+        <ResponseField name="note" type="string">
+          The note saved on the promoter profile by an admin
+        </ResponseField>
+        <ResponseField name="w8_form_url" type="string">
+          The w8 form url saved on the promoter profile by an admin
+        </ResponseField>
+        <ResponseField name="w9_form_url" type="string">
+          The w9 form url saved on the promoter profile by an admin
+        </ResponseField>
+        <ResponseField name="parent_promoter_id" type="number">
+          The parent promoter id of the promoter
+        </ResponseField>
+        <ResponseField name="earnings_balance" type="number">
+          The earnings balance of the promoter
+        </ResponseField>
+        <ResponseField name="current_balance" type="number">
+          The current balance of the promoter
+        </ResponseField>
+        <ResponseField name="paid_balance" type="number">
+          The paid balance of the promoter
+        </ResponseField>
+        <ResponseField name="auth_token" type="string">
+          The auth token of the promoter
+        </ResponseField>
+        <ResponseField name="profile" type="Profile Object">
+          <Expandable title="properties">
+            <ResponseField name="id" type="number">
+              The Id of the profile
+            </ResponseField>
+            <ResponseField name="first_name" type="string">
+              The first name of the profile
+            </ResponseField>
+            <ResponseField name="last_name" type="string">
+              The last name of the profile
+            </ResponseField>
+            <ResponseField name="website" type="string">
+              The website of the profile
+            </ResponseField>
+            <ResponseField name="company_name" type="string">
+              The company name of the profile
+            </ResponseField>
+            <ResponseField name="phone_number" type="string">
+              The phone number of the profile
+            </ResponseField>
+            <ResponseField name="address" type="string">
+              The address of the profile
+            </ResponseField>
+            <ResponseField name="vat_id" type="string">
+              The vat id of the profile
+            </ResponseField>
+            <ResponseField name="country" type="string">
+              The country of the profile
+            </ResponseField>
+            <ResponseField name="paypal_email" type="string">
+              The paypal email of the profile
+            </ResponseField>
+            <ResponseField name="avatar_url" type="string">
+              The avatar url of the profile
+            </ResponseField>
+            <ResponseField name="description" type="string">
+              The description of the profile
+            </ResponseField>
+            <ResponseField name="social_accounts" type="Social Accounts Object">
+              <Expandable title="properties">
+                <ResponseField name="tiktok" type="Social Account Object">
+                  <Expandable title="properties">
+                    <ResponseField name="url" type="string">
+                      The url of the social account
+                    </ResponseField>
+                  </Expandable>
+                </ResponseField>
+                <ResponseField name="twitch" type="Social Account Object">
+                  <Expandable title="properties">
+                    <ResponseField name="url" type="string">
+                      The url of the social account
+                    </ResponseField>
+                  </Expandable>
+                </ResponseField>
+                <ResponseField name="twitter" type="Social Account Object">
+                  <Expandable title="properties">
+                    <ResponseField name="url" type="string">
+                      The url of the social account
+                    </ResponseField>
+                  </Expandable>
+                </ResponseField>
+                <ResponseField name="youtube" type="Social Account Object">
+                  <Expandable title="properties">
+                    <ResponseField name="url" type="string">
+                      The url of the social account
+                    </ResponseField>
+                  </Expandable>
+                </ResponseField>
+                <ResponseField name="facebook" type="Social Account Object">
+                  <Expandable title="properties">
+                    <ResponseField name="url" type="string">
+                      The url of the social account
+                    </ResponseField>
+                  </Expandable>
+                </ResponseField>
+                <ResponseField name="linkedin" type="Social Account Object">
+                  <Expandable title="properties">
+                    <ResponseField name="url" type="string">
+                      The url of the social account
+                    </ResponseField>
+                  </Expandable>
+                </ResponseField>
+                <ResponseField name="instagram" type="Social Account Object">
+                  <Expandable title="properties">
+                    <ResponseField name="url" type="string">
+                      The url of the social account
+                    </ResponseField>
+                  </Expandable>
+                </ResponseField>
+              </Expandable>
+            </ResponseField>
+          </Expandable>
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+</Expandable>
+</ResponseField>
+
+
+<ResponseExample name="FulfilmentPendingResponse" type="string">
+    ```json Response
+  {
+  "event": {
+    "id": 13007875,
+    "type": "fulfilment_pending",
+    "created_at": "2023-08-23T11:06:02.663Z"
+  },
+  "data": {
+    "id": 2429153,
+    "status": "pending",
+    "amount": 3,
+    "date_paid": null,
+    "due_date": null,
+    "unit": "free_months",
+    "created_at": "2023-08-23T11:06:02.607Z",
+    "has_issues": false,
+    "reward": {
+      "id": 109465,
+      "amount": null,
+      "type": "per_promotion",
+      "unit": "free_months",
+      "name": "Free subscription months",
+      "per_of_sale": 0,
+      "default_promo_code": null
+    },
+    "promoter": {
+      "id": 5272969,
+      "status": "active",
+      "cust_id": "",
+      "email": "promoter.email@domain.com",
+      "created_at": "2023-02-08T06:25:28.004Z",
+      "temp_password": "gpBwBYw1",
+      "default_promotion_id": 5680057,
+      "pref": "i790yc6",
+      "default_ref_id": "referralid18",
+      "note": null,
+      "w8_form_url": null,
+      "w9_form_url": null,
+      "parent_promoter_id": null,
+      "earnings_balance": {
+        "cash": 882,
+        "free_months": 3
+      },
+      "current_balance": {
+        "cash": 882,
+        "free_months": 3
+      },
+      "paid_balance": null,
+      "auth_token": "2-5P1Shfk2nnKaZrYFZExh-sfCThGt-2",
+      "profile": {
+        "id": 5306304,
+        "first_name": "Promoter",
+        "last_name": "Name",
+        "website": "",
+        "company_name": "",
+        "phone_number": "",
+        "address": "",
+        "vat_id": "",
+        "country": "",
+        "paypal_email": null,
+        "avatar_url": "",
+        "description": null,
+        "social_accounts": {
+          "twitter": {
+            "url": ""
+          },
+          "youtube": {
+            "url": ""
+          },
+          "facebook": {
+            "url": ""
+          },
+          "linkedin": {
+            "url": ""
+          },
+          "instagram": {
+            "url": ""
+          }
+        }
+      },
+      "promotions": [
+        {
+          "id": 5680057,
+          "status": "offer_inactive",
+          "ref_id": "referralid18",
+          "promo_code": "",
+          "customer_promo_code": "",
+          "target_reached_at": null,
+          "promoter_id": 5272969,
+          "campaign_id": 17476,
+          "referral_link": "https://www.your-company.com/?fpr=referralid18",
+          "current_offer": null,
+          "current_referral_reward": {
+            "id": 90548,
+            "amount": null,
+            "type": "per_referral",
+            "unit": "cash",
+            "name": "35% recurring commission",
+            "per_of_sale": 35,
+            "default_promo_code": null
+          },
+          "current_promotion_reward": null,
+          "current_target_reward": null,
+          "campaign_name": "Campaign Name",
+          "hidden": false,
+          "visitors_count": 4,
+          "leads_count": 3,
+          "customers_count": 2,
+          "refunds_count": 0,
+          "cancellations_count": 0,
+          "sales_count": 2,
+          "sales_total": 2522,
+          "refunds_total": 0,
+          "active_customers_count": 2
+        }
+      ]
+    },
+    "campaign": {
+      "id": 17476,
+      "name": "Campaign Name",
+      "landing_url": "https://www.your-company.com",
+      "description": "Private campaign with 2 plans",
+      "private": false,
+      "color": "#42a5f5",
+      "default_webhook_url": "https://your-webhook-url.com",
+      "auto_approve_rewards": true,
+      "auto_approve_promoters": false,
+      "offer": null,
+      "referral_reward": {
+        "id": 90548,
+        "amount": null,
+        "type": "per_referral",
+        "unit": "cash",
+        "name": "35% recurring commission",
+        "per_of_sale": 35,
+        "default_promo_code": null
+      },
+      "promotion_reward": null,
+      "target_reward": null
+    }
+  }
+}
+```
+</ResponseExample>

@@ -1,0 +1,8 @@
+---
+title: "Reset promoter's authentication token"
+openapi: 'openapi-promoters PUT /refresh_token'
+---
+
+Resetting authentication token(auth_token) which is used to automatically sign in your promoters(if you use this feature) is not required, but can be used to enhance the security of the promoter dashboard. You can set up a cron job to call the API endpoint and store the new "auth_token" from the response.
+
+You can identify promoters by: id, cust_id or auth_token...only one required.

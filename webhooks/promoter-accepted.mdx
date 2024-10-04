@@ -1,0 +1,658 @@
+---
+title: "Promoter Accepted"
+---
+
+By setting up a webhook your endpoint will receive an event when a promoter is created.
+
+## Response Paramerters
+
+<ResponseField name="Event" type="Event Object">
+  <Expandable title="properties">
+    <ResponseField name="id" type="string">
+      The Id of the event
+    </ResponseField>
+    <ResponseField name="type" type="string">
+      Indicates the webhook event type, such as `promoter_accepted`.
+    </ResponseField>
+    <ResponseField name="created_at" type="string">
+      Timestamp of when the event occurred.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="Data" type="Data Object">
+  <Expandable title="properties">
+    <ResponseField name="state" type="string">
+      Current state of the promoter in relation to the campaign (e.g., "accepted").
+    </ResponseField>
+    <ResponseField name="campaign" type="Campaign Object">
+      <Expandable title="properties">
+        <ResponseField name="id" type="number">
+          The Id of the campaign
+        </ResponseField>
+        <ResponseField name="name" type="string">
+          The name of the campaign
+        </ResponseField>
+        <ResponseField name="landing_url" type="string">
+          The landing url of the campaign
+        </ResponseField>
+        <ResponseField name="description" type="string">
+          The description of the campaign
+        </ResponseField>
+        <ResponseField name="private" type="boolean">
+          Whether the campaign is private
+        </ResponseField>
+        <ResponseField name="color" type="string">
+          The color of the campaign
+        </ResponseField>
+        <ResponseField name="default_webhook_url" type="string">
+          The default webhook url of the campaign
+        </ResponseField>
+        <ResponseField name="auto_approve_rewards" type="boolean">
+          Whether the campaign automatically approves rewards
+        </ResponseField>
+        <ResponseField name="auto_approve_promoters" type="boolean">
+          Whether the campaign automatically approves promoters
+        </ResponseField>
+        <ResponseField name="offer" type="Offer Object">
+          <Expandable title="properties">
+            <ResponseField name="id" type="number">
+              The Id of the offer
+            </ResponseField>
+            <ResponseField name="name" type="string">
+              The name of the offer
+            </ResponseField>
+            <ResponseField name="amount" type="number">
+              The amount of the offer
+            </ResponseField>
+            <ResponseField name="unit" type="string">
+              The unit of the offer
+            </ResponseField>
+            <ResponseField name="default_promo_code" type="string">
+              The default promo code of the offer
+            </ResponseField>
+          </Expandable>
+        </ResponseField>
+        <ResponseField name="referral_reward" type="Referral Reward Object">
+          <Expandable title="properties">
+            <ResponseField name="id" type="number">
+              The Id of the referral reward
+            </ResponseField>
+            <ResponseField name="amount" type="number">
+              The amount of the referral reward
+            </ResponseField>
+            <ResponseField name="type" type="string">
+              The type of the referral reward
+            </ResponseField>
+            <ResponseField name="unit" type="string">
+              The unit of the referral reward
+            </ResponseField>
+            <ResponseField name="name" type="string">
+              The name of the referral reward
+            </ResponseField>
+            <ResponseField name="per_of_sale" type="number">
+              The per of sale of the referral reward
+            </ResponseField>
+            <ResponseField name="default_promo_code" type="string">
+              The default promo code of the referral reward
+            </ResponseField>
+          </Expandable>
+        </ResponseField>
+        <ResponseField name="promotion_reward" type="Promotion Reward Object">
+          <Expandable title="properties">
+            <ResponseField name="id" type="number">
+              The Id of the promotion reward
+            </ResponseField>
+            <ResponseField name="amount" type="number">
+              The amount of the promotion reward
+            </ResponseField>
+            <ResponseField name="type" type="string">
+              The type of the promotion reward
+            </ResponseField>
+            <ResponseField name="unit" type="string">
+              The unit of the promotion reward
+            </ResponseField>
+            <ResponseField name="name" type="string">
+              The name of the promotion reward
+            </ResponseField>
+            <ResponseField name="per_of_sale" type="number">
+              The per of sale of the promotion reward
+            </ResponseField>
+            <ResponseField name="default_promo_code" type="string">
+              The default promo code of the promotion reward
+            </ResponseField>
+          </Expandable>
+        </ResponseField>
+      <ResponseField name="target_reward" type="string">
+        The target reward of the campaign
+      </ResponseField>
+      </Expandable>
+    </ResponseField>
+    <ResponseField name="promoter" type="Promoter Object">
+      <Expandable title="properties">
+        <ResponseField name="id" type="number">
+          The Id of the promoter
+        </ResponseField>
+        <ResponseField name="status" type="string">
+          The status of the promoter
+        </ResponseField>
+           <ResponseField name="cust_id" type="string">
+          The customer id of the promoter
+        </ResponseField>
+        <ResponseField name="email" type="string">
+          The email of the promoter
+        </ResponseField>
+        <ResponseField name="created_at" type="string">
+          The date the promoter was created
+        </ResponseField>
+        <ResponseField name="temp_password" type="string">
+          The temporary password of the promoter
+        </ResponseField>
+        <ResponseField name="default_promotion_id" type="number">
+          The default promotion id of the promoter
+        </ResponseField>
+        <ResponseField name="pref" type="string">
+          The pref of the promoter
+        </ResponseField>
+        <ResponseField name="default_ref_id" type="string">
+          The default referral id of the promoter
+        </ResponseField>
+        <ResponseField name="note" type="string">
+          The note saved on the promoter profile by an admin
+        </ResponseField>
+        <ResponseField name="w8_form_url" type="string">
+          The w8 form url saved on the promoter profile by an admin
+        </ResponseField>
+        <ResponseField name="w9_form_url" type="string">
+          The w9 form url saved on the promoter profile by an admin
+        </ResponseField>
+        <ResponseField name="parent_promoter_id" type="number">
+          The parent promoter id of the promoter
+        </ResponseField>   
+        <ResponseField name="earnings_balance" type="number">
+          The earnings balance of the promoter
+        </ResponseField>
+        <ResponseField name="current_balance" type="number">
+          The current balance of the promoter
+        </ResponseField>
+        <ResponseField name="paid_balance" type="number">
+          The paid balance of the promoter
+        </ResponseField>
+        <ResponseField name="auth_token" type="string">
+          The auth token of the promoter
+        </ResponseField>
+        <ResponseField name="profile" type="Profile Object">
+          <Expandable title="properties">
+            <ResponseField name="id" type="number">
+              The Id of the profile
+            </ResponseField>
+            <ResponseField name="first_name" type="string">
+              The first name of the profile
+            </ResponseField>
+            <ResponseField name="last_name" type="string">
+              The last name of the profile
+            </ResponseField>
+            <ResponseField name="website" type="string">
+              The website of the profile
+            </ResponseField>
+            <ResponseField name="company_name" type="string">
+              The company name of the profile
+            </ResponseField>
+            <ResponseField name="phone_number" type="string">
+              The phone number of the profile
+            </ResponseField>
+            <ResponseField name="address" type="string">
+              The address of the profile    
+            </ResponseField>
+            <ResponseField name="vat_id" type="string">
+              The vat id of the profile
+            </ResponseField>
+            <ResponseField name="country" type="string">
+              The country of the profile
+            </ResponseField>
+            <ResponseField name="paypal_email" type="string">
+              The paypal email of the profile
+            </ResponseField>
+            <ResponseField name="avatar_url" type="string">
+              The avatar url of the profile
+            </ResponseField>
+            <ResponseField name="description" type="string">
+              The description of the profile
+            </ResponseField>
+            <ResponseField name="social_accounts" type="Social Accounts Object">
+              <Expandable title="properties">
+                <ResponseField name="tiktok" type="Social Account Object">
+                  <Expandable title="properties">
+                    <ResponseField name="url" type="string">
+                      The url of the social account
+                    </ResponseField>
+                  </Expandable>
+                </ResponseField>
+                <ResponseField name="twitch" type="Social Account Object">
+                  <Expandable title="properties">
+                    <ResponseField name="url" type="string">
+                      The url of the social account
+                    </ResponseField>
+                  </Expandable>
+                </ResponseField>
+                <ResponseField name="twitter" type="Social Account Object">
+                  <Expandable title="properties">
+                    <ResponseField name="url" type="string">
+                      The url of the social account
+                    </ResponseField>
+                  </Expandable>
+                </ResponseField>
+                <ResponseField name="youtube" type="Social Account Object">
+                  <Expandable title="properties">
+                    <ResponseField name="url" type="string">
+                      The url of the social account
+                    </ResponseField>
+                  </Expandable>
+                </ResponseField>
+                <ResponseField name="facebook" type="Social Account Object">
+                  <Expandable title="properties">
+                    <ResponseField name="url" type="string">
+                      The url of the social account
+                    </ResponseField>
+                  </Expandable>
+                </ResponseField>
+                <ResponseField name="linkedin" type="Social Account Object">
+                  <Expandable title="properties">
+                    <ResponseField name="url" type="string">
+                      The url of the social account
+                    </ResponseField>
+                  </Expandable>
+                </ResponseField>
+                <ResponseField name="instagram" type="Social Account Object">
+                  <Expandable title="properties">
+                    <ResponseField name="url" type="string">
+                      The url of the social account
+                    </ResponseField>
+                  </Expandable>
+                </ResponseField>
+              </Expandable>
+            </ResponseField>
+          </Expandable>
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="promotions" type="Promotions Array">
+
+      <Expandable title="properties">
+        <ResponseField name="promotion" type="Promotion Object">
+            <Expandable title="properties">
+
+                <ResponseField name="id" type="number">
+                  The Id of the promotion
+                </ResponseField>
+                <ResponseField name="status" type="string">
+                  The status of the promotion
+                </ResponseField>
+                <ResponseField name="ref_id" type="string">
+                  The referral id of the promotion
+                </ResponseField>
+                <ResponseField name="promo_code" type="string">
+                  The promo code of the promotion
+                </ResponseField>
+                <ResponseField name="customer_promo_code" type="string">
+                  The customer promo code of the promotion
+                </ResponseField>
+                <ResponseField name="target_reached_at" type="string">
+                  The target reached at of the promotion
+                </ResponseField>
+                <ResponseField name="promoter_id" type="number">
+                  The promoter id of the promotion
+                </ResponseField>
+                <ResponseField name="campaign_id" type="number">
+                  The campaign id of the promotion
+                </ResponseField>
+                <ResponseField name="referral_link" type="string">
+                  The referral link of the promotion
+                </ResponseField>
+                <ResponseField name="current_offer" type="Offer Object">
+                  <Expandable title="properties">
+                    <ResponseField name="id" type="number">
+                      The Id of the offer
+                    </ResponseField>
+                    <ResponseField name="name" type="string">
+                      The name of the offer
+                    </ResponseField>
+                    <ResponseField name="amount" type="number">
+                      The amount of the offer
+                    </ResponseField>
+                    <ResponseField name="unit" type="string">
+                      The unit of the offer
+                    </ResponseField>
+                    <ResponseField name="default_promo_code" type="string">
+                      The default promo code of the offer
+                    </ResponseField>
+                  </Expandable>
+                </ResponseField>
+
+
+            <ResponseField name="current_referral_reward" type="Current referral reward Object">
+                <Expandable title="properties">
+
+                    <ResponseField name="id" type="number">
+                      The Id of the referral reward
+                    </ResponseField>
+                    <ResponseField name="amount" type="number">
+                      The amount of the referral reward
+                    </ResponseField>
+                    <ResponseField name="type" type="string">
+                      The type of the referral reward
+                    </ResponseField>
+                    <ResponseField name="unit" type="string">
+                      The unit of the referral reward
+                    </ResponseField>
+                    <ResponseField name="name" type="string">
+                      The name of the referral reward
+                    </ResponseField>
+                    <ResponseField name="per_of_sale" type="number">
+                      The per of sale of the referral reward
+                    </ResponseField>
+                    <ResponseField name="default_promo_code" type="string">
+                      The default promo code of the referral reward
+                    </ResponseField>
+
+                </Expandable>
+            </ResponseField>
+            <ResponseField name="current_promotion_reward" type="Current promotion reward Object">
+                <Expandable title="properties">
+                    <ResponseField name="id" type="number">
+                      The Id of the promotion reward
+                    </ResponseField>
+                    <ResponseField name="amount" type="number">
+                      The amount of the promotion reward
+                    </ResponseField>
+                    <ResponseField name="type" type="string">
+                      The type of the promotion reward
+                    </ResponseField>
+                    <ResponseField name="unit" type="string">
+                      The unit of the promotion reward
+                    </ResponseField>
+                    <ResponseField name="name" type="string">
+                      The name of the promotion reward
+                    </ResponseField>
+                    <ResponseField name="per_of_sale" type="number">
+                      The per of sale of the promotion reward
+                    </ResponseField>
+                    <ResponseField name="default_promo_code" type="string">
+                      The default promo code of the promotion reward
+                    </ResponseField>
+                </Expandable>
+            </ResponseField>
+            <ResponseField name="current_target_reward" type="Current target reward Object">
+                 <Expandable title="properties">
+                    <ResponseField name="id" type="number">
+                      The Id of the referral reward
+                    </ResponseField>
+                    <ResponseField name="amount" type="number">
+                      The amount of the referral reward
+                    </ResponseField>
+                    <ResponseField name="type" type="string">
+                      The type of the referral reward
+                    </ResponseField>
+                    <ResponseField name="unit" type="string">
+                      The unit of the referral reward
+                    </ResponseField>
+                    <ResponseField name="name" type="string">
+                      The name of the referral reward
+                    </ResponseField>
+                    <ResponseField name="per_of_sale" type="number">
+                      The per of sale of the referral reward
+                    </ResponseField>
+                    <ResponseField name="default_promo_code" type="string">
+                      The default promo code of the referral reward
+                    </ResponseField>
+
+                </Expandable>
+                </ResponseField>
+            <ResponseField name="campaign_name" type="string">
+              The name of the campaign
+            </ResponseField>
+            <ResponseField name="hidden" type="boolean">
+              Whether the campaign is hidden
+            </ResponseField>
+            <ResponseField name="visitors_count" type="number">
+              The number of visitors
+            </ResponseField>
+            <ResponseField name="leads_count" type="number">
+              The number of leads
+            </ResponseField>
+            <ResponseField name="customers_count" type="number">
+              The number of customers
+            </ResponseField>
+            <ResponseField name="refunds_count" type="number">
+              The number of refunds
+            </ResponseField>
+            <ResponseField name="cancellations_count" type="number">
+              The number of cancellations
+            </ResponseField>
+            <ResponseField name="sales_count" type="number">
+              The number of sales
+            </ResponseField>
+            <ResponseField name="sales_total" type="number">
+              The total sales
+            </ResponseField>
+            <ResponseField name="refunds_total" type="number">
+              The total refunds
+            </ResponseField>
+            <ResponseField name="active_customers_count" type="number">
+              The number of active customers
+            </ResponseField>
+            </Expandable>
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample name="Promoter Accepted Response" type="string">
+  ```json Response
+
+{
+  "event": {
+    "id": 22733469,
+    "type": "promoter_accepted",
+    "created_at": "2024-10-03T11:57:31.228Z"
+  },
+  "data": {
+    "state": "accepted",
+    "campaign": {
+      "id": 13202,
+      "name": "Jaquelyn Ryan",
+      "landing_url": "https://www.cax.ws",
+      "description": "",
+      "private": false,
+      "color": "#42a5f5",
+      "default_webhook_url": "https://h.albato.com/wh/38/1lfiorr/DQRARvqv1zQQuxMO4FKsgWJ66qVqwm9HcfvTqCqdfF0/",
+      "auto_approve_rewards": true,
+      "auto_approve_promoters": false,
+      "offer": {
+        "id": 67212,
+        "name": "5% discount coupon",
+        "amount": 5,
+        "unit": "discount_per",
+        "default_promo_code": " MAXADA-5"
+      },
+      "referral_reward": {
+        "id": 128312,
+        "amount": 0,
+        "type": "per_referral",
+        "unit": "cash",
+        "name": "20% recurring commission",
+        "per_of_sale": 20,
+        "default_promo_code": ""
+      },
+      "promotion_reward": {
+        "id": 68347,
+        "amount": null,
+        "type": "per_promotion",
+        "unit": "free_months",
+        "name": "Free subscription months",
+        "per_of_sale": 0,
+        "default_promo_code": null
+      },
+      "target_reward": null
+    },
+    "promoter": {
+      "id": 9000754,
+      "status": "active",
+      "cust_id": null,
+      "email": "zavuha@mailinator.com",
+      "created_at": "2024-10-03T11:57:30.943Z",
+      "temp_password": "VKD-uS",
+      "default_promotion_id": 11027468,
+      "pref": "bh4oj6x",
+      "default_ref_id": "bhyrr",
+      "note": null,
+      "w8_form_url": null,
+      "w9_form_url": null,
+      "parent_promoter_id": null,
+      "earnings_balance": null,
+      "current_balance": null,
+      "paid_balance": null,
+      "auth_token": "nu9NhM6Hza-kybjZZJivC-FgMtxMrT_o",
+      "profile": {
+        "id": 9048173,
+        "first_name": "Cooper",
+        "last_name": "Faulkner",
+        "website": "https://www.baxyzozocu.org.au",
+        "company_name": "Dalton and Mcneil",
+        "phone_number": null,
+        "address": "",
+        "vat_id": "",
+        "country": "AU",
+        "paypal_email": null,
+        "avatar_url": null,
+        "description": null,
+        "social_accounts": {
+          "tiktok": {
+            "url": ""
+          },
+          "twitch": {
+            "url": ""
+          },
+          "twitter": {
+            "url": ""
+          },
+          "youtube": {
+            "url": ""
+          },
+          "facebook": {
+            "url": ""
+          },
+          "linkedin": {
+            "url": ""
+          },
+          "instagram": {
+            "url": ""
+          }
+        }
+      },
+      "promotions": [
+        {
+          "id": 11027468,
+          "status": "offer_running",
+          "ref_id": "bhyrr",
+          "promo_code": null,
+          "customer_promo_code": null,
+          "target_reached_at": null,
+          "promoter_id": 9000754,
+          "campaign_id": 13202,
+          "referral_link": "https://www.cax.ws?_get=bhyrr",
+          "current_offer": {
+            "id": 67212,
+            "name": "5% discount coupon",
+            "amount": 5,
+            "unit": "discount_per",
+            "default_promo_code": " MAXADA-5"
+          },
+          "current_referral_reward": {
+            "id": 128312,
+            "amount": 0,
+            "type": "per_referral",
+            "unit": "cash",
+            "name": "20% recurring commission",
+            "per_of_sale": 20,
+            "default_promo_code": ""
+          },
+          "current_promotion_reward": {
+            "id": 68347,
+            "amount": null,
+            "type": "per_promotion",
+            "unit": "free_months",
+            "name": "Free subscription months",
+            "per_of_sale": 0,
+            "default_promo_code": null
+          },
+          "current_target_reward": null,
+          "campaign_name": "Jaquelyn Ryan",
+          "hidden": false,
+          "visitors_count": 0,
+          "leads_count": 0,
+          "customers_count": 0,
+          "refunds_count": 0,
+          "cancellations_count": 0,
+          "sales_count": 0,
+          "sales_total": 0,
+          "refunds_total": 0,
+          "active_customers_count": 0
+        }
+      ]
+    },
+    "promotion": {
+      "id": 11027468,
+      "status": "offer_running",
+      "ref_id": "bhyrr",
+      "promo_code": null,
+      "customer_promo_code": null,
+      "target_reached_at": null,
+      "promoter_id": 9000754,
+      "campaign_id": 13202,
+      "referral_link": "https://www.cax.ws?_get=bhyrr",
+      "current_offer": {
+        "id": 67212,
+        "name": "5% discount coupon",
+        "amount": 5,
+        "unit": "discount_per",
+        "default_promo_code": " MAXADA-5"
+      },
+      "current_referral_reward": {
+        "id": 128312,
+        "amount": 0,
+        "type": "per_referral",
+        "unit": "cash",
+        "name": "20% recurring commission",
+        "per_of_sale": 20,
+        "default_promo_code": ""
+      },
+      "current_promotion_reward": {
+        "id": 68347,
+        "amount": null,
+        "type": "per_promotion",
+        "unit": "free_months",
+        "name": "Free subscription months",
+        "per_of_sale": 0,
+        "default_promo_code": null
+      },
+      "current_target_reward": null,
+      "campaign_name": "Jaquelyn Ryan",
+      "hidden": false,
+      "visitors_count": 0,
+      "leads_count": 0,
+      "customers_count": 0,
+      "refunds_count": 0,
+      "cancellations_count": 0,
+      "sales_count": 0,
+      "sales_total": 0,
+      "refunds_total": 0,
+      "active_customers_count": 0
+    }
+  }
+}
+  ```
+
+</ResponseExample>

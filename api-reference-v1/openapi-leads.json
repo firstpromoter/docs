@@ -1,0 +1,670 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "FirstPromoter Leads API",
+    "description": "The leads API allows you to manage the leads and customers referred by your promoters. To send an API call you will require the API key found in the `Settings` page to be added in the `x-api-key` header.",
+    "license": {
+      "name": "MIT"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://firstpromoter.com/api/v1/leads"
+    }
+  ],
+  "security": [
+    {
+      "apiKeyAuth": []
+    }
+  ],
+  "paths": {
+    "/delete": {
+      "delete": {
+        "description": "Remove a lead/customer from FirstPromoter using the API. You can find the lead either by `id` , `uid` or `email`. <Tip>**HTTP Request** <br/>`DELETE https://firstpromoter.com/api/v1/leads/delete`</Tip>",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "`required if email or uid is null` \n\n  ID of the lead or customer to delete",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "uid",
+            "in": "query",
+            "description": "`required if email or id is null` \n\n  UID of the lead or customer to delete",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "description": "`required if id and uid is null` \n\n Email of the lead or customer to delete",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete lead 200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication error 401 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError",
+                  "example": "Bad credentials"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError",
+                  "example": {
+                    "error": "Lead not found."
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError",
+                  "example": {
+                    "error": "You need to find the lead/customer either by id, uid or email."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/update": {
+      "put": {
+        "description": "Use this to update a lead/customer details from FirstPromoter using the API. You can find the lead either by `id` , `uid` or `email` <Tip>**HTTP Request** <br/> `PUT https://firstpromoter.com/api/v1/leads/update`</Tip>",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "`required if email or uid is null` \n\n  ID of the lead or customer",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "uid",
+            "in": "query",
+            "description": "`required if email or id is null` \n\n  UID of the lead or customer.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "description": "`required if id and uid is null` \n\n Email of the lead or customer.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "new_uid",
+            "in": "query",
+            "description": "New uid of the lead or customer.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "new_email",
+            "in": "query",
+            "description": "New email of the lead or customer.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "new_ref_id",
+            "in": "query",
+            "description": "If you want to move the lead or customer to another promoter, you can enter the referral id of the new promotion",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "description": "Lead's state`",
+            "schema": {
+              "type": "string",
+              "enum": ["signup", "active", "subscribed", "denied", "cancelled"]
+            }
+          },
+          {
+            "name": "customer_since",
+            "in": "query",
+            "description": "ISO datetime when the lead was converted to a customer",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "plan_name",
+            "in": "query",
+            "description": "Id of the plan the customer was assigned to. Needs to match with the plans set on FirstPromoter",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Lead"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication error 401 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError",
+                  "example": "Bad credentials"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError",
+                  "example": {
+                    "error": "Lead not found."
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/show": {
+      "get": {
+        "description": "Show the lead/customer details from FirstPromoter using the API. You can find the lead either by `id` , `uid` or `email` <Tip>**HTTP Request** <br/> `GET https://firstpromoter.com/api/v1/leads/show`</Tip>",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "`required if email or uid is null` \n\n  ID of the lead or customer to show",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "uid",
+            "in": "query",
+            "description": "`required if email or id is null` \n\n  UID of the lead or customer to show",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "description": "`required if id and uid is null` \n\n Email of the lead or customer to show",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Show lead 200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Lead"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication error 401 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError",
+                   "example": "Bad credentials"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError",
+                  "example": {
+                    "error": "Lead not found."
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError",
+                  "example": {
+                    "error": "You need to find the lead/customer either by id, uid or email."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/list": {
+      "get": {
+        "description": "With this endpoint you can list all the leads and customers assigned to a promotion, promoter, campaign or entire account using the API. <Note>Pagination details are held on response headers. Add `--include` option on `curl` request to see the pagination details format and links to next pages.</Note><Tip>**HTTP Request** <br/> `GET https://firstpromoter.com/api/v1/leads/list`</Tip>",
+        "parameters": [
+          {
+            "name": "promotion_id",
+            "in": "query",
+            "description": "List all leads and customer assigned to this promotion id",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ref_id",
+            "in": "query",
+            "description": "List all leads and customer assigned to a promotion - find promotion by `ref_id`",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "promoter_id",
+            "in": "query",
+            "description": "List all leads and customers assigned to a promoter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "campaign_id",
+            "in": "query",
+            "description": "List all leads and customers in a campaign",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get the list of leads and customers response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Lead"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication error 401 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationError",
+                   "example": "Bad credentials"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError",
+                  "example": {
+                    "error": "Promotion not found."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Lead": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The lead's ID inside FirstPromoter",
+            "type": "integer"
+          },
+          "status": {
+            "description": "The lead's or customer's status",
+            "type": "string",
+            "enum": ["signup", "active", "subscribed", "denied", "cancelled"]
+          },
+          "uid": {
+            "description": "Your lead/customer's user ID inside your application."
+          },
+          "email": {
+            "description": "The lead's or customer's email",
+            "type": "string",
+            "format": "email"
+          },
+          "customer_since": {
+            "description": "ISO date string at which the lead converted to a customer.",
+            "type": "string"
+          },
+          "cancelled_at": {
+            "description": "ISO date string at which the lead/customer cancelled",
+            "type": "string"
+          },
+          "plan_name": {
+            "type": "string"
+          },
+          "suspicion": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "website": {
+            "type": "string"
+          },
+          "created_at": {
+            "description": "ISO date string at which the lead/customer signed up",
+            "type": "string"
+          },
+          "split_promotion_id": {},
+          "custom_fields": {},
+          "split_percentage_value": {},
+          "visitor_sub_id": {},
+          "promotion": {
+            "$ref": "#/components/schemas/Promotion"
+          },
+          "promoter": {
+            "$ref": "#/components/schemas/PromoterWithoutPromotionsAndProfile"
+          }
+        }
+      },
+      "Promotion": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "ID of the promotion.",
+            "type": "number"
+          },
+          "status": {
+            "description": "Current offer status.",
+            "type": "string"
+          },
+          "ref_id": {
+            "type": "string"
+          },
+          "promo_code": {
+            "description": "The unique coupon id or coupon code from your billing provider to assign to this affiliate for coupon tracking. This is also known as promo code.",
+            "type": "string"
+          },
+          "customer_promo_code": {
+            "description": "This is discount code/promotion code your customer used or applied on your checkout page. This is also known as display code",
+            "type": "string"
+          },
+          "target_reached_at": {
+            "type": "string"
+          },
+          "promoter_id": {
+            "description": "ID of the promoter/affiliate.",
+            "type": "number"
+          },
+          "campaign_id": {
+            "description": "ID of the campaign where the promotion runs.",
+            "type": "number"
+          },
+          "referral_link": {
+            "description": "Promoter's referral link",
+            "type": "string"
+          },
+          "current_offer": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "description": "The reward id",
+                "type": "number"
+              },
+              "name": {
+                "description": "The reward name",
+                "type": "string"
+              },
+              "amount": {
+                "description": "The reward amount",
+                "type": "number"
+              },
+              "unit": {
+                "description": "The reward unit (e.g., 'credits', 'free_months', 'cash').",
+                "type": "string"
+              },
+              "default_promo_code": {
+                "type": "string"
+              }
+            }
+          },
+          "current_referral_reward": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "amount": {
+                "type": "number"
+              },
+              "unit": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "per_of_sale": {
+                "type": "number"
+              },
+              "default_promo_code": {
+                "type": "string"
+              }
+            }
+          },
+          "current_promotion_reward": {
+            "type": "object"
+          },
+          "current_target_reward": {
+            "type": "object"
+          },
+          "campaign_name": {
+            "type": "string"
+          },
+          "hidden": {
+            "type": "boolean"
+          },
+          "visitors_count": {
+            "type": "number"
+          },
+          "leads_count": {
+            "type": "number"
+          },
+          "customers_count": {
+            "type": "number"
+          },
+          "refunds_count": {
+            "type": "number"
+          },
+          "cancellations_count": {
+            "type": "number"
+          },
+          "sales_count": {
+            "type": "number"
+          },
+          "sales_total": {
+            "type": "number"
+          },
+          "refunds_total": {
+            "type": "number"
+          },
+          "active_customers_count": {
+            "type": "number"
+          }
+        }
+      },
+      "PromoterWithoutPromotionsAndProfile": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Promoter's id",
+            "type": "integer"
+          },
+          "status": {
+            "description": "Promoter's status",
+            "type": "string",
+            "enum": ["approved", "pending", "denied"]
+          },
+          "cust_id": {
+            "description": "Customer/user ID of the promoter inside your application. This will be included in the webhook event and can be used to identify the promoter in your system if you scribscibe for FirstPromoter's 'promoter_accepted' webhook."
+          },
+          "email": {
+            "description": "Promoter's email",
+            "type": "string"
+          },
+          "created_at": {
+            "description": "ISO date string at which the promoter signed up",
+            "type": "string"
+          },
+          "temp_password": {
+            "description": "A temporary password the promoter can use to log in to their dashboard if you don't use authentication tokens(auth_token) to sign promoters in automatically.",
+            "type": "string"
+          },
+          "default_promotion_id": {
+            "description": "Promoter's default promotion id",
+            "type": "number"
+          },
+          "pref": {
+            "description": "Promoter's parent referral id.",
+            "type": "string"
+          },
+          "default_ref_id": {
+            "description": "Promoter's default referral id",
+            "type": "string"
+          },
+          "note": {
+            "description": "A note/description of promoter",
+            "type": "string"
+          },
+          "w8_form_url": {},
+          "w9_form_url": {},
+          "parent_promoter_id": {
+            "description": "Parent promoter id",
+            "type": "string"
+          },
+          "earnings_balance": {
+            "description": "Promoter's earnings balance",
+            "type": "object"
+          },
+          "current_balance": {
+            "description": "Promoter's current balance",
+            "type": "object"
+          },
+          "paid_balance": {
+            "description": "Promoter's paid balance",
+            "type": "object"
+          },
+          "auth_token": {
+            "description": "Authentication token generated when the promoter was created",
+            "type": "string"
+          }
+        }
+      },
+      "MessageResponse": {
+        "required": ["message"],
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "AuthenticationError": {
+        "type": "string"
+      },
+      "NotFoundError": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-KEY"
+      }
+    }
+  }
+}

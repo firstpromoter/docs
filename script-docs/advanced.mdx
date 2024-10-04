@@ -1,0 +1,114 @@
+---
+title: 'Advanced use cases & examples'
+---
+
+## Passing the ref id programmatically
+`fpr("init",{cid:"...",ref_id:"..."})`
+
+Getting the ref id from the url and passing it to fpr init
+
+<CodeGroup>
+```html Custom query parameter
+<script>(function (w) { w.fpr = w.fpr || function () { w.fpr.q = w.fpr.q || []; w.fpr.q[arguments[0] == 'set' ? 'unshift' : 'push'](arguments); }; })(window);
+
+  function getQueryParameter(qParam) {
+    var searchParams = new URL(document.location.toString()).searchParams;
+    if (searchParams.has(qParam)) {
+      return searchParams.get(qParam);
+    } else {
+      return null;
+    }
+  }
+
+  var customRefValue = getQueryParameter("aff");
+  if (customRefValue) {
+    fpr("init", { ref_id: customRefValue, cid: "xxxxxx" });
+  } else {
+    fpr("init", { cid: "xxxxxxx" });
+  }
+</script>
+<script src="https://cdn.firstpromoter.com/fpr.js" async></script>
+```
+
+```html Custom hash
+<script>
+(function(w){w.fpr=w.fpr||function(){w.fpr.q = w.fpr.q||[];w.fpr.q[arguments[0]=='set'?'unshift':'push'](arguments);};})(window);
+var fullUrl= window.location.href;
+const url = new URL(fullUrl);
+console.log(url.searchParams);
+if(fullUrl.includes("#")){
+    fpr("init", {ref_id:fullUrl.split("#")[1],cid:"xxxxxxx"});
+}else{
+    fpr("init", {cid:"xxxxxxx"});
+}
+fpr("click");
+</script>
+```
+
+</CodeGroup>
+
+
+
+## Passing the ref id programmatically from a query string
+
+``` html
+<script>(function(w){w.fpr=w.fpr||function(){w.fpr.q = w.fpr.q||[];w.fpr.q[arguments[0]=='set'?'unshift':'push'](arguments);};})(window);
+function getParam(param) {
+return new URLSearchParams(window.location.search).get(param);
+}
+var ref_id = getParam("sa");
+if (ref_id) {
+fpr("init", { ref_id, cid: "c19onh5t" });
+} else {
+fpr("init", { cid: "c19onh5t" });
+}
+fpr("click");
+</script>
+<script src="https://cdn.firstpromoter.com/fpr.js" async></script>
+```
+
+## Forcing a new tid to be created or reinitializing the first promoter cookies
+
+You can force a new tid to be created by invalidating the old one this can be done by passing cookie_ref_id: 'xxx' as shown in the example below
+
+```js
+fpr("referral",{email: getParam("wj_lead_email")}, function(){
+window.fpr("click",{cookie_ref_id: 'xxx'});
+});
+```
+
+it can also be used to force new emails to be collected on page refresh
+
+```html
+<script>(function(w){w.fpr=w.fpr||function(){w.fpr.q = w.fpr.q||[];w.fpr.q[arguments[0]=='set'?'unshift':'push'](arguments);};})(window);
+fpr("init", {cid:"…"});
+fpr("click",{cookie_ref_id: 'xxx'});
+</script>
+
+```
+
+
+## Setting a default  Promoter
+
+```html
+<script>
+  function getParam(param) {
+    return new URLSearchParams(window.location.search).get(param);
+  }
+
+  (function (w) {w.fpr = w.fpr || function () {w.fpr.q = w.fpr.q || []; w.fpr.q[arguments[0] == 'set' ? 'unshift' : 'push'](arguments);};})(window);
+  var hasTid = document.cookie.indexOf('fprom_tid=') > 0;
+  var hasRefId = document.cookie.indexOf('fprom_ref=') > 0;
+
+  if ((!hasRefId || !hasTid) && !getParam('fpr')) {
+    var ref_id = "pm";
+    fpr("init", {ref_id, cid: "pdlduqv6"});
+  } else {
+    fpr("init", {cid: "pdlduqv6"});
+  }
+  fpr("click");
+
+</script>
+
+<script src="https://cdn.firstpromoter.com/fpr.js" async></script>
+```
