@@ -5,10 +5,11 @@ description: "This is a reference document for all the methods available in Firs
 
 
 # Including fpr.js
- On your first promoter dashboard, under the getting started > Quick setup section, you are provided with some scripts which are to be added to your website. It is ideal that the script is added globally on the HEAD section of every marketing or public page of your website.
+ On your FirstPromoter dashboard, under the Settings> Integrations> Integrate your website section, based on the selections you make, you are provided with some scripts which are to be added to your website. 
 
-
-Using the scripts provided in the Getting started > Quick setup section which look like the below
+ <Note>
+ It is ideal that the script is added globally on the HEAD section of every marketing or public page of your website.
+</Note>
 
 ```html
 <script>(function(w){w.fpr=w.fpr||function(){w.fpr.q = w.fpr.q||[];w.fpr.q[arguments[0]=='set'?'unshift':'push'](arguments);};})(window);
@@ -28,7 +29,7 @@ To get the best performance, it is ideal that you have the scripts added to all 
 # Functions
 
 ## fpr("init",options, callback?)
-This method helps initializes first promoter with the provided options. Most of these options are loaded automatically when the script loads, but they can be overwritten by passing different ones to the method. The most used one is "ref_id" which forces the script to track a specific promoter.
+This method helps initializes FirstPromoter with the provided options. Most of these options are loaded automatically when the script loads, but they can be overwritten by passing different ones to the method. The most used one is "ref_id" which forces the script to track a specific promoter.
 
 ### Parameters 
 <ParamField path="options" type="object" required>
@@ -111,7 +112,7 @@ fpr("onReady", function(data){
 ----------
 
 ## fpr("referral",payload, callback?)
-This method is used primarily to send the referral details to first promoter.It takes as its payload the email of the referral/lead
+This method is used primarily to send the referral details to FirstPromoter. It takes as its payload the email of the referral/lead
 
 ### Parameters   
 <ParamField path="payload" type="object" required>
