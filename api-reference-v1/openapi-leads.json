@@ -21,7 +21,7 @@
   "paths": {
     "/delete": {
       "delete": {
-        "description": "Remove a lead/customer from FirstPromoter using the API. You can find the lead either by `id` , `uid` or `email`. <Tip>**HTTP Request** <br/>`DELETE https://firstpromoter.com/api/v1/leads/delete`</Tip>",
+        "description": "Remove a lead/customer from FirstPromoter using the API. You can find the referral either by `id` , `uid` or `email`. <Tip>**HTTP Request** <br/>`DELETE https://firstpromoter.com/api/v1/leads/delete`</Tip>",
         "parameters": [
           {
             "name": "id",
@@ -227,7 +227,7 @@
     },
     "/show": {
       "get": {
-        "description": "Show the lead/customer details from FirstPromoter using the API. You can find the lead either by `id` , `uid` or `email` <Tip>**HTTP Request** <br/> `GET https://firstpromoter.com/api/v1/leads/show`</Tip>",
+        "description": "Show the lead/customer details from FirstPromoter using the API. You can find the referral either by `id` , `uid` or `email` <Tip>**HTTP Request** <br/> `GET https://firstpromoter.com/api/v1/leads/show`</Tip>",
         "parameters": [
           {
             "name": "id",

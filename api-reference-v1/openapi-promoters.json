@@ -966,7 +966,7 @@
     },
     "/move_to_campaign": {
       "post": {
-        "description": "This endpoint will change the campaign of the promoter with another one, keeping the referral id the same(affiliate won't need to update the referral link). It's the same function to move the promoter to another campaign from the UI. More details of how it works [here](https://help.firstpromoter.com/en/articles/2509650-moving-promoters-from-one-campaign-to-another).<br/><br/>You can identify promoters by: `id`, `cust_id`, `auth_token`, `promoter_email` or `ref_id`(referral id).<Tip> **HTTP Request** <br/> `POST https://firstpromoter.com/api/v1/promoters/move_to_campaign` </Tip>",
+        "description": "This endpoint will change the promoter's campaign to another one, keeping the referral ID the same (the affiliate won’t need to update the referral link). It serves the same function as moving the promoter to another campaign from the UI.More details on how it works can be found [here](https://help.firstpromoter.com/en/articles/2509650-moving-promoters-from-one-campaign-to-another).<br/><br/>You can identify promoters by: `id`, `cust_id`, `auth_token`, `promoter_email` or `ref_id`(referral id).<Tip> **HTTP Request** <br/> `POST https://firstpromoter.com/api/v1/promoters/move_to_campaign` </Tip>",
         "parameters": [
           {
             "name": "id",
@@ -1191,7 +1191,7 @@
     },
     "/add_to_campaign": {
       "post": {
-        "description": "Use this endpoint to add a promoter to another campaign. Your promoter will have multiple campaigns to promoter, each campaign with its own promotion, referral link and referral id.<br/>You can identify promoters by: `id`, `cust_id`, `auth_token`, `promoter_email` or `ref_id` (referral id).<Tip> **HTTP Request** <br/> `POST https://firstpromoter.com/api/v1/promoters/add_to_campaign` </Tip>",
+        "description": "Use this endpoint to add a promoter to another campaign. Your promoter can have multiple campaigns to promote, each with its own referral link and referral ID.<br/><br/>You can identify promoters by `id`, `cust_id`, `auth_token`, `promoter_email` or `ref_id` (referral id). <Tip> **HTTP Request** <br/> `POST https://firstpromoter.com/api/v1/promoters/add_to_campaign` </Tip>",
         "parameters": [
           {
             "name": "id",
@@ -1446,7 +1446,7 @@
     },
     "/refresh_token": {
       "put": {
-        "description": "Resetting authentication token(`auth_token`) which is used to automatically sign in your promoters(if you use this feature) is not required, but can be used to enhance the security of the promoter dashboard. You can set up a cron job to call the API endpoint and store the new `auth_token` from the response.<br/>You can identify promoters by: `id`, `cust_id` or `auth_token`. Only one is required.<br/><Tip> **HTTP Request** <br/> `PUT https://firstpromoter.com/api/v1/promoters/refresh_token` </Tip>",
+        "description": "Resetting the authentication token (`auth_token`), which is used to automatically sign in your promoters (if you use this feature), is not required but can enhance the security of the promoter dashboard. You can set up a cron job to call the API endpoint and store the new auth_token from the response. <br/><br/>You can identify promoters by id, cust_id, or auth_token; only one is required.<Tip> **HTTP Request** <br/> `PUT https://firstpromoter.com/api/v1/promoters/refresh_token` </Tip>",
         "parameters": [
           {
             "name": "id",

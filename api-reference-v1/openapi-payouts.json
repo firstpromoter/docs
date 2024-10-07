@@ -21,7 +21,7 @@
   "paths": {
     "/list": {
       "get": {
-        "description": "With this endpoint you can list all payouts of a promoter, campaign or entire account using the API. <Tip>**HTTP Request** <br/><br/> `GET https://firstpromoter.com/api/v1/payouts/list`</Tip>",
+        "description": "With this endpoint, you can list all payouts for a promoter, a campaign, or the entire account using the API. <Tip>**HTTP Request** <br/><br/> `GET https://firstpromoter.com/api/v1/payouts/list`</Tip>",
         "parameters": [
           {
             "name": "promoter_id",
@@ -534,7 +534,7 @@
 
     "/update": {
       "put": {
-        "description": "This call allows you to change the status of the payout. For ex. you can mark the payout as completed once the payout is paid.",
+        "description": "This call allows you to change the status of the payout. For example, you can mark the payout as completed once it has been paid.",
         "parameters": [
           {
             "name": "id",
