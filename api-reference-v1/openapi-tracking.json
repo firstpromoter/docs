@@ -389,7 +389,7 @@
             "name": "amount",
             "in": "query",
             "required": true,
-            "description": "the refund amount in cents. It's used to calculate the negative commissions/rewards.",
+            "description": "The refund amount in cents. It's used to calculate the negative commissions/rewards.",
             "schema": { "type": "string" }
           },
           {
