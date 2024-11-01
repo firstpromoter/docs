@@ -192,7 +192,7 @@
             "name": "amount",
             "in": "query",
             "required": true,
-            "description": "The sale amount in cents. It's used to calculate commissions/rewards. \n \n **For zero-decimal** currencies like `JPY`, `amount` and `mrr` parameters should be sent as **whole values**. <br/><br/>**For other currencies**, `amount` and `mrr` parameter values should be in cents, i.e., you will need to **multiply the value by 100** before sending the request.",
+            "description": "The sale amount in cents. It's used to calculate commissions/rewards. \n \n **For zero-decimal** currencies like `JPY`, `amount` and `mrr` parameters should be sent as **whole values**. \n \n **For other currencies**, `amount` and `mrr` parameter values should be in cents, i.e., you will need to **multiply the value by 100** before sending the request.",
             "schema": { "type": "string" }
           },
           {
