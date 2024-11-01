@@ -185,14 +185,14 @@
             "name": "event_id",
             "in": "query",
             "required": true,
-            "description": "Transaction or refund event ID. It's required to avoid generating duplicate refunds in case you mistakenly send the same API call multiple times.",
+            "description": "Transaction or sale event ID. It's required to avoid generating duplicate sales in case you mistakenly send the same API call multiple times.",
             "schema": { "type": "string" }
           },
           {
             "name": "amount",
             "in": "query",
             "required": true,
-            "description": "The refund amount in cents. It's used to calculate the negative commissions/rewards.",
+            "description": "The sale amount in cents. It's used to calculate commissions/rewards. \n \n **For zero-decimal** currencies like `JPY`, `amount` and `mrr` parameters should be sent as **whole values**. <br/><br/>**For other currencies**, `amount` and `mrr` parameter values should be in cents, i.e., you will need to **multiply the value by 100** before sending the request.",
             "schema": { "type": "string" }
           },
           {
