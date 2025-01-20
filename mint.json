@@ -40,6 +40,11 @@
   ],
   "anchors": [
     {
+      "name": "API Docs",
+      "icon": "webhook",
+      "url": "api-reference-v1/introduction"
+    },
+    {
       "name": "Help Center",
       "icon": "square-question",
       "url": "https://help.firstpromoter.com/en/"
