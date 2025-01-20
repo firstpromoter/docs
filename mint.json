@@ -40,7 +40,7 @@
   ],
   "anchors": [
     {
-      "name": "API Docs",
+      "name": "API Reference",
       "icon": "webhook",
       "url": "https://docs.firstpromoter.com/api-reference-v1/introduction",
       "version":"v1"
