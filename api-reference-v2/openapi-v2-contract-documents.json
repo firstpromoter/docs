@@ -1,0 +1,126 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "FirstPromoter Contract Documents API",
+    "version": "2.0.0",
+    "description": "API for managing contract documents in FirstPromoter"
+  },
+  "servers": [
+    {
+      "url": "https://firstpromoter.com/api/v2/company"
+    }
+  ],
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+  "paths": {
+    "/contract_documents": {
+      "get": {
+        "summary": "Get all current version contract documents of a company or promoter",
+        "tags": ["Contract Documents"],
+
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Search params. Searches by promoter name and email",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/DocumentFilters"
+            }
+          },
+          {
+            "name": "sorting",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/DocumentSorting"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/contract_documents/{id}": {
+      "get": {
+        "summary": "Get contract documents by id and returns it in the selected format (html/pdf)",
+        "tags": ["Contract Documents"],
+
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "content_type",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["html", "pdf"]
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "DocumentFilters": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": ["pending", "signed"]
+          },
+          "promoter_id": {
+            "type": "integer"
+          },
+          "contract_id": {
+            "type": "integer"
+          }
+        }
+      },
+      "DocumentSorting": {
+        "type": "object",
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "enum": ["asc", "desc"]
+          },
+          "signed_at": {
+            "type": "string",
+            "enum": ["asc", "desc"]
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Access token passed as a Bearer token in the Authorization header"
+      }
+    }
+  }
+}

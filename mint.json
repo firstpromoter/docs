@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/schema.json",
   "name": "FirstPromoter Docs",
-  "versions": ["v1", "v2"],
+  "versions": ["v2", "v1"],
   "logo": {
     "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
@@ -43,7 +43,7 @@
       "name": "API Reference",
       "icon": "webhook",
       "url": "https://docs.firstpromoter.com/api-reference-v1/introduction",
-      "version":"v1"
+      "version": "v1"
     },
     {
       "name": "Help Center",
@@ -54,12 +54,16 @@
   "navigation": [
     {
       "group": "Overview",
-      "pages": ["introduction","how-it-works", "quickstart"]
+      "pages": ["introduction", "how-it-works", "quickstart"]
     },
 
     {
       "group": "Scripts",
-      "pages": ["script-docs/fpr-js-docs", "script-docs/advanced","script-docs/concepts"]
+      "pages": [
+        "script-docs/fpr-js-docs",
+        "script-docs/advanced",
+        "script-docs/concepts"
+      ]
     },
     {
       "group": "Integration Options",
@@ -72,50 +76,55 @@
             "integrations/billing/recurly",
             "integrations/billing/paddle",
             "integrations/billing/braintree",
-             "integrations/billing/api"
+            "integrations/billing/api"
           ]
         },
         {
-         "group": "Platform",
-         "pages": [
-          "integrations/tracking/platform/highlevel",
-          "integrations/tracking/platform/clickfunnels",
-          {
-            "group": "Stripe",
-            "pages": ["integrations/tracking/platform/stripe/payment-links", "integrations/tracking/platform/stripe/pricing-table"]
-          },
-          "integrations/tracking/platform/ghost",
-          "integrations/tracking/platform/kajabi",
-          "integrations/tracking/platform/thrivecart",
-          "integrations/tracking/platform/samcart",
-          "integrations/tracking/platform/kartra",
-          "integrations/tracking/platform/dropfunnels",
-          "integrations/tracking/platform/calendly",
-          "integrations/tracking/platform/kickpages",
-          "integrations/tracking/platform/thinkific",
-          {
-            "group": "Chargebee",
-            "pages": ["integrations/tracking/platform/chargebee/drop-in-scripts", "integrations/tracking/platform/chargebee/hosted-pages"]
-          }
-        ]
-       },
-       {
-        "group": "Custom",
-        "pages": [
-         "integrations/tracking/custom/js",
-         "integrations/tracking/custom/api",
-         "integrations/tracking/custom/django",
-         "integrations/tracking/custom/php",
-         "integrations/tracking/custom/rails",
-         "integrations/tracking/custom/stripe-checkout",
-         "integrations/tracking/custom/paddle-checkout",
-          "integrations/tracking/custom/gtm"
-       ]
-      }
-    ]
+          "group": "Platform",
+          "pages": [
+            "integrations/tracking/platform/highlevel",
+            "integrations/tracking/platform/clickfunnels",
+            {
+              "group": "Stripe",
+              "pages": [
+                "integrations/tracking/platform/stripe/payment-links",
+                "integrations/tracking/platform/stripe/pricing-table"
+              ]
+            },
+            "integrations/tracking/platform/ghost",
+            "integrations/tracking/platform/kajabi",
+            "integrations/tracking/platform/thrivecart",
+            "integrations/tracking/platform/samcart",
+            "integrations/tracking/platform/kartra",
+            "integrations/tracking/platform/dropfunnels",
+            "integrations/tracking/platform/calendly",
+            "integrations/tracking/platform/kickpages",
+            "integrations/tracking/platform/thinkific",
+            {
+              "group": "Chargebee",
+              "pages": [
+                "integrations/tracking/platform/chargebee/drop-in-scripts",
+                "integrations/tracking/platform/chargebee/hosted-pages"
+              ]
+            }
+          ]
+        },
+        {
+          "group": "Custom",
+          "pages": [
+            "integrations/tracking/custom/js",
+            "integrations/tracking/custom/api",
+            "integrations/tracking/custom/django",
+            "integrations/tracking/custom/php",
+            "integrations/tracking/custom/rails",
+            "integrations/tracking/custom/stripe-checkout",
+            "integrations/tracking/custom/paddle-checkout",
+            "integrations/tracking/custom/gtm"
+          ]
+        }
+      ]
     },
     {
-
       "group": "Webhooks",
       "pages": [
         "webhooks/overview",
@@ -130,7 +139,10 @@
     {
       "group": "API Documentation",
       "version": "v1",
-      "pages": ["api-reference-v1/introduction", "api-reference-v1/authentication"]
+      "pages": [
+        "api-reference-v1/introduction",
+        "api-reference-v1/authentication"
+      ]
     },
     {
       "group": "Tracking",
@@ -165,7 +177,8 @@
         "api-reference-v1/promoters-api/refresh-token",
         "api-reference-v1/promoters-api/delete"
       ]
-    },    {
+    },
+    {
       "group": "Rewards",
       "version": "v1",
       "pages": [
@@ -194,16 +207,98 @@
       ]
     },
 
-
     {
       "group": "API Documentation",
       "version": "v2",
-      "pages": ["api-reference-v2/introduction"]
+      "pages": [
+        "api-reference-v2/introduction",
+        "api-reference-v2/authentication"
+      ]
+    },
+    {
+      "group": "Tracking",
+      "version": "v2",
+      "pages": [
+        "api-reference-v2/tracking-api/leads-and-signups",
+        "api-reference-v2/tracking-api/sales",
+        "api-reference-v2/tracking-api/refund",
+        "api-reference-v2/tracking-api/cancellation"
+      ]
+    },
+    {
+      "group": "Assets",
+      "version": "v2",
+      "pages": [
+        "api-reference-v2/assets-api/get",
+        "api-reference-v2/assets-api/get-single",
+        "api-reference-v2/assets-api/create",
+        "api-reference-v2/assets-api/update",
+        "api-reference-v2/assets-api/delete",
+        "api-reference-v2/assets-api/update-category"
+      ]
+    },
+
+    {
+      "group": "Assets Categories",
+      "version": "v2",
+      "pages": [
+        "api-reference-v2/asset-categories-api/get",
+        "api-reference-v2/asset-categories-api/update"
+      ]
+    },
+
+    {
+      "group": "Campaigns",
+      "version": "v2",
+      "pages": [
+        "api-reference-v2/campaigns-api/get",
+        "api-reference-v2/campaigns-api/create",
+        "api-reference-v2/campaigns-api/show-one",
+        "api-reference-v2/campaigns-api/update",
+        "api-reference-v2/campaigns-api/delete"
+      ]
+    },
+
+    {
+      "group": "Commissions",
+      "version": "v2",
+      "pages": [
+        "api-reference-v2/commissions-api/get",
+        "api-reference-v2/commissions-api/create",
+        "api-reference-v2/commissions-api/update",
+        "api-reference-v2/commissions-api/delete"
+      ]
+    },
+    {
+      "group": "Contract Documents",
+      "version": "v2",
+      "pages": [
+        "api-reference-v2/contract-documents-api/get",
+        "api-reference-v2/contract-documents-api/show"
+      ]
+    },
+    {
+      "group": "Contracts",
+      "version": "v2",
+      "pages": [
+        "api-reference-v2/contracts-api/get",
+        "api-reference-v2/contracts-api/create",
+        "api-reference-v2/contracts-api/show",
+        "api-reference-v2/contracts-api/update",
+        "api-reference-v2/contracts-api/delete"
+      ]
+    },
+    {
+      "group": "Dashboard",
+      "version": "v2",
+      "pages": [
+        "api-reference-v2/dashboard-api/get-stats",
+        "api-reference-v2/dashboard-api/get-trending",
+        "api-reference-v2/dashboard-api/get-chart-data",
+        "api-reference-v2/dashboard-api/get-payouts-and-commissions"
+      ]
     }
-
-
-
-
+    
   ],
   "footerSocials": {
     "x": "https://x.com/firstpromoter",
