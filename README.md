@@ -30,3 +30,9 @@ Install our Github App to auto propagate changes from your repo to your deployme
 
 - Mintlify dev isn't running - Run `mintlify install` it'll re-install dependencies.
 - Page loads as a 404 - Make sure you are running in a folder with `mint.json`
+
+
+
+## to show the affiliate code 
+http://localhost:3000/api-reference-v2/api-admin/
+http://localhost:3000/api-reference-v2/api-affiliate/introduction

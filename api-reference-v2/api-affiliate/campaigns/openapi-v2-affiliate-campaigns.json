@@ -1,0 +1,130 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Affiliate::V1::Campaigns",
+    "version": "1.0",
+    "description": "Get all campaigns for current promoter"
+  },
+  "servers": [
+    {
+      "url": "https://firstpromoter.com/api/v2/affiliate"
+    }
+  ],
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+  "paths": {
+    "/campaigns": {
+      "get": {
+        "summary": "Get all campaigns for current promoter",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "description": "ID of the campaign"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Name of the campaign"
+                      },
+                      "color": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Color associated with the campaign"
+                      }
+                    },
+                    "description": "Campaign object"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "code": {
+                      "type": "string",
+                      "description": "Error code"
+                    }
+                  },
+                  "description": "Error response"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "code": {
+                      "type": "string",
+                      "description": "Error code"
+                    }
+                  },
+                  "description": "Error response"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Company_host",
+            "description": "Company host",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Access token passed as a Bearer token in the Authorization header"
+      }
+    }
+  }
+}

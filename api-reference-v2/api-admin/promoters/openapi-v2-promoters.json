@@ -1,0 +1,745 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "FirstPromoter API",
+    "version": "1.0",
+    "description": "API documentation for FirstPromoter promoters management"
+  },
+  "servers": [
+    {
+      "url": "https://firstpromoter.com/api/v1"
+    }
+  ],
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+  "paths": {
+    "/promoters": {
+      "get": {
+        "summary": "Get available promoters",
+        "operationId": "getPromoters",
+        "tags": ["Promoters"],
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Search params",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "description": "Filter params",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/PromoterFilters"
+            }
+          },
+          {
+            "name": "sorting",
+            "in": "query",
+            "description": "Sorting params",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "clicks_count": {
+                  "type": "string",
+                  "enum": ["asc", "desc"]
+                },
+                "referrals_count": {
+                  "type": "string",
+                  "enum": ["asc", "desc"]
+                },
+                "customers_count": {
+                  "type": "string",
+                  "enum": ["asc", "desc"]
+                },
+                "revenue_amount": {
+                  "type": "string",
+                  "enum": ["asc", "desc"]
+                },
+                "joined_at": {
+                  "type": "string",
+                  "enum": ["asc", "desc"]
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Promoter"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create promoter",
+        "operationId": "createPromoter",
+        "tags": ["Promoters"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromoterCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Promoter created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Promoter"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/promoters/{id}": {
+      "get": {
+        "summary": "Get promoter details",
+        "operationId": "getPromoter",
+        "tags": ["Promoters"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "find_by",
+            "in": "query",
+            "description": "Find by attribute",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "email",
+                "cust_id",
+                "auth_token",
+                "ref_token",
+                "promo_code"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Promoter"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update promoter",
+        "operationId": "updatePromoter",
+        "tags": ["Promoters"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromoterUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Promoter updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Promoter"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/promoters/{id}/chart_data": {
+      "get": {
+        "summary": "Get data used for chart",
+        "operationId": "getPromoterChartData",
+        "tags": ["Promoters"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "period_from",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "period_to",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "selection",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "revenue",
+                "clicks",
+                "referrals",
+                "customers",
+                "cancellations"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Chart data retrieved successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/promoters/accept": {
+      "post": {
+        "summary": "Accept promoters",
+        "operationId": "acceptPromoters",
+        "tags": ["Promoters"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["campaign_id"],
+                "properties": {
+                  "campaign_id": {
+                    "type": "integer",
+                    "description": "The ID of the campaign promoter will be accepted to"
+                  },
+                  "filters": {
+                    "$ref": "#/components/schemas/PromoterFilters"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Promoters accepted successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/promoters/reject": {
+      "post": {
+        "summary": "Reject promoters",
+        "operationId": "rejectPromoters",
+        "tags": ["Promoters"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["campaign_id"],
+                "properties": {
+                  "campaign_id": {
+                    "type": "integer",
+                    "description": "The ID of the campaign promoter will be rejected from"
+                  },
+                  "filters": {
+                    "$ref": "#/components/schemas/PromoterFilters"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Promoters rejected successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/promoters/block": {
+      "post": {
+        "summary": "Block promoters",
+        "operationId": "blockPromoters",
+        "tags": ["Promoters"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["campaign_id"],
+                "properties": {
+                  "campaign_id": {
+                    "type": "integer",
+                    "description": "The ID of the campaign promoter will be blocked from"
+                  },
+                  "filters": {
+                    "$ref": "#/components/schemas/PromoterFilters"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Promoters blocked successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/promoters/archive": {
+      "post": {
+        "summary": "Archive promoters",
+        "operationId": "archivePromoters",
+        "tags": ["Promoters"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "filters": {
+                    "$ref": "#/components/schemas/PromoterFilters"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Promoters archived successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/promoters/restore": {
+      "post": {
+        "summary": "Restore promoters",
+        "operationId": "restorePromoters",
+        "tags": ["Promoters"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "filters": {
+                    "$ref": "#/components/schemas/PromoterFilters"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Promoters restored successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/promoters/export": {
+      "get": {
+        "summary": "Exports promoters",
+        "operationId": "exportPromoters",
+        "tags": ["Promoters"],
+        "parameters": [
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/PromoterFilters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Export successful",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Promoter": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "email": {
+            "type": "string"
+          },
+          "cust_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "accepted",
+              "rejected",
+              "blocked",
+              "inactive",
+              "not_set"
+            ]
+          },
+          "profile": {
+            "$ref": "#/components/schemas/PromoterProfile"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "PromoterProfile": {
+        "type": "object",
+        "properties": {
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "website": {
+            "type": "string"
+          },
+          "company_name": {
+            "type": "string"
+          },
+          "phone_number": {
+            "type": "string"
+          },
+          "vat_id": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country in 2 characters format"
+          },
+          "address": {
+            "type": "string"
+          },
+          "should_validate_invoice_details": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PromoterCreate": {
+        "type": "object",
+        "required": ["email", "initial_campaign_id"],
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "cust_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "profile": {
+            "$ref": "#/components/schemas/PromoterProfile"
+          },
+          "initial_campaign_id": {
+            "type": "integer",
+            "description": "The ID of the campaign promoter will be added first"
+          }
+        }
+      },
+      "PromoterUpdate": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "cust_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "profile": {
+            "$ref": "#/components/schemas/PromoterProfile"
+          }
+        }
+      },
+      "PromoterFilters": {
+        "type": "object",
+        "properties": {
+          "revenue_amount": {
+            "type": "object",
+            "properties": {
+              "from": {
+                "type": "integer"
+              },
+              "to": {
+                "type": "integer"
+              }
+            }
+          },
+          "customers_count": {
+            "type": "object",
+            "properties": {
+              "from": {
+                "type": "integer"
+              },
+              "to": {
+                "type": "integer"
+              }
+            }
+          },
+          "referrals_count": {
+            "type": "object",
+            "properties": {
+              "from": {
+                "type": "integer"
+              },
+              "to": {
+                "type": "integer"
+              }
+            }
+          },
+          "clicks_count": {
+            "type": "object",
+            "properties": {
+              "from": {
+                "type": "integer"
+              },
+              "to": {
+                "type": "integer"
+              }
+            }
+          },
+          "joined_at": {
+            "type": "object",
+            "properties": {
+              "from": {
+                "type": "string",
+                "format": "date"
+              },
+              "to": {
+                "type": "string",
+                "format": "date"
+              }
+            }
+          },
+          "last_login_at": {
+            "type": "object",
+            "properties": {
+              "from": {
+                "type": "string",
+                "format": "date"
+              },
+              "to": {
+                "type": "string",
+                "format": "date"
+              }
+            }
+          },
+          "campaign_id": {
+            "oneOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              }
+            ]
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "accepted",
+              "rejected",
+              "blocked",
+              "inactive",
+              "not_set"
+            ]
+          },
+          "has_wform": {
+            "type": "string",
+            "enum": ["yes", "no"]
+          },
+          "parent_promoter_id": {
+            "type": "integer"
+          },
+          "archived": {
+            "type": "string",
+            "enum": ["true", "false", "`true`", "`false`", "`yes`", "`no`"]
+          },
+          "subscribed_to_email": {
+            "type": "string",
+            "enum": ["true", "false", "`true`", "`false`", "`yes`", "`no`"]
+          },
+          "custom_field1": {
+            "$ref": "#/components/schemas/CustomFieldFilter"
+          },
+          "custom_field2": {
+            "$ref": "#/components/schemas/CustomFieldFilter"
+          },
+          "fraud_suspicions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "same_ip_suspicion",
+                "same_promoter_email",
+                "ad_source",
+                "no_suspicion"
+              ]
+            }
+          }
+        }
+      },
+      "CustomFieldFilter": {
+        "type": "object",
+        "required": ["key", "operator", "value"],
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "The key custom_field key"
+          },
+          "operator": {
+            "type": "string",
+            "enum": ["exact", "partial"],
+            "description": "The custom field operator"
+          },
+          "value": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ],
+            "description": "The value of the custom field. Must be String or Array of strings"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Access token passed as a Bearer token in the Authorization header"
+      }
+    }
+  }
+}
