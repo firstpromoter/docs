@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/schema.json",
   "name": "FirstPromoter Docs",
-  "versions": ["v2", "v1"],
+  "versions": ["v1", "v2"],
   "logo": {
     "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
@@ -34,20 +34,8 @@
     },
     {
       "name": "API Reference",
-      "url": "api-reference-v2/api-admin",
+      "url": "api-reference-v2",
       "version": "v2"
-    },
-    {
-      "name": "Affiliate API Reference",
-      "url": "api-reference-v2/api-affiliate",
-      "version": "v2",
-      "isDefaultHidden": true
-    },
-    {
-      "name": "Advanced API Reference",
-      "url": "api-reference-v2/api-advanced",
-      "version": "v2",
-      "isDefaultHidden": true
     }
   ],
   "anchors": [
@@ -55,15 +43,8 @@
       "name": "API Reference",
       "icon": "webhook",
       "url": "https://docs.firstpromoter.com/api-reference-v1/introduction",
-      "version": "v1"
+      "version":"v1"
     },
-    {
-      "name": "Admin API Reference",
-      "icon": "webhook",
-      "url": "api-reference-v2/api-admin/introduction",
-      "version": "v2"
-    },
-
     {
       "name": "Help Center",
       "icon": "square-question",
@@ -73,16 +54,12 @@
   "navigation": [
     {
       "group": "Overview",
-      "pages": ["introduction", "how-it-works", "quickstart"]
+      "pages": ["introduction","how-it-works", "quickstart"]
     },
 
     {
       "group": "Scripts",
-      "pages": [
-        "script-docs/fpr-js-docs",
-        "script-docs/advanced",
-        "script-docs/concepts"
-      ]
+      "pages": ["script-docs/fpr-js-docs", "script-docs/advanced","script-docs/concepts"]
     },
     {
       "group": "Integration Options",
@@ -95,55 +72,50 @@
             "integrations/billing/recurly",
             "integrations/billing/paddle",
             "integrations/billing/braintree",
-            "integrations/billing/api"
+             "integrations/billing/api"
           ]
         },
         {
-          "group": "Platform",
-          "pages": [
-            "integrations/tracking/platform/highlevel",
-            "integrations/tracking/platform/clickfunnels",
-            {
-              "group": "Stripe",
-              "pages": [
-                "integrations/tracking/platform/stripe/payment-links",
-                "integrations/tracking/platform/stripe/pricing-table"
-              ]
-            },
-            "integrations/tracking/platform/ghost",
-            "integrations/tracking/platform/kajabi",
-            "integrations/tracking/platform/thrivecart",
-            "integrations/tracking/platform/samcart",
-            "integrations/tracking/platform/kartra",
-            "integrations/tracking/platform/dropfunnels",
-            "integrations/tracking/platform/calendly",
-            "integrations/tracking/platform/kickpages",
-            "integrations/tracking/platform/thinkific",
-            {
-              "group": "Chargebee",
-              "pages": [
-                "integrations/tracking/platform/chargebee/drop-in-scripts",
-                "integrations/tracking/platform/chargebee/hosted-pages"
-              ]
-            }
-          ]
-        },
-        {
-          "group": "Custom",
-          "pages": [
-            "integrations/tracking/custom/js",
-            "integrations/tracking/custom/api",
-            "integrations/tracking/custom/django",
-            "integrations/tracking/custom/php",
-            "integrations/tracking/custom/rails",
-            "integrations/tracking/custom/stripe-checkout",
-            "integrations/tracking/custom/paddle-checkout",
-            "integrations/tracking/custom/gtm"
-          ]
-        }
-      ]
+         "group": "Platform",
+         "pages": [
+          "integrations/tracking/platform/highlevel",
+          "integrations/tracking/platform/clickfunnels",
+          {
+            "group": "Stripe",
+            "pages": ["integrations/tracking/platform/stripe/payment-links", "integrations/tracking/platform/stripe/pricing-table"]
+          },
+          "integrations/tracking/platform/ghost",
+          "integrations/tracking/platform/kajabi",
+          "integrations/tracking/platform/thrivecart",
+          "integrations/tracking/platform/samcart",
+          "integrations/tracking/platform/kartra",
+          "integrations/tracking/platform/dropfunnels",
+          "integrations/tracking/platform/calendly",
+          "integrations/tracking/platform/kickpages",
+          "integrations/tracking/platform/thinkific",
+          {
+            "group": "Chargebee",
+            "pages": ["integrations/tracking/platform/chargebee/drop-in-scripts", "integrations/tracking/platform/chargebee/hosted-pages"]
+          }
+        ]
+       },
+       {
+        "group": "Custom",
+        "pages": [
+         "integrations/tracking/custom/js",
+         "integrations/tracking/custom/api",
+         "integrations/tracking/custom/django",
+         "integrations/tracking/custom/php",
+         "integrations/tracking/custom/rails",
+         "integrations/tracking/custom/stripe-checkout",
+         "integrations/tracking/custom/paddle-checkout",
+          "integrations/tracking/custom/gtm"
+       ]
+      }
+    ]
     },
     {
+
       "group": "Webhooks",
       "pages": [
         "webhooks/overview",
@@ -158,10 +130,7 @@
     {
       "group": "API Documentation",
       "version": "v1",
-      "pages": [
-        "api-reference-v1/introduction",
-        "api-reference-v1/authentication"
-      ]
+      "pages": ["api-reference-v1/introduction", "api-reference-v1/authentication"]
     },
     {
       "group": "Tracking",
@@ -196,8 +165,7 @@
         "api-reference-v1/promoters-api/refresh-token",
         "api-reference-v1/promoters-api/delete"
       ]
-    },
-    {
+    },    {
       "group": "Rewards",
       "version": "v1",
       "pages": [
@@ -226,312 +194,16 @@
       ]
     },
 
+
     {
       "group": "API Documentation",
       "version": "v2",
-      "pages": [
-        "api-reference-v2/api-admin/introduction",
-        "api-reference-v2/api-admin/authentication"
-      ]
-    },
-    {
-      "group": "API Documentation",
-      "version": "v2",
-      "pages": [
-        "api-reference-v2/api-affiliate/introduction",
-        "api-reference-v2/api-affiliate/authentication"
-      ]
-    },
-    {
-      "group": "Tracking",
-      "version": "v2",
-      "pages": [
-        "api-reference-v2/api-admin/tracking-api/leads-and-signups",
-        "api-reference-v2/api-admin/tracking-api/sales",
-        "api-reference-v2/api-admin/tracking-api/refund",
-        "api-reference-v2/api-admin/tracking-api/cancellation"
-      ]
-    },
-    {
-      "group": "Assets",
-      "version": "v2",
-      "pages": [
-        "api-reference-v2/api-admin/assets/get-available-assets-for-current-company",
-        "api-reference-v2/api-admin/assets/get-asset-for-current-company-based-on-id",
-        "api-reference-v2/api-admin/assets/create-assets-for-current-company",
-        "api-reference-v2/api-admin/assets/update-asset-for-current-company",
-        "api-reference-v2/api-admin/assets/update-category-of-assets-for-current-company",
-        "api-reference-v2/api-admin/assets/delete-assets-for-current-company"
-      ]
-    },
-
-    {
-      "group": "Assets Categories",
-      "version": "v2",
-      "pages": [
-        "api-reference-v2/api-admin/asset-categories-api/get",
-        "api-reference-v2/api-admin/asset-categories-api/update"
-      ]
-    },
-
-    {
-      "group": "Campaigns",
-      "version": "v2",
-      "pages": [
-        "api-reference-v2/api-admin/campaigns-api/get",
-        "api-reference-v2/api-admin/campaigns-api/create",
-        "api-reference-v2/api-admin/campaigns-api/show-one",
-        "api-reference-v2/api-admin/campaigns-api/update",
-        "api-reference-v2/api-admin/campaigns-api/delete"
-      ]
-    },
-
-    {
-      "group": "Commissions",
-      "version": "v2",
-      "pages": [
-        "api-reference-v2/api-admin/commissions-api/get",
-        "api-reference-v2/api-admin/commissions-api/create",
-        "api-reference-v2/api-admin/commissions-api/update",
-        "api-reference-v2/api-admin/commissions-api/delete"
-      ]
-    },
-    {
-      "group": "Contract Documents",
-      "version": "v2",
-      "pages": [
-        "api-reference-v2/api-advanced/contract-documents-api/get",
-        "api-reference-v2/api-advanced/contract-documents-api/show"
-      ]
-    },
-    {
-      "group": "Contracts",
-      "version": "v2",
-      "pages": [
-        "api-reference-v2/api-advanced/contracts-api/get",
-        "api-reference-v2/api-advanced/contracts-api/create",
-        "api-reference-v2/api-advanced/contracts-api/show",
-        "api-reference-v2/api-advanced/contracts-api/update",
-        "api-reference-v2/api-advanced/contracts-api/delete"
-      ]
-    },
-    {
-      "group": "Dashboard",
-      "version": "v2",
-      "pages": [
-        "api-reference-v2/api-admin/dashboard-api/get-stats",
-        "api-reference-v2/api-admin/dashboard-api/get-trending",
-        "api-reference-v2/api-admin/dashboard-api/get-chart-data",
-        "api-reference-v2/api-admin/dashboard-api/get-payouts-and-commissions"
-      ]
-    },
-    {
-      "group": "Payout Methods",
-      "version": "v2",
-      "pages": [
-        "api-reference-v2/api-advanced/payout-methods-api/get-a-payout-method",
-        "api-reference-v2/api-advanced/payout-methods-api/create-a-payout-method",
-        "api-reference-v2/api-advanced/payout-methods-api/get-all-payout-methods-for-current-company",
-        "api-reference-v2/api-advanced/payout-methods-api/update-a-payout-method",
-        "api-reference-v2/api-advanced/payout-methods-api/delete-a-payout-method"
-      ]
-    },
-    {
-      "group": "Payment Batches",
-      "version": "v2",
-      "pages": [
-        "api-reference-v2/api-advanced/payments-batches/delete-payments-batch",
-        "api-reference-v2/api-advanced/payments-batches/pay-start-payments-batch"
-      ]
-    },
-    {
-      "group": "Promo Codes",
-      "version": "v2",
-      "pages": [
-        "api-reference-v2/api-admin/promo-codes/get-promo-codes",
-        "api-reference-v2/api-admin/promo-codes/get-promo-code-by-id",
-        "api-reference-v2/api-admin/promo-codes/create-promo-code",
-        "api-reference-v2/api-admin/promo-codes/update-promo-code-by-id",
-        "api-reference-v2/api-admin/promo-codes/archive-promo-code-by-id"
-      ]
-    },
-    {
-      "group": "Promoters",
-      "version": "v2",
-      "pages": [
-        "api-reference-v2/api-admin/promoters/get-available-promoters-for-current-company",
-        "api-reference-v2/api-admin/promoters/create-promoter-for-current-company",
-        "api-reference-v2/api-admin/promoters/get-promoter-details",
-        "api-reference-v2/api-admin/promoters/update-promoter-for-current-company-based-on-id",
-        "api-reference-v2/api-admin/promoters/get-data-used-for-chart",
-        "api-reference-v2/api-admin/promoters/accepts-a-batch-of-promoters",
-        "api-reference-v2/api-admin/promoters/rejects-a-batch-of-promoters",
-        "api-reference-v2/api-admin/promoters/blocks-a-batch-of-promoters",
-        "api-reference-v2/api-admin/promoters/archives-a-batch-of-promoters",
-        "api-reference-v2/api-admin/promoters/restores-unarchive-a-batch-of-promoters",
-        "api-reference-v2/api-admin/promoters/exports-promoters"
-      ]
-    },
-    {
-      "group": "Referrals",
-      "version": "v2",
-      "pages": [
-        "api-reference-v2/api-admin/referrals/get-available-referrals-for-current-company",
-        "api-reference-v2/api-admin/referrals/create-referral-for-current-company",
-        "api-reference-v2/api-admin/referrals/get-referral-for-current-company-based-on-id",
-        "api-reference-v2/api-admin/referrals/update-referral-for-current-company-based-on-id",
-        "api-reference-v2/api-admin/referrals/approve-referrals-based-on-query",
-        "api-reference-v2/api-admin/referrals/disable-referrals-based-on-query",
-        "api-reference-v2/api-admin/referrals/enable-referrals-based-on-query",
-        "api-reference-v2/api-admin/referrals/delete-referrals-based-on-query",
-        "api-reference-v2/api-admin/referrals/move-referrals-to-promoter-based-on-query",
-        "api-reference-v2/api-admin/referrals/import-previous-sales-from-stripe"
-      ]
-    },
-    {
-      "group": "Reports",
-      "version": "v2",
-      "pages": [
-        "api-reference-v2/api-admin/reports/download-reports",
-        "api-reference-v2/api-admin/reports/get-reports-for-campaigns",
-        "api-reference-v2/api-admin/reports/get-reports-for-overview",
-        "api-reference-v2/api-admin/reports/get-reports-for-promoters",
-        "api-reference-v2/api-admin/reports/get-reports-for-urls",
-        "api-reference-v2/api-admin/reports/get-reports-for-traffic-sources"
-      ]
-    },
-
-    {
-      "group": "Affiliate Assets",
-      "version": "v2",
-      "pages": [
-        "api-reference-v2/api-affiliate/assets/get-available-assets",
-        "api-reference-v2/api-affiliate/assets/get-available-asset-categories"
-      ]
-    },
-    {
-      "group": "Affiliate Campaigns",
-      "version": "v2",
-      "pages": [
-        "api-reference-v2/api-affiliate/campaigns/get-all-campaigns-for-current-promoter"
-      ]
-    },
-    {
-      "group": "Affiliate Commissions",
-      "version": "v2",
-      "pages": [
-        "api-reference-v2/api-affiliate/commissions/get-all-commissions-for-current-promoter",
-        "api-reference-v2/api-affiliate/commissions/export-all-commissions-for-current-promoter"
-      ]
-    },
-    {
-      "group": "Affiliate Contract Documents",
-      "version": "v2",
-      "pages": [
-        "api-reference-v2/api-affiliate/contract-documents/get-current-version-contract-documents-for-the-promoter",
-        "api-reference-v2/api-affiliate/contract-documents/get-contract-documents-by-id-and-returns-it-in-the-selected-format-htmlpdf",
-        "api-reference-v2/api-affiliate/contract-documents/sign-a-document-with-ip",
-        "api-reference-v2/api-affiliate/contract-documents/get-the-draft-content-of-the-contract-with-user-details-parsed"
-      ]
-    },
-    {
-      "group": "Affiliate Email Settings",
-      "pages": [
-        "api-reference-v2/api-affiliate/email-settings/get-affiliate-email-settings",
-        "api-reference-v2/api-affiliate/email-settings/update-affiliate-email-settings"
-      ]
-    },
-    {
-      "group": "Affiliate Payout Methods",
-      "pages": [
-        "api-reference-v2/api-affiliate/payout-methods/get-all-payout-methods-for-current-promoter",
-        "api-reference-v2/api-affiliate/payout-methods/create-a-payout-method-for-the-current-promoter",
-        "api-reference-v2/api-affiliate/payout-methods/get-a-payout-method",
-        "api-reference-v2/api-affiliate/payout-methods/update-a-payout-method",
-        "api-reference-v2/api-affiliate/payout-methods/delete-a-payout-method"
-      ]
-    },
-    {
-      "group": "Affiliate Payouts",
-      "pages": [
-        "api-reference-v2/api-affiliate/payouts/get-all-payouts-for-current-promoter",
-        "api-reference-v2/api-affiliate/payouts/get-due-payout-stats-for-current-promoter",
-        "api-reference-v2/api-affiliate/payouts/export-payouts"
-      ]
-    },
-    {
-      "group": "Affiliate Promo Codes",
-      "pages": [
-        "api-reference-v2/api-affiliate/promo-codes/create-promo-code",
-        "api-reference-v2/api-affiliate/promo-codes/update-promo-code-by-id",
-        "api-reference-v2/api-affiliate/promo-codes/archive-promo-code-by-id"
-      ]
-    },
-    {
-      "group": "Affiliate Promoter Campaigns",
-      "pages": [
-        "api-reference-v2/api-affiliate/promoter-campaigns/update-promotion-ref_token-for-the-promoter_campaign"
-      ]
-    },
-    {
-      "group": "Affiliate Promoters",
-      "pages": [
-        "api-reference-v2/api-affiliate/promoters/get-current-promoter",
-        "api-reference-v2/api-affiliate/promoters/get-current-promoter-sub-affiliates",
-        "api-reference-v2/api-affiliate/promoters/get-chart-data",
-        "api-reference-v2/api-affiliate/promoters/get-the-promoter-email",
-        "api-reference-v2/api-affiliate/promoters/set-the-user-password",
-        "api-reference-v2/api-affiliate/promoters/archives-current-promoter"
-      ]
-    },
-    {
-      "group": "Affiliate Referral Links",
-      "pages": [
-        "api-reference-v2/api-affiliate/referral-links/get-current-promoter-referral-links",
-        "api-reference-v2/api-affiliate/referral-links/creates-a-referral-link-for-current-promoter",
-        "api-reference-v2/api-affiliate/referral-links/updates-a-referral-link-for-current-promoter",
-        "api-reference-v2/api-affiliate/referral-links/destroys-a-referral-link"
-      ]
-    },
-    {
-      "group": "Affiliate Referrals",
-      "pages": [
-        "api-reference-v2/api-affiliate/referrals/get-available-referrals-for-current-promoter",
-        "api-reference-v2/api-affiliate/referrals/create-referral-for-current-promoter",
-        "api-reference-v2/api-affiliate/referrals/update-referral",
-        "api-reference-v2/api-affiliate/referrals/delete-referral",
-        "api-reference-v2/api-affiliate/referrals/export-referrals"
-      ]
-    },
-    {
-      "group": "Affiliate Reports",
-      "pages": [
-        "api-reference-v2/api-affiliate/reports/get-campaigns-reports-for-current-promoter",
-        "api-reference-v2/api-affiliate/reports/get-sub_ids-report-for-current-promoter",
-        "api-reference-v2/api-affiliate/reports/download-reports"
-      ]
-    },
-    {
-      "group": "Invoices",
-      "pages": [
-        "api-reference-v2/api-advanced/invoices/get-invoices-for-current-company",
-        "api-reference-v2/api-advanced/invoices/get-invoice-by-id-generates-invoice-pdf-if-not-present",
-        "api-reference-v2/api-advanced/invoices/void-invoices",
-        "api-reference-v2/api-advanced/invoices/finalize-invoices",
-        "api-reference-v2/api-advanced/invoices/destroy-invoices",
-        "api-reference-v2/api-advanced/invoices/export-invoices-csv",
-        "api-reference-v2/api-advanced/invoices/export-all-invoices-pdf-in-a-single-zip",
-        "api-reference-v2/api-advanced/invoices/shows-the-preview-of-the-invoice-for-the-given-promoter-and-payouts"
-      ]
-    },
-    {
-      "group": "Invoice Templates",
-      "pages": [
-        "api-reference-v2/api-advanced/invoice-templates/shows-the-company-invoice-template",
-        "api-reference-v2/api-advanced/invoice-templates/shows-the-company-invoice-template-preview",
-        "api-reference-v2/api-advanced/invoice-templates/updates-the-company-invoice-template"
-      ]
+      "pages": ["api-reference-v2/introduction"]
     }
+
+
+
+
   ],
   "footerSocials": {
     "x": "https://x.com/firstpromoter",
