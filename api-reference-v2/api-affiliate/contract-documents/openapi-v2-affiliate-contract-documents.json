@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://firstpromoter.com/api/v2/affiliate"
+      "url": "https://v2.fprom.co/api/v2/affiliate"
     }
   ],
   "security": [
@@ -18,8 +18,13 @@
   "paths": {
     "/contract_documents": {
       "get": {
-        "summary": "Get current version contract documents for the promoter",
+        "summary": "Get current version contract documents",
         "tags": ["Contract Documents"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
         "responses": {
           "200": {
             "description": "List of contract documents",
@@ -55,6 +60,9 @@
         "summary": "Get contract documents by id and returns it in the selected format (html/pdf)",
         "tags": ["Contract Documents"],
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "name": "id",
             "in": "path",
@@ -145,6 +153,9 @@
 
         "parameters": [
           {
+            "$ref": "#/components/parameters/AccountId"
+          },
+          {
             "name": "id",
             "in": "path",
             "required": true,
@@ -219,6 +230,11 @@
     },
     "/contract_documents/draft": {
       "post": {
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
         "summary": "Get the draft content of the contract with user details parsed",
         "tags": ["Contract Documents"],
         "requestBody": {
@@ -284,7 +300,19 @@
       }
     }
   },
-  "components": {
+   "components": {
+    "parameters": {
+      "AccountId": {
+        "name": "Account-ID",
+        "in": "header",
+        "required": true,
+        "description": "Account identifier that specifies which account is making the request",
+        "schema": {
+          "type": "string",
+          "example": "acc_123456"
+        }
+      }
+    },
     "schemas": {
       "ContractDocument": {
         "type": "object",
@@ -407,6 +435,12 @@
         "type": "http",
         "scheme": "bearer",
         "description": "Access token passed as a Bearer token in the Authorization header"
+      },
+      "accountId": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "ACCOUNT-ID",
+        "description": "Account ID required with bearer token"
       }
     }
   }

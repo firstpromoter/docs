@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://staging.fprom.co/api/admin/v1",
+      "url": "https://v2.fprom.co/api/v2/company",
       "description": "Staging server"
     }
   ],
@@ -23,22 +23,7 @@
         "tags": ["Referrals"],
         "parameters": [
           {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Access token"
-          },
-          {
-            "in": "header",
-            "name": "Company_host",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Company host"
+            "$ref": "#/components/parameters/AccountId"
           },
           {
             "in": "query",
@@ -110,22 +95,7 @@
         "tags": ["Referrals"],
         "parameters": [
           {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Access token"
-          },
-          {
-            "in": "header",
-            "name": "Company_host",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Company host"
+            "$ref": "#/components/parameters/AccountId"
           }
         ],
         "requestBody": {
@@ -187,6 +157,9 @@
         "tags": ["Referrals"],
         "parameters": [
           {
+            "$ref": "#/components/parameters/AccountId"
+          },
+          {
             "in": "path",
             "name": "id",
             "required": true,
@@ -203,24 +176,6 @@
               "enum": ["email", "uid", "username"]
             },
             "description": "Find by attribute"
-          },
-          {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Access token"
-          },
-          {
-            "in": "header",
-            "name": "Company_host",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Company host"
           }
         ],
         "responses": {
@@ -250,6 +205,9 @@
         "tags": ["Referrals"],
         "parameters": [
           {
+            "$ref": "#/components/parameters/AccountId"
+          },
+          {
             "in": "path",
             "name": "id",
             "required": true,
@@ -257,24 +215,6 @@
               "type": "string"
             },
             "description": "ID of the referral"
-          },
-          {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Access token"
-          },
-          {
-            "in": "header",
-            "name": "Company_host",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Company host"
           }
         ],
         "requestBody": {
@@ -328,22 +268,7 @@
         "tags": ["Referrals"],
         "parameters": [
           {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Access token"
-          },
-          {
-            "in": "header",
-            "name": "Company_host",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Company host"
+            "$ref": "#/components/parameters/AccountId"
           }
         ],
         "requestBody": {
@@ -392,22 +317,7 @@
         "tags": ["Referrals"],
         "parameters": [
           {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Access token"
-          },
-          {
-            "in": "header",
-            "name": "Company_host",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Company host"
+            "$ref": "#/components/parameters/AccountId"
           }
         ],
         "requestBody": {
@@ -456,22 +366,7 @@
         "tags": ["Referrals"],
         "parameters": [
           {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Access token"
-          },
-          {
-            "in": "header",
-            "name": "Company_host",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Company host"
+            "$ref": "#/components/parameters/AccountId"
           }
         ],
         "requestBody": {
@@ -520,22 +415,7 @@
         "tags": ["Referrals"],
         "parameters": [
           {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Access token"
-          },
-          {
-            "in": "header",
-            "name": "Company_host",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Company host"
+            "$ref": "#/components/parameters/AccountId"
           }
         ],
         "requestBody": {
@@ -584,22 +464,7 @@
         "tags": ["Referrals"],
         "parameters": [
           {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Access token"
-          },
-          {
-            "in": "header",
-            "name": "Company_host",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Company host"
+            "$ref": "#/components/parameters/AccountId"
           }
         ],
         "requestBody": {
@@ -949,6 +814,9 @@
         "tags": ["Referrals"],
         "parameters": [
           {
+            "$ref": "#/components/parameters/AccountId"
+          },
+          {
             "in": "path",
             "name": "id",
             "required": true,
@@ -965,24 +833,6 @@
               "enum": ["email", "uid", "username"]
             },
             "description": "Find by attribute"
-          },
-          {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Access token"
-          },
-          {
-            "in": "header",
-            "name": "Company_host",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Company host"
           }
         ],
         "responses": {
@@ -1017,6 +867,18 @@
     }
   },
   "components": {
+    "parameters": {
+      "AccountId": {
+        "name": "Account-ID",
+        "in": "header",
+        "required": true,
+        "description": "Account identifier that specifies which account is making the request",
+        "schema": {
+          "type": "string",
+          "example": "acc_123456"
+        }
+      }
+    },
     "schemas": {
       "Referral": {
         "type": "object",
@@ -1356,6 +1218,12 @@
         "type": "http",
         "scheme": "bearer",
         "description": "Access token passed as a Bearer token in the Authorization header"
+      },
+      "accountId": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "ACCOUNT-ID",
+        "description": "Account ID required with bearer token"
       }
     }
   }

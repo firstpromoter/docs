@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://firstpromoter.com/api/v2/affiliate"
+      "url": "https://v2.fprom.co/api/v2/affiliate"
     }
   ],
   "security": [
@@ -20,6 +20,11 @@
       "get": {
         "summary": "Get current promoter",
         "tags": ["Promoters"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -52,19 +57,18 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "bearerAuth": [],
-            "companyHost": []
-          }
-        ]
+        }
       }
     },
     "/promoters/sub_affiliates": {
       "get": {
         "summary": "Get current promoter sub affiliates",
         "tags": ["Promoters"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -85,13 +89,7 @@
           "403": {
             "description": "Forbidden"
           }
-        },
-        "security": [
-          {
-            "bearerAuth": [],
-            "companyHost": []
-          }
-        ]
+        }
       }
     },
     "/promoters/chart_data": {
@@ -99,6 +97,9 @@
         "summary": "Get chart data",
         "tags": ["Promoters"],
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "name": "promoter_campaign_id",
             "in": "query",
@@ -143,13 +144,7 @@
           "401": {
             "description": "Unauthorized"
           }
-        },
-        "security": [
-          {
-            "bearerAuth": [],
-            "companyHost": []
-          }
-        ]
+        }
       }
     },
     "/promoters/email_from_encrypted_id": {
@@ -157,6 +152,9 @@
         "summary": "Get the promoter email",
         "tags": ["Promoters"],
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "name": "id",
             "in": "query",
@@ -193,6 +191,11 @@
       "put": {
         "summary": "Set the user password",
         "tags": ["Promoters"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -243,6 +246,11 @@
       "post": {
         "summary": "Archives current promoter",
         "tags": ["Promoters"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response"
@@ -253,17 +261,23 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        },
-        "security": [
-          {
-            "bearerAuth": [],
-            "companyHost": []
-          }
-        ]
+        }
       }
     }
   },
-  "components": {
+   "components": {
+    "parameters": {
+      "AccountId": {
+        "name": "Account-ID",
+        "in": "header",
+        "required": true,
+        "description": "Account identifier that specifies which account is making the request",
+        "schema": {
+          "type": "string",
+          "example": "acc_123456"
+        }
+      }
+    },
     "schemas": {
       "Promoter": {
         "type": "object",
@@ -507,6 +521,12 @@
         "type": "http",
         "scheme": "bearer",
         "description": "Access token passed as a Bearer token in the Authorization header"
+      },
+      "accountId": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "ACCOUNT-ID",
+        "description": "Account ID required with bearer token"
       }
     }
   }

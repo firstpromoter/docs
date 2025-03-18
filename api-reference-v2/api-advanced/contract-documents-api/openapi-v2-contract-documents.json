@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://firstpromoter.com/api/v2/company"
+      "url": "https://v2.fprom.co/api/v2/company"
     }
   ],
   "security": [
@@ -22,6 +22,9 @@
         "tags": ["Contract Documents"],
 
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "name": "q",
             "in": "query",
@@ -59,6 +62,9 @@
 
         "parameters": [
           {
+            "$ref": "#/components/parameters/AccountId"
+          },
+          {
             "name": "id",
             "in": "path",
             "required": true,
@@ -84,7 +90,19 @@
       }
     }
   },
-  "components": {
+   "components": {
+    "parameters": {
+      "AccountId": {
+        "name": "Account-ID",
+        "in": "header",
+        "required": true,
+        "description": "Account identifier that specifies which account is making the request",
+        "schema": {
+          "type": "string",
+          "example": "acc_123456"
+        }
+      }
+    },
     "schemas": {
       "DocumentFilters": {
         "type": "object",
@@ -120,6 +138,12 @@
         "type": "http",
         "scheme": "bearer",
         "description": "Access token passed as a Bearer token in the Authorization header"
+      },
+      "accountId": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "ACCOUNT-ID",
+        "description": "Account ID required with bearer token"
       }
     }
   }

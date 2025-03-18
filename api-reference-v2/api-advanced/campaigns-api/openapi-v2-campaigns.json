@@ -1,0 +1,348 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "FirstPromoter Assets API",
+    "version": "2.0.0",
+    "description": "API for managing assets in FirstPromoter"
+  },
+  "servers": [
+    {
+      "url": "https://v2.fprom.co/api/v2/company"
+    }
+  ],
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+
+  "paths": {
+    "/campaigns": {
+      "get": {
+        "summary": "Get all campaigns",
+        "tags": ["Campaigns"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a campaign",
+        "tags": ["Campaigns"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CampaignCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/campaigns/{id}": {
+      "get": {
+        "summary": "Get a campaign",
+        "tags": ["Campaigns"],
+
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a campaign",
+        "tags": ["Campaigns"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CampaignUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a campaign",
+        "tags": ["Campaigns"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    }
+  },
+   "components": {
+    "parameters": {
+      "AccountId": {
+        "name": "Account-ID",
+        "in": "header",
+        "required": true,
+        "description": "Account identifier that specifies which account is making the request",
+        "schema": {
+          "type": "string",
+          "example": "acc_123456"
+        }
+      }
+    },
+    "schemas": {
+      "Link": {
+        "type": "object",
+        "required": ["name", "url"],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "_destroy": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UpgradeDetails": {
+        "type": "object",
+        "required": ["campaign_id", "amount", "metric"],
+        "properties": {
+          "campaign_id": {
+            "type": "integer"
+          },
+          "amount": {
+            "type": "integer"
+          },
+          "metric": {
+            "type": "string",
+            "enum": ["customers", "revenue"]
+          }
+        }
+      },
+      "Reward": {
+        "type": "object",
+        "required": ["apply_on", "product_ids", "reward_id"],
+        "properties": {
+          "apply_on": {
+            "type": "string",
+            "enum": ["monthly", "yearly", "one_time", "all", "specific"]
+          },
+          "product_ids": {
+            "type": "array",
+            "items": {}
+          },
+          "reward_id": {
+            "type": "integer"
+          }
+        }
+      },
+      "CampaignCreate": {
+        "type": "object",
+        "required": [
+          "name",
+          "landing_url",
+          "ref_token_param",
+          "visitor_cookie_life"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "landing_url": {
+            "type": "string"
+          },
+          "ref_token_param": {
+            "type": "string",
+            "enum": [
+              "?fpr",
+              "?via",
+              "?fp_ref",
+              "?deal",
+              "?ref",
+              "?_from",
+              "?_by",
+              "?_go"
+            ]
+          },
+          "color": {
+            "type": "string"
+          },
+          "visitor_cookie_life": {
+            "type": "integer"
+          },
+          "auto_approve_promoters": {
+            "type": "boolean"
+          },
+          "is_private": {
+            "type": "boolean"
+          },
+          "track_ad_traffic": {
+            "type": "string",
+            "enum": ["pending", "allow", "block"]
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            }
+          },
+          "upgrade_details": {
+            "$ref": "#/components/schemas/UpgradeDetails"
+          },
+          "rewards_for_promoters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Reward"
+            }
+          },
+          "rewards_for_referrals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Reward"
+            }
+          }
+        }
+      },
+      "CampaignUpdate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "landing_url": {
+            "type": "string"
+          },
+          "ref_token_param": {
+            "type": "string",
+            "enum": [
+              "?fpr",
+              "?via",
+              "?fp_ref",
+              "?deal",
+              "?ref",
+              "?_from",
+              "?_by",
+              "?_go"
+            ]
+          },
+          "color": {
+            "type": "string"
+          },
+          "visitor_cookie_life": {
+            "type": "integer"
+          },
+          "auto_approve_promoters": {
+            "type": "boolean"
+          },
+          "is_private": {
+            "type": "boolean"
+          },
+          "track_ad_traffic": {
+            "type": "string",
+            "enum": ["pending", "allow", "block"]
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            }
+          },
+          "upgrade_details": {
+            "$ref": "#/components/schemas/UpgradeDetails"
+          },
+          "rewards_for_promoters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Reward"
+            }
+          },
+          "rewards_for_referrals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Reward"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Access token passed as a Bearer token in the Authorization header"
+      },
+      "accountId": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "ACCOUNT-ID",
+        "description": "Account ID required with bearer token"
+      }
+    }
+  }
+}

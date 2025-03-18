@@ -3,11 +3,11 @@
   "info": {
     "title": "FirstPromoter Assets",
     "version": "1.0",
-    "description": "Get available assets for current promoter"
+    "description": "Get available assets "
   },
   "servers": [
     {
-      "url": "https://firstpromoter.com/api/v2/affiliate"
+      "url": "https://v2.fprom.co/api/v2/affiliate"
     }
   ],
   "security": [
@@ -18,7 +18,12 @@
   "paths": {
     "/assets": {
       "get": {
-        "summary": "Get available assets for current promoter",
+        "summary": "Get available assets",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -187,7 +192,12 @@
     },
     "/asset_categories": {
       "get": {
-        "summary": "Get available asset categories for the current promoter",
+        "summary": "Get available asset categories",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful operation"
@@ -200,11 +210,29 @@
     }
   },
   "components": {
+    "parameters": {
+      "AccountId": {
+        "name": "Account-ID",
+        "in": "header",
+        "required": true,
+        "description": "Account identifier that specifies which account is making the request",
+        "schema": {
+          "type": "string",
+          "example": "acc_123456"
+        }
+      }
+    },
     "securitySchemes": {
       "BearerAuth": {
         "type": "http",
         "scheme": "bearer",
         "description": "Access token passed as a Bearer token in the Authorization header"
+      },
+      "accountId": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "ACCOUNT-ID",
+        "description": "Account ID required with bearer token"
       }
     }
   }

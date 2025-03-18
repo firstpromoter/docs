@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://firstpromoter.com/api/v1"
+      "url": "https://v2.fprom.co/api/v2/company"
     }
   ],
   "security": [
@@ -22,6 +22,9 @@
         "operationId": "getPromoters",
         "tags": ["Promoters"],
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "name": "q",
             "in": "query",
@@ -95,6 +98,11 @@
         "summary": "Create promoter",
         "operationId": "createPromoter",
         "tags": ["Promoters"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -128,6 +136,9 @@
         "operationId": "getPromoter",
         "tags": ["Promoters"],
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "name": "id",
             "in": "path",
@@ -174,6 +185,9 @@
         "tags": ["Promoters"],
         "parameters": [
           {
+            "$ref": "#/components/parameters/AccountId"
+          },
+          {
             "name": "id",
             "in": "path",
             "required": true,
@@ -215,6 +229,9 @@
         "operationId": "getPromoterChartData",
         "tags": ["Promoters"],
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "name": "id",
             "in": "path",
@@ -272,6 +289,11 @@
         "summary": "Accept promoters",
         "operationId": "acceptPromoters",
         "tags": ["Promoters"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -307,6 +329,11 @@
         "summary": "Reject promoters",
         "operationId": "rejectPromoters",
         "tags": ["Promoters"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -342,6 +369,11 @@
         "summary": "Block promoters",
         "operationId": "blockPromoters",
         "tags": ["Promoters"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -377,6 +409,11 @@
         "summary": "Archive promoters",
         "operationId": "archivePromoters",
         "tags": ["Promoters"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -407,6 +444,11 @@
         "summary": "Restore promoters",
         "operationId": "restorePromoters",
         "tags": ["Promoters"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -431,41 +473,21 @@
           }
         }
       }
-    },
-    "/promoters/export": {
-      "get": {
-        "summary": "Exports promoters",
-        "operationId": "exportPromoters",
-        "tags": ["Promoters"],
-        "parameters": [
-          {
-            "name": "filters",
-            "in": "query",
-            "schema": {
-              "$ref": "#/components/schemas/PromoterFilters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Export successful",
-            "content": {
-              "text/csv": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
     }
   },
   "components": {
+    "parameters": {
+      "AccountId": {
+        "name": "Account-ID",
+        "in": "header",
+        "required": true,
+        "description": "Account identifier that specifies which account is making the request",
+        "schema": {
+          "type": "string",
+          "example": "acc_123456"
+        }
+      }
+    },
     "schemas": {
       "Promoter": {
         "type": "object",
@@ -739,6 +761,12 @@
         "type": "http",
         "scheme": "bearer",
         "description": "Access token passed as a Bearer token in the Authorization header"
+      },
+      "accountId": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "ACCOUNT-ID",
+        "description": "Account ID required with bearer token"
       }
     }
   }

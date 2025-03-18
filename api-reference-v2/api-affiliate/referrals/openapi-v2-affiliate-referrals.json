@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://firstpromoter.com/api/v2/affiliate"
+      "url": "https://v2.fprom.co/api/v2/affiliate"
     }
   ],
   "security": [
@@ -18,9 +18,12 @@
   "paths": {
     "/referrals": {
       "get": {
-        "summary": "Get available referrals for current promoter",
+        "summary": "Get available referrals",
         "operationId": "getReferrals",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "name": "q",
             "in": "query",
@@ -166,16 +169,16 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        }
       },
       "post": {
-        "summary": "Create referral for current promoter",
+        "summary": "Create referral",
         "operationId": "createReferral",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -236,12 +239,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/referrals/{id}": {
@@ -249,6 +247,9 @@
         "summary": "Update referral",
         "operationId": "updateReferral",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "name": "id",
             "in": "path",
@@ -303,17 +304,15 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        }
       },
       "delete": {
         "summary": "Delete referral",
         "operationId": "deleteReferral",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "name": "id",
             "in": "path",
@@ -340,12 +339,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/referrals/export": {
@@ -353,6 +347,9 @@
         "summary": "Export referrals",
         "operationId": "exportReferrals",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "name": "filters[type]",
             "in": "query",
@@ -422,16 +419,23 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        }
       }
     }
   },
-  "components": {
+   "components": {
+    "parameters": {
+      "AccountId": {
+        "name": "Account-ID",
+        "in": "header",
+        "required": true,
+        "description": "Account identifier that specifies which account is making the request",
+        "schema": {
+          "type": "string",
+          "example": "acc_123456"
+        }
+      }
+    },
     "schemas": {
       "Referral": {
         "type": "object",
@@ -534,6 +538,15 @@
         "type": "http",
         "scheme": "bearer",
         "description": "Access token passed as a Bearer token in the Authorization header"
+      },
+      "accountId": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "ACCOUNT-ID",
+        "description": "Account ID required with bearer token",
+        "x-examples": {
+          "value": "12345"
+        }
       }
     }
   }

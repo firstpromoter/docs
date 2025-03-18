@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://firstpromoter.com/api/v2/affiliate"
+      "url": "https://v2.fprom.co/api/v2/affiliate"
     }
   ],
   "security": [
@@ -22,6 +22,9 @@
         "operationId": "getReferralLinks",
         "parameters": [
           {
+            "$ref": "#/components/parameters/AccountId"
+          },
+          {
             "name": "promoter_campaign_id",
             "in": "query",
             "description": "If provided, it returns only the links related to the given campaign",
@@ -29,26 +32,8 @@
             "schema": {
               "type": "integer"
             }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Company_host",
-            "in": "header",
-            "description": "Company host",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
           }
-        ],
+],
         "responses": {
           "200": {
             "description": "List of referral links",
@@ -79,26 +64,11 @@
         }
       },
       "post": {
-        "summary": "Creates a referral link for current promoter",
+        "summary": "Creates a referral link",
         "operationId": "createReferralLink",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Company_host",
-            "in": "header",
-            "description": "Company host",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/AccountId"
           }
         ],
         "requestBody": {
@@ -169,9 +139,12 @@
     },
     "/referral_links/{id}": {
       "put": {
-        "summary": "Updates a referral link for current promoter",
+        "summary": "Updates a referral link",
         "operationId": "updateReferralLink",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "name": "id",
             "in": "path",
@@ -180,26 +153,8 @@
             "schema": {
               "type": "integer"
             }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Company_host",
-            "in": "header",
-            "description": "Company host",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
           }
-        ],
+],
         "requestBody": {
           "required": true,
           "content": {
@@ -251,6 +206,9 @@
         "operationId": "deleteReferralLink",
         "parameters": [
           {
+            "$ref": "#/components/parameters/AccountId"
+          },
+          {
             "name": "id",
             "in": "path",
             "description": "The id of the referral_link to be destroyed",
@@ -258,26 +216,8 @@
             "schema": {
               "type": "integer"
             }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Company_host",
-            "in": "header",
-            "description": "Company host",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
           }
-        ],
+],
         "responses": {
           "200": {
             "description": "Referral link deleted successfully"
@@ -299,7 +239,19 @@
       }
     }
   },
-  "components": {
+   "components": {
+    "parameters": {
+      "AccountId": {
+        "name": "Account-ID",
+        "in": "header",
+        "required": true,
+        "description": "Account identifier that specifies which account is making the request",
+        "schema": {
+          "type": "string",
+          "example": "acc_123456"
+        }
+      }
+    },
     "schemas": {
       "ReferralLink": {
         "type": "object",
@@ -361,6 +313,12 @@
         "type": "http",
         "scheme": "bearer",
         "description": "Access token passed as a Bearer token in the Authorization header"
+      },
+      "accountId": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "ACCOUNT-ID",
+        "description": "Account ID required with bearer token"
       }
     }
   }

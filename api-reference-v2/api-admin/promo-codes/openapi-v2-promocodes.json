@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://firstpromoter.com/api/v2/company"
+      "url": "https://v2.fprom.co/api/v2/company"
     }
   ],
   "security": [
@@ -23,30 +23,15 @@
         "tags": ["Promo Codes"],
         "parameters": [
           {
+            "$ref": "#/components/parameters/AccountId"
+          },
+          {
             "name": "promoter_campaign_id",
             "in": "query",
             "description": "Filters promo codes by promoter campaign id",
             "required": false,
             "schema": {
               "type": "integer"
-            }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Company_host",
-            "in": "header",
-            "description": "Company host",
-            "required": true,
-            "schema": {
-              "type": "string"
             }
           }
         ],
@@ -85,22 +70,7 @@
         "tags": ["Promo Codes"],
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Company_host",
-            "in": "header",
-            "description": "Company host",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/AccountId"
           }
         ],
         "requestBody": {
@@ -174,30 +144,15 @@
         "tags": ["Promo Codes"],
         "parameters": [
           {
+            "$ref": "#/components/parameters/AccountId"
+          },
+          {
             "name": "id",
             "in": "path",
             "description": "ID of the promo code",
             "required": true,
             "schema": {
               "type": "integer"
-            }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Company_host",
-            "in": "header",
-            "description": "Company host",
-            "required": true,
-            "schema": {
-              "type": "string"
             }
           }
         ],
@@ -234,30 +189,15 @@
         "tags": ["Promo Codes"],
         "parameters": [
           {
+            "$ref": "#/components/parameters/AccountId"
+          },
+          {
             "name": "id",
             "in": "path",
             "description": "ID of the promo code",
             "required": true,
             "schema": {
               "type": "integer"
-            }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Company_host",
-            "in": "header",
-            "description": "Company host",
-            "required": true,
-            "schema": {
-              "type": "string"
             }
           }
         ],
@@ -325,30 +265,15 @@
         "tags": ["Promo Codes"],
         "parameters": [
           {
+            "$ref": "#/components/parameters/AccountId"
+          },
+          {
             "name": "id",
             "in": "path",
             "description": "ID of the promo code",
             "required": true,
             "schema": {
               "type": "integer"
-            }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Company_host",
-            "in": "header",
-            "description": "Company host",
-            "required": true,
-            "schema": {
-              "type": "string"
             }
           }
         ],
@@ -373,7 +298,19 @@
       }
     }
   },
-  "components": {
+   "components": {
+    "parameters": {
+      "AccountId": {
+        "name": "Account-ID",
+        "in": "header",
+        "required": true,
+        "description": "Account identifier that specifies which account is making the request",
+        "schema": {
+          "type": "string",
+          "example": "acc_123456"
+        }
+      }
+    },
     "schemas": {
       "PromoCode": {
         "type": "object",
@@ -436,6 +373,12 @@
         "type": "http",
         "scheme": "bearer",
         "description": "Access token passed as a Bearer token in the Authorization header"
+      },
+      "accountId": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "ACCOUNT-ID",
+        "description": "Account ID required with bearer token"
       }
     }
   }

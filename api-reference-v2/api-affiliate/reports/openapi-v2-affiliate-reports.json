@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://firstpromoter.com/api/v2/affiliate"
+      "url": "https://v2.fprom.co/api/v2/affiliate"
     }
   ],
   "security": [
@@ -18,9 +18,12 @@
   "paths": {
     "/reports/overview": {
       "get": {
-        "summary": "Get campaigns reports for current promoter",
+        "summary": "Get campaigns reports",
         "tags": ["Reports"],
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "name": "columns",
             "in": "query",
@@ -150,9 +153,12 @@
     },
     "/reports/sub_ids": {
       "get": {
-        "summary": "Get sub_ids report for current promoter",
+        "summary": "Get sub_ids report",
         "tags": ["Reports"],
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "name": "columns",
             "in": "query",
@@ -278,6 +284,9 @@
         "tags": ["Reports"],
         "parameters": [
           {
+            "$ref": "#/components/parameters/AccountId"
+          },
+          {
             "name": "report_type",
             "in": "query",
             "required": true,
@@ -357,7 +366,19 @@
       }
     }
   },
-  "components": {
+   "components": {
+    "parameters": {
+      "AccountId": {
+        "name": "Account-ID",
+        "in": "header",
+        "required": true,
+        "description": "Account identifier that specifies which account is making the request",
+        "schema": {
+          "type": "string",
+          "example": "acc_123456"
+        }
+      }
+    },
     "schemas": {
       "Error": {
         "type": "object",
@@ -483,6 +504,12 @@
         "type": "http",
         "scheme": "bearer",
         "description": "Access token passed as a Bearer token in the Authorization header"
+      },
+      "accountId": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "ACCOUNT-ID",
+        "description": "Account ID required with bearer token"
       }
     }
   }

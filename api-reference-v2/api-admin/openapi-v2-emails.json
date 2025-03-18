@@ -8,7 +8,7 @@
 
   "servers": [
     {
-      "url": "https://firstpromoter.com/api/v2/company"
+      "url": "https://v2.fprom.co/api/v2/company"
     }
   ],
   "security": [
@@ -22,6 +22,9 @@
         "summary": "Get available emails",
         "tags": ["Emails"],
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "name": "q",
             "in": "query",
@@ -276,6 +279,9 @@
         "tags": ["Emails"],
         "parameters": [
           {
+            "$ref": "#/components/parameters/AccountId"
+          },
+          {
             "name": "id",
             "in": "path",
             "required": true,
@@ -298,6 +304,9 @@
         "summary": "Update email",
         "tags": ["Emails"],
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "name": "id",
             "in": "path",
@@ -332,6 +341,9 @@
         "tags": ["Emails"],
         "parameters": [
           {
+            "$ref": "#/components/parameters/AccountId"
+          },
+          {
             "name": "id",
             "in": "path",
             "required": true,
@@ -356,6 +368,9 @@
         "summary": "Copy email",
         "tags": ["Emails"],
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "name": "id",
             "in": "path",
@@ -382,6 +397,9 @@
         "tags": ["Emails"],
         "parameters": [
           {
+            "$ref": "#/components/parameters/AccountId"
+          },
+          {
             "name": "id",
             "in": "path",
             "required": true,
@@ -406,6 +424,9 @@
         "summary": "Send test email",
         "tags": ["Emails"],
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "name": "id",
             "in": "path",
@@ -484,6 +505,18 @@
     }
   },
   "components": {
+    "parameters": {
+      "AccountId": {
+        "name": "Account-ID",
+        "in": "header",
+        "required": true,
+        "description": "Account identifier that specifies which account is making the request",
+        "schema": {
+          "type": "string",
+          "example": "acc_123456"
+        }
+      }
+    },
     "schemas": {
       "EmailRequest": {
         "type": "object",
@@ -597,6 +630,12 @@
         "type": "http",
         "scheme": "bearer",
         "description": "Access token passed as a Bearer token in the Authorization header"
+      },
+      "accountId": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "ACCOUNT-ID",
+        "description": "Account ID required with bearer token"
       }
     }
   }

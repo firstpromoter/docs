@@ -3,11 +3,11 @@
   "info": {
     "title": "Affiliate::V1::Campaigns",
     "version": "1.0",
-    "description": "Get all campaigns for current promoter"
+    "description": "Get all campaigns "
   },
   "servers": [
     {
-      "url": "https://firstpromoter.com/api/v2/affiliate"
+      "url": "https://v2.fprom.co/api/v2/affiliate"
     }
   ],
   "security": [
@@ -18,7 +18,12 @@
   "paths": {
     "/campaigns": {
       "get": {
-        "summary": "Get all campaigns for current promoter",
+        "summary": "Get all campaigns",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -94,36 +99,34 @@
               }
             }
           }
-        },
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Authorization",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "name": "Company_host",
-            "description": "Company host",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     }
   },
-  "components": {
+   "components": {
+    "parameters": {
+      "AccountId": {
+        "name": "Account-ID",
+        "in": "header",
+        "required": true,
+        "description": "Account identifier that specifies which account is making the request",
+        "schema": {
+          "type": "string",
+          "example": "acc_123456"
+        }
+      }
+    },
     "securitySchemes": {
       "BearerAuth": {
         "type": "http",
         "scheme": "bearer",
         "description": "Access token passed as a Bearer token in the Authorization header"
+      },
+      "accountId": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "ACCOUNT-ID",
+        "description": "Account ID required with bearer token"
       }
     }
   }

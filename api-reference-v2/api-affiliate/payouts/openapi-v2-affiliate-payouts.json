@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://staging.fprom.co/api"
+      "url": "https://v2.fprom.co/api/v2/affiliate"
     }
   ],
   "security": [
@@ -18,9 +18,12 @@
   "paths": {
     "/affiliate/v1/payouts": {
       "get": {
-        "summary": "Get all payouts for current promoter",
+        "summary": "Get all payouts",
         "tags": ["Payouts"],
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "name": "q",
             "in": "query",
@@ -166,8 +169,13 @@
     },
     "/affiliate/v1/payouts/due_stats": {
       "get": {
-        "summary": "Get due payout stats for current promoter",
+        "summary": "Get due payout stats",
         "tags": ["Payouts"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Payout stats",
@@ -212,6 +220,9 @@
         "summary": "Export payouts",
         "tags": ["Payouts"],
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "name": "q",
             "in": "query",
@@ -439,6 +450,16 @@
       }
     },
     "parameters": {
+      "AccountId": {
+        "name": "Account-ID",
+        "in": "header",
+        "required": true,
+        "description": "Account identifier that specifies which account is making the request",
+        "schema": {
+          "type": "string",
+          "example": "acc_123456"
+        }
+      },
       "filters": {
         "name": "filters",
         "in": "query",
@@ -518,6 +539,12 @@
         "type": "http",
         "scheme": "bearer",
         "description": "Access token passed as a Bearer token in the Authorization header"
+      },
+      "accountId": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "ACCOUNT-ID",
+        "description": "Account ID required with bearer token"
       }
     },
     "responses": {
