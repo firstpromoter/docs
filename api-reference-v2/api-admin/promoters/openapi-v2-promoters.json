@@ -310,6 +310,9 @@
                     "type": "integer",
                     "description": "The ID of the campaign promoter will be accepted to"
                   },
+                  "selection": {
+                    "$ref": "#/components/schemas/Selection"
+                  },
                   "filters": {
                     "$ref": "#/components/schemas/PromoterFilters"
                   }
@@ -349,6 +352,9 @@
                   "campaign_id": {
                     "type": "integer",
                     "description": "The ID of the campaign promoter will be rejected from"
+                  },
+                  "selection": {
+                    "$ref": "#/components/schemas/Selection"
                   },
                   "filters": {
                     "$ref": "#/components/schemas/PromoterFilters"
@@ -390,6 +396,9 @@
                     "type": "integer",
                     "description": "The ID of the campaign promoter will be blocked from"
                   },
+                  "selection": {
+                    "$ref": "#/components/schemas/Selection"
+                  },
                   "filters": {
                     "$ref": "#/components/schemas/PromoterFilters"
                   }
@@ -425,6 +434,9 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "selection": {
+                    "$ref": "#/components/schemas/Selection"
+                  },
                   "filters": {
                     "$ref": "#/components/schemas/PromoterFilters"
                   }
@@ -460,6 +472,9 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "selection": {
+                    "$ref": "#/components/schemas/Selection"
+                  },
                   "filters": {
                     "$ref": "#/components/schemas/PromoterFilters"
                   }
@@ -616,6 +631,30 @@
           },
           "profile": {
             "$ref": "#/components/schemas/PromoterProfile"
+          }
+        }
+      },
+
+      "Selection": {
+        "type": "object",
+        "properties": {
+          "select_all": {
+            "type": "boolean",
+            "description": "Select all promoters"
+          },
+          "selected_ids": {
+            "type": "array",
+            "description": "Selected ids. Required when select_all is false or not present",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "unselected_ids": {
+            "type": "array",
+            "description": "Unselected ids. Required when select_all is true",
+            "items": {
+              "type": "integer"
+            }
           }
         }
       },
