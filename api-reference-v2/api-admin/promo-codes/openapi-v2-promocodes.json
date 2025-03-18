@@ -298,7 +298,7 @@
       }
     }
   },
-   "components": {
+  "components": {
     "parameters": {
       "AccountId": {
         "name": "Account-ID",
@@ -316,39 +316,48 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer"
+            "type": "integer",
+            "description": "ID of the promo code entry"
           },
           "code": {
-            "type": "string"
+            "type": "string",
+            "description": "Code of the promo code"
           },
           "reward": {
             "type": "object",
             "properties": {
               "id": {
-                "type": "integer"
+                "type": "integer",
+                "description": "ID of the reward"
               },
               "name": {
-                "type": "string"
+                "type": "string",
+                "description": "Name of the reward"
               }
-            }
+            },
+            "description": "Reward"
           },
           "ext_id": {
             "type": "string"
           },
           "description": {
-            "type": "string"
+            "type": "string",
+            "description": "Description of the promo code"
           },
           "company_id": {
             "type": "integer"
           },
           "promoter_campaign_id": {
-            "type": "integer"
+            "type": "integer",
+            "description": "ID of the promoter campaign"
           },
           "metadata": {
-            "type": "object"
+            "type": "object",
+            "description": "Metadata of the promo code"
           },
           "details": {
-            "type": "object"
+            "type": "object",
+            "description": "Details of the promo code"
           },
           "archived_at": {
             "type": "string",

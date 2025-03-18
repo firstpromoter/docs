@@ -271,7 +271,7 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AuthenticationError",
-                   "example": "Bad credentials"
+                  "example": "Bad credentials"
                 }
               }
             }
@@ -362,7 +362,7 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AuthenticationError",
-                   "example": "Bad credentials"
+                  "example": "Bad credentials"
                 }
               }
             }
@@ -656,10 +656,6 @@
       }
     },
     "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
-      },
       "apiKeyAuth": {
         "type": "apiKey",
         "in": "header",

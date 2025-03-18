@@ -824,10 +824,6 @@
       }
     },
     "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
-      },
       "apiKeyAuth": {
         "type": "apiKey",
         "in": "header",

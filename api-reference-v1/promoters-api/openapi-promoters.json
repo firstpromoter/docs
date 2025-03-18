@@ -250,6 +250,14 @@
             "schema": {
               "type": "boolean"
             }
+          },
+           {
+            "name": "always_approve",
+            "in": "query",
+            "description": "Set this to `true` to automatically approve the promoter into the campaign without having to manually review the promoter. Please note that this feature only works when `Auto approve new promoters` is enabled/toggle on your FirstPromoter Admin panel under the Campaign settings.",
+            "schema": {
+              "type": "boolean"
+            }
           }
         ],
         "responses": {
