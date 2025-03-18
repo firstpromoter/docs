@@ -28,7 +28,7 @@
           {
             "name": "q",
             "in": "query",
-            "description": "Search params",
+            "description": "Search params for promoters, search using, email, name or ref_id",
             "required": false,
             "schema": {
               "type": "string"
@@ -141,6 +141,7 @@
           },
           {
             "name": "id",
+            "description": "Id of the promoter",
             "in": "path",
             "required": true,
             "schema": {
@@ -190,6 +191,7 @@
           {
             "name": "id",
             "in": "path",
+            "description": "Id of the promoter",
             "required": true,
             "schema": {
               "type": "integer"
@@ -236,12 +238,14 @@
             "name": "id",
             "in": "path",
             "required": true,
+            "description": "Id of the promoter",
             "schema": {
               "type": "integer"
             }
           },
           {
             "name": "period_from",
+            "description": "From date of the period for the chart, ISO date format (YYYY-MM-DD)",
             "in": "query",
             "required": true,
             "schema": {
@@ -493,14 +497,17 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Id of the promoter"
           },
           "email": {
-            "type": "string"
+            "type": "string",
+            "description": "Email address of the promoter"
           },
           "cust_id": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Cust ID of the promoter"
           },
           "state": {
             "type": "string",
@@ -511,18 +518,21 @@
               "blocked",
               "inactive",
               "not_set"
-            ]
+            ],
+            "description": "State of the promoter."
           },
           "profile": {
             "$ref": "#/components/schemas/PromoterProfile"
           },
           "created_at": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "Date and time when the promoter was created. \n ISO date format `(YYYY-MM-DD HH:MM:SS)`"
           },
           "updated_at": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "Date and time when the promoter was last updated. \n ISO date format `(YYYY-MM-DD HH:MM:SS)`"
           }
         }
       },
@@ -530,32 +540,41 @@
         "type": "object",
         "properties": {
           "first_name": {
-            "type": "string"
+            "type": "string",
+            "description": "First name of the promoter"
           },
           "last_name": {
-            "type": "string"
+            "type": "string",
+            "description": "Last name of the promoter"
           },
           "website": {
-            "type": "string"
+            "type": "string",
+            "description": "Website of the promoter"
           },
           "company_name": {
-            "type": "string"
+            "type": "string",
+            "description": "Company name of the promoter"
           },
           "phone_number": {
-            "type": "string"
+            "type": "string",
+            "description": "Phone number of the promoter"
           },
           "vat_id": {
-            "type": "string"
+            "type": "string",
+            "description": "VAT ID of the promoter"
           },
           "country": {
             "type": "string",
-            "description": "Country in 2 characters format"
+            "description": "Country in 2 characters format",
+            "example": "US"
           },
           "address": {
-            "type": "string"
+            "type": "string",
+            "description": "Address of the promoter"
           },
           "should_validate_invoice_details": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Should validate invoice details"
           }
         }
       },
@@ -564,11 +583,14 @@
         "required": ["email", "initial_campaign_id"],
         "properties": {
           "email": {
-            "type": "string"
+            "type": "string",
+            "format": "email",
+            "description": "Email address of the promoter"
           },
           "cust_id": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Cust ID of the promoter"
           },
           "profile": {
             "$ref": "#/components/schemas/PromoterProfile"
@@ -583,11 +605,14 @@
         "type": "object",
         "properties": {
           "email": {
-            "type": "string"
+            "type": "string",
+            "format": "email",
+            "description": "Email address of the promoter"
           },
           "cust_id": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Cust ID of the promoter"
           },
           "profile": {
             "$ref": "#/components/schemas/PromoterProfile"
@@ -599,81 +624,105 @@
         "properties": {
           "revenue_amount": {
             "type": "object",
+            "description": "Revenue amount filter",
             "properties": {
               "from": {
-                "type": "integer"
+                "type": "integer",
+                "minimum": 0,
+                "description": "Minimum revenue amount"
               },
               "to": {
-                "type": "integer"
+                "type": "integer",
+                "description": "Maximum revenue amount"
               }
             }
           },
           "customers_count": {
             "type": "object",
+            "description": "Customers count filter",
             "properties": {
               "from": {
-                "type": "integer"
+                "type": "integer",
+                "minimum": 0,
+                "description": "Minimum customers count"
               },
               "to": {
-                "type": "integer"
+                "type": "integer",
+                "description": "Maximum customers count"
               }
             }
           },
           "referrals_count": {
             "type": "object",
+            "description": "Referrals count filter",
             "properties": {
               "from": {
-                "type": "integer"
+                "type": "integer",
+                "minimum": 0,
+                "description": "Minimum referrals count"
               },
               "to": {
-                "type": "integer"
+                "type": "integer",
+                "description": "Maximum referrals count"
               }
             }
           },
           "clicks_count": {
             "type": "object",
+            "description": "Clicks count filter",
             "properties": {
               "from": {
-                "type": "integer"
+                "type": "integer",
+                "minimum": 0,
+                "description": "Minimum clicks count"
               },
               "to": {
-                "type": "integer"
+                "type": "integer",
+                "description": "Maximum clicks count"
               }
             }
           },
           "joined_at": {
             "type": "object",
+            "description": "Joined at filter",
             "properties": {
               "from": {
                 "type": "string",
+                "description": "Minimum joined at date, ISO date format (YYYY-MM-DD HH:MM:SS)",
                 "format": "date"
               },
               "to": {
                 "type": "string",
+                "description": "Maximum joined at date, ISO date format (YYYY-MM-DD HH:MM:SS)",
                 "format": "date"
               }
             }
           },
           "last_login_at": {
             "type": "object",
+            "description": "Last login at filter",
             "properties": {
               "from": {
                 "type": "string",
-                "format": "date"
+                "format": "date",
+                "description": "Minimum last login at date, ISO date format (YYYY-MM-DD HH:MM:SS)"
               },
               "to": {
                 "type": "string",
-                "format": "date"
+                "format": "date",
+                "description": "Maximum last login at date, ISO date format (YYYY-MM-DD HH:MM:SS)"
               }
             }
           },
           "campaign_id": {
             "oneOf": [
               {
-                "type": "integer"
+                "type": "integer",
+                "description": "Campaign id"
               },
               {
                 "type": "array",
+                "description": "Array of campaign ids",
                 "items": {
                   "type": "integer"
                 }
@@ -689,22 +738,27 @@
               "blocked",
               "inactive",
               "not_set"
-            ]
+            ],
+            "description": "Promoter state filter"
           },
           "has_wform": {
             "type": "string",
-            "enum": ["yes", "no"]
+            "enum": ["yes", "no"],
+            "description": "Has wform filter"
           },
           "parent_promoter_id": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Parent promoter id"
           },
           "archived": {
             "type": "string",
-            "enum": ["true", "false", "`true`", "`false`", "`yes`", "`no`"]
+            "enum": ["true", "false", "`true`", "`false`", "`yes`", "`no`"],
+            "description": "Archived filter"
           },
           "subscribed_to_email": {
             "type": "string",
-            "enum": ["true", "false", "`true`", "`false`", "`yes`", "`no`"]
+            "enum": ["true", "false", "`true`", "`false`", "`yes`", "`no`"],
+            "description": "Subscribed to email filter"
           },
           "custom_field1": {
             "$ref": "#/components/schemas/CustomFieldFilter"
@@ -721,7 +775,8 @@
                 "same_promoter_email",
                 "ad_source",
                 "no_suspicion"
-              ]
+              ],
+              "description": "Suspicion type filter"
             }
           }
         }

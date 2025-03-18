@@ -40,7 +40,7 @@
               "type": "string",
               "enum": ["lead", "customer"]
             },
-            "description": "Type (lead or customer)"
+            "description": "Filter the referrals by type (lead or customer)"
           },
           {
             "in": "query",
@@ -58,7 +58,7 @@
                 "moved"
               ]
             },
-            "description": "State"
+            "description": "Filter the referrals by state"
           }
         ],
         "responses": {
@@ -108,13 +108,16 @@
                 "properties": {
                   "email": {
                     "type": "string",
-                    "format": "email"
+                    "format": "email",
+                    "description": "Email address of the referral"
                   },
                   "uid": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "uid of the referral (This can be your user id from your database)"
                   },
                   "promoter_campaign_id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "The ID of the promoter campaign"
                   }
                 }
               }
@@ -226,13 +229,16 @@
                 "properties": {
                   "email": {
                     "type": "string",
-                    "format": "email"
+                    "format": "email",
+                    "description": "Email address of the referral, this is required if the uid is null"
                   },
                   "uid": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "UID of the referral, this is required if the email is null"
                   },
                   "promoter_campaign_id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Promoter campaign ID, you can obtain this for each promoter form the promoters endpoint"
                   }
                 }
               }
@@ -884,14 +890,17 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Id of the referral"
           },
           "email": {
             "type": "string",
-            "format": "email"
+            "format": "email",
+            "description": "Email address of the referral"
           },
           "uid": {
-            "type": "string"
+            "type": "string",
+            "description": "uid of the referral"
           },
           "state": {
             "type": "string",
@@ -904,10 +913,12 @@
               "denied",
               "pending",
               "moved"
-            ]
+            ],
+            "description": "State of the referral"
           },
           "metadata": {
-            "type": "object"
+            "type": "object",
+            "description": "Additional metadata of the referral"
           },
           "entry_source": {
             "type": "string",
@@ -916,18 +927,20 @@
               "coupon",
               "cookie",
               "manual_admin",
-              "manual_affiliate",
-              null
-            ]
+              "manual_affiliate"
+            ],
+            "description": "Entry source of the referral. This shows where the referral was captured from. \n **Cookie** is set if the referral was captured using the tid cookie, \n **Coupon** is for when the referral is captured via a coupon code. \n**Manual admin** is for when the referral is added manually by an admin. \n**Manual affiliate** is for when the referral is added manually by an affiliate."
           },
           "created_at": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "Date and time when the referral was created"
           },
           "customer_since": {
             "type": "string",
             "format": "date-time",
-            "nullable": true
+            "nullable": true,
+            "description": "Date and time when the referral became a customer"
           },
           "promoter_campaign": {
             "$ref": "#/components/schemas/PromoterCampaign"
@@ -939,12 +952,14 @@
               "same_ip_suspicion",
               "same_promoter_email",
               "ad_source"
-            ]
+            ],
+            "description": "Fraud check result of the referral"
           },
           "created_by_user_email": {
             "type": "string",
             "format": "email",
-            "nullable": true
+            "nullable": true,
+            "description": "Email address of the user who created the referral"
           }
         }
       },
@@ -952,17 +967,21 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Id of the promoter campaign"
           },
           "campaign_id": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Id of the campaign"
           },
           "promoter_id": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Id of the promoter"
           },
           "created_at": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "Date and time when the promoter campaign was created"
           },
           "promoter": {
             "$ref": "#/components/schemas/Promoter"
@@ -976,14 +995,17 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Id of the promoter"
           },
           "email": {
             "type": "string",
-            "format": "email"
+            "format": "email",
+            "description": "Email address of the promoter"
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "Name of the promoter"
           }
         }
       },
@@ -991,14 +1013,17 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Id of the campaign"
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "Name of the campaign"
           },
           "color": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Color assigned to the campaign"
           }
         }
       },
@@ -1009,10 +1034,12 @@
             "type": "object",
             "properties": {
               "select_all": {
-                "type": "boolean"
+                "type": "boolean",
+                "description": "Select all"
               },
               "selected_ids": {
                 "type": "array",
+                "description": "Selected ids. Required when select_all is false or not present",
                 "items": {
                   "type": "integer"
                 }
@@ -1020,13 +1047,11 @@
               "unselected_ids": {
                 "type": "array",
                 "items": {
-                  "type": "integer"
+                  "type": "integer",
+                  "description": "Unselected ids. Required when select_all is true and you want to ignore specific items from the selection"
                 }
               }
             }
-          },
-          "filters": {
-            "$ref": "#/components/schemas/Filters"
           }
         }
       },
@@ -1034,45 +1059,57 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Id of the batch operation"
           },
           "status": {
             "type": "string",
-            "enum": ["pending", "completed"]
+            "enum": ["pending", "completed"],
+            "description": "Status of the batch operation"
           },
           "total": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Total number of items"
           },
           "selected_total": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Number of selected items"
           },
           "processed_count": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Number of processed items"
           },
           "failed_count": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Number of failed operations"
           },
           "action_label": {
-            "type": "string"
+            "type": "string",
+            "description": "Action identifier/ label assigned to the action"
           },
           "created_at": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "Date and time when the batch operation was created"
           },
           "updated_at": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "Date and time when the batch operation was updated"
           },
           "meta": {
-            "type": "object"
+            "type": "object",
+            "description": "Meta data of the batch operation"
           },
           "progress": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Progress of the action (0-100)"
           },
           "processing_errors": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "description": "List of processing errors"
             }
           }
         }

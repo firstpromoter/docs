@@ -92,7 +92,8 @@
             "required": true,
             "schema": {
               "type": "integer"
-            }
+            },
+            "description": "Id of the commission"
           }
         ],
         "requestBody": {
@@ -367,16 +368,19 @@
           },
           "paid": {
             "type": "string",
-            "enum": ["yes", "no"]
+            "enum": ["yes", "no"],
+            "description": "Paid"
           },
           "sale_amount": {
             "type": "object",
             "properties": {
               "from": {
-                "type": "integer"
+                "type": "integer",
+                 "description": "Sale amount from"
               },
               "to": {
-                "type": "integer"
+                "type": "integer",
+                "description": "Sale amount to"
               }
             }
           },
@@ -384,10 +388,12 @@
             "type": "object",
             "properties": {
               "from": {
-                "type": "integer"
+                "type": "integer",
+                 "description": "Amount from"
               },
               "to": {
-                "type": "integer"
+                "type": "integer",
+                "description": "Amount to"
               }
             }
           },
@@ -396,11 +402,13 @@
             "properties": {
               "from": {
                 "type": "string",
-                "format": "date"
+                "format": "date",
+                 "description": "created_at start date"
               },
               "to": {
                 "type": "string",
-                "format": "date"
+                "format": "date",
+                 "description": "created_at end date"
               }
             }
           },
@@ -415,7 +423,8 @@
                   "type": "integer"
                 }
               }
-            ]
+            ],
+             "description": "Campaign ids. Can be Integer or Array of Integers"
           },
           "payout_id": {
             "oneOf": [
@@ -428,20 +437,27 @@
                   "type": "integer"
                 }
               }
-            ]
+            ],
+            "description": "Payout ids. Can be Integer or Array of Integers"
           },
           "due_period": {
             "type": "string",
-            "enum": ["next", "overdue", "custom"]
+            "enum": ["next", "overdue", "custom"],
+            "description": "Due period filter"
+
           },
           "promoter_id": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Promoter id"
           },
           "first_commission": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "First commission"
+         
           },
           "refunded": {
-            "type": "boolean"
+            "type": "boolean",
+             "description": "Refunded reward"
           },
           "fraud_check": {
             "type": "string",
@@ -450,7 +466,8 @@
               "same_ip_suspicion",
               "same_promoter_email",
               "ad_source"
-            ]
+            ],
+             "description": "Referral fraud check (suspicion). Array accepted"
           },
           "plan_id": {
             "oneOf": [
@@ -463,7 +480,8 @@
                   "type": "integer"
                 }
               }
-            ]
+            ], 
+            "description": "Plan id"
           }
         }
       },
@@ -472,19 +490,23 @@
         "properties": {
           "sale_amount": {
             "type": "string",
-            "enum": ["asc", "desc"]
+            "enum": ["asc", "desc"],
+              "description": "The sort by sale direction"
           },
           "amount": {
             "type": "string",
-            "enum": ["asc", "desc"]
+            "enum": ["asc", "desc"],
+            "description": "The sort by amount direction"
           },
           "created_at": {
             "type": "string",
-            "enum": ["asc", "desc"]
+            "enum": ["asc", "desc"],
+            "description": "The sort by created_at direction"
           },
           "referral": {
             "type": "string",
-            "enum": ["asc", "desc"]
+            "enum": ["asc", "desc"],
+            "description": "The sort by referral direction"
           }
         }
       },
@@ -494,32 +516,42 @@
         "properties": {
           "commission_type": {
             "type": "string",
-            "enum": ["sale", "custom"]
+            "enum": ["sale", "custom"],
+            "description": "The commission type"
           },
           "referral_id": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Referral id required only for sale commission type"
           },
           "plan_id": {
-            "type": "integer"
+            "type": "integer",
+            "description": "One of the items id from price_ids"
           },
           "promoter_campaign_id": {
-            "type": "integer"
+            "type": "integer",
+            "description": "PromoterCampaign id required for custom commission type"
           },
           "sale_amount": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Sale amount required only for sale commission type"
           },
           "amount": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Commission amount required only for custom commission type"
           },
           "event_id": {
-            "type": "string"
+            "type": "string",
+            "description": "The ID of the event that generated the sale from billing provider"
           },
           "event_date": {
             "type": "string",
-            "format": "date"
+            "format": "date",
+            "description": "The date of the event that generated the sale"
+
           },
           "internal_note": {
-            "type": "string"
+            "type": "string",
+            "description": "Internal note visible only by the team"
           },
           "unit": {
             "type": "string",
@@ -530,14 +562,18 @@
               "free_months",
               "mon_discount",
               "discount_per"
-            ]
+            ],
+            "description": "Set the reward unit type"
           },
           "notify_promoter": {
-            "type": "boolean"
+            "type": "boolean",
+             "description": "If true a notification email is sent to promoter if enabled on Emails section"
+
           },
           "billing_period": {
             "type": "string",
-            "enum": ["monthly", "yearly", "one_time"]
+            "enum": ["monthly", "yearly", "one_time"],
+            "description": "The billing period of the event that generated the sale"
           }
         }
       },
@@ -545,10 +581,12 @@
         "type": "object",
         "properties": {
           "internal_note": {
-            "type": "string"
+            "type": "string",
+            "description": "Internal note visible only by the team"
           },
           "external_note": {
-            "type": "string"
+            "type": "string",
+             "description": "External note visible by the promoter"
           }
         }
       },
@@ -559,24 +597,28 @@
             "type": "object",
             "properties": {
               "select_all": {
-                "type": "boolean"
+                "type": "boolean",
+                "description" :"Select all"
               },
               "selected_ids": {
                 "type": "array",
                 "items": {
                   "type": "integer"
-                }
+                },
+                 "description" :"Selected ids. Required when select_all is false or not present"
               },
               "unselected_ids": {
                 "type": "array",
                 "items": {
                   "type": "integer"
-                }
+                },
+                "description" :"Unselected ids. Required when select_all is true"
               }
             }
           },
           "q": {
-            "type": "string"
+            "type": "string",
+             "description": "Search params. Searches by initial_tier_event.transaction_id, lead.email, lead.uid"
           },
           "filters": {
             "$ref": "#/components/schemas/CommissionFilters"
