@@ -208,6 +208,7 @@
       },
       "put": {
         "summary": "Update referral",
+        "description": "Update a specific referral \n <Tip>**HTTP Request** <br/>`PUT https://firstpromoter.com/api/v2/company/referrals/{id}`</Tip>",
         "tags": ["Referrals"],
         "parameters": [
           {

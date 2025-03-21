@@ -215,7 +215,7 @@
       "get": {
         "summary": "Get referral_links associated with this promoter campaign",
         "operationId": "getReferralLinksAssociatedWithThisPromoterCampaign",
-        "description": "With this endpoint you can get the referral links associated with this promoter campaign.`<Tip>**HTTP Request** <br/>`GET https://firstpromoter.com/api/v2/company/promoter_campaigns/{id}/referral_links`</Tip>",
+        "description": "With this endpoint you can get the referral links associated with this promoter campaign.<Tip>**HTTP Request** <br/>`GET https://firstpromoter.com/api/v2/company/promoter_campaigns/{id}/referral_links`</Tip>",
         "tags": ["Promoter Campaigns"],
 
         "parameters": [
@@ -277,7 +277,7 @@
         "summary": "Get data used for chart",
         "tags": ["Promoter Campaigns"],
         "operationId": "getPromoterCampaignChartData",
-        "description": "With this endpoint you can get the data used for charts.`<Tip>**HTTP Request** <br/>`GET https://firstpromoter.com/api/v2/company/promoter_campaigns/{id}/chart_data`</Tip>",
+        "description": "With this endpoint you can get the data used for charts.<Tip>**HTTP Request** <br/>`GET https://firstpromoter.com/api/v2/company/promoter_campaigns/{id}/chart_data`</Tip>",
 
         "parameters": [
           {

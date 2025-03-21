@@ -186,6 +186,7 @@
       "put": {
         "summary": "Update promoter",
         "operationId": "updatePromoter",
+        "description": "With this endpoint you can update a promoter. \n <Tip>**HTTP Request** <br/>`PUT https://firstpromoter.com/api/v2/company/promoters/{id}`</Tip>",
         "tags": ["Promoters"],
         "parameters": [
           {
@@ -231,7 +232,7 @@
     "/promoters/{id}/chart_data": {
       "get": {
         "summary": "Get data used for chart",
-        "description": "With this endpoint you can get the data used for charts.`<Tip>**HTTP Request** <br/>`GET https://firstpromoter.com/api/v2/company/promoters/{id}/chart_data`</Tip>",
+        "description": "With this endpoint you can get the data used for charts.<Tip>**HTTP Request** <br/>`GET https://firstpromoter.com/api/v2/company/promoters/{id}/chart_data`</Tip>",
         "operationId": "getPromoterChartData",
         "tags": ["Promoters"],
         "parameters": [
