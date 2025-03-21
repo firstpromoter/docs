@@ -19,6 +19,7 @@
     "/reports/overview": {
       "get": {
         "summary": "Get reports for overview",
+        "description": "Get reports for overview \n <Tip>**HTTP Request** <br/>`GET https://firstpromoter.com/api/v2/company/reports/overview`</Tip>",
         "tags": ["Reports"],
         "parameters": [
           {
@@ -215,6 +216,7 @@
     "/reports/campaigns": {
       "get": {
         "summary": "Get reports for campaigns",
+        "description": "With this endpoint you can get the report data grouped by campaigns.`<Tip>**HTTP Request** <br/>`GET https://firstpromoter.com/api/v2/company/reports/campaigns`</Tip>",
         "tags": ["Reports"],
         "parameters": [
           {
@@ -447,6 +449,7 @@
     "/reports/promoters": {
       "get": {
         "summary": "Get reports for promoters",
+        "description": " With this endpoint you can get the report data grouped by promoters.`<Tip>**HTTP Request** <br/>`GET https://firstpromoter.com/api/v2/company/reports/promoters`</Tip>",
         "tags": ["Reports"],
         "parameters": [
           {
@@ -710,6 +713,7 @@
     "/reports/traffic_sources": {
       "get": {
         "summary": "Get reports for traffic sources",
+        "description": "With this endpoint you can get the report data grouped by traffic sources. \n <Tip>**HTTP Request** <br/>`GET https://firstpromoter.com/api/v2/company/reports/traffic_sources`</Tip>",
         "tags": ["Reports"],
         "parameters": [
           {
@@ -970,6 +974,7 @@
     "/reports/urls": {
       "get": {
         "summary": "Get reports for URLs",
+        "description": "With this endpoint you can get the report data grouped by URLs.`<Tip>**HTTP Request** <br/>`GET https://firstpromoter.com/api/v2/company/reports/urls`</Tip>",
         "tags": ["Reports"],
         "parameters": [
           {
@@ -1074,6 +1079,7 @@
     "/reports/download": {
       "get": {
         "summary": "Download reports",
+        "description": "With this endpoint you can download reports.`<Tip>**HTTP Request** <br/>`GET https://firstpromoter.com/api/v2/company/reports/download`</Tip>",
         "tags": ["Reports"],
         "parameters": [
           {

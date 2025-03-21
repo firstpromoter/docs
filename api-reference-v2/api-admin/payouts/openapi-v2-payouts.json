@@ -17,10 +17,10 @@
     }
   ],
   "paths": {
-    "/api/admin/v1/payouts": {
+    "/payouts": {
       "get": {
         "summary": "Get all payouts",
-        "description": "Returns all payouts for the current company",
+        "description":"With this endpoint you can list all payouts. \n <Tip>**HTTP Request** <br/>`GET https://firstpromoter.com/api/v2/company/payouts`</Tip>",
         "operationId": "getAdminPayouts",
         "parameters": [
           {
@@ -270,10 +270,10 @@
         }
       }
     },
-    "/api/admin/v1/payouts/stats": {
+    "/payouts/stats": {
       "get": {
         "summary": "Get payout stats",
-        "description": "Returns statistics about payouts for the current company",
+        "description": "This endpoint returns statistics about payouts. \n <Tip>**HTTP Request** <br/>`GET https://firstpromoter.com/api/v2/company/payouts/stats`</Tip>",
         "operationId": "getAdminPayoutStats",
         "parameters": [
           {
@@ -419,10 +419,10 @@
         }
       }
     },
-    "/api/admin/v1/payouts/due_stats": {
+    "/payouts/due_stats": {
       "get": {
         "summary": "Get due payout stats",
-        "description": "Returns statistics about due payouts for the current company",
+        "description": "This endpoint returns statistics about due payouts. \n <Tip>**HTTP Request** <br/>`GET https://firstpromoter.com/api/v2/company/payouts/due_stats`</Tip>",
         "operationId": "getAdminPayoutDueStats",
         "parameters": [
           {
@@ -540,10 +540,10 @@
         }
       }
     },
-    "/api/admin/v1/payouts/group_by_promoters": {
+    "/payouts/group_by_promoters": {
       "get": {
         "summary": "Get all payouts grouped by promoters",
-        "description": "Returns all payouts  but grouped by promoters",
+        "description": "This endpoint returns all payouts but grouped by promoters. \n <Tip>**HTTP Request** <br/>`GET https://firstpromoter.com/api/v2/company/payouts/group_by_promoters`</Tip>",
         "operationId": "getAdminPayoutsGroupedByPromoters",
         "parameters": [
           {
@@ -689,15 +689,15 @@
         }
       }
     },
-    "/api/admin/v1/payouts/create_payments_batch": {
+    "/payouts/create_payments_batch": {
       "post": {
         "summary": "Create payments batch",
-        "description": "Creates a new payments batch",
+        "description": "This endpoint creates a new payments batch. \n <Tip>**HTTP Request** <br/>`POST https://firstpromoter.com/api/v2/company/payouts/create_payments_batch`</Tip>",
         "operationId": "createPaymentsBatch",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
-          },],
+          }],
         "requestBody": {
           "required": true,
           "content": {
@@ -795,15 +795,15 @@
         }
       }
     },
-    "/api/admin/v1/payouts/batch/mark_as_paid": {
+    "/payouts/batch/mark_as_paid": {
       "post": {
         "summary": "Mark payouts as paid",
-        "description": "Marks selected payouts as paid",
+        "description": "Marks selected payouts as paid \n <Tip>**HTTP Request** <br/>`POST https://firstpromoter.com/api/v2/company/payouts/batch/mark_as_paid`</Tip>",
         "operationId": "markPayoutsAsPaid",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
-          },],
+          }],
         "requestBody": {
           "required": true,
           "content": {
@@ -922,15 +922,15 @@
         }
       }
     },
-    "/api/admin/v1/payouts/batch/mark_as_unpaid": {
+    "/payouts/batch/mark_as_unpaid": {
       "post": {
         "summary": "Mark payouts as unpaid",
-        "description": "Marks selected payouts as unpaid",
+        "description": "Marks selected payouts as unpaid \n <Tip>**HTTP Request** <br/>`POST https://firstpromoter.com/api/v2/company/payouts/batch/mark_as_unpaid`</Tip>",
         "operationId": "markPayoutsAsUnpaid",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
-          },],
+          }],
         "requestBody": {
           "required": true,
           "content": {
@@ -1049,15 +1049,15 @@
         }
       }
     },
-    "/api/admin/v1/payouts/batch/destroy": {
+    "/payouts/batch/destroy": {
       "delete": {
         "summary": "Delete payouts",
-        "description": "Deletes selected payouts",
+        "description": "Deletes selected payouts \n <Tip>**HTTP Request** <br/>`DELETE https://firstpromoter.com/api/v2/company/payouts/batch/destroy`</Tip>",
         "operationId": "deletePayouts",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
-          },],
+          }],
         "requestBody": {
           "required": true,
           "content": {

@@ -19,6 +19,7 @@
     "/commissions": {
       "get": {
         "summary": "Get all commissions",
+        "description": "With this endpoint you can list all rewards and commissions assigned to a promotion, promoter, campaign or entire account using the API. \n <Tip>**HTTP Request** <br/>`GET https://firstpromoter.com/api/v2/company/commissions`</Tip>",
         "tags": ["Commissions"],
         "parameters": [
           {
@@ -55,6 +56,7 @@
       },
       "post": {
         "summary": "Create a commission",
+        "description": "With this endpoint you can create a commission. \n <Tip>**HTTP Request** <br/>`POST https://firstpromoter.com/api/v2/company/commissions`</Tip>",
         "tags": ["Commissions"],
         "parameters": [
           {
@@ -81,6 +83,7 @@
     "/commissions/{id}": {
       "put": {
         "summary": "Update a commission",
+        "description": "With this endpoint you can update a commission. \n <Tip>**HTTP Request** <br/>`PUT https://firstpromoter.com/api/v2/company/commissions/{id}`</Tip>",
         "tags": ["Commissions"],
         "parameters": [
           {
@@ -117,6 +120,7 @@
     "/commissions/approve": {
       "post": {
         "summary": "Approve commissions",
+        "description": "With this endpoint you can approve commissions. \n <Tip>**HTTP Request** <br/>`POST https://firstpromoter.com/api/v2/company/commissions/approve`</Tip>",
         "tags": ["Commissions"],
         "parameters": [
           {
@@ -143,6 +147,7 @@
     "/commissions/deny": {
       "post": {
         "summary": "Deny commissions",
+        "description": "With this endpoint you can deny commissions. \n <Tip>**HTTP Request** <br/>`POST https://firstpromoter.com/api/v2/company/commissions/deny`</Tip>",
         "tags": ["Commissions"],
         "parameters": [
           {
@@ -168,7 +173,8 @@
     },
     "/commissions/mark_fulfilled": {
       "post": {
-        "summary": "Mark commissions payout as completed",
+        "summary": "Mark commissions payout as fulfilled",
+        "description": "With this endpoint you can mark commissions payout as fulfilled. \n <Tip>**HTTP Request** <br/>`POST https://firstpromoter.com/api/v2/company/commissions/mark_fulfilled`</Tip>",
         "tags": ["Commissions"],
         "parameters": [
           {
@@ -194,7 +200,8 @@
     },
     "/commissions/mark_unfulfilled": {
       "post": {
-        "summary": "Mark commissions payout as pending",
+        "summary": "Mark commissions payout as unfulfilled",
+        "description": "With this endpoint you can mark commissions payout as unfulfilled. \n <Tip>**HTTP Request** <br/>`POST https://firstpromoter.com/api/v2/company/commissions/mark_unfulfilled`</Tip>",
         "tags": ["Commissions"],
         "parameters": [
           {
@@ -221,6 +228,7 @@
     "/commissions/destroy": {
       "delete": {
         "summary": "Delete commissions",
+        "description": "With this endpoint you can delete commissions. \n <Tip>**HTTP Request** <br/>`DELETE https://firstpromoter.com/api/v2/company/commissions/destroy`</Tip>",
         "tags": ["Commissions"],
         "parameters": [
           {
@@ -247,8 +255,8 @@
     "/commissions/generate_payouts": {
       "post": {
         "summary": "Generate payouts for commissions",
+        "description": "With this endpoint you can generate payouts for commissions. \n <Tip>**HTTP Request** <br/>`POST https://firstpromoter.com/api/v2/company/commissions/generate_payouts`</Tip>",
         "tags": ["Commissions", "Payouts"],
-        "description": "Endpoint to generate payouts for specific commission IDs",
         "operationId": "generatePayouts",
         "parameters": [
           {
@@ -376,7 +384,7 @@
             "properties": {
               "from": {
                 "type": "integer",
-                 "description": "Sale amount from"
+                "description": "Sale amount from"
               },
               "to": {
                 "type": "integer",
@@ -389,7 +397,7 @@
             "properties": {
               "from": {
                 "type": "integer",
-                 "description": "Amount from"
+                "description": "Amount from"
               },
               "to": {
                 "type": "integer",
@@ -403,12 +411,12 @@
               "from": {
                 "type": "string",
                 "format": "date",
-                 "description": "created_at start date"
+                "description": "created_at start date"
               },
               "to": {
                 "type": "string",
                 "format": "date",
-                 "description": "created_at end date"
+                "description": "created_at end date"
               }
             }
           },
@@ -424,7 +432,7 @@
                 }
               }
             ],
-             "description": "Campaign ids. Can be Integer or Array of Integers"
+            "description": "Campaign ids. Can be Integer or Array of Integers"
           },
           "payout_id": {
             "oneOf": [
@@ -444,7 +452,6 @@
             "type": "string",
             "enum": ["next", "overdue", "custom"],
             "description": "Due period filter"
-
           },
           "promoter_id": {
             "type": "integer",
@@ -453,11 +460,10 @@
           "first_commission": {
             "type": "boolean",
             "description": "First commission"
-         
           },
           "refunded": {
             "type": "boolean",
-             "description": "Refunded reward"
+            "description": "Refunded reward"
           },
           "fraud_check": {
             "type": "string",
@@ -467,7 +473,7 @@
               "same_promoter_email",
               "ad_source"
             ],
-             "description": "Referral fraud check (suspicion). Array accepted"
+            "description": "Referral fraud check (suspicion). Array accepted"
           },
           "plan_id": {
             "oneOf": [
@@ -480,7 +486,7 @@
                   "type": "integer"
                 }
               }
-            ], 
+            ],
             "description": "Plan id"
           }
         }
@@ -491,7 +497,7 @@
           "sale_amount": {
             "type": "string",
             "enum": ["asc", "desc"],
-              "description": "The sort by sale direction"
+            "description": "The sort by sale direction"
           },
           "amount": {
             "type": "string",
@@ -547,7 +553,6 @@
             "type": "string",
             "format": "date",
             "description": "The date of the event that generated the sale"
-
           },
           "internal_note": {
             "type": "string",
@@ -567,8 +572,7 @@
           },
           "notify_promoter": {
             "type": "boolean",
-             "description": "If true a notification email is sent to promoter if enabled on Emails section"
-
+            "description": "If true a notification email is sent to promoter if enabled on Emails section"
           },
           "billing_period": {
             "type": "string",
@@ -586,7 +590,7 @@
           },
           "external_note": {
             "type": "string",
-             "description": "External note visible by the promoter"
+            "description": "External note visible by the promoter"
           }
         }
       },
@@ -598,27 +602,27 @@
             "properties": {
               "select_all": {
                 "type": "boolean",
-                "description" :"Select all"
+                "description": "Select all"
               },
               "selected_ids": {
                 "type": "array",
                 "items": {
                   "type": "integer"
                 },
-                 "description" :"Selected ids. Required when select_all is false or not present"
+                "description": "Selected ids. Required when select_all is false or not present"
               },
               "unselected_ids": {
                 "type": "array",
                 "items": {
                   "type": "integer"
                 },
-                "description" :"Unselected ids. Required when select_all is true"
+                "description": "Unselected ids. Required when select_all is true"
               }
             }
           },
           "q": {
             "type": "string",
-             "description": "Search params. Searches by initial_tier_event.transaction_id, lead.email, lead.uid"
+            "description": "Search params. Searches by initial_tier_event.transaction_id, lead.email, lead.uid"
           },
           "filters": {
             "$ref": "#/components/schemas/CommissionFilters"

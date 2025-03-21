@@ -40,14 +40,12 @@
     {
       "name": "Affiliate API Reference",
       "url": "api-reference-v2/api-affiliate",
-      "version": "v2",
-      "isDefaultHidden": true
+      "version": "v2"
     },
     {
       "name": "Advanced API Reference",
       "url": "api-reference-v2/api-advanced",
-      "version": "v2",
-      "isDefaultHidden": true
+      "version": "v2"
     }
   ],
   "anchors": [
@@ -259,12 +257,8 @@
         "api-reference-v2/api-admin/referrals/create-referral-for-current-company",
         "api-reference-v2/api-admin/referrals/get-referral-for-current-company-based-on-id",
         "api-reference-v2/api-admin/referrals/update-referral-for-current-company-based-on-id",
-        "api-reference-v2/api-admin/referrals/approve-referrals-based-on-query",
-        "api-reference-v2/api-admin/referrals/disable-referrals-based-on-query",
-        "api-reference-v2/api-admin/referrals/enable-referrals-based-on-query",
-        "api-reference-v2/api-admin/referrals/delete-referrals-based-on-query",
         "api-reference-v2/api-admin/referrals/move-referrals-to-promoter-based-on-query",
-        "api-reference-v2/api-admin/referrals/import-previous-sales-from-stripe"
+        "api-reference-v2/api-admin/referrals/delete-referrals-based-on-query"
       ]
     },
     {
@@ -291,31 +285,11 @@
         "api-reference-v2/api-admin/commissions/update-a-commission",
         "api-reference-v2/api-admin/commissions/approve-commissions",
         "api-reference-v2/api-admin/commissions/deny-commissions",
-        "api-reference-v2/api-admin/commissions/mark-commissions-payout-as-completed",
-        "api-reference-v2/api-admin/commissions/mark-commissions-payout-as-pending",
-        "api-reference-v2/api-admin/commissions/generate-payouts",
-        "api-reference-v2/api-admin/commissions/delete-commissions"
+        "api-reference-v2/api-admin/commissions/mark-commissions-payout-as-fulfilled",
+        "api-reference-v2/api-admin/commissions/mark-commissions-payout-as-unfulfilled"
       ]
     },
-    {
-      "group": "Payout Methods",
-      "version": "v2",
-      "pages": [
-        "api-reference-v2/api-advanced/payout-methods-api/get-a-payout-method",
-        "api-reference-v2/api-advanced/payout-methods-api/create-a-payout-method",
-        "api-reference-v2/api-advanced/payout-methods-api/get-all-payout-methods-for-current-company",
-        "api-reference-v2/api-advanced/payout-methods-api/update-a-payout-method",
-        "api-reference-v2/api-advanced/payout-methods-api/delete-a-payout-method"
-      ]
-    },
-    {
-      "group": "Payment Batches",
-      "version": "v2",
-      "pages": [
-        "api-reference-v2/api-advanced/payments-batches/delete-payments-batch",
-        "api-reference-v2/api-advanced/payments-batches/pay-start-payments-batch"
-      ]
-    },
+
     {
       "group": "Promo Codes",
       "version": "v2",
@@ -333,13 +307,10 @@
         "api-reference-v2/api-admin/payouts/get-all-payouts",
         "api-reference-v2/api-admin/payouts/get-payout-stats",
         "api-reference-v2/api-admin/payouts/get-due-payout-stats",
-        "api-reference-v2/api-admin/payouts/get-all-payouts-grouped-by-promoters",
-        "api-reference-v2/api-admin/payouts/create-payments-batch",
-        "api-reference-v2/api-admin/payouts/mark-payouts-as-paid",
-        "api-reference-v2/api-admin/payouts/mark-payouts-as-unpaid",
-        "api-reference-v2/api-admin/payouts/delete-payouts"
+        "api-reference-v2/api-admin/payouts/get-all-payouts-grouped-by-promoters"
       ]
     },
+
     {
       "group": "Reports",
       "version": "v2",
@@ -487,6 +458,14 @@
     },
 
     {
+      "group": "Commissions",
+      "pages": [
+        "api-reference-v2/api-advanced/commissions/generate-payouts",
+        "api-reference-v2/api-advanced/commissions/delete-commissions"
+      ]
+    },
+
+    {
       "group": "Contract Documents",
       "version": "v2",
       "pages": [
@@ -516,7 +495,6 @@
         "api-reference-v2/api-advanced/dashboard-api/get-payouts-and-commissions"
       ]
     },
-
     {
       "group": "Invoices",
       "pages": [
@@ -536,6 +514,44 @@
         "api-reference-v2/api-advanced/invoice-templates/show-invoice-template",
         "api-reference-v2/api-advanced/invoice-templates/show-invoice-template-preview",
         "api-reference-v2/api-advanced/invoice-templates/update-invoice-template"
+      ]
+    },
+    {
+      "group": "Payment Batches",
+      "version": "v2",
+      "pages": [
+        "api-reference-v2/api-advanced/payments-batches/delete-payments-batch",
+        "api-reference-v2/api-advanced/payments-batches/pay-start-payments-batch"
+      ]
+    },
+    {
+      "group": "Payouts",
+      "pages": [
+        "api-reference-v2/api-advanced/payouts/create-payments-batch",
+        "api-reference-v2/api-advanced/payouts/mark-payouts-as-paid",
+        "api-reference-v2/api-advanced/payouts/mark-payouts-as-unpaid",
+        "api-reference-v2/api-advanced/payouts/delete-payouts"
+      ]
+    },
+    {
+      "group": "Payout Methods",
+      "version": "v2",
+      "pages": [
+        "api-reference-v2/api-advanced/payout-methods-api/get-a-payout-method",
+        "api-reference-v2/api-advanced/payout-methods-api/create-a-payout-method",
+        "api-reference-v2/api-advanced/payout-methods-api/get-all-payout-methods-for-current-company",
+        "api-reference-v2/api-advanced/payout-methods-api/update-a-payout-method",
+        "api-reference-v2/api-advanced/payout-methods-api/delete-a-payout-method"
+      ]
+    },
+    {
+      "group": "Referrals",
+      "version": "v2",
+      "pages": [
+        "api-reference-v2/api-advanced/referrals/approve-referrals-based-on-query",
+        "api-reference-v2/api-advanced/referrals/disable-referrals-based-on-query",
+        "api-reference-v2/api-advanced/referrals/enable-referrals-based-on-query",
+        "api-reference-v2/api-advanced/referrals/import-previous-sales-from-stripe"
       ]
     }
   ],
