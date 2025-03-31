@@ -548,7 +548,7 @@
       "group": "Referrals",
       "version": "v2",
       "pages": [
-        "api-reference-v2/api-advanced/referrals/approve-referrals-based-on-query ",
+        "api-reference-v2/api-advanced/referrals/approve-referrals-based-on-query",
         "api-reference-v2/api-advanced/referrals/disable-referrals-based-on-query",
         "api-reference-v2/api-advanced/referrals/enable-referrals-based-on-query",
         "api-reference-v2/api-advanced/referrals/import-previous-sales-from-stripe"
