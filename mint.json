@@ -59,12 +59,11 @@
       "version": "v1"
     },
     {
-      "name": "Admin API Reference",
+      "name": "API Reference",
       "icon": "webhook",
       "url": "api-reference-v2/api-admin/introduction",
       "version": "v2"
     },
-
     {
       "name": "Help Center",
       "icon": "square-question",
@@ -228,7 +227,7 @@
     },
 
     {
-      "group": "Admin API Documentation",
+      "group": "API Reference",
       "version": "v2",
       "pages": [
         "api-reference-v2/api-admin/introduction",
