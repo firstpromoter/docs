@@ -37,19 +37,8 @@
       "name": "API Reference",
       "url": "api-reference-v2/api-admin",
       "version": "v2"
-    },
-    {
-      "name": "Affiliate API Reference",
-      "url": "api-reference-v2/api-affiliate",
-      "version": "v2",
-      "isDefaultHidden": true
-    },
-    {
-      "name": "Advanced API Reference",
-      "url": "api-reference-v2/api-advanced",
-      "version": "v2",
-      "isDefaultHidden":true
     }
+
   ],
   "anchors": [
     {
@@ -59,7 +48,7 @@
       "version": "v1"
     },
     {
-      "name": "Admin API Reference",
+      "name": "API Reference",
       "icon": "webhook",
       "url": "https://docs.firstpromoter.com/api-reference-v2/api-admin/introduction",
       "version": "v2"
