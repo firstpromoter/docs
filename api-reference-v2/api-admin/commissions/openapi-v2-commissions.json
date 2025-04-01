@@ -600,32 +600,14 @@
           "selection": {
             "type": "object",
             "properties": {
-              "select_all": {
-                "type": "boolean",
-                "description": "Select all"
-              },
               "selected_ids": {
                 "type": "array",
                 "items": {
                   "type": "integer"
                 },
-                "description": "Selected ids. Required when select_all is false or not present"
-              },
-              "unselected_ids": {
-                "type": "array",
-                "items": {
-                  "type": "integer"
-                },
-                "description": "Unselected ids. Required when select_all is true"
+                "description": "Selected ids."
               }
             }
-          },
-          "q": {
-            "type": "string",
-            "description": "Search params. Searches by initial_tier_event.transaction_id, lead.email, lead.uid"
-          },
-          "filters": {
-            "$ref": "#/components/schemas/CommissionFilters"
           }
         }
       },
