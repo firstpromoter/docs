@@ -46,7 +46,8 @@
     {
       "name": "Advanced API Reference",
       "url": "api-reference-v2/api-advanced",
-      "version": "v2"
+      "version": "v2",
+      "isDefaultHidden":true,
     }
   ],
   "anchors": [
