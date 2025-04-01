@@ -41,7 +41,8 @@
     {
       "name": "Affiliate API Reference",
       "url": "api-reference-v2/api-affiliate",
-      "version": "v2"
+      "version": "v2",
+      "isDefaultHidden": true
     },
     {
       "name": "Advanced API Reference",
