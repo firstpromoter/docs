@@ -10,182 +10,7 @@
   "favicon": "/favicon.png",
   "navigation": {
     "versions": [
-      {
-        "version": "v1",
-        "anchors": [
-          {
-            "anchor": "Documentation",
-            "icon": "book-open",
-            "tabs": [
-              {
-                "tab": "Documentation",
-                "groups": [
-                  {
-                    "group": "Overview",
-                    "pages": ["introduction", "how-it-works", "quickstart"]
-                  },
-                  {
-                    "group": "Scripts",
-                    "pages": [
-                      "script-docs/fpr-js-docs",
-                      "script-docs/advanced",
-                      "script-docs/concepts"
-                    ]
-                  },
-                  {
-                    "group": "Integration Options",
-                    "pages": [
-                      {
-                        "group": "Billing Provider",
-                        "pages": [
-                          "integrations/billing/stripe",
-                          "integrations/billing/chargebee",
-                          "integrations/billing/recurly",
-                          "integrations/billing/paddle",
-                          "integrations/billing/braintree",
-                          "integrations/billing/api"
-                        ]
-                      },
-                      {
-                        "group": "Platform",
-                        "pages": [
-                          "integrations/tracking/platform/highlevel",
-                          "integrations/tracking/platform/clickfunnels",
-                          {
-                            "group": "Stripe",
-                            "pages": [
-                              "integrations/tracking/platform/stripe/payment-links",
-                              "integrations/tracking/platform/stripe/pricing-table"
-                            ]
-                          },
-                          "integrations/tracking/platform/ghost",
-                          "integrations/tracking/platform/kajabi",
-                          "integrations/tracking/platform/thrivecart",
-                          "integrations/tracking/platform/samcart",
-                          "integrations/tracking/platform/kartra",
-                          "integrations/tracking/platform/dropfunnels",
-                          "integrations/tracking/platform/calendly",
-                          "integrations/tracking/platform/kickpages",
-                          "integrations/tracking/platform/thinkific",
-                          {
-                            "group": "Chargebee",
-                            "pages": [
-                              "integrations/tracking/platform/chargebee/drop-in-scripts",
-                              "integrations/tracking/platform/chargebee/hosted-pages"
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "group": "Custom",
-                        "pages": [
-                          "integrations/tracking/custom/js",
-                          "integrations/tracking/custom/api",
-                          "integrations/tracking/custom/django",
-                          "integrations/tracking/custom/php",
-                          "integrations/tracking/custom/rails",
-                          "integrations/tracking/custom/stripe-checkout",
-                          "integrations/tracking/custom/paddle-checkout",
-                          "integrations/tracking/custom/gtm"
-                        ]
-                      }
-                    ]
-                  },
-                  {
-                    "group": "Webhooks",
-                    "pages": [
-                      "webhooks/overview",
-                      "webhooks/lead-signup",
-                      "webhooks/reward-created",
-                      "webhooks/new-customer",
-                      "webhooks/promoter-accepted",
-                      "webhooks/fulfilment-pending"
-                    ]
-                  }
-                ]
-              },
-              {
-                "tab": "API Reference",
-                "groups": [
-                  {
-                    "group": "API Documentation",
-                    "pages": [
-                      "api-reference-v1/introduction",
-                      "api-reference-v1/authentication"
-                    ]
-                  },
-                  {
-                    "group": "Tracking",
-                    "pages": [
-                      "api-reference-v1/tracking-api/leads-and-signups",
-                      "api-reference-v1/tracking-api/sales",
-                      "api-reference-v1/tracking-api/refund",
-                      "api-reference-v1/tracking-api/cancellation"
-                    ]
-                  },
-                  {
-                    "group": "Leads",
-                    "pages": [
-                      "api-reference-v1/leads-api/update",
-                      "api-reference-v1/leads-api/list",
-                      "api-reference-v1/leads-api/show",
-                      "api-reference-v1/leads-api/delete"
-                    ]
-                  },
-                  {
-                    "group": "Promoters",
-                    "pages": [
-                      "api-reference-v1/promoters-api/create",
-                      "api-reference-v1/promoters-api/update",
-                      "api-reference-v1/promoters-api/list",
-                      "api-reference-v1/promoters-api/show-details",
-                      "api-reference-v1/promoters-api/move-to-campaign",
-                      "api-reference-v1/promoters-api/add-to-campaign",
-                      "api-reference-v1/promoters-api/refresh-token",
-                      "api-reference-v1/promoters-api/delete"
-                    ]
-                  },
-                  {
-                    "group": "Rewards",
-                    "pages": [
-                      "api-reference-v1/rewards-api/create",
-                      "api-reference-v1/rewards-api/list",
-                      "api-reference-v1/rewards-api/update"
-                    ]
-                  },
-                  {
-                    "group": "Payouts",
-                    "pages": [
-                      "api-reference-v1/payouts-api/list",
-                      "api-reference-v1/payouts-api/create",
-                      "api-reference-v1/payouts-api/update"
-                    ]
-                  },
-                  {
-                    "group": "Reports",
-                    "pages": [
-                      "api-reference-v1/reports-api/overview",
-                      "api-reference-v1/reports-api/campaign",
-                      "api-reference-v1/reports-api/promoter"
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "anchor": "API Reference",
-            "href": "https://docs.firstpromoter.com/api-reference-v1/introduction",
-            "icon": "webhook"
-          },
-          {
-            "anchor": "Help Center",
-            "href": "https://help.firstpromoter.com/en/",
-            "icon": "square-question"
-          }
-        ]
-      },
-      {
+       {
         "version": "v2",
         "anchors": [
           {
@@ -612,7 +437,183 @@
             "icon": "square-question"
           }
         ]
+      },
+      {
+        "version": "v1",
+        "anchors": [
+          {
+            "anchor": "Documentation",
+            "icon": "book-open",
+            "tabs": [
+              {
+                "tab": "Documentation",
+                "groups": [
+                  {
+                    "group": "Overview",
+                    "pages": ["introduction", "how-it-works", "quickstart"]
+                  },
+                  {
+                    "group": "Scripts",
+                    "pages": [
+                      "script-docs/fpr-js-docs",
+                      "script-docs/advanced",
+                      "script-docs/concepts"
+                    ]
+                  },
+                  {
+                    "group": "Integration Options",
+                    "pages": [
+                      {
+                        "group": "Billing Provider",
+                        "pages": [
+                          "integrations/billing/stripe",
+                          "integrations/billing/chargebee",
+                          "integrations/billing/recurly",
+                          "integrations/billing/paddle",
+                          "integrations/billing/braintree",
+                          "integrations/billing/api"
+                        ]
+                      },
+                      {
+                        "group": "Platform",
+                        "pages": [
+                          "integrations/tracking/platform/highlevel",
+                          "integrations/tracking/platform/clickfunnels",
+                          {
+                            "group": "Stripe",
+                            "pages": [
+                              "integrations/tracking/platform/stripe/payment-links",
+                              "integrations/tracking/platform/stripe/pricing-table"
+                            ]
+                          },
+                          "integrations/tracking/platform/ghost",
+                          "integrations/tracking/platform/kajabi",
+                          "integrations/tracking/platform/thrivecart",
+                          "integrations/tracking/platform/samcart",
+                          "integrations/tracking/platform/kartra",
+                          "integrations/tracking/platform/dropfunnels",
+                          "integrations/tracking/platform/calendly",
+                          "integrations/tracking/platform/kickpages",
+                          "integrations/tracking/platform/thinkific",
+                          {
+                            "group": "Chargebee",
+                            "pages": [
+                              "integrations/tracking/platform/chargebee/drop-in-scripts",
+                              "integrations/tracking/platform/chargebee/hosted-pages"
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "group": "Custom",
+                        "pages": [
+                          "integrations/tracking/custom/js",
+                          "integrations/tracking/custom/api",
+                          "integrations/tracking/custom/django",
+                          "integrations/tracking/custom/php",
+                          "integrations/tracking/custom/rails",
+                          "integrations/tracking/custom/stripe-checkout",
+                          "integrations/tracking/custom/paddle-checkout",
+                          "integrations/tracking/custom/gtm"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Webhooks",
+                    "pages": [
+                      "webhooks/overview",
+                      "webhooks/lead-signup",
+                      "webhooks/reward-created",
+                      "webhooks/new-customer",
+                      "webhooks/promoter-accepted",
+                      "webhooks/fulfilment-pending"
+                    ]
+                  }
+                ]
+              },
+              {
+                "tab": "API Reference",
+                "groups": [
+                  {
+                    "group": "API Documentation",
+                    "pages": [
+                      "api-reference-v1/introduction",
+                      "api-reference-v1/authentication"
+                    ]
+                  },
+                  {
+                    "group": "Tracking",
+                    "pages": [
+                      "api-reference-v1/tracking-api/leads-and-signups",
+                      "api-reference-v1/tracking-api/sales",
+                      "api-reference-v1/tracking-api/refund",
+                      "api-reference-v1/tracking-api/cancellation"
+                    ]
+                  },
+                  {
+                    "group": "Leads",
+                    "pages": [
+                      "api-reference-v1/leads-api/update",
+                      "api-reference-v1/leads-api/list",
+                      "api-reference-v1/leads-api/show",
+                      "api-reference-v1/leads-api/delete"
+                    ]
+                  },
+                  {
+                    "group": "Promoters",
+                    "pages": [
+                      "api-reference-v1/promoters-api/create",
+                      "api-reference-v1/promoters-api/update",
+                      "api-reference-v1/promoters-api/list",
+                      "api-reference-v1/promoters-api/show-details",
+                      "api-reference-v1/promoters-api/move-to-campaign",
+                      "api-reference-v1/promoters-api/add-to-campaign",
+                      "api-reference-v1/promoters-api/refresh-token",
+                      "api-reference-v1/promoters-api/delete"
+                    ]
+                  },
+                  {
+                    "group": "Rewards",
+                    "pages": [
+                      "api-reference-v1/rewards-api/create",
+                      "api-reference-v1/rewards-api/list",
+                      "api-reference-v1/rewards-api/update"
+                    ]
+                  },
+                  {
+                    "group": "Payouts",
+                    "pages": [
+                      "api-reference-v1/payouts-api/list",
+                      "api-reference-v1/payouts-api/create",
+                      "api-reference-v1/payouts-api/update"
+                    ]
+                  },
+                  {
+                    "group": "Reports",
+                    "pages": [
+                      "api-reference-v1/reports-api/overview",
+                      "api-reference-v1/reports-api/campaign",
+                      "api-reference-v1/reports-api/promoter"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "anchor": "API Reference",
+            "href": "https://docs.firstpromoter.com/api-reference-v1/introduction",
+            "icon": "webhook"
+          },
+          {
+            "anchor": "Help Center",
+            "href": "https://help.firstpromoter.com/en/",
+            "icon": "square-question"
+          }
+        ]
       }
+     
     ]
   },
   "logo": {
