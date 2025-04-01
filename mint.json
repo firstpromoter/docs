@@ -61,7 +61,7 @@
     {
       "name": "Admin API Reference",
       "icon": "webhook",
-      "url": "api-reference-v2/api-admin/introduction",
+      "url": "https://docs.firstpromoter.com/api-reference-v2/api-admin/introduction",
       "version": "v2"
     },
 
