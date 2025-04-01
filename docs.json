@@ -22,11 +22,7 @@
                 "groups": [
                   {
                     "group": "Overview",
-                    "pages": [
-                      "introduction",
-                      "how-it-works",
-                      "quickstart"
-                    ]
+                    "pages": ["introduction", "how-it-works", "quickstart"]
                   },
                   {
                     "group": "Scripts",
@@ -201,11 +197,7 @@
                 "groups": [
                   {
                     "group": "Overview",
-                    "pages": [
-                      "introduction",
-                      "how-it-works",
-                      "quickstart"
-                    ]
+                    "pages": ["introduction", "how-it-works", "quickstart"]
                   },
                   {
                     "group": "Scripts",
@@ -291,8 +283,9 @@
                 "tab": "API Reference",
                 "groups": [
                   {
-                    "group": "Admin API Documentation",
+                    "group": "API Documentation",
                     "pages": [
+                      "api-reference-v2/api-admin/introduction",
                       "api-reference-v2/api-admin/authentication"
                     ]
                   },
@@ -609,16 +602,9 @@
             ]
           },
           {
-            "anchor": "Admin API Reference",
+            "anchor": "API Reference",
             "icon": "webhook",
-            "groups": [
-              {
-                "group": "API Reference",
-                "pages": [
-                  "https://docs.firstpromoter.com/api-reference-v2/api-admin/introduction"
-                ]
-              }
-            ]
+            "href": "https://docs.firstpromoter.com/api-reference-v2/introduction"
           },
           {
             "anchor": "Help Center",
