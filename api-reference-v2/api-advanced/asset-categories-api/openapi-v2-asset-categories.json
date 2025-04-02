@@ -19,6 +19,7 @@
     "/assets/categories": {
       "get": {
         "summary": "Get available asset categories",
+        "description": "Get all available asset categories /n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/assets/categories`</Tip>",
         "tags": ["Asset Categories"],
         "responses": {
           "200": {
@@ -42,6 +43,7 @@
       "put": {
         "summary": "Update asset categories",
         "tags": ["Asset Categories"],
+        "description": "Update asset categories. \n <Tip>**HTTP Request** <br/>`PUT https://v2.firstpromoter.com/api/v2/company/assets/categories`</Tip>",
         "requestBody": {
           "required": true,
           "content": {
