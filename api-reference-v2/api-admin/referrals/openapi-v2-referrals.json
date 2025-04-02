@@ -21,7 +21,7 @@
       "get": {
         "summary": "Get available referrals",
         "tags": ["Referrals"],
-        "description": "Get available referrals \n <Tip>**HTTP Request** <br/>`GET https://firstpromoter.com/api/v2/company/referrals`</Tip>",
+        "description": "Get available referrals \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/referrals`</Tip>",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -94,7 +94,7 @@
       "post": {
         "summary": "Create referral",
         "tags": ["Referrals"],
-        "description": "Create a new referral \n <Tip>**HTTP Request** <br/>`POST https://firstpromoter.com/api/v2/company/referrals`</Tip>",
+        "description": "Create a new referral \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/referrals`</Tip>",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -160,7 +160,7 @@
       "get": {
         "summary": "Get referral",
         "tags": ["Referrals"],
-        "description": "Get a specific referral \n <Tip>**HTTP Request** <br/>`GET https://firstpromoter.com/api/v2/company/referrals/{id}`</Tip>",
+        "description": "Get a specific referral \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/referrals/{id}`</Tip>",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -208,7 +208,7 @@
       },
       "put": {
         "summary": "Update referral",
-        "description": "Update a specific referral \n <Tip>**HTTP Request** <br/>`PUT https://firstpromoter.com/api/v2/company/referrals/{id}`</Tip>",
+        "description": "Update a specific referral \n <Tip>**HTTP Request** <br/>`PUT https://v2.firstpromoter.com/api/v2/company/referrals/{id}`</Tip>",
         "tags": ["Referrals"],
         "parameters": [
           {
@@ -275,7 +275,7 @@
     "/referrals/approve": {
       "post": {
         "summary": "Approve referrals",
-        "description": "With this endpoint you can approve referrals. \n <Tip>**HTTP Request** <br/>`POST https://firstpromoter.com/api/v2/company/referrals/approve`</Tip>",
+        "description": "With this endpoint you can approve referrals. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/referrals/approve`</Tip>",
         "tags": ["Referrals"],
         "parameters": [
           {
@@ -325,7 +325,7 @@
     "/referrals/disable": {
       "post": {
         "summary": "Disable referrals",
-        "description": "With this endpoint you can disable referrals. \n <Tip>**HTTP Request** <br/>`POST https://firstpromoter.com/api/v2/company/referrals/disable`</Tip>",
+        "description": "With this endpoint you can disable referrals. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/referrals/disable`</Tip>",
         "tags": ["Referrals"],
         "parameters": [
           {
@@ -375,7 +375,7 @@
     "/referrals/enable": {
       "post": {
         "summary": "Enable referrals",
-        "description": "With this endpoint you can enable referrals. \n <Tip>**HTTP Request** <br/>`POST https://firstpromoter.com/api/v2/company/referrals/enable`</Tip>",
+        "description": "With this endpoint you can enable referrals. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/referrals/enable`</Tip>",
         "tags": ["Referrals"],
         "parameters": [
           {
@@ -425,7 +425,7 @@
     "/referrals/destroy": {
       "delete": {
         "summary": "Delete referrals",
-        "description": "With this endpoint you can delete referrals. \n <Tip>**HTTP Request** <br/>`DELETE https://firstpromoter.com/api/v2/company/referrals/destroy`</Tip>",
+        "description": "With this endpoint you can delete referrals. \n <Tip>**HTTP Request** <br/>`DELETE https://v2.firstpromoter.com/api/v2/company/referrals/destroy`</Tip>",
         "tags": ["Referrals"],
         "parameters": [
           {
@@ -475,7 +475,7 @@
     "/referrals/move_to_promoter": {
       "post": {
         "summary": "Move referrals to promoter",
-        "description": "With this endpoint you can move referrals to another promoter. \n <Tip>**HTTP Request** <br/>`POST https://firstpromoter.com/api/v2/company/referrals/move_to_promoter`</Tip>",
+        "description": "With this endpoint you can move referrals to another promoter. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/referrals/move_to_promoter`</Tip>",
         "tags": ["Referrals"],
         "parameters": [
           {
@@ -687,7 +687,7 @@
     "/referrals/{id}/import_events": {
       "post": {
         "summary": "Import previous sales from stripe",
-        "description": "With this endpoint you can import previous sales from stripe. \n <Tip>**HTTP Request** <br/>`POST https://firstpromoter.com/api/v2/company/referrals/{id}/import_events`</Tip>",
+        "description": "With this endpoint you can import previous sales from stripe. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/referrals/{id}/import_events`</Tip>",
         "tags": ["Referrals"],
         "parameters": [
           {

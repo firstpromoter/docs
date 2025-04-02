@@ -19,7 +19,7 @@
     "/promoters": {
       "get": {
         "summary": "Get available promoters",
-        "description": "With this endpoint you can list all promoters. \n <Tip>**HTTP Request** <br/>`GET https://firstpromoter.com/api/v2/company/promoters`</Tip>",
+        "description": "With this endpoint you can list all promoters. \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/promoters`</Tip>",
         "operationId": "getPromoters",
         "tags": ["Promoters"],
         "parameters": [
@@ -97,7 +97,7 @@
       },
       "post": {
         "summary": "Create promoter",
-        "description": "With this endpoint you can create a promoter. \n <Tip>**HTTP Request** <br/>`POST https://firstpromoter.com/api/v2/company/promoters`</Tip>",
+        "description": "With this endpoint you can create a promoter. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/promoters`</Tip>",
         "operationId": "createPromoter",
         "tags": ["Promoters"],
         "parameters": [
@@ -135,7 +135,7 @@
     "/promoters/{id}": {
       "get": {
         "summary": "Get promoter details",
-        "description": "With this endpoint you can get the details of a promoter. \n <Tip>**HTTP Request** <br/>`GET https://firstpromoter.com/api/v2/company/promoters/{id}`</Tip>",
+        "description": "With this endpoint you can get the details of a promoter. \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/promoters/{id}`</Tip>",
         "operationId": "getPromoter",
         "tags": ["Promoters"],
         "parameters": [
@@ -186,7 +186,7 @@
       "put": {
         "summary": "Update promoter",
         "operationId": "updatePromoter",
-        "description": "With this endpoint you can update a promoter. \n <Tip>**HTTP Request** <br/>`PUT https://firstpromoter.com/api/v2/company/promoters/{id}`</Tip>",
+        "description": "With this endpoint you can update a promoter. \n <Tip>**HTTP Request** <br/>`PUT https://v2.firstpromoter.com/api/v2/company/promoters/{id}`</Tip>",
         "tags": ["Promoters"],
         "parameters": [
           {
@@ -232,7 +232,7 @@
     "/promoters/{id}/chart_data": {
       "get": {
         "summary": "Get data used for chart",
-        "description": "With this endpoint you can get the data used for charts.<Tip>**HTTP Request** <br/>`GET https://firstpromoter.com/api/v2/company/promoters/{id}/chart_data`</Tip>",
+        "description": "With this endpoint you can get the data used for charts.<Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/promoters/{id}/chart_data`</Tip>",
         "operationId": "getPromoterChartData",
         "tags": ["Promoters"],
         "parameters": [
@@ -296,7 +296,7 @@
     "/promoters/accept": {
       "post": {
         "summary": "Accept promoters",
-        "description": "With this endpoint you can accept promoters. \n <Tip>**HTTP Request** <br/>`POST https://firstpromoter.com/api/v2/company/promoters/accept`</Tip>",
+        "description": "With this endpoint you can accept promoters. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/promoters/accept`</Tip>",
         "operationId": "acceptPromoters",
         "tags": ["Promoters"],
         "parameters": [
@@ -340,7 +340,7 @@
     "/promoters/reject": {
       "post": {
         "summary": "Reject promoters",
-        "description": "With this endpoint you can reject promoters. \n <Tip>**HTTP Request** <br/>`POST https://firstpromoter.com/api/v2/company/promoters/reject`</Tip>",
+        "description": "With this endpoint you can reject promoters. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/promoters/reject`</Tip>",
         "operationId": "rejectPromoters",
         "tags": ["Promoters"],
         "parameters": [
@@ -384,7 +384,7 @@
     "/promoters/block": {
       "post": {
         "summary": "Block promoters",
-        "description": "With this endpoint you can block promoters. \n <Tip>**HTTP Request** <br/>`POST https://firstpromoter.com/api/v2/company/promoters/block`</Tip>",
+        "description": "With this endpoint you can block promoters. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/promoters/block`</Tip>",
         "operationId": "blockPromoters",
         "tags": ["Promoters"],
         "parameters": [
@@ -428,7 +428,7 @@
     "/promoters/archive": {
       "post": {
         "summary": "Archive promoters",
-        "description": "With this endpoint you can archive promoters. \n <Tip>**HTTP Request** <br/>`POST https://firstpromoter.com/api/v2/company/promoters/archive`</Tip>",
+        "description": "With this endpoint you can archive promoters. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/promoters/archive`</Tip>",
         "operationId": "archivePromoters",
         "tags": ["Promoters"],
         "parameters": [
@@ -467,7 +467,7 @@
     "/promoters/restore": {
       "post": {
         "summary": "Restore promoters",
-        "description": "With this endpoint you can restore promoters. \n <Tip>**HTTP Request** <br/>`POST https://firstpromoter.com/api/v2/company/promoters/restore`</Tip>",
+        "description": "With this endpoint you can restore promoters. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/promoters/restore`</Tip>",
         "operationId": "restorePromoters",
         "tags": ["Promoters"],
         "parameters": [
