@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://v2.fprom.co/api/v2/company",
+      "url": "https://firstpromoter.com/api/v2/company",
       "description": "Staging server"
     }
   ],
