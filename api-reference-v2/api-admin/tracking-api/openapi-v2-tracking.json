@@ -10,7 +10,7 @@
   },
   "servers": [
     {
-      "url": "https://firstpromoter.com/api/v2/track" 
+      "url": "https://v2.firstpromoter.com/api/v2/track" 
     }
   ],
   "security": [
