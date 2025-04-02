@@ -19,6 +19,7 @@
     "/assets": {
       "get": {
         "summary": "Get available assets",
+        "description": "Get all available assets \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/assets`</Tip>",
         "tags": ["Assets"],
         "parameters": [
           {
@@ -137,6 +138,7 @@
       },
       "post": {
         "summary": "Create assets",
+        "description": "Create assets \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/assets`</Tip>",
         "tags": ["Assets"],
         "parameters": [
           {
@@ -387,23 +389,12 @@
                   "selection": {
                     "type": "object",
                     "properties": {
-                      "select_all": {
-                        "type": "boolean",
-                        "description": "Select all"
-                      },
                       "selected_ids": {
                         "type": "array",
                         "items": {
                           "type": "integer"
                         },
-                        "description": "Selected ids. Required when select_all is false or not present"
-                      },
-                      "unselected_ids": {
-                        "type": "array",
-                        "items": {
-                          "type": "integer"
-                        },
-                        "description": "Unselected ids. Required when select_all is true"
+                        "description": "Selected ids of the assets"
                       }
                     }
                   },
@@ -482,23 +473,12 @@
                   "selection": {
                     "type": "object",
                     "properties": {
-                      "select_all": {
-                        "type": "boolean",
-                        "description": "Select all"
-                      },
                       "selected_ids": {
                         "type": "array",
                         "items": {
                           "type": "integer"
                         },
-                        "description": "Selected ids. Required when select_all is false or not present"
-                      },
-                      "unselected_ids": {
-                        "type": "array",
-                        "items": {
-                          "type": "integer"
-                        },
-                        "description": "Unselected ids. Required when select_all is true"
+                        "description": "Selected ids of assets to delete"
                       }
                     }
                   }
