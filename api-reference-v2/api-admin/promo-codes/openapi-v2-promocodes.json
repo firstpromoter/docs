@@ -20,7 +20,7 @@
       "get": {
         "summary": "Get promo codes",
         "operationId": "getPromoCodes",
-        "description": "With this endpoint you can list all promo codes. \n <Tip>**HTTP Request** <br/>`GET https://firstpromoter.com/api/v2/company/promo_codes`</Tip>",
+        "description": "With this endpoint you can list all promo codes. \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/promo_codes`</Tip>",
         "tags": ["Promo Codes"],
         "parameters": [
           {
@@ -68,7 +68,7 @@
       "post": {
         "summary": "Create promo code",
         "operationId": "createPromoCode",
-        "description": "With this endpoint you can create a new promo code. \n <Tip>**HTTP Request** <br/>`POST https://firstpromoter.com/api/v2/company/promo_codes`</Tip>",
+        "description": "With this endpoint you can create a new promo code. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/promo_codes`</Tip>",
         "tags": ["Promo Codes"],
         "parameters": [
           {
@@ -144,7 +144,7 @@
         "summary": "Get promo code by id",
         "operationId": "getPromoCode",
         "tags": ["Promo Codes"],
-        "description": "With this endpoint you can get the details of a specific promo code. \n <Tip>**HTTP Request** <br/>`GET https://firstpromoter.com/api/v2/company/promo_codes/{id}`</Tip>",
+        "description": "With this endpoint you can get the details of a specific promo code. \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/promo_codes/{id}`</Tip>",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -187,7 +187,7 @@
       },
       "put": {
         "summary": "Update promo code by id",
-        "description": "Update promo code by id. Can not be updated if archived and ext_id present. \n<Tip>**HTTP Request** <br/>`PUT https://firstpromoter.com/api/v2/company/promo_codes/{id}`</Tip>",
+        "description": "Update promo code by id. Can not be updated if archived and ext_id present. \n<Tip>**HTTP Request** <br/>`PUT https://v2.firstpromoter.com/api/v2/company/promo_codes/{id}`</Tip>",
         "operationId": "updatePromoCode",
         "tags": ["Promo Codes"],
         "parameters": [
@@ -264,7 +264,7 @@
       },
       "delete": {
         "summary": "Archive promo code by id",
-        "description": "Archive promo code by id. \n<Tip>**HTTP Request** <br/>`DELETE https://firstpromoter.com/api/v2/company/promo_codes/{id}`</Tip>",
+        "description": "Archive promo code by id. \n<Tip>**HTTP Request** <br/>`DELETE https://v2.firstpromoter.com/api/v2/company/promo_codes/{id}`</Tip>",
         "operationId": "archivePromoCode",
         "tags": ["Promo Codes"],
         "parameters": [
