@@ -10,7 +10,7 @@
   },
   "servers": [
     {
-      "url": "https://v2.fprom.co/api/v2/track" 
+      "url": "https://firstpromoter.com/api/v2/track" 
     }
   ],
   "security": [

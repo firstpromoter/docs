@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://firstpromoter.com/api/v1"
+      "url": "https://firstpromoter.com/api/v2/company"
     }
   ],
   "security": [
