@@ -1300,7 +1300,7 @@
               },
               "managed_payouts": {
                 "type": "boolean",
-                "description": "Whether payouts are managed"
+                "description": "Whether payouts are managed by us (auto-payouts)"
               }
             }
           },
@@ -1392,7 +1392,7 @@
               },
               "managed_payouts": {
                 "type": "boolean",
-                "description": "Whether payouts are managed"
+                "description": "Whether payouts are managed by us (auto-payouts)"
               }
             }
           },
@@ -1515,7 +1515,7 @@
               },
               "managed_payouts": {
                 "type": "boolean",
-                "description": "Whether payouts are managed"
+                "description": "Whether payouts are managed by us (auto-payouts)"
               }
             }
           },
@@ -1685,7 +1685,7 @@
                     },
                     "managed_payouts": {
                       "type": "boolean",
-                      "description": "Whether payouts are managed"
+                      "description": "Whether payouts are managed by us (auto-payouts)"
                     }
                   }
                 },
