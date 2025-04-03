@@ -21,6 +21,7 @@
       "get": {
         "summary": "Get all campaigns",
         "tags": ["Campaigns"],
+        "description": "With this endpoint you can list all campaigns. \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/campaigns`</Tip>",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -35,6 +36,7 @@
       "post": {
         "summary": "Create a campaign",
         "tags": ["Campaigns"],
+        "description": "With this endpoint you can create a campaign. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/campaigns`</Tip>",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -61,7 +63,7 @@
       "get": {
         "summary": "Get a campaign",
         "tags": ["Campaigns"],
-
+        "description": "With this endpoint you can get a campaign.<Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/campaigns/{id}`</Tip>",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -84,6 +86,7 @@
       "put": {
         "summary": "Update a campaign",
         "tags": ["Campaigns"],
+        "description": "With this endpoint you can update a campaign. \n <Tip>**HTTP Request** <br/>`PUT https://v2.firstpromoter.com/api/v2/company/campaigns/{id}`</Tip>",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -116,6 +119,7 @@
       "delete": {
         "summary": "Delete a campaign",
         "tags": ["Campaigns"],
+        "description": "With this endpoint you can delete a campaign. \n <Tip>**HTTP Request** <br/>`DELETE https://v2.firstpromoter.com/api/v2/company/campaigns/{id}`</Tip>",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"

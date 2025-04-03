@@ -318,9 +318,6 @@
                   },
                   "selection": {
                     "$ref": "#/components/schemas/Selection"
-                  },
-                  "filters": {
-                    "$ref": "#/components/schemas/PromoterFilters"
                   }
                 }
               }
@@ -362,9 +359,6 @@
                   },
                   "selection": {
                     "$ref": "#/components/schemas/Selection"
-                  },
-                  "filters": {
-                    "$ref": "#/components/schemas/PromoterFilters"
                   }
                 }
               }
@@ -406,9 +400,6 @@
                   },
                   "selection": {
                     "$ref": "#/components/schemas/Selection"
-                  },
-                  "filters": {
-                    "$ref": "#/components/schemas/PromoterFilters"
                   }
                 }
               }
@@ -445,9 +436,6 @@
                 "properties": {
                   "selection": {
                     "$ref": "#/components/schemas/Selection"
-                  },
-                  "filters": {
-                    "$ref": "#/components/schemas/PromoterFilters"
                   }
                 }
               }
@@ -484,9 +472,6 @@
                 "properties": {
                   "selection": {
                     "$ref": "#/components/schemas/Selection"
-                  },
-                  "filters": {
-                    "$ref": "#/components/schemas/PromoterFilters"
                   }
                 }
               }
@@ -648,20 +633,9 @@
       "Selection": {
         "type": "object",
         "properties": {
-          "select_all": {
-            "type": "boolean",
-            "description": "Select all promoters"
-          },
           "selected_ids": {
             "type": "array",
-            "description": "Selected ids. Required when select_all is false or not present",
-            "items": {
-              "type": "integer"
-            }
-          },
-          "unselected_ids": {
-            "type": "array",
-            "description": "Unselected ids. Required when select_all is true",
+            "description": "Promoters ids",
             "items": {
               "type": "integer"
             }
