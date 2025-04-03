@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://firstpromoter.com/api/v2/company"
+      "url": "https://v2.firstpromoter.com/api/v2/company"
     }
   ],
   "security": [
@@ -18,9 +18,9 @@
   "paths": {
     "/contract_documents": {
       "get": {
-        "summary": "Get all current version contract documents of a company or promoter",
+        "summary": "Get all current version contract documents",
         "tags": ["Contract Documents"],
-
+        "description": " Get all current version contract documents \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/contract_documents`</Tip>",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -57,7 +57,8 @@
     },
     "/contract_documents/{id}": {
       "get": {
-        "summary": "Get contract documents by id and returns it in the selected format (html/pdf)",
+        "summary": "Get contract documents by id and return it in the selected format (html/pdf)",
+        "description": "Get contract documents by id(html/pdf) \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/contract_documents/{id}`</Tip>",
         "tags": ["Contract Documents"],
 
         "parameters": [
