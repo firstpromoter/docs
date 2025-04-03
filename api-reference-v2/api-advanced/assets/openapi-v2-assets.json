@@ -235,6 +235,7 @@
     "/assets/{id}": {
       "get": {
         "summary": "Get asset",
+        "description": "Get asset details \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/assets/{id}`</Tip>",
         "tags": ["Assets"],
         "parameters": [
           {
@@ -372,6 +373,7 @@
     "/assets/update_category": {
       "put": {
         "summary": "Update category of an asset",
+        "description": "Update category of an asset \n <Tip>**HTTP Request** <br/>`PUT https://v2.firstpromoter.com/api/v2/company/assets/update_category`</Tip>",
         "tags": ["Assets"],
         "parameters": [
           {
@@ -457,6 +459,7 @@
     "/assets/destroy": {
       "delete": {
         "summary": "Delete assets",
+        "description": "Delete assets \n <Tip>**HTTP Request** <br/>`DELETE https://v2.firstpromoter.com/api/v2/company/assets/destroy`</Tip>",
         "tags": ["Assets"],
         "parameters": [
           {
