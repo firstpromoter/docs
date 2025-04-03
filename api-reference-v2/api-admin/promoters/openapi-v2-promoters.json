@@ -597,6 +597,11 @@
             "format": "email",
             "description": "Email address of the promoter"
           },
+          "drip_emails": {
+            "type": "boolean",
+            "description": "Send notification email to the promoter",
+            "nullable": true
+          },
           "cust_id": {
             "type": "string",
             "nullable": true,
