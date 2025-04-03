@@ -280,6 +280,7 @@
       "put": {
         "summary": "Update asset",
         "tags": ["Assets"],
+        "description":" Update an asset \n <Tip>**HTTP Request** <br/>`PUT https://v2.firstpromoter.com/api/v2/company/assets/{id}`</Tip>",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"

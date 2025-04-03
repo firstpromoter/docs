@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://firstpromoter.com/api/v2/company"
+      "url": "https://v2.firstpromoter.com/api/v2/company"
     }
   ],
   "security": [
@@ -19,6 +19,7 @@
     "/contracts": {
       "get": {
         "summary": "Get all contracts",
+        "description": "Returns all contracts \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/contracts`</Tip>",
         "tags": ["Contracts"],
         "parameters": [
           {
@@ -33,6 +34,7 @@
       },
       "post": {
         "summary": "Create a contract. Calls the service that generates the contract documents.",
+        "description": "Create a contract \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/contracts`</Tip>",
         "tags": ["Contracts"],
         "parameters": [
           {
@@ -59,6 +61,7 @@
     "/contracts/{id}": {
       "get": {
         "summary": "Get contract by id",
+        "description": "Returns a contract by id \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/contracts/{id}`</Tip>",
         "tags": ["Contracts"],
         "parameters": [
           {
@@ -81,6 +84,7 @@
       },
       "put": {
         "summary": "Update a contract. Calls the service that generates the contract documents if needed.",
+        "description": "Update a contract \n <Tip>**HTTP Request** <br/>`PUT https://v2.firstpromoter.com/api/v2/company/contracts/{id}`</Tip>",
         "tags": ["Contracts"],
         "parameters": [
           {
@@ -113,8 +117,8 @@
       },
       "delete": {
         "summary": "Delete a contract",
+        "description": "Delete a contract \n <Tip>**HTTP Request** <br/>`DELETE https://v2.firstpromoter.com/api/v2/company/contracts/{id}`</Tip>",
         "tags": ["Contracts"],
-
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
