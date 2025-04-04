@@ -19,6 +19,7 @@
     "/contract_documents": {
       "get": {
         "summary": "Get current version contract documents",
+        "description": "Returns the current contract document  \n <Tip>**HTTP Request** <br/>` GET  https://v2.firstpromoter.com/api/v2/affiliate/contract_documents`</Tip>",
         "tags": ["Contract Documents"],
         "parameters": [
           {
@@ -57,7 +58,8 @@
     },
     "/contract_documents/{id}": {
       "get": {
-        "summary": "Get contract documents by id and returns it in the selected format (html/pdf)",
+        "summary": "Get contract documents by id (html/pdf)",
+        "description": "Gets contract document and returns it in the selected format  \n <Tip>**HTTP Request** <br/>` GET  https://v2.firstpromoter.com/api/v2/affiliate/contract_documents/{id}`</Tip>",
         "tags": ["Contract Documents"],
         "parameters": [
           {
@@ -148,9 +150,9 @@
     },
     "/contract_documents/{id}/sign": {
       "post": {
-        "summary": "Sign a document with ip",
+        "summary": "Sign a document with id",
+        "description": "Signs a contract document with id \n <Tip>**HTTP Request** <br/>` GET  https://v2.firstpromoter.com/api/v2/affiliate/contract_documents/{id}/sign`</Tip>",
         "tags": ["Contract Documents"],
-
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -235,7 +237,8 @@
             "$ref": "#/components/parameters/AccountId"
           }
         ],
-        "summary": "Get the draft content of the contract with user details parsed",
+        "summary": "Get the draft content of the contract",
+        "description": "Returns the draft content of the contract with user details \n <Tip>**HTTP Request** <br/>` GET  https://v2.firstpromoter.com/api/v2/affiliate/contract_documents/draft`</Tip>",
         "tags": ["Contract Documents"],
         "requestBody": {
           "required": true,
@@ -300,7 +303,7 @@
       }
     }
   },
-   "components": {
+  "components": {
     "parameters": {
       "AccountId": {
         "name": "Account-ID",
