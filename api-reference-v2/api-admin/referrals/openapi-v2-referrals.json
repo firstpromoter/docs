@@ -154,6 +154,54 @@
             }
           }
         }
+      },
+      "delete": {
+        "summary": "Delete referrals",
+        "description": "With this endpoint you can delete referrals. \n <Tip>**HTTP Request** <br/>`DELETE https://v2.firstpromoter.com/api/v2/company/referrals/destroy`</Tip>",
+        "tags": ["Referrals"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchSelectionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Batch operation completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchOperationResponse"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Batch operation accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchOperationResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
       }
     },
     "/referrals/{id}": {
@@ -376,56 +424,6 @@
       "post": {
         "summary": "Enable referrals",
         "description": "With this endpoint you can enable referrals. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/referrals/enable`</Tip>",
-        "tags": ["Referrals"],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/AccountId"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BatchSelectionRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Batch operation completed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BatchOperationResponse"
-                }
-              }
-            }
-          },
-          "202": {
-            "description": "Batch operation accepted",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BatchOperationResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        }
-      }
-    },
-    "/referrals/destroy": {
-      "delete": {
-        "summary": "Delete referrals",
-        "description": "With this endpoint you can delete referrals. \n <Tip>**HTTP Request** <br/>`DELETE https://v2.firstpromoter.com/api/v2/company/referrals/destroy`</Tip>",
         "tags": ["Referrals"],
         "parameters": [
           {
@@ -904,22 +902,11 @@
           "selection": {
             "type": "object",
             "properties": {
-              "select_all": {
-                "type": "boolean",
-                "description": "Select all"
-              },
               "selected_ids": {
                 "type": "array",
-                "description": "Selected ids. Required when select_all is false or not present",
+                "description": "Selected referral ids.",
                 "items": {
                   "type": "integer"
-                }
-              },
-              "unselected_ids": {
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "description": "Unselected ids. Required when select_all is true and you want to ignore specific items from the selection"
                 }
               }
             }
