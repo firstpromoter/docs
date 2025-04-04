@@ -323,8 +323,8 @@
                     "type": "integer",
                     "description": "The ID of the campaign promoter will be accepted to"
                   },
-                  "selection": {
-                    "$ref": "#/components/schemas/Selection"
+                   "ids": {
+                    "$ref": "#/components/schemas/Ids"
                   }
                 }
               }
@@ -364,8 +364,8 @@
                     "type": "integer",
                     "description": "The ID of the campaign promoter will be rejected from"
                   },
-                  "selection": {
-                    "$ref": "#/components/schemas/Selection"
+                   "ids": {
+                    "$ref": "#/components/schemas/Ids"
                   }
                 }
               }
@@ -405,8 +405,8 @@
                     "type": "integer",
                     "description": "The ID of the campaign promoter will be blocked from"
                   },
-                  "selection": {
-                    "$ref": "#/components/schemas/Selection"
+                   "ids": {
+                    "$ref": "#/components/schemas/Ids"
                   }
                 }
               }
@@ -441,8 +441,8 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "selection": {
-                    "$ref": "#/components/schemas/Selection"
+                   "ids": {
+                    "$ref": "#/components/schemas/Ids"
                   }
                 }
               }
@@ -478,8 +478,8 @@
                 "type": "object",
                 "required": ["selection", "from_campaign_id", "to_campaign_id"],
                 "properties": {
-                  "selection": {
-                    "$ref": "#/components/schemas/Selection"
+                   "ids": {
+                    "$ref": "#/components/schemas/Ids"
                   },
                   "from_campaign_id": {
                     "type": "integer",
@@ -676,8 +676,8 @@
                 "type": "object",
                 "required": ["selection", "campaign_id"],
                 "properties": {
-                  "selection": {
-                    "$ref": "#/components/schemas/Selection"
+                   "ids": {
+                    "$ref": "#/components/schemas/Ids"
                   },
                   "campaign_id": {
                     "type": "integer",
@@ -889,8 +889,8 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "selection": {
-                    "$ref": "#/components/schemas/Selection"
+                   "ids": {
+                    "$ref": "#/components/schemas/Ids"
                   }
                 }
               }
@@ -1329,16 +1329,11 @@
         }
       },
 
-      "Selection": {
-        "type": "object",
-        "properties": {
-          "selected_ids": {
-            "type": "array",
-            "description": "Promoters ids",
-            "items": {
-              "type": "integer"
-            }
-          }
+      "Ids": {
+        "type": "array",
+        "description": "Array of promoter ids",
+        "items": {
+          "type": "integer"
         }
       },
       "PromoterFilters": {

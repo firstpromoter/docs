@@ -497,16 +497,11 @@
                     "description": "Move associated commissions",
                     "enum": [true, false]
                   },
-                  "selection": {
-                    "type": "object",
-                    "properties": {
-                      "selected_ids": {
-                        "type": "array",
-                        "description": "Selected ids of referrals for move",
-                        "items": {
-                          "type": "integer"
-                        }
-                      }
+                  "ids": {
+                    "type": "array",
+                    "description": "Array of selected referral ids.",
+                    "items": {
+                      "type": "integer"
                     }
                   }
                 }
@@ -899,16 +894,11 @@
       "BatchSelectionRequest": {
         "type": "object",
         "properties": {
-          "selection": {
-            "type": "object",
-            "properties": {
-              "selected_ids": {
-                "type": "array",
-                "description": "Selected referral ids.",
-                "items": {
-                  "type": "integer"
-                }
-              }
+          "ids": {
+            "type": "array",
+            "description": "Array of selected referral ids.",
+            "items": {
+              "type": "integer"
             }
           }
         }
