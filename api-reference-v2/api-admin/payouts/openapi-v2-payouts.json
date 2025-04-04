@@ -646,41 +646,6 @@
                     "type": "string",
                     "enum": ["paypal", "bank", "wise", "crypto", "dots"],
                     "description": "Payment method"
-                  },
-                  "q": {
-                    "type": "string",
-                    "description": "Search params. Searches by 'promoter.profile.first_name`, `promoter.profile.last_name`, `promoter.user.email`"
-                  },
-                  "filters": {
-                    "type": "object",
-                    "properties": {
-                      "status": {
-                        "type": "string",
-                        "enum": [
-                          "pending",
-                          "completed",
-                          "failed",
-                          "processing",
-                          "cancelled"
-                        ]
-                      },
-                      "campaign_id": {
-                        "oneOf": [
-                          {
-                            "type": "integer"
-                          },
-                          {
-                            "type": "array",
-                            "items": {
-                              "type": "integer"
-                            }
-                          }
-                        ]
-                      },
-                      "only_payable": {
-                        "type": "boolean"
-                      }
-                    }
                   }
                 },
                 "required": ["method"]
@@ -748,48 +713,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "selection": {
-                    "type": "object",
-                    "properties": {
-                      "selected_ids": {
-                        "type": "array",
-                        "items": {
-                          "type": "integer"
-                        },
-                        "description": "Selected payout IDs."
-                      }
-                    }
-                  },
-                  "filters": {
-                    "type": "object",
-                    "properties": {
-                      "status": {
-                        "type": "string",
-                        "enum": [
-                          "pending",
-                          "completed",
-                          "failed",
-                          "processing",
-                          "cancelled"
-                        ]
-                      },
-                      "campaign_id": {
-                        "oneOf": [
-                          {
-                            "type": "integer"
-                          },
-                          {
-                            "type": "array",
-                            "items": {
-                              "type": "integer"
-                            }
-                          }
-                        ]
-                      }
-                    }
+                  "ids": {
+                    "$ref": "#/components/schemas/Ids"
                   }
                 },
-                "required": ["selection"]
+                "required": ["ids"]
               }
             }
           }
@@ -864,48 +792,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "selection": {
-                    "type": "object",
-                    "properties": {
-                      "selected_ids": {
-                        "type": "array",
-                        "items": {
-                          "type": "integer"
-                        },
-                        "description": "Selected payout IDs."
-                      }
-                    }
-                  },
-                  "filters": {
-                    "type": "object",
-                    "properties": {
-                      "status": {
-                        "type": "string",
-                        "enum": [
-                          "pending",
-                          "completed",
-                          "failed",
-                          "processing",
-                          "cancelled"
-                        ]
-                      },
-                      "campaign_id": {
-                        "oneOf": [
-                          {
-                            "type": "integer"
-                          },
-                          {
-                            "type": "array",
-                            "items": {
-                              "type": "integer"
-                            }
-                          }
-                        ]
-                      }
-                    }
+                  "ids": {
+                    "$ref": "#/components/schemas/Ids"
                   }
                 },
-                "required": ["selection"]
+                "required": ["ids"]
               }
             }
           }
@@ -980,48 +871,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "selection": {
-                    "type": "object",
-                    "properties": {
-                      "selected_ids": {
-                        "type": "array",
-                        "items": {
-                          "type": "integer"
-                        },
-                        "description": "Selected payout IDs."
-                      }
-                    }
-                  },
-                  "filters": {
-                    "type": "object",
-                    "properties": {
-                      "status": {
-                        "type": "string",
-                        "enum": [
-                          "pending",
-                          "completed",
-                          "failed",
-                          "processing",
-                          "cancelled"
-                        ]
-                      },
-                      "campaign_id": {
-                        "oneOf": [
-                          {
-                            "type": "integer"
-                          },
-                          {
-                            "type": "array",
-                            "items": {
-                              "type": "integer"
-                            }
-                          }
-                        ]
-                      }
-                    }
+                  "ids": {
+                    "$ref": "#/components/schemas/Ids"
                   }
                 },
-                "required": ["selection"]
+                "required": ["ids"]
               }
             }
           }
@@ -1818,6 +1672,13 @@
             }
           }
         }
+      },
+      "Ids": {
+        "type": "array",
+        "items": {
+          "type": "integer"
+        },
+        "description": "Array of Payout IDs"
       },
       "Error": {
         "type": "object",
