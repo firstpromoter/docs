@@ -19,6 +19,7 @@
     "/commissions": {
       "get": {
         "summary": "Get all commissions",
+        "description": "Return all commissions \n <Tip>**HTTP Request** <br/>` GET  https://v2.firstpromoter.com/api/v2/affiliate/commissions`</Tip>",
         "tags": ["Commissions"],
         "parameters": [
           {
@@ -304,6 +305,7 @@
     "/commissions/export": {
       "get": {
         "summary": "Export all commissions",
+        "description": "Export all commissions \n <Tip>**HTTP Request** <br/>` GET  https://v2.firstpromoter.com/api/v2/affiliate/commissions/export`</Tip>",
         "tags": ["Commissions"],
         "parameters": [
           {

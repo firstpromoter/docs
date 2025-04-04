@@ -27,15 +27,6 @@
           },
           {
             "in": "query",
-            "name": "selection[select_all]",
-            "schema": {
-              "type": "boolean",
-              "enum": [true, false]
-            },
-            "description": "Select all"
-          },
-          {
-            "in": "query",
             "name": "selection[selected_ids]",
             "schema": {
               "type": "array",
@@ -43,18 +34,7 @@
                 "type": "integer"
               }
             },
-            "description": "Selected ids. Required when select_all is false or not present"
-          },
-          {
-            "in": "query",
-            "name": "selection[unselected_ids]",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "integer"
-              }
-            },
-            "description": "Unselected ids. Required when select_all is true"
+            "description": "Selected ids."
           },
           {
             "in": "query",

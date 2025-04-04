@@ -19,6 +19,7 @@
     "/assets": {
       "get": {
         "summary": "Get available assets",
+        "description": "Returns all assets \n <Tip>**HTTP Request** <br/>` GET  https://v2.firstpromoter.com/api/v2/affiliate/assets`</Tip>",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -193,6 +194,7 @@
     "/asset_categories": {
       "get": {
         "summary": "Get available asset categories",
+        "description":"Returns all asset categories \n <Tip>**HTTP Request** <br/>` GET  https://v2.firstpromoter.com/api/v2/affiliate/asset_categories`</Tip>",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
