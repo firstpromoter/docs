@@ -340,18 +340,6 @@
                 }
               ]
             }
-          },
-          {
-            "name": "selection[selected_ids]",
-            "in": "query",
-            "description": "Selected ids.",
-            "required": false,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "integer"
-              }
-            }
           }
         ],
         "responses": {
@@ -406,18 +394,6 @@
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
-          },
-          {
-            "name": "selection[selected_ids]",
-            "in": "query",
-            "description": "Selected ids.",
-            "required": false,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "integer"
-              }
-            }
           },
           {
             "name": "q",
@@ -506,18 +482,6 @@
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
-          },
-          {
-            "name": "selection[selected_ids]",
-            "in": "query",
-            "description": "Selected ids.",
-            "required": false,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "integer"
-              }
-            }
           },
           {
             "name": "q",

@@ -389,17 +389,12 @@
                 "type": "object",
                 "required": ["category_id"],
                 "properties": {
-                  "selection": {
-                    "type": "object",
-                    "properties": {
-                      "selected_ids": {
-                        "type": "array",
-                        "items": {
-                          "type": "integer"
-                        },
-                        "description": "Selected ids of the assets"
-                      }
-                    }
+                  "ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    },
+                    "description": "Array of asset ids"
                   },
                   "category_id": {
                     "type": "integer",
@@ -474,17 +469,12 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "selection": {
-                    "type": "object",
-                    "properties": {
-                      "selected_ids": {
-                        "type": "array",
-                        "items": {
-                          "type": "integer"
-                        },
-                        "description": "Selected ids of assets to delete"
-                      }
-                    }
+                  "ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    },
+                    "description": "Selected ids of assets to delete"
                   }
                 }
               }

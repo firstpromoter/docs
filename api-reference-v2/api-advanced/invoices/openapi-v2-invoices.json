@@ -27,17 +27,6 @@
           },
           {
             "in": "query",
-            "name": "selection[selected_ids]",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "integer"
-              }
-            },
-            "description": "Selected ids."
-          },
-          {
-            "in": "query",
             "name": "filters[promoter_id]",
             "schema": {
               "type": "integer"
@@ -686,28 +675,11 @@
       "BatchRequest": {
         "type": "object",
         "properties": {
-          "selection": {
-            "type": "object",
-            "properties": {
-              "selected_ids": {
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "description": "Selected invoice ids."
-                }
-              }
-            }
-          },
-          "filters": {
-            "type": "object",
-            "properties": {
-              "promoter_id": {
-                "type": "integer"
-              },
-              "status": {
-                "type": "string",
-                "enum": ["draft", "open", "paid", "voided"]
-              }
+          "ids": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "description": "Array of invoice ids."
             }
           }
         }

@@ -597,17 +597,12 @@
       "BatchActionRequest": {
         "type": "object",
         "properties": {
-          "selection": {
-            "type": "object",
-            "properties": {
-              "selected_ids": {
-                "type": "array",
-                "items": {
-                  "type": "integer"
-                },
-                "description": "Selected ids."
-              }
-            }
+          "ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "Array of commission Ids."
           }
         }
       },
