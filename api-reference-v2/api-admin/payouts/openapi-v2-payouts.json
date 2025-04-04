@@ -342,30 +342,9 @@
             }
           },
           {
-            "name": "selection[select_all]",
-            "in": "query",
-            "description": "Select all",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
             "name": "selection[selected_ids]",
             "in": "query",
-            "description": "Selected ids. Required when select_all is false or not present",
-            "required": false,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "integer"
-              }
-            }
-          },
-          {
-            "name": "selection[unselected_ids]",
-            "in": "query",
-            "description": "Unselected ids. Required when select_all is true",
+            "description": "Selected ids.",
             "required": false,
             "schema": {
               "type": "array",
@@ -429,30 +408,9 @@
             "$ref": "#/components/parameters/AccountId"
           },
           {
-            "name": "selection[select_all]",
-            "in": "query",
-            "description": "Select all",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
             "name": "selection[selected_ids]",
             "in": "query",
-            "description": "Selected ids. Required when select_all is false or not present",
-            "required": false,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "integer"
-              }
-            }
-          },
-          {
-            "name": "selection[unselected_ids]",
-            "in": "query",
-            "description": "Unselected ids. Required when select_all is true",
+            "description": "Selected ids.",
             "required": false,
             "schema": {
               "type": "array",
@@ -550,30 +508,9 @@
             "$ref": "#/components/parameters/AccountId"
           },
           {
-            "name": "selection[select_all]",
-            "in": "query",
-            "description": "Select all",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
             "name": "selection[selected_ids]",
             "in": "query",
-            "description": "Selected ids. Required when select_all is false or not present",
-            "required": false,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "integer"
-              }
-            }
-          },
-          {
-            "name": "selection[unselected_ids]",
-            "in": "query",
-            "description": "Unselected ids. Required when select_all is true",
+            "description": "Selected ids.",
             "required": false,
             "schema": {
               "type": "array",
@@ -814,23 +751,12 @@
                   "selection": {
                     "type": "object",
                     "properties": {
-                      "select_all": {
-                        "type": "boolean",
-                        "description": "Select all payouts"
-                      },
                       "selected_ids": {
                         "type": "array",
                         "items": {
                           "type": "integer"
                         },
-                        "description": "Selected payout IDs. Required when select_all is false or not present"
-                      },
-                      "unselected_ids": {
-                        "type": "array",
-                        "items": {
-                          "type": "integer"
-                        },
-                        "description": "Unselected payout IDs. Required when select_all is true"
+                        "description": "Selected payout IDs."
                       }
                     }
                   },
@@ -941,23 +867,12 @@
                   "selection": {
                     "type": "object",
                     "properties": {
-                      "select_all": {
-                        "type": "boolean",
-                        "description": "Select all payouts"
-                      },
                       "selected_ids": {
                         "type": "array",
                         "items": {
                           "type": "integer"
                         },
-                        "description": "Selected payout IDs. Required when select_all is false or not present"
-                      },
-                      "unselected_ids": {
-                        "type": "array",
-                        "items": {
-                          "type": "integer"
-                        },
-                        "description": "Unselected payout IDs. Required when select_all is true"
+                        "description": "Selected payout IDs."
                       }
                     }
                   },
@@ -1068,23 +983,12 @@
                   "selection": {
                     "type": "object",
                     "properties": {
-                      "select_all": {
-                        "type": "boolean",
-                        "description": "Select all payouts"
-                      },
                       "selected_ids": {
                         "type": "array",
                         "items": {
                           "type": "integer"
                         },
-                        "description": "Selected payout IDs. Required when select_all is false or not present"
-                      },
-                      "unselected_ids": {
-                        "type": "array",
-                        "items": {
-                          "type": "integer"
-                        },
-                        "description": "Unselected payout IDs. Required when select_all is true"
+                        "description": "Selected payout IDs."
                       }
                     }
                   },
