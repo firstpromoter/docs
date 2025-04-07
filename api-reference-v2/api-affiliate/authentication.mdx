@@ -1,11 +1,57 @@
 ---
-title: 'Authentication'
-description: 'How to authenticate your API'
+title: "Authentication"
+description: "How to authenticate your API"
 ---
 
-FirstPromoter uses an API key to authorize API requests. You can find your key on the Settings page of your FirstPromoter Dashboard—log in to FirstPromoter and click the 'Settings' button in the top bar.
+## Authentication
 
-To make authenticated requests to our API, you'll need to include an Authorization header with a bearer token which will hold your API key as:
-`Authorization: Bearer {apikey}`
+### Obtaining Your Credentials
 
-<Note>You must replace `{apikey}` with your account API key.</Note>
+FirstPromoter uses two key credentials to authorize API requests:
+
+1. **API Key**: A unique token that authenticates your application
+2. **Account ID**: Identifies your specific FirstPromoter account
+
+To locate these credentials:
+
+1. Log in to your FirstPromoter Dashboard
+2. Navigate to **Settings** → **Integrations **→ **Manage API Keys **→ **Add new Key**
+3. Set a descriptive key name (e.g., `My Application Key`) and click **Create**
+4. Immediately copy and securely store your newly generated API key.
+5. You will find your **Account ID** in the same API integrations panel under **Settings** → **Integrations**
+
+### Making Authenticated Requests
+
+All API requests must include both credentials in your request headers:
+
+```
+Authorization: Bearer {your_api_key}
+ACCOUNT-ID: {your_account_id}
+```
+
+#### Example Request
+
+```
+GET https://v2.firstpromoter.com/api/v2/company/referrals
+Authorization: Bearer 01234567890abcdef
+ACCOUNT-ID: 123456
+```
+
+<Note>
+  You must replace `{apikey}` with your account API key and  `{account_id}` with your account ID
+</Note>
+
+### Security Best Practices
+
+- Keep your API key secure and never expose it in client-side code
+- Consider implementing IP restrictions for API access
+- Regularly audit your API usage and rotate keys if suspicious activity occurs
+- Use HTTPS for all API communications
+
+### Rate Limits
+
+To ensure fair usage and system stability, FirstPromoter implements the following rate limits:
+
+- 400 requests per minute per account
+
+Exceeding these limits will result in a `429 Too Many Requests` response.
