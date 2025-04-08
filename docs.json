@@ -303,17 +303,17 @@
                   {
                     "group": "Promoters",
                     "pages": [
-                      "api-reference-v2/api-admin/promoters/get-available-promoters-for-current-company",
-                      "api-reference-v2/api-admin/promoters/create-promoter-for-current-company",
+                      "api-reference-v2/api-admin/promoters/get-available-promoters",
+                      "api-reference-v2/api-admin/promoters/create-promoter",
                       "api-reference-v2/api-admin/promoters/get-promoter-details",
-                      "api-reference-v2/api-admin/promoters/update-promoter-for-current-company-based-on-id",
+                      "api-reference-v2/api-admin/promoters/update-promoter",
                      "api-reference-v2/api-admin/promoters/add-promoter-to-campaign",
                       "api-reference-v2/api-admin/promoters/move-promoter-to-campaign",
-                      "api-reference-v2/api-admin/promoters/accepts-a-batch-of-promoters",
-                      "api-reference-v2/api-admin/promoters/rejects-a-batch-of-promoters",
-                      "api-reference-v2/api-admin/promoters/blocks-a-batch-of-promoters",
-                      "api-reference-v2/api-admin/promoters/archives-a-batch-of-promoters",
-                      "api-reference-v2/api-admin/promoters/restores-unarchive-a-batch-of-promoters"
+                      "api-reference-v2/api-admin/promoters/accept-promoters",
+                      "api-reference-v2/api-admin/promoters/reject-promoters",
+                      "api-reference-v2/api-admin/promoters/block-promoters",
+                      "api-reference-v2/api-admin/promoters/archive-promoters",
+                      "api-reference-v2/api-admin/promoters/restore-unarchived-promoters"
                     ]
                   },
                   {
