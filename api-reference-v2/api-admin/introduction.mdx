@@ -35,7 +35,13 @@ To ensure fair usage and system stability, FirstPromoter implements the followin
 
 Exceeding these limits will result in a `429 Too Many Requests` response.
 
+### Pagination
 
-### Pagination 
+When retrieving multiple affiliates, the API uses pagination to limit the number of records returned in a single response. This ensures optimal performance for both the API and your application.
 
-The next sections will walk you through authentication, available endpoints and request formats
+### Pagination Parameters
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `page` | Integer | The page number to retrieve (default: 1) |
+| `per_page` | Integer | Number of records per page (default: 20, max: 100) |
