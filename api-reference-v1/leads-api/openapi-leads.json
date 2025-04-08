@@ -393,7 +393,7 @@
             "description": "The lead's ID inside FirstPromoter",
             "type": "integer"
           },
-          "status": {
+          "state": {
             "description": "The lead's or customer's status",
             "type": "string",
             "enum": ["signup", "active", "subscribed", "denied", "cancelled"]
