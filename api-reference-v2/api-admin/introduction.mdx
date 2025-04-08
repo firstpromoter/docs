@@ -5,7 +5,7 @@ description: "This is the public API documentation for FirstPromoter V2."
 
 Welcome to the FirstPromoter API\! This documentation will guide you through the process of integrating with our platform programmatically, allowing you to leverage the full power of FirstPromoter's affiliate and referral tracking capabilities in your own applications.
 
-### **Why Use Our API?**
+### Why Use Our API?
 
 **Automation:** Streamline your workflow by automating repetitive tasks\
 **Integration:** Seamlessly incorporate FirstPromoter's capabilities into your existing systems **Customization:** Build custom solutions tailored to your specific business needs
@@ -27,10 +27,15 @@ To begin using the FirstPromoter API, you'll need:
 2. Your account id and an API key
 3. Basic knowledge of REST API principles
 
+### Rate Limits
+
+To ensure fair usage and system stability, FirstPromoter implements the following rate limits:
+
+- 400 requests per minute per account
+
+Exceeding these limits will result in a `429 Too Many Requests` response.
+
+
+### Pagination 
+
 The next sections will walk you through authentication, available endpoints and request formats
-
-<Note>
-  For this version, the API calls should be made in JSON format. The responses are in JSON format.
-
-  If you need more advanced features, reach out to us on support.
-</Note>
