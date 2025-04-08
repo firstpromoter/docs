@@ -28,7 +28,7 @@
           {
             "name": "q",
             "in": "query",
-            "description": "Search params. Searches by initial_tier_event.transaction_id, lead.email, lead.uid",
+            "description": "Search params. Searches by event_id, referral.email, referral.uid",
             "schema": {
               "type": "string"
             }
