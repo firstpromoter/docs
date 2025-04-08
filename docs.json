@@ -292,12 +292,12 @@
                   {
                     "group": "Referrals",
                     "pages": [
-                      "api-reference-v2/api-admin/referrals/get-available-referrals-for-current-company",
-                      "api-reference-v2/api-admin/referrals/create-referral-for-current-company",
-                      "api-reference-v2/api-admin/referrals/get-referral-for-current-company-based-on-id",
-                      "api-reference-v2/api-admin/referrals/update-referral-for-current-company-based-on-id",
-                      "api-reference-v2/api-admin/referrals/move-referrals-to-promoter-based-on-query",
-                      "api-reference-v2/api-admin/referrals/delete-referrals-based-on-query"
+                      "api-reference-v2/api-admin/referrals/get-referrals",
+                      "api-reference-v2/api-admin/referrals/create-referral",
+                      "api-reference-v2/api-admin/referrals/get-referral",
+                      "api-reference-v2/api-admin/referrals/update-referral",
+                      "api-reference-v2/api-admin/referrals/move-referrals-to-promoter",
+                      "api-reference-v2/api-admin/referrals/delete-referrals"
                     ]
                   },
                   {
