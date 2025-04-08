@@ -324,8 +324,8 @@
                       "api-reference-v2/api-admin/commissions/update-a-commission",
                       "api-reference-v2/api-admin/commissions/approve-commissions",
                       "api-reference-v2/api-admin/commissions/deny-commissions",
-                      "api-reference-v2/api-admin/commissions/mark-commissions-payout-as-fulfilled",
-                      "api-reference-v2/api-admin/commissions/mark-commissions-payout-as-unfulfilled"
+                      "api-reference-v2/api-admin/commissions/mark-nonmonetary-commissions-as-fulfilled",
+                      "api-reference-v2/api-admin/commissions/mark-nonmonetary-commissions-as-unfulfilled"
                     ]
                   },
                   {
