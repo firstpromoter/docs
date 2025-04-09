@@ -323,7 +323,7 @@
     "/referrals/approve": {
       "post": {
         "summary": "Approve referrals",
-        "description": "With this endpoint you can approve referrals. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/referrals/approve`</Tip>",
+        "description": "With this endpoint you can approve referrals. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/referrals/approve`</Tip>",
         "tags": ["Referrals"],
         "parameters": [
           {
@@ -373,7 +373,7 @@
     "/referrals/disable": {
       "post": {
         "summary": "Disable referrals",
-        "description": "With this endpoint you can disable referrals. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/referrals/disable`</Tip>",
+        "description": "With this endpoint you can disable referrals. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/referrals/disable`</Tip>",
         "tags": ["Referrals"],
         "parameters": [
           {
@@ -473,7 +473,7 @@
     "/referrals/move_to_promoter": {
       "post": {
         "summary": "Move referrals to promoter",
-        "description": "With this endpoint you can move referrals to another promoter. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/referrals/move_to_promoter`</Tip>",
+        "description": "With this endpoint you can move referrals to another promoter. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/referrals/move_to_promoter`</Tip>",
         "tags": ["Referrals"],
         "parameters": [
           {
@@ -499,7 +499,7 @@
                   },
                   "ids": {
                     "type": "array",
-                    "description": "Array of selected referral ids.",
+                    "description": "Array of selected referral ids. If there are more than __5__ ids on this param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`",
                     "items": {
                       "type": "integer"
                     }
@@ -511,7 +511,7 @@
         },
         "responses": {
           "200": {
-            "description": "Batch operation completed successfully",
+            "description": "Batch operation completed successfully.",
             "content": {
               "application/json": {
                 "schema": {
