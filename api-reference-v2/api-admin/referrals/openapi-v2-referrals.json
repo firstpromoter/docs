@@ -896,7 +896,7 @@
         "properties": {
           "ids": {
             "type": "array",
-            "description": "Array of selected referral ids.",
+            "description": "Array of selected referral ids. If there are more than __5__ ids on this param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`",
             "items": {
               "type": "integer"
             }
