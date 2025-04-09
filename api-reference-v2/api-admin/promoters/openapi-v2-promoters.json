@@ -303,7 +303,7 @@
     "/promoters/accept": {
       "post": {
         "summary": "Accept promoters",
-        "description": "With this endpoint you can accept promoters. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/promoters/accept`</Tip>",
+        "description": "With this endpoint you can accept promoters. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/promoters/accept`</Tip>",
         "operationId": "acceptPromoters",
         "tags": ["Promoters"],
         "parameters": [
@@ -344,7 +344,7 @@
     "/promoters/reject": {
       "post": {
         "summary": "Reject promoters",
-        "description": "With this endpoint you can reject promoters. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/promoters/reject`</Tip>",
+        "description": "With this endpoint you can reject promoters. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/promoters/reject`</Tip>",
         "operationId": "rejectPromoters",
         "tags": ["Promoters"],
         "parameters": [
@@ -385,7 +385,7 @@
     "/promoters/block": {
       "post": {
         "summary": "Block promoters",
-        "description": "With this endpoint you can block promoters. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/promoters/block`</Tip>",
+        "description": "With this endpoint you can block promoters. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/promoters/block`</Tip>",
         "operationId": "blockPromoters",
         "tags": ["Promoters"],
         "parameters": [
@@ -426,7 +426,7 @@
     "/promoters/archive": {
       "post": {
         "summary": "Archive promoters",
-        "description": "With this endpoint you can archive promoters. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/promoters/archive`</Tip>",
+        "description": "With this endpoint you can archive promoters. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/promoters/archive`</Tip>",
         "operationId": "archivePromoters",
         "tags": ["Promoters"],
         "parameters": [
@@ -462,7 +462,7 @@
     "/promoters/move_to_campaign": {
       "post": {
         "summary": "Move promoters to campaign",
-        "description": "With this endpoint you can move promoters from one campaign to another. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/promoters/move_to_campaign`</Tip>",
+        "description": "With this endpoint you can move promoters from one campaign to another. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/promoters/move_to_campaign`</Tip>",
         "operationId": "movePromotersToCampaign",
         "tags": ["Promoters"],
         "parameters": [
@@ -660,7 +660,7 @@
     "/promoters/add_to_campaign": {
       "post": {
         "summary": "Add promoters to campaign",
-        "description": "With this endpoint you can add promoters to a campaign. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/promoters/add_to_campaign`</Tip>",
+        "description": "With this endpoint you can add promoters to a campaign. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/promoters/add_to_campaign`</Tip>",
         "operationId": "addPromotersToCampaign",
         "tags": ["Promoters"],
         "parameters": [
@@ -874,7 +874,7 @@
     "/promoters/restore": {
       "post": {
         "summary": "Restore promoters",
-        "description": "With this endpoint you can restore promoters. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/promoters/restore`</Tip>",
+        "description": "With this endpoint you can restore promoters. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/promoters/restore`</Tip>",
         "operationId": "restorePromoters",
         "tags": ["Promoters"],
         "parameters": [
@@ -1331,7 +1331,7 @@
 
       "Ids": {
         "type": "array",
-        "description": "Array of promoter ids",
+        "description": "Array of promoter ids. If there are more than __5__ ids on this param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`",
         "items": {
           "type": "integer"
         }
