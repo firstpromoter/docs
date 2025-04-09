@@ -19,7 +19,7 @@
   "paths": {
     "/batch_processes": {
       "get": {
-        "summary": "List batch processes that are in progress",
+        "summary": "List in progress batch processes.",
         "description": "List batch processes that are in progress \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/batch_processes`</Tip>",
         "operationId": "listBatchProcesses",
         "parameters": [
@@ -138,8 +138,8 @@
     },
     "/batch_processes/progress": {
       "get": {
-        "summary": "Show batch process collection progress",
-        "description": "Show batch process collection progress (faster than getting all batch processes) \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/batch_processes/progress`</Tip>",
+        "summary": "Show progress",
+        "description": "Show progress of batch process. \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/batch_processes/progress`</Tip>",
         "operationId": "getBatchProcessProgress",
         "parameters": [
           {
