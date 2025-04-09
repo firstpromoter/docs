@@ -157,7 +157,7 @@
       },
       "delete": {
         "summary": "Delete referrals",
-        "description": "With this endpoint you can delete referrals. \n <Tip>**HTTP Request** <br/>`DELETE https://v2.firstpromoter.com/api/v2/company/referrals/destroy`</Tip>",
+        "description": "With this endpoint you can delete referrals. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`DELETE https://v2.firstpromoter.com/api/v2/company/referrals/destroy`</Tip>",
         "tags": ["Referrals"],
         "parameters": [
           {
@@ -423,7 +423,7 @@
     "/referrals/enable": {
       "post": {
         "summary": "Enable referrals",
-        "description": "With this endpoint you can enable referrals. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/referrals/enable`</Tip>",
+        "description": "With this endpoint you can enable referrals. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/referrals/enable`</Tip>",
         "tags": ["Referrals"],
         "parameters": [
           {
