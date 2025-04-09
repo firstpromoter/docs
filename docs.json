@@ -289,6 +289,14 @@
                       "api-reference-v2/api-admin/authentication"
                     ]
                   },
+                    {
+                    "group": "Batch Processes",
+                    "pages": [
+                      "api-reference-v2/api-admin/batches/list-inprogress-batch-processes",
+                      "api-reference-v2/api-admin/batches/show-batch-process",
+                      "api-reference-v2/api-admin/batches/show-progress"
+                    ]
+                  },
                   {
                     "group": "Referrals",
                     "pages": [
