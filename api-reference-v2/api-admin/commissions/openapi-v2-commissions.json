@@ -174,7 +174,7 @@
     "/commissions/mark_fulfilled": {
       "post": {
         "summary": "Mark nonmonetary commissions as fulfilled",
-        "description": "With this endpoint you can mark commissions payout as fulfilled. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/commissions/mark_fulfilled`</Tip>",
+        "description": "With this endpoint you can mark nonmonetary commissions as fulfilled. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/commissions/mark_fulfilled`</Tip>",
         "tags": ["Commissions"],
         "parameters": [
           {
@@ -201,7 +201,7 @@
     "/commissions/mark_unfulfilled": {
       "post": {
         "summary": "Mark nonmonetary commissions as unfulfilled",
-        "description": "With this endpoint you can mark commissions payout as unfulfilled. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/commissions/mark_unfulfilled`</Tip>",
+        "description": "With this endpoint you can mark nonmonetary commissions as unfulfilled. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/commissions/mark_unfulfilled`</Tip>",
         "tags": ["Commissions"],
         "parameters": [
           {
