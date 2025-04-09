@@ -120,7 +120,7 @@
     "/commissions/approve": {
       "post": {
         "summary": "Approve commissions",
-        "description": "With this endpoint you can approve commissions. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/commissions/approve`</Tip>",
+        "description": "With this endpoint you can approve commissions. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/commissions/approve`</Tip>",
         "tags": ["Commissions"],
         "parameters": [
           {
@@ -147,7 +147,7 @@
     "/commissions/deny": {
       "post": {
         "summary": "Deny commissions",
-        "description": "With this endpoint you can deny commissions. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/commissions/deny`</Tip>",
+        "description": "With this endpoint you can deny commissions. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n  <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/commissions/deny`</Tip>",
         "tags": ["Commissions"],
         "parameters": [
           {
@@ -255,7 +255,7 @@
     "/commissions/generate_payouts": {
       "post": {
         "summary": "Generate payouts for commissions",
-        "description": "With this endpoint you can generate payouts for commissions. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/commissions/generate_payouts`</Tip>",
+        "description": "With this endpoint you can generate payouts for commissions. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/commissions/generate_payouts`</Tip>",
         "tags": ["Commissions", "Payouts"],
         "operationId": "generatePayouts",
         "parameters": [
@@ -275,7 +275,7 @@
                     "items": {
                       "type": "integer"
                     },
-                    "description": "Commission IDs to generate payouts for"
+                    "description": "Commission IDs to generate payouts for. If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`."
                   }
                 },
                 "required": ["ids"]
@@ -602,7 +602,7 @@
             "items": {
               "type": "integer"
             },
-            "description": "Array of commission Ids."
+            "description": "Array of commission Ids. If there are more than __5__ ids on this param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`"
           }
         }
       },
