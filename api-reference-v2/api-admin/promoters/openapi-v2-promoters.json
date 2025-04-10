@@ -36,6 +36,15 @@
             }
           },
           {
+            "name": "ids",
+            "in": "query",
+            "description": "Array of promoter ids to get",
+            "required": false,
+            "schema": {
+              "type": "array"
+            }
+          },
+          {
             "name": "filters",
             "in": "query",
             "description": "Filter params",
@@ -323,7 +332,7 @@
                     "type": "integer",
                     "description": "The ID of the campaign promoter will be accepted to"
                   },
-                   "ids": {
+                  "ids": {
                     "$ref": "#/components/schemas/Ids"
                   }
                 }
@@ -333,10 +342,47 @@
         },
         "responses": {
           "200": {
-            "description": "Promoters accepted successfully"
+            "description": "Operation completed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchOperationResponse"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Batch operation accepted and processing",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchOperationResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -364,7 +410,7 @@
                     "type": "integer",
                     "description": "The ID of the campaign promoter will be rejected from"
                   },
-                   "ids": {
+                  "ids": {
                     "$ref": "#/components/schemas/Ids"
                   }
                 }
@@ -374,10 +420,47 @@
         },
         "responses": {
           "200": {
-            "description": "Promoters rejected successfully"
+            "description": "Operation completed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchOperationResponse"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Batch operation accepted and processing",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchOperationResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -405,7 +488,7 @@
                     "type": "integer",
                     "description": "The ID of the campaign promoter will be blocked from"
                   },
-                   "ids": {
+                  "ids": {
                     "$ref": "#/components/schemas/Ids"
                   }
                 }
@@ -415,10 +498,47 @@
         },
         "responses": {
           "200": {
-            "description": "Promoters blocked successfully"
+            "description": "Operation completed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchOperationResponse"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Batch operation accepted and processing",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchOperationResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -441,7 +561,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                   "ids": {
+                  "ids": {
                     "$ref": "#/components/schemas/Ids"
                   }
                 }
@@ -451,10 +571,47 @@
         },
         "responses": {
           "200": {
-            "description": "Promoters archived successfully"
+            "description": "Operation completed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchOperationResponse"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Batch operation accepted and processing",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchOperationResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -478,7 +635,7 @@
                 "type": "object",
                 "required": ["selection", "from_campaign_id", "to_campaign_id"],
                 "properties": {
-                   "ids": {
+                  "ids": {
                     "$ref": "#/components/schemas/Ids"
                   },
                   "from_campaign_id": {
@@ -500,67 +657,11 @@
         },
         "responses": {
           "200": {
-            "description": "Promoters moved successfully",
+            "description": "Operation completed successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "description": "Batch ID"
-                    },
-                    "status": {
-                      "type": "string",
-                      "enum": ["completed", "pending"],
-                      "description": "Status of the batch operation"
-                    },
-                    "total": {
-                      "type": "integer",
-                      "description": "Total number of promoters"
-                    },
-                    "selected_total": {
-                      "type": "integer",
-                      "description": "Total number of selected promoters"
-                    },
-                    "processed_count": {
-                      "type": "integer",
-                      "description": "Number of processed promoters"
-                    },
-                    "failed_count": {
-                      "type": "integer",
-                      "description": "Number of failed promoters"
-                    },
-                    "action_label": {
-                      "type": "string",
-                      "description": "Label for the action"
-                    },
-                    "created_at": {
-                      "type": "string",
-                      "format": "date-time",
-                      "description": "Creation date of the batch operation"
-                    },
-                    "updated_at": {
-                      "type": "string",
-                      "format": "date-time",
-                      "description": "Last update date of the batch operation"
-                    },
-                    "meta": {
-                      "type": "object",
-                      "description": "Additional metadata"
-                    },
-                    "progress": {
-                      "type": "integer",
-                      "description": "Progress of the batch operation"
-                    },
-                    "processing_errors": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      },
-                      "description": "List of processing errors if any"
-                    }
-                  }
+                  "$ref": "#/components/schemas/BatchOperationResponse"
                 }
               }
             }
@@ -570,63 +671,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "description": "Batch ID"
-                    },
-                    "status": {
-                      "type": "string",
-                      "enum": ["pending"],
-                      "description": "Status of the batch operation"
-                    },
-                    "total": {
-                      "type": "integer",
-                      "description": "Total number of promoters"
-                    },
-                    "selected_total": {
-                      "type": "integer",
-                      "description": "Total number of selected promoters"
-                    },
-                    "processed_count": {
-                      "type": "integer",
-                      "description": "Number of processed promoters"
-                    },
-                    "failed_count": {
-                      "type": "integer",
-                      "description": "Number of failed promoters"
-                    },
-                    "action_label": {
-                      "type": "string",
-                      "description": "Label for the action"
-                    },
-                    "created_at": {
-                      "type": "string",
-                      "format": "date-time",
-                      "description": "Creation date of the batch operation"
-                    },
-                    "updated_at": {
-                      "type": "string",
-                      "format": "date-time",
-                      "description": "Last update date of the batch operation"
-                    },
-                    "meta": {
-                      "type": "object",
-                      "description": "Additional metadata"
-                    },
-                    "progress": {
-                      "type": "integer",
-                      "description": "Progress of the batch operation"
-                    },
-                    "processing_errors": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      },
-                      "description": "List of processing errors if any"
-                    }
-                  }
+                  "$ref": "#/components/schemas/BatchOperationResponse"
                 }
               }
             }
@@ -634,22 +679,22 @@
           "401": {
             "description": "Unauthorized"
           },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
           "422": {
             "description": "Invalid parameters",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "Error message"
-                    },
-                    "code": {
-                      "type": "string",
-                      "description": "Error code"
-                    }
-                  }
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -676,7 +721,7 @@
                 "type": "object",
                 "required": ["selection", "campaign_id"],
                 "properties": {
-                   "ids": {
+                  "ids": {
                     "$ref": "#/components/schemas/Ids"
                   },
                   "campaign_id": {
@@ -694,67 +739,11 @@
         },
         "responses": {
           "200": {
-            "description": "Promoters added successfully",
+            "description": "Operation completed successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "description": "Batch ID"
-                    },
-                    "status": {
-                      "type": "string",
-                      "enum": ["completed", "pending"],
-                      "description": "Status of the batch operation"
-                    },
-                    "total": {
-                      "type": "integer",
-                      "description": "Total number of promoters"
-                    },
-                    "selected_total": {
-                      "type": "integer",
-                      "description": "Total number of selected promoters"
-                    },
-                    "processed_count": {
-                      "type": "integer",
-                      "description": "Number of processed promoters"
-                    },
-                    "failed_count": {
-                      "type": "integer",
-                      "description": "Number of failed promoters"
-                    },
-                    "action_label": {
-                      "type": "string",
-                      "description": "Label for the action"
-                    },
-                    "created_at": {
-                      "type": "string",
-                      "format": "date-time",
-                      "description": "Creation date of the batch operation"
-                    },
-                    "updated_at": {
-                      "type": "string",
-                      "format": "date-time",
-                      "description": "Last update date of the batch operation"
-                    },
-                    "meta": {
-                      "type": "object",
-                      "description": "Additional metadata"
-                    },
-                    "progress": {
-                      "type": "integer",
-                      "description": "Progress of the batch operation"
-                    },
-                    "processing_errors": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      },
-                      "description": "List of processing errors if any"
-                    }
-                  }
+                  "$ref": "#/components/schemas/BatchOperationResponse"
                 }
               }
             }
@@ -764,63 +753,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "description": "Batch ID"
-                    },
-                    "status": {
-                      "type": "string",
-                      "enum": ["pending"],
-                      "description": "Status of the batch operation"
-                    },
-                    "total": {
-                      "type": "integer",
-                      "description": "Total number of promoters"
-                    },
-                    "selected_total": {
-                      "type": "integer",
-                      "description": "Total number of selected promoters"
-                    },
-                    "processed_count": {
-                      "type": "integer",
-                      "description": "Number of processed promoters"
-                    },
-                    "failed_count": {
-                      "type": "integer",
-                      "description": "Number of failed promoters"
-                    },
-                    "action_label": {
-                      "type": "string",
-                      "description": "Label for the action"
-                    },
-                    "created_at": {
-                      "type": "string",
-                      "format": "date-time",
-                      "description": "Creation date of the batch operation"
-                    },
-                    "updated_at": {
-                      "type": "string",
-                      "format": "date-time",
-                      "description": "Last update date of the batch operation"
-                    },
-                    "meta": {
-                      "type": "object",
-                      "description": "Additional metadata"
-                    },
-                    "progress": {
-                      "type": "integer",
-                      "description": "Progress of the batch operation"
-                    },
-                    "processing_errors": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      },
-                      "description": "List of processing errors if any"
-                    }
-                  }
+                  "$ref": "#/components/schemas/BatchOperationResponse"
                 }
               }
             }
@@ -833,17 +766,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "Error message"
-                    },
-                    "code": {
-                      "type": "string",
-                      "description": "Error code"
-                    }
-                  }
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -853,17 +776,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "Error message"
-                    },
-                    "code": {
-                      "type": "string",
-                      "description": "Error code"
-                    }
-                  }
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -889,7 +802,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                   "ids": {
+                  "ids": {
                     "$ref": "#/components/schemas/Ids"
                   }
                 }
@@ -899,10 +812,47 @@
         },
         "responses": {
           "200": {
-            "description": "Promoters restored successfully"
+            "description": "Operation completed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchOperationResponse"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Batch operation accepted and processing",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchOperationResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -922,6 +872,84 @@
       }
     },
     "schemas": {
+      "BatchOperationResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Batch ID"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "completed",
+              "pending",
+              "in_progress",
+              "failed",
+              "stopped"
+            ],
+            "description": "Status of the batch operation"
+          },
+          "total": {
+            "type": "integer",
+            "description": "Total number of promoters"
+          },
+          "selected_total": {
+            "type": "integer",
+            "description": "Total number of selected promoters"
+          },
+          "processed_count": {
+            "type": "integer",
+            "description": "Number of processed promoters"
+          },
+          "failed_count": {
+            "type": "integer",
+            "description": "Number of failed promoters"
+          },
+          "action_label": {
+            "type": "string",
+            "description": "Label for the action"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Creation date of the batch operation"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Last update date of the batch operation"
+          },
+          "meta": {
+            "type": "object",
+            "description": "Additional metadata"
+          },
+          "progress": {
+            "type": "integer",
+            "description": "Progress of the batch operation"
+          },
+          "processing_errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of processing errors if any"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Error code"
+          }
+        }
+      },
       "PromoterChartData": {
         "type": "object",
         "properties": {
