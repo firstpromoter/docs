@@ -58,8 +58,31 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully retrieved commissions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Commission"
+                  }
+                }
+              }
+            }
+          },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           }
         }
       },
@@ -83,8 +106,31 @@
           }
         },
         "responses": {
+          "200": {
+            "description": "Successfully retrieved commissions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Commission"
+                  }
+                }
+              }
+            }
+          },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -119,8 +165,38 @@
           }
         },
         "responses": {
+          "200": {
+            "description": "Commission updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Commission"
+                }
+              }
+            }
+          },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Commission not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -1059,6 +1135,216 @@
           "code": {
             "type": "string",
             "description": "Error code"
+          }
+        }
+      },
+      "Commission": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Commission ID"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["pending", "approved", "denied"],
+            "description": "Current status of the commission"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Additional metadata about the commission"
+          },
+          "is_self_referral": {
+            "type": "boolean",
+            "nullable": true,
+            "description": "Whether this is a self-referral"
+          },
+          "commission_type": {
+            "type": "string",
+            "enum": ["sale", "custom"],
+            "description": "Type of commission"
+          },
+          "created_by_user_email": {
+            "type": "string",
+            "nullable": true,
+            "description": "Email of the user who created the commission"
+          },
+          "created_by_user_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "Timestamp when the user created the commission"
+          },
+          "sale_amount": {
+            "type": "integer",
+            "description": "Amount of the sale"
+          },
+          "original_sale_amount": {
+            "type": "integer",
+            "description": "Original amount of the sale"
+          },
+          "original_sale_currency": {
+            "type": "string",
+            "nullable": true,
+            "description": "Currency of the original sale"
+          },
+          "event_id": {
+            "type": "string",
+            "nullable": true,
+            "description": "ID of the event that generated the commission"
+          },
+          "plan_id": {
+            "type": "string",
+            "nullable": true,
+            "description": "Plan ID associated with the commission"
+          },
+          "tier": {
+            "type": "integer",
+            "description": "Reward tier"
+          },
+          "internal_note": {
+            "type": "string",
+            "nullable": true,
+            "description": "Internal note visible only to the team"
+          },
+          "external_note": {
+            "type": "string",
+            "nullable": true,
+            "description": "External note visible to the promoter"
+          },
+          "unit": {
+            "type": "string",
+            "enum": [
+              "cash",
+              "credits",
+              "points",
+              "free_months",
+              "mon_discount",
+              "discount_per"
+            ],
+            "description": "Unit type for the reward"
+          },
+          "fraud_check": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "no_suspicion",
+              "same_ip_suspicion",
+              "same_promoter_email",
+              "ad_source"
+            ],
+            "description": "Result of fraud check"
+          },
+          "amount": {
+            "type": "integer",
+            "description": "Commission amount"
+          },
+          "is_paid": {
+            "type": "boolean",
+            "description": "Whether the commission has been paid"
+          },
+          "is_split": {
+            "type": "boolean",
+            "description": "Whether the commission is split among multiple promoters"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Creation timestamp"
+          },
+          "status_updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "Last status update timestamp"
+          },
+          "promoter_campaign": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "Promoter campaign ID"
+              },
+              "campaign_id": {
+                "type": "integer",
+                "description": "Campaign ID"
+              },
+              "promoter_id": {
+                "type": "integer",
+                "description": "Promoter ID"
+              },
+              "created_at": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Creation timestamp"
+              },
+              "promoter": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "Promoter ID"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "Promoter email"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Promoter name"
+                  }
+                }
+              },
+              "campaign": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "Campaign ID"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Campaign name"
+                  },
+                  "color": {
+                    "type": "string",
+                    "nullable": true,
+                    "description": "Campaign color"
+                  }
+                }
+              }
+            }
+          },
+          "referral": {
+            "type": "object",
+            "nullable": true,
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "Referral ID"
+              },
+              "email": {
+                "type": "string",
+                "description": "Referral email"
+              },
+              "uid": {
+                "type": "string",
+                "description": "Referral UID"
+              }
+            }
+          },
+          "reward": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "Reward ID"
+              },
+              "name": {
+                "type": "string",
+                "description": "Reward name"
+              }
+            }
           }
         }
       }
