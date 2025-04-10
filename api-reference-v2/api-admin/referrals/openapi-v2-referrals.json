@@ -40,7 +40,10 @@
             "description": "Array of referral ids to get",
             "required": false,
             "schema": {
-              "type": "array"
+              "type": "array",
+               "items": {
+      "type": "integer"
+    }
             }
           },
           {

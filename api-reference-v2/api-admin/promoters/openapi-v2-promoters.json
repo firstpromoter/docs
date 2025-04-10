@@ -36,12 +36,15 @@
             }
           },
           {
-            "name": "ids",
+            "name": "ids[]",
             "in": "query",
             "description": "Array of promoter ids to get",
             "required": false,
             "schema": {
-              "type": "array"
+              "type": "array",
+               "items": {
+      "type": "integer"
+    }
             }
           },
           {
