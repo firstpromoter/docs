@@ -152,7 +152,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BatchOperationResponse"
+                  "allOf": [
+                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": ["completed"],
+                          "description": "Status of the batch operation (always completed for synchronous operations)"
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -162,7 +173,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BatchOperationResponse"
+                  "allOf": [
+                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": ["pending"],
+                          "description": "Status of the batch operation (initially pending for asynchronous operations)"
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -219,7 +241,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BatchOperationResponse"
+                  "allOf": [
+                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": ["completed"],
+                          "description": "Status of the batch operation (always completed for synchronous operations)"
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -229,7 +262,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BatchOperationResponse"
+                  "allOf": [
+                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": ["pending"],
+                          "description": "Status of the batch operation (initially pending for asynchronous operations)"
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -286,7 +330,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BatchOperationResponse"
+                  "allOf": [
+                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": ["completed"],
+                          "description": "Status of the batch operation (always completed for synchronous operations)"
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -296,7 +351,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BatchOperationResponse"
+                  "allOf": [
+                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": ["pending"],
+                          "description": "Status of the batch operation (initially pending for asynchronous operations)"
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -353,7 +419,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BatchOperationResponse"
+                  "allOf": [
+                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": ["completed"],
+                          "description": "Status of the batch operation (always completed for synchronous operations)"
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -363,7 +440,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BatchOperationResponse"
+                  "allOf": [
+                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": ["pending"],
+                          "description": "Status of the batch operation (initially pending for asynchronous operations)"
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -420,7 +508,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BatchOperationResponse"
+                  "allOf": [
+                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": ["completed"],
+                          "description": "Status of the batch operation (always completed for synchronous operations)"
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -430,7 +529,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BatchOperationResponse"
+                  "allOf": [
+                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": ["pending"],
+                          "description": "Status of the batch operation (initially pending for asynchronous operations)"
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
