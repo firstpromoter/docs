@@ -35,6 +35,15 @@
             "description": "Search params. Searches by email, uid, username, website"
           },
           {
+            "name": "ids",
+            "in": "query",
+            "description": "Array of referral ids to get",
+            "required": false,
+            "schema": {
+              "type": "array"
+            }
+          },
+          {
             "in": "query",
             "name": "filters[type]",
             "schema": {
