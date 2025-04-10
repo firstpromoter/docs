@@ -35,7 +35,7 @@
             "description": "Search params. Searches by email, uid, username, website"
           },
           {
-            "name": "ids",
+            "name": "ids[]",
             "in": "query",
             "description": "Array of referral ids to get",
             "required": false,
