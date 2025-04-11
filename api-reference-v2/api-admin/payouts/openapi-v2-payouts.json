@@ -36,6 +36,18 @@
             }
           },
           {
+            "name": "ids[]",
+            "in": "query",
+            "description": "Array of payout ids to get",
+            "required": false,
+            "schema": {
+              "type": "array",
+               "items": {
+                  "type": "integer"
+                }
+              }
+          },
+          {
             "name": "filters[status]",
             "in": "query",
             "description": "Filter by status",
