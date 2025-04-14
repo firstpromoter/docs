@@ -119,7 +119,7 @@
             "schema": {
               "type": "integer"
             },
-            "description": "Promoter campaign ID"
+            "description": "Promoter campaign ID."
           }
         ],
         "requestBody": {
