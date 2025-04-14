@@ -330,7 +330,7 @@
                      "group": "Promoter Campaigns",
                     "pages": [
                       "api-reference-v2/api-admin/promoter-campaigns/get-available-promoter-campaigns",
-                      "api-reference-v2/api-admin/promoter-campaigns/get-referral_links-associated-with-a-promoter-campaign",
+                      "api-reference-v2/api-admin/promoter-campaigns/get-promoter-campaign-rerferral-links",
                       "api-reference-v2/api-admin/promoter-campaigns/update-promoter-campaign"
                     ]
                   },
