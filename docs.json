@@ -315,6 +315,7 @@
                       "api-reference-v2/api-admin/promoters/create-promoter",
                       "api-reference-v2/api-admin/promoters/get-promoter-details",
                       "api-reference-v2/api-admin/promoters/update-promoter",
+                       "api-reference-v2/api-admin/promoters/assign-parent-promoter",
                      "api-reference-v2/api-admin/promoters/add-promoter-to-campaign",
                       "api-reference-v2/api-admin/promoters/move-promoter-to-campaign",
                       "api-reference-v2/api-admin/promoters/accept-promoters",

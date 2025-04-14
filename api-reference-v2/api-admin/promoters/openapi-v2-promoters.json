@@ -919,6 +919,106 @@
         }
       }
     },
+    "/promoters/assign_parent": {
+      "post": {
+        "summary": "Assign a parent promoter",
+        "description": "With this endpoint you can assign a parent promoter to your promoters. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/promoters/assign_parent`</Tip>",
+        "operationId": "acceptPromoters",
+        "tags": ["Promoters"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["parent_promoter_id"],
+                "properties": {
+                  "parent_promoter_id": {
+                    "type": "integer",
+                    "description": "The ID of the parent promoter you want to assign the promoters to"
+                  },
+                  "ids": {
+                    "$ref": "#/components/schemas/Ids"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": ["completed"],
+                          "description": "Status of the batch operation (always completed for synchronous operations)"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Batch operation accepted and processing",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": ["pending"],
+                          "description": "Status of the batch operation (initially pending for asynchronous operations)"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/promoters/restore": {
       "post": {
         "summary": "Restore promoters",
