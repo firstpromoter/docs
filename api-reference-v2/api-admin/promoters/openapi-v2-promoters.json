@@ -42,9 +42,9 @@
             "required": false,
             "schema": {
               "type": "array",
-               "items": {
-      "type": "integer"
-    }
+              "items": {
+                "type": "integer"
+              }
             }
           },
           {
@@ -1503,13 +1503,36 @@
             "format": "email",
             "description": "Email address of the promoter"
           },
+          "find_by": {
+            "type": "string",
+            "enum": [
+              "email",
+              "cust_id",
+              "auth_token",
+              "ref_token",
+              "promo_code"
+            ],
+            "description": "Find by attribute. Required when you want to find the promoter using another parameter like the  email, cust_id, auth_token, ref_token, or promo_code instead of an ID. \n \n  Your request should follow the format `https://v2.firstpromoter.com/api/v2/company/promoters/{email, cust_id, auth_token, ref_token, or promo_code}`"
+          },
           "cust_id": {
             "type": "string",
             "nullable": true,
             "description": "Cust ID of the promoter"
           },
+          "custom_fields": {
+            "type": "array",
+            "description": "Custom fields must be a Hash with the keys being the ones from the company custom fields and values must be String or Array of Strings. These are based on the custom fields that you set in your Settings > Affiliate portal > Custom fields.\n \n **Note**: Each item will have to be set as `custom_fields[my_custom_field_key]: my_custom_field_value`"
+          },
           "profile": {
             "$ref": "#/components/schemas/PromoterProfile"
+          },
+          "profile[_destroy_w8form]": {
+            "type": "boolean",
+            "description": "Destroy W8 form"
+          },
+          "profile[_destroy_w9form]": {
+            "type": "boolean",
+            "description": "Destroy W9 form"
           }
         }
       },

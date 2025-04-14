@@ -41,9 +41,9 @@
             "required": false,
             "schema": {
               "type": "array",
-               "items": {
-      "type": "integer"
-    }
+              "items": {
+                "type": "integer"
+              }
             }
           },
           {
@@ -129,9 +129,23 @@
                     "type": "string",
                     "description": "uid of the referral (This can be your user id from your database)"
                   },
+                  "username": {
+                    "type": "string",
+                    "description": "Username of the referral. \n\n **Note**: Reach out to us on support if you need this.It needs to be enabled before you can use it."
+                  },
                   "promoter_campaign_id": {
                     "type": "integer",
                     "description": "The ID of the promoter campaign"
+                  },
+                  "split_details[percentage]": {
+                    "type": "number",
+                    "description": "Percentage vale of the split between 0 and 100. \n\n **Note**: Reach out to us on support if you need this.It needs to be enabled before you can use it.",
+                    "default": 0
+                  },
+                  "split_details[promoter_campaign_id]": {
+                    "type": "integer",
+                    "description": "Promoter campaign ID, on which you want the split on. \n\n **Note**: Reach out to us on support if you need this.It needs to be enabled before you can use it. ",
+                    "default": 0
                   }
                 }
               }
@@ -268,7 +282,7 @@
       },
       "put": {
         "summary": "Update referral",
-        "description": "Update a specific referral \n <Tip>**HTTP Request** <br/>`PUT https://v2.firstpromoter.com/api/v2/company/referrals/{id}`</Tip>",
+        "description": "Update a specific referral. The id can be a referral ID, email, uid, or username when used with the find_by parameter in the request body. \n <Tip>**HTTP Request** <br/>`PUT https://v2.firstpromoter.com/api/v2/company/referrals/{id}`</Tip>",
         "tags": ["Referrals"],
         "parameters": [
           {
@@ -300,9 +314,28 @@
                     "type": "string",
                     "description": "UID of the referral, this is required if the email is null"
                   },
+                  "username": {
+                    "type": "string",
+                    "description": "Username of the referral. \n\n **Note**: Reach out to us on support if you need this.It needs to be enabled before you can use it."
+                  },
                   "promoter_campaign_id": {
                     "type": "integer",
-                    "description": "Promoter campaign ID, you can obtain this for each promoter form the promoters endpoint"
+                    "description": "Promoter campaign ID, you can obtain this for each promoter form the promoters endpoint. It is the id that pairs a promoter to a campaign. Not the campaign id."
+                  },
+                  "find_by": {
+                    "type": "string",
+                    "enum": ["email", "uid", "username"],
+                    "description": "Find by attribute. Required when id parameter is an email, uid, or username instead of an ID.\n\n Your request should follow the format `https://v2.firstpromoter.com/api/v2/company/referrals/{email or uid or username}`"
+                  },
+                  "split_details[percentage]": {
+                    "type": "number",
+                    "description": "Percentage vale of the split between 0 and 100. \n\n **Note**: Reach out to us on support if you need this.It needs to be enabled before you can use it.",
+                    "default": 0
+                  },
+                  "split_details[promoter_campaign_id]": {
+                    "type": "integer",
+                    "description": "Promoter campaign ID, on which you want the split on. \n\n **Note**: Reach out to us on support if you need this.It needs to be enabled before you can use it. ",
+                    "default": 0
                   }
                 }
               }
