@@ -311,15 +311,16 @@
             "type": "string",
             "enum": ["paypal", "bank", "wise", "crypto", "custom", "dots"]
           },
+          "promoter_id": {
+            "type": "integer",
+            "description": "Promoter id"
+          },
+
           "is_disabled": {
             "type": "boolean"
           },
           "is_selected": {
             "type": "boolean"
-          },
-          "promoter_id": {
-            "type": "integer",
-            "description": "Promoter id"
           },
           "details": {
             "type": "object",
