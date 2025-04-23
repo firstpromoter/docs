@@ -55,6 +55,14 @@
             },
             "description": "Filter the referrals by type (lead or customer)"
           },
+            {
+            "in": "query",
+            "name": "filters[promoter_id]",
+            "schema": {
+              "type": "string",
+            },
+            "description": "Filter the referrals by a promoter"
+          },
           {
             "in": "query",
             "name": "filters[state]",
