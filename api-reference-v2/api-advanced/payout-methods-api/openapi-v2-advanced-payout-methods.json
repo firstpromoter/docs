@@ -354,6 +354,10 @@
           "is_selected": {
             "type": "boolean"
           },
+          "promoter_id": {
+            "type": "integer",
+            "description": "Id of the promoter"
+          },
           "details": {
             "type": "object",
             "oneOf": [
