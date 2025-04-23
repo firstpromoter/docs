@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "FirstPromoter Payouts API",
+    "title": "FirstPromoter Affiliate Payouts API",
     "version": "1.0",
     "description": "API for managing affiliate payouts"
   },
