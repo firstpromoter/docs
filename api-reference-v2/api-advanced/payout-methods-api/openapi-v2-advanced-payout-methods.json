@@ -72,8 +72,42 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PayoutMethodCreate"
-              }
+                "type": "object",
+                "required": ["method", "details", "promoter_id"],
+                "properties": {
+                  "method": {
+                    "type": "string",
+                    "enum": ["paypal", "bank", "wise", "crypto", "custom", "dots"]
+                  },
+                  "promoter_id": {
+                    "type": "integer",
+                    "description": "Promoter id"
+                  },
+        
+                  "is_disabled": {
+                    "type": "boolean"
+                  },
+                  "is_selected": {
+                    "type": "boolean"
+                  },
+                  "details": {
+                    "type": "object",
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/PaypalDetails"
+                      },
+                      {
+                        "$ref": "#/components/schemas/BankDetails"
+                      },
+                      {
+                        "$ref": "#/components/schemas/WiseDetails"
+                      },
+                      {
+                        "$ref": "#/components/schemas/CryptoDetails"
+                      }
+                    ]
+                  }
+                }
             }
           }
         },
