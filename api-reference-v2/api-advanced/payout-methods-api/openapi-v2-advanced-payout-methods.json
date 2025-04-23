@@ -72,25 +72,8 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "required": ["method", "details", "promoter_id"],
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "enum": ["paypal", "bank", "wise", "crypto", "custom", "dots"]
-                  },
-                  "promoter_id": {
-                    "type": "integer",
-                    "description": "Id of the promoter"
-                  },
-                  "is_disabled": {
-                    "type": "boolean"
-                  },
-                  "is_selected": {
-                    "type": "boolean"
-                  }
-                
-                }
+                "$ref": "#/components/schemas/PayoutMethodCreate"
+              }
             }
           }
         },
@@ -328,16 +311,15 @@
             "type": "string",
             "enum": ["paypal", "bank", "wise", "crypto", "custom", "dots"]
           },
-          "promoter_id": {
-            "type": "integer",
-            "description": "Promoter id"
-          },
-
           "is_disabled": {
             "type": "boolean"
           },
           "is_selected": {
             "type": "boolean"
+          },
+          "promoter_id": {
+            "type": "integer",
+            "description": "Id of the promoter"
           },
           "details": {
             "type": "object",
