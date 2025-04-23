@@ -81,32 +81,15 @@
                   },
                   "promoter_id": {
                     "type": "integer",
-                    "description": "Promoter id"
+                    "description": "Id of the promoter"
                   },
-        
                   "is_disabled": {
                     "type": "boolean"
                   },
                   "is_selected": {
                     "type": "boolean"
-                  },
-                  "details": {
-                    "type": "object",
-                    "oneOf": [
-                      {
-                        "$ref": "#/components/schemas/PaypalDetails"
-                      },
-                      {
-                        "$ref": "#/components/schemas/BankDetails"
-                      },
-                      {
-                        "$ref": "#/components/schemas/WiseDetails"
-                      },
-                      {
-                        "$ref": "#/components/schemas/CryptoDetails"
-                      }
-                    ]
                   }
+                
                 }
             }
           }
