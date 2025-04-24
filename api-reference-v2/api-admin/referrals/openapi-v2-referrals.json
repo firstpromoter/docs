@@ -61,7 +61,7 @@
             "schema": {
               "type": "string",
             },
-            "description": "Filter the referrals by a promoter"
+            "description": "Filter the referrals by a promoter id"
           },
           {
             "in": "query",
