@@ -297,6 +297,15 @@
                       "api-reference-v2/api-admin/batches/show-progress"
                     ]
                   },
+                        {
+                    "group": "Tracking Api",
+                    "pages": [
+                      "api-reference-v2/api-admin/tracking-api/leads-and-signups",
+                      "api-reference-v2/api-admin/tracking-api/sales",
+                      "api-reference-v2/api-admin/tracking-api/refund",
+                      "api-reference-v2/api-admin/tracking-api/cancellation"
+                    ]
+                  },
                   {
                     "group": "Referrals",
                     "pages": [

@@ -90,25 +90,69 @@
                   "properties": {
                     "id": {
                       "type": "integer",
-                      "example": 33765409
+                      "example": 45831611
                     },
-                    "type": {
+                    "etype": {
                       "type": "string",
                       "example": "signup"
                     },
-                    "amount_cents": {
+                    "sale_amount": {
                       "type": "integer",
-                      "nullable": true
+                      "nullable": true,
+                      "example": null
                     },
-                    "reward": {
+                    "original_sale_amount": {
+                      "type": "integer",
+                      "nullable": true,
+                      "example": null
+                    },
+                    "original_sale_currency": {
                       "type": "string",
-                      "nullable": true
+                      "nullable": true,
+                      "example": null
                     },
-                    "lead": {
-                      "$ref": "#/components/schemas/Lead"
+                    "event_id": {
+                      "type": "string",
+                      "nullable": true,
+                      "example": null
                     },
-                    "promoter": {
-                      "$ref": "#/components/schemas/Promoter"
+                    "plan_id": {
+                      "type": "string",
+                      "nullable": true,
+                      "example": null
+                    },
+                    "billing_period": {
+                      "type": "string",
+                      "nullable": true,
+                      "example": null
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2025-04-25T09:29:51.973Z"
+                    },
+                    "referral": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 29203686
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "testme@test1.com"
+                        },
+                        "uid": {
+                          "type": "string",
+                          "nullable": true,
+                          "example": null
+                        }
+                      }
+                    },
+                    "commissions": {
+                      "type": "array",
+                      "items": {},
+                      "example": []
                     }
                   }
                 }
@@ -254,67 +298,254 @@
                   "properties": {
                     "id": {
                       "type": "integer",
-                      "example": 33847194
+                      "example": 45831949
                     },
-                    "type": {
+                    "etype": {
                       "type": "string",
                       "example": "sale"
                     },
-                    "amount_cents": {
+                    "sale_amount": {
                       "type": "integer",
-                      "example": 1000
+                      "example": 2000
                     },
-                    "reward": {
+                    "original_sale_amount": {
+                      "type": "integer",
+                      "example": 2000
+                    },
+                    "original_sale_currency": {
+                      "type": "string",
+                      "nullable": true,
+                      "example": null
+                    },
+                    "event_id": {
+                      "type": "string",
+                      "nullable": true,
+                      "example": null
+                    },
+                    "plan_id": {
+                      "type": "string",
+                      "nullable": true,
+                      "example": null
+                    },
+                    "billing_period": {
+                      "type": "string",
+                      "nullable": true,
+                      "example": null
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2025-04-25T09:39:42.289Z"
+                    },
+                    "referral": {
                       "type": "object",
                       "properties": {
                         "id": {
                           "type": "integer",
-                          "example": 10940014
+                          "example": 29203686
                         },
-                        "status": {
+                        "email": {
                           "type": "string",
-                          "example": "approved"
+                          "example": "testme@test1.com"
                         },
-                        "amount": {
-                          "type": "integer",
-                          "example": 200
-                        },
-                        "unit": {
-                          "type": "string",
-                          "example": "cash"
-                        },
-                        "created_at": {
-                          "type": "string",
-                          "format": "date-time",
-                          "example": "2024-09-11T14:22:12.160Z"
-                        },
-                        "lead": {
-                          "$ref": "#/components/schemas/Lead"
-                        },
-                        "event_id": {
-                          "type": "string",
-                          "example": "test_sale_12340987"
-                        },
-                        "conversion_amount": {
-                          "type": "integer",
-                          "example": 1000
-                        },
-                        "tier_level": {
-                          "type": "integer",
-                          "example": 1
-                        },
-                        "split_type": {
+                        "uid": {
                           "type": "string",
                           "nullable": true,
                           "example": null
                         }
                       }
                     },
-                    "lead": {
-                      "$ref": "#/components/schemas/Lead"
-                    },
-                    "promoter": {
-                      "$ref": "#/components/schemas/Promoter"
+                    "commissions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 13533003
+                          },
+                          "status": {
+                            "type": "string",
+                            "example": "approved"
+                          },
+                          "metadata": {
+                            "type": "object",
+                            "example": {}
+                          },
+                          "is_self_referral": {
+                            "type": "boolean",
+                            "example": false
+                          },
+                          "commission_type": {
+                            "type": "string",
+                            "example": "sale"
+                          },
+                          "created_by_user_email": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": null
+                          },
+                          "created_by_user_at": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": null
+                          },
+                          "sale_amount": {
+                            "type": "integer",
+                            "example": 2000
+                          },
+                          "original_sale_amount": {
+                            "type": "integer",
+                            "example": 2000
+                          },
+                          "original_sale_currency": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": null
+                          },
+                          "event_id": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": null
+                          },
+                          "plan_id": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": null
+                          },
+                          "tier": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "internal_note": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": null
+                          },
+                          "external_note": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": null
+                          },
+                          "unit": {
+                            "type": "string",
+                            "example": "cash"
+                          },
+                          "fraud_check": {
+                            "type": "string",
+                            "example": "no_suspicion"
+                          },
+                          "amount": {
+                            "type": "integer",
+                            "example": 400
+                          },
+                          "is_paid": {
+                            "type": "boolean",
+                            "example": false
+                          },
+                          "is_split": {
+                            "type": "boolean",
+                            "example": false
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2025-04-25T09:39:42Z"
+                          },
+                          "status_updated_at": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": null
+                          },
+                          "promoter_campaign": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer",
+                                "example": 14850130
+                              },
+                              "campaign_id": {
+                                "type": "integer",
+                                "example": 28004
+                              },
+                              "promoter_id": {
+                                "type": "integer",
+                                "example": 8262622
+                              },
+                              "created_at": {
+                                "type": "string",
+                                "format": "date-time",
+                                "example": "2025-01-16T18:16:41Z"
+                              },
+                              "promoter": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "integer",
+                                    "example": 8262622
+                                  },
+                                  "email": {
+                                    "type": "string",
+                                    "example": "test@promoter.com"
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "example": "Test Promoter"
+                                  }
+                                }
+                              },
+                              "campaign": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "integer",
+                                    "example": 28004
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "example": "Quinn Ramirez"
+                                  },
+                                  "color": {
+                                    "type": "string",
+                                    "example": "#EC4899"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "referral": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer",
+                                "example": 29203686
+                              },
+                              "email": {
+                                "type": "string",
+                                "example": "testme@test1.com"
+                              },
+                              "uid": {
+                                "type": "string",
+                                "nullable": true,
+                                "example": null
+                              }
+                            }
+                          },
+                          "reward": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer",
+                                "example": 157427
+                              },
+                              "name": {
+                                "type": "string",
+                                "example": "20% recurring commission"
+                              }
+                            }
+                          }
+                        }
+                      }
                     }
                   }
                 }
