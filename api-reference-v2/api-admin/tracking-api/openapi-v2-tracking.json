@@ -49,10 +49,6 @@
                     "type": "string",
                     "description": "IP of the visitor who generated the sign up. It's used for fraud analysis."
                   },
-                  "promoter_email": {
-                    "type": "string",
-                    "description": "Email of the promoter"
-                  },
                   "created_at": {
                     "type": "string",
                     "description": "ISO date string of the date of the signup event"
