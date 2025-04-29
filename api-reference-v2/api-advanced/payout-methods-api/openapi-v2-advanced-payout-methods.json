@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "FirstPromoter Admin API",
+    "title": "FirstPromoter Admin Payouts API",
     "version": "1.0",
     "description": "API for managing payout methods as an admin"
   },
@@ -342,7 +342,7 @@
       },
       "PayoutMethodUpdate": {
         "type": "object",
-        "required": ["details","method","promoter_id"],
+        "required": ["method","details","promoter_id"],
         "properties": {
           "method": {
             "type": "string",
