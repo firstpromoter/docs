@@ -342,7 +342,7 @@
       },
       "PayoutMethodUpdate": {
         "type": "object",
-        "required": ["method","details","promoter_id"],
+        "required": ["details","method","promoter_id"],
         "properties": {
           "method": {
             "type": "string",
