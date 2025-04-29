@@ -342,7 +342,7 @@
       },
       "PayoutMethodUpdate": {
         "type": "object",
-        "required": ["details"],
+        "required": ["details","method"],
         "properties": {
           "method": {
             "type": "string",
