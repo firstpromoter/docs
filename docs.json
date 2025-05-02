@@ -310,7 +310,6 @@
                     "group": "Referrals",
                     "pages": [
                       "api-reference-v2/api-admin/referrals/get-referrals",
-                      "api-reference-v2/api-admin/referrals/create-referral",
                       "api-reference-v2/api-admin/referrals/get-referral",
                       "api-reference-v2/api-admin/referrals/update-referral",
                       "api-reference-v2/api-admin/referrals/move-referrals-to-promoter",
