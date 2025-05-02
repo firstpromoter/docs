@@ -571,7 +571,7 @@
                   {
                     "group": "Invoices",
                     "pages": [
-                      "api-reference-v2/api-advanced/invoices/get-invoices-for-current-company",
+                      "api-reference-v2/api-advanced/invoices/get-invoices",
                       "api-reference-v2/api-advanced/invoices/get-invoice-by-id",
                       "api-reference-v2/api-advanced/invoices/void-invoices",
                       "api-reference-v2/api-advanced/invoices/finalize-invoices",
