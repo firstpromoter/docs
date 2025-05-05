@@ -99,7 +99,6 @@ After deploying your new worker, click "Edit code". If you're already on the wor
 ```javascript
 const FP_CDN_HOST = "https://cdn.firstpromoter.com/fpr-proxy.js";
 const FP_HOST = "https://t.firstpromoter.com";
-const SCRIPT_PATH = "/tscript"; // you can change this to something else
 
 async function handleRequest(request, ctx) {
   const url = new URL(request.url)
