@@ -25,6 +25,10 @@
                     "pages": ["introduction", "how-it-works", "quickstart"]
                   },
                   {
+                    "group": "How to guides",
+                    "pages": ["guides/setting-up-proxy"]
+                  },
+                  {
                     "group": "Scripts",
                     "pages": [
                       "script-docs/fpr-js-docs",
@@ -198,6 +202,10 @@
                   {
                     "group": "Overview",
                     "pages": ["introduction", "how-it-works", "quickstart"]
+                  },
+                  {
+                    "group": "How to guides",
+                    "pages": ["guides/setting-up-proxy"]
                   },
                   {
                     "group": "Scripts",

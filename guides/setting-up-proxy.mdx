@@ -1,0 +1,266 @@
+---
+title: 'Proxy Setup'
+description: 'FirstPromoter Proxy Integration Guide to bypassing AdBlockers'
+---
+
+Overview
+In today's digital battlefield, ad blockers have become the invisible enemy of affiliate marketers, silently sabotaging your tracking, undermining your revenue, and leaving your commission data in shambles. Every blocked script means lost attribution, and every lost attribution means money left on the table.
+
+This document outlines how to implement proxy integrations with FirstPromoter to ensure reliable tracking even when ad blockers are present. By leveraging a proxy setup, you can maintain accurate affiliate tracking and conversion attribution while minimizing the impact of ad blocking technologies.
+
+## The Challenge with Ad Blockers
+
+Ad blockers and privacy tools can interfere with affiliate tracking in several ways:
+
+Blocking tracking scripts from loading
+Preventing cookies from being set
+Blocking HTTP requests to domains identified as tracking services
+Stripping tracking parameters from URLs
+
+
+FirstPromoter, like many affiliate platforms, can be affected by these measures, resulting in lost attribution data and commission tracking failures.
+
+## Proxy Integration Solution
+A proxy integration routes tracking requests through your own domain or a custom domain instead of directly to FirstPromoter's tracking domain.
+This approach has several advantages:
+
+* **Improved Deliverability**: Requests appear to come from your trusted domain, not a third-party tracking service
+* **Reduced Blocking**: Most ad blockers don't block first-party requests
+* **Enhanced Privacy**: User data stays within your domain ecosystem
+* **Better Performance**: Removes additional DNS lookups to third-party domains
+
+
+### Implementation Methods
+
+####  Method 1: Vercel redirect setup
+If your service is hosted by Vercel, they provide an option to reroute your requests.
+To set up a Vercel redirect, follow these steps:
+
+1. Find your vercel.json file. This is usually in your root directory.
+
+2. Add the following lines to your vercel.json file:
+
+```json
+{
+    "rewrites": [
+      {
+        "source": "/get_details",
+        "destination": "https://t.firstpromoter.com/get_details"
+      },
+      {
+        "source": "/tr",
+        "destination": "https://t.firstpromoter.com/tr"
+      }
+    ]
+  }
+```
+
+<Note>You can change the source paths to anything that you like. However you will need to update the URL's in the tracking scripts as well.
+For these we provide the following variables which you will use when setting up your scripts : `window.proxy_fpr_tr_url` and `window.proxy_fpr_get_details_url`</Note>
+
+3. Download the tracking scripts from <a download  href="/scripts/fpr-prox.js">here (Click here) </a> and add it to your main websites public directory.
+This will allow it to be fetched from your website. You can change the name of the file to anything but remember to rename it in the main tracking code below.
+
+4. For your main tracking scripts, add the following code. Please replace `<your-account-id-here>` with your **actual account id** in the settings > integrations page on your FirstPromoter dashboard. If you changed the urls to something more custom you can uncomment the `window.proxy_fpr_tr_url` and `window.proxy_fpr_get_details_url` variables and update them to match your proxy urls.
+
+```html
+    <script>
+       // window.proxy_fpr_tr_url =`/tr`;
+       // window.proxy_fpr_get_details_url=`/get_details`
+
+        (function (w) { w.fpr = w.fpr || function () { w.fpr.q = w.fpr.q || []; w.fpr.q[arguments[0] == 'set' ? 'unshift' : 'push'](arguments); }; })(window);
+        fpr("init", { cid: "<your-account-id-here>" });
+        fpr("click");
+    </script>
+    <script src="/fpr-prox.js" defer async=""></script>
+```
+
+6. Deploy your changes and test using the brave browser or install uBlockOrigin and confirm if your tracking is working as expected
+
+
+
+####  Method 2: Cloudflare workers setup
+Cloudflare provides a free plan with up to 100,000 requests per day, making it a good choice for a reverse proxy setup. 
+To set up a Cloudflare worker, follow these steps:
+
+
+1. Set up a Cloudflare Worker
+Navigate to the Cloudflare dashboard, select `Compute (Workers)` > `Workers & Pages` > `Create`. 
+You can choose a custom name for your worker or use the default one. Click "Deploy" when ready.  
+<Note>Please take note of the url of your worker as this will be needed in your setup of the tracking scripts.</Note>
+
+2. Modify the Worker for Proxy Functionality
+After deploying your new worker, click "Edit code". If you're already on the worker's page, select "Quick edit". This will open a code editor where you should replace the existing code with the following proxy code:
+
+
+```javascript
+const FP_CDN_HOST = "https://cdn.firstpromoter.com/fpr-proxy.js";
+const FP_HOST = "https://t.firstpromoter.com";
+const SCRIPT_PATH = "/tscript"; // you can change this to something else
+
+async function handleRequest(request, ctx) {
+  const url = new URL(request.url)
+  const pathname = url.pathname
+  const search = url.search
+  const pathWithParams = pathname + search
+  return forwardRequest(request, pathWithParams)
+}
+
+async function forwardRequest(request, pathWithSearch) {
+  const originRequest = new Request(request)
+  originRequest.headers.delete("cookie")
+  return await fetch(`${FP_HOST}${pathWithSearch}`, originRequest)
+}
+
+
+export default {
+  async fetch(request, env, ctx) {
+    return handleRequest(request, ctx);
+  }
+};
+```
+3. When done, click "Save and deploy".
+
+4. Download the tracking scripts from <a download  href="/scripts/fpr-prox.js">here (Click here) </a> and add it to your main websites public directory.
+This will allow it to be fetched from your website. You can change the name of the file to anything but remember to rename it in the main tracking code below.
+
+5. For your main tracking scripts, add the following code. Please replace `<worker-url-here>` with the url of your worker and `<your-account-id-here>` with your **actual account id** in the settings > integrations page on your FirstPromoter dashboard.
+
+```html
+    <script>
+        const WORKER_URL = "<worker-url-here>";
+        window.proxy_fpr_tr_url =`${WORKER_URL}/tr`;
+        window.proxy_fpr_get_details_url=`${WORKER_URL}/get_details`
+
+        (function (w) { w.fpr = w.fpr || function () { w.fpr.q = w.fpr.q || []; w.fpr.q[arguments[0] == 'set' ? 'unshift' : 'push'](arguments); }; })(window);
+        fpr("init", { cid: "<your-account-id-here>" });
+        fpr("click");
+    </script>
+    <script src="/fpr-prox.js" defer async=""></script>
+```
+
+6. Test using the brave browser or install uBlockOrigin and confirm if your tracking is working as expected
+
+
+
+####  Method 3: Apache setup
+
+1. Find your apache config. Depending on your setup  you may need to put the below in your default-ssl.conf file.
+`yourdomain.com/tr` will be pointed to  `https://t.firstpromoter.com/tr` and `yourdomain.com/tr/get_details` will point to `https://t.firstpromoter.com/get_details`.
+
+<Note>
+Feel free to change `/tr` to anything you want on your domain if you do you will be required to set the following in your script `window.proxy_fpr_tr_url` and `window.proxy_fpr_get_details_url`
+</Note>
+
+
+
+```apache
+<VirtualHost _default_:443>
+
+  #your other configs
+
+	<IfModule mod_proxy.c>
+      <IfModule mod_proxy_http.c>
+          ProxyPass /tr/get_details https://t.firstpromoter.com/get_details
+          ProxyPassReverse /tr/get_details https://t.firstpromoter.com/get_details
+          
+		  ProxyPass /tr https://t.firstpromoter.com/tr
+          ProxyPassReverse /tr https://t.firstpromoter.com/tr
+      </IfModule>
+  </IfModule>
+
+</VirtualHost>
+```
+
+<Note>
+Feel free to change `/tr` and `/tr/get_details` to anything you want on your domain if you do you will be required to set the following in your script `window.proxy_fpr_tr_url` and `window.proxy_fpr_get_details_url`
+</Note>
+
+2. Restart your server. `sudo service apache2 restart`
+
+3. Download the FirstPromoter scripts from <a download  href="/scripts/fpr-prox.js">here (Click here) </a> and add it to your main websites public directory.
+This will allow it to be fetched from your website. 
+
+4. Add the scripts below directly to your website. Replace `<your-account-id-here>` with your **actual account id** in the settings > integrations page on your FirstPromoter dashboard.
+
+```html
+
+    <script>
+        window.proxy_fpr_tr_url ="/tr";
+        window.proxy_fpr_get_details_url="/tr/get_details";
+        (function (w) { w.fpr = w.fpr || function () { w.fpr.q = w.fpr.q || []; w.fpr.q[arguments[0] == 'set' ? 'unshift' : 'push'](arguments); }; })(window);
+        fpr("init", { cid: "<your-account-id-here>" });
+        fpr("click");
+    </script>
+    <script src="/fpr-prox.js" defer async=""></script>
+```
+
+5. Deploy and test using the brave browser or install uBlockOrigin and confirm if your tracking is working as expected.
+
+
+#### Method 4: NGINX setup
+
+1. Find your NGINX config file. This is typically at:
+`/etc/nginx/sites-available/yourdomain.com` Or if using a default site: `/etc/nginx/sites-available/default`
+
+Then within the server block, add the proxy rules like this:
+
+```nginx
+
+location /tr/get_details {
+    proxy_pass https://t.firstpromoter.com/get_details;
+    proxy_set_header Host t.firstpromoter.com;
+    proxy_ssl_server_name on;
+}
+
+location /tr {
+    proxy_pass https://t.firstpromoter.com/tr;
+    proxy_set_header Host t.firstpromoter.com;
+    proxy_ssl_server_name on;
+}
+
+```
+
+The contents of your file should look like the below 
+
+```
+server {
+    listen 80;
+    server_name yourdomain.com;
+
+    location /tr/get_details {
+        proxy_pass https://t.firstpromoter.com/get_details;
+        proxy_set_header Host t.firstpromoter.com;
+        proxy_ssl_server_name on;
+    }
+
+    location /tr {
+        proxy_pass https://t.firstpromoter.com/tr;
+        proxy_set_header Host t.firstpromoter.com;
+        proxy_ssl_server_name on;
+    }
+
+    # other configs here
+}
+```
+
+2. Restart your server. `sudo service nginx restart`
+
+3. Download the FirstPromoter scripts from from <a download  href="/scripts/fpr-prox.js">here (Click here) </a> and add it to your main websites public directory.
+This will allow it to be fetched from your website.
+
+4. Add the scripts below directly to your website. Replace `your-account-id-here` with your **actual account id** in the settings > integrations page on your FirstPromoter dashboard.
+
+```html
+
+    <script>
+        window.proxy_fpr_tr_url ="/tr";
+        window.proxy_fpr_get_details_url="/tr/get_details";
+        (function (w) { w.fpr = w.fpr || function () { w.fpr.q = w.fpr.q || []; w.fpr.q[arguments[0] == 'set' ? 'unshift' : 'push'](arguments); }; })(window);
+        fpr("init", { cid: "<your-account-id-here>" });
+        fpr("click");
+    </script>
+    <script src="/fpr-prox.js" defer async=""></script>
+```
+
+5. Deploy and test using the brave browser or install uBlockOrigin and confirm if your tracking is working as expected
