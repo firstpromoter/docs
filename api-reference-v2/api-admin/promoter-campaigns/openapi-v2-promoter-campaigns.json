@@ -21,6 +21,11 @@
         "summary": "Get available promoter campaigns",
         "description": "With this endpoint you can list all promoter campaigns. \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/promoter_campaigns`</Tip>",
         "tags": ["Promoter Campaigns"],
+            "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
         "responses": {
           "200": {
             "description": "List of promoter campaigns",
