@@ -1,0 +1,53 @@
+---
+title: 'Tracking with FirstPromoter tracking scripts'
+description: 'Track clicks and referrals using the fpr.js scripts'
+---
+
+## Installation
+First Add the main tracking scripts to your website.
+Replace `<your-account-id-here>` with your **actual account id** found in the settings > integrations page on your FirstPromoter dashboard.
+
+```html
+<script>
+    (function (w) { w.fpr = w.fpr || function () { w.fpr.q = w.fpr.q || []; w.fpr.q[arguments[0] == 'set' ? 'unshift' : 'push'](arguments); }; })(window);
+    fpr("init", { cid: "<your-account-id-here>" });
+    fpr("click");
+</script>
+<script src="https://cdn.firstpromoter.com/fpr.js" async></script>
+```
+
+
+## Tracking Flow
+
+### 1. Click Tracking
+The main tracking script automatically tracks visitors that come through your affiliate links:
+
+    * When a visitor arrives on your website using a referral link the main tracking script will automatically track the click.
+    * The click  sets 2 cookies in the browser - `_fprom_ref` and `_fprom_tid`
+    * These cookies are used for tracking in future without the need for a referral link.
+
+### 2. Referral Tracking
+When a visitor signs up or fills an opt-in form, convert them to a referral by  using the signup function:
+
+```html
+<script>
+  fpr("referral",{email: 'actual_user_email@email.com', uid: '123456'});
+</script>
+```
+<Tip>
+ You can send only the email or only the uid or both. You need to ensure that the actual visitor data is passed to the function.
+</Tip>
+
+### 3. Sales Tracking
+If you are using [Stripe](https://login.firstpromoter.com?redirect=%2Fintegration%2Fstripe), [Chargebee](https://login.firstpromoter.com?redirect=%2Fintegration%2Fchargebee), [Braintree](https://login.firstpromoter.com?redirect=%2Fintegration%2Fbraintree), [Paddle](https://login.firstpromoter.com?redirect=%2Fintegration%2Fpaddle) or [Recurly](https://login.firstpromoter.com?redirect=%2Fintegration%2Frecurly) we can track sales automatically on our end. You will only need to connect your billing provider to FirstPromoter. 
+
+If you use any other billing provider you will need to track sales using the tracking [API](https://docs.firstpromoter.com/api-reference-v2/api-admin/tracking-api/sales).
+
+
+When a sale event is received, FirstPromoter will automatically:
+
+* Identify the corresponding affiliate to assign the sale to.
+* Assign the corresponding reward/commission to the promoter.
+
+
+With this in place you have completed the basic tracking flow. From tracking of clicks through to assigning the corresponding commissions to the affiliates.

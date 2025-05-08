@@ -25,8 +25,8 @@
                     "pages": ["introduction", "how-it-works", "quickstart"]
                   },
                   {
-                    "group": "How to guides",
-                    "pages": ["guides/proxy-setup"]
+                    "group": "How to Guides",
+                    "pages": ["guides/tracking-with-fprjs","guides/proxy-setup"]
                   },
                   {
                     "group": "Scripts",
@@ -205,7 +205,7 @@
                   },
                   {
                     "group": "How to guides",
-                    "pages": ["guides/proxy-setup"]
+                    "pages": ["guides/tracking-with-fprjs","guides/proxy-setup"]
                   },
                   {
                     "group": "Scripts",
