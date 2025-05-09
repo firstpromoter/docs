@@ -1,0 +1,177 @@
+---
+title: 'Tracking without fpr.js'
+description: 'Track affiliate leads and sales/payments using API calls'
+---
+
+# Tracking Flow
+
+## 1. Store and retrieve link token (Referral ID):
+When a visitor arrives through a referral link (e.g., https://yourdomain.com?fpr=joe13, where `fpr` is the affiliate's Referral ID parameter and `joe13` is the value), retrieve the referral link token (Referral ID) from the referral link, store it in the browser's localStorage or as cookie for later use.
+
+<Tip>
+	The available query parameters are `?fpr`, `?via`, `?fp_ref`, `?deal`, `?ref`, `?_from`, `?_by`, `?_go` .
+</Tip>
+
+
+### I. Store referral link token implementation
+
+<CodeGroup>
+
+```javascript client side (localStorage implementation)
+<script>
+// Function to store referral link token in localStorage
+function storeReferralLinkTokenInLocalStorage(referralLinkTokenParam) {
+    // Get URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const referralLinkToken = urlParams.get(referralLinkTokenParam.replace("?",""));
+
+    if (referralLinkToken) {
+        localStorage.setItem('_fprom_ref', referralLinkToken);
+    }
+     else{
+        console.log(`No such query parameter '${referralLinkTokenParam.replace("?","")}' or '${referralLinkTokenParam}' found in ${window.location.search}`);
+    }
+}
+
+// Call the function to store the Referral ID/token when the page loads by passing the query parameter.
+
+storeReferralLinkTokenInLocalStorage('fpr');
+</script>
+```
+
+```javascript client side (cookie implementation)
+<script>
+// Function to store referral link token (Referral ID) in document.cookie
+function storeReferralLinkTokenInCookies(referralLinkTokenParam, numberOfDays) {
+    // Get URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const referralLinkToken = urlParams.get(referralLinkTokenParam.replace("?",""));
+    
+    if (referralLinkToken) {
+       // Store in cookies (expires in number of days passed in the function else in 1 day)
+       if(!numberOfDays) numberOfDays = 1;
+        document.cookie = `_fprom_ref=${referralLinkToken}; path=/; max-age=${ ( Number.parseInt(numberOfDays) == Number.NaN ? 1 : Number.parseInt(numberOfDays)) * 24 * 60 * 60}`;
+        console.log("referral link token stored!");
+    }
+    else{
+        console.log(`No such query parameter '${referralLinkTokenParam.replace("?","")}' or '${referralLinkTokenParam}' found in ${window.location.search}`);
+    }
+}
+
+//  Call the function to store the referral ID/token when the page loads by passing the referral link token parameter 
+
+storeReferralLinkTokenInCookies('fpr', 60);
+</script>
+
+```
+
+</CodeGroup>
+
+
+### II. Retrive referral ID/token 
+
+<CodeGroup>
+
+```javascript client-side (localStorage implementation)
+
+<script>
+// Function to retrieve referral ID/token stored in localStorage
+function getReferralLinkToken() {
+    return localStorage.getItem('_fprom_ref');
+}
+
+// Call the `getReferralLinkToken` function whenever you want to get referral ID/token on any of the pages.
+
+var ref_id = getReferralLinkToken();
+</script>
+
+```	
+```javascript client Side(cookie retrieval implementation)
+
+<script>
+// Function to retrieve referral ID/token stored in document.cookie
+function getReferralLinkToken() {
+    const cookies = document.cookie.split(';').reduce((acc, cookie) => {
+        const [key, value] = cookie.trim().split('=');
+        acc[key] = value;
+        return acc;
+    }, {});
+
+    return cookies['_fprom_ref'];
+}
+
+// Call the `getReferralLinkToken` function whenever you want to get the referral ID/token.
+
+var ref_id = getReferralLinkToken();
+</script>
+
+```	
+
+```javascript Server Side (cookie retrieval implementation)
+// backend.js
+// this code is just a demonstration of how to retrieve the referral ID/token stored in the cookie.
+
+const express = require('express');
+const cookieParser = require('cookie-parser');
+
+const app = express();
+app.use(cookieParser());
+app.post('/signup', (req, res) => {
+  // retreive the referral ID/token (_fprom_ref) from server-side.
+  const ref_id = req.cookies['_fprom_ref'];
+  
+  // make API call with ref_id to track referral
+});
+
+app.listen(3000, () => {
+  console.log('Server listening on port 3000');
+});
+
+```	
+
+</CodeGroup>
+
+
+## 2. Lead/Referral tracking
+
+When a visitor signs up or fills an opt-in form, convert them to a referral by using the [track/signup](/api-reference-v2/api-admin/tracking-api/leads-and-signups) endpoint.
+
+
+<Tip>
+	You can send only the email or only the uid or both. You need to ensure that the actual visitor data is passed in the API call.
+</Tip>
+
+<CodeGroup>
+
+```sh
+curl --request POST \
+  --url https://v2.firstpromoter.com/api/v2/track/signup \
+  --header 'Account-ID: <account-id>' \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+	  "email": "customer1@gmail.com",
+	  "uid": "cus_000001",
+	  "ref_id": "joe13",
+	  "skip_email_notification": true
+}'
+```
+</CodeGroup>
+
+
+## 3. Sales Tracking
+
+If you are using Stripe, Chargebee, Braintree, Paddle or Recurly we can track sales automatically on our end. You will only need to connect your billing provider to FirstPromoter.
+
+
+<Tip>
+	If you use any other billing provider, you will need to track sales using the tracking API. For more information on sales tracking API, see documentation [here](/api-reference-v2/api-admin/tracking-api/leads-and-signups).
+</Tip>
+
+
+When a sale event is received, FirstPromoter will automatically:
+
+- Identify the corresponding affiliate to assign the sale to.
+- Assign the corresponding reward/commission to the promoter.
+
+With this in place, you have completed the basic tracking flow. From storing and retrieval of affiliate referral link token (Referral ID) through to assigning the corresponding commissions to the affiliates.
