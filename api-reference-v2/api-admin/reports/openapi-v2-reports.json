@@ -1242,6 +1242,12 @@
         "type": "http",
         "scheme": "bearer",
         "description": "Access token passed as a Bearer token in the Authorization header"
+      },
+         "accountId": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "ACCOUNT-ID",
+        "description": "Account ID required with bearer token"
       }
     }
   }
