@@ -12,7 +12,8 @@
   ],
   "security": [
     {
-      "BearerAuth": []
+      "BearerAuth": [],
+      "accountId": []
     }
   ],
   "paths": {
@@ -23,9 +24,6 @@
         "description": "With this endpoint you can list all promo codes. \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/promo_codes`</Tip>",
         "tags": ["Promo Codes"],
         "parameters": [
-          {
-            "$ref": "#/components/parameters/AccountId"
-          },
           {
             "name": "promoter_campaign_id",
             "in": "query",
@@ -70,11 +68,6 @@
         "operationId": "createPromoCode",
         "description": "With this endpoint you can create a new promo code. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/promo_codes`</Tip>",
         "tags": ["Promo Codes"],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/AccountId"
-          }
-        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -147,9 +140,6 @@
         "description": "With this endpoint you can get the details of a specific promo code. \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/promo_codes/{id}`</Tip>",
         "parameters": [
           {
-            "$ref": "#/components/parameters/AccountId"
-          },
-          {
             "name": "id",
             "in": "path",
             "description": "ID of the promo code",
@@ -191,9 +181,6 @@
         "operationId": "updatePromoCode",
         "tags": ["Promo Codes"],
         "parameters": [
-          {
-            "$ref": "#/components/parameters/AccountId"
-          },
           {
             "name": "id",
             "in": "path",
@@ -268,9 +255,6 @@
         "operationId": "archivePromoCode",
         "tags": ["Promo Codes"],
         "parameters": [
-          {
-            "$ref": "#/components/parameters/AccountId"
-          },
           {
             "name": "id",
             "in": "path",
