@@ -631,6 +631,16 @@
                       "api-reference-v2/api-advanced/referrals/enable-referrals-based-on-query",
                       "api-reference-v2/api-advanced/referrals/import-previous-sales-from-stripe"
                     ]
+                  },
+
+                  {
+                    "group": "Rewards",
+                    "pages": [
+                      "api-reference-v2/api-advanced/rewards/get-rewards",
+                      "api-reference-v2/api-advanced/rewards/create-new-reward",
+                      "api-reference-v2/api-advanced/rewards/update-reward",
+                      "api-reference-v2/api-advanced/rewards/hide-reward"
+                    ]
                   }
                 ]
               }
