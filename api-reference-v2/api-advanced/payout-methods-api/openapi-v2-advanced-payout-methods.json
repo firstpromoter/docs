@@ -12,7 +12,8 @@
   ],
   "security": [
     {
-      "BearerAuth": []
+      "BearerAuth": [],
+       "accountId": []
     }
   ],
   "paths": {
@@ -23,9 +24,7 @@
         "operationId": "adminGetPayoutMethods",
         "tags": ["Payout Methods"],
         "parameters": [
-          {
-            "$ref": "#/components/parameters/AccountId"
-          },
+      
           {
             "name": "filters[promoter_id]",
             "in": "query",
@@ -113,9 +112,7 @@
         "operationId": "adminGetPayoutMethod",
         "tags": ["Payout Methods"],
         "parameters": [
-          {
-            "$ref": "#/components/parameters/AccountId"
-          },
+
           {
             "name": "id",
             "in": "path",
@@ -154,9 +151,7 @@
         "tags": ["Payout Methods"],
 
         "parameters": [
-          {
-            "$ref": "#/components/parameters/AccountId"
-          },
+       
           {
             "name": "id",
             "in": "path",
@@ -573,7 +568,7 @@
         "type": "apiKey",
         "in": "header",
         "name": "ACCOUNT-ID",
-        "description": "Account ID required with bearer token"
+        "description": "Account identifier that specifies which account is making the request"
       }
     },
     "responses": {
