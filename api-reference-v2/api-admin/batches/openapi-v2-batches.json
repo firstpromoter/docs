@@ -13,7 +13,8 @@
   ],
   "security": [
     {
-      "BearerAuth": []
+      "BearerAuth": [],
+      "accountId": []
     }
   ],
   "paths": {
@@ -23,9 +24,6 @@
         "description": "List batch processes that are in progress \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/batch_processes`</Tip>",
         "operationId": "listBatchProcesses",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/AccountId"
-          },
           {
             "in": "query",
             "name": "filters[status]",
@@ -97,9 +95,6 @@
         "operationId": "getBatchProcess",
         "parameters": [
           {
-            "$ref": "#/components/parameters/AccountId"
-          },
-          {
             "in": "path",
             "name": "id",
             "schema": {
@@ -142,9 +137,6 @@
         "description": "Show progress of batch process. \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/batch_processes/progress`</Tip>",
         "operationId": "getBatchProcessProgress",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/AccountId"
-          },
           {
             "in": "query",
             "name": "filters[status]",

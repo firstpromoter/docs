@@ -12,7 +12,8 @@
   ],
   "security": [
     {
-      "BearerAuth": []
+      "BearerAuth": [],
+      "accountId": []
     }
   ],
   "paths": {
@@ -22,9 +23,6 @@
         "description": "Get reports for overview \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/reports/overview`</Tip>",
         "tags": ["Reports"],
         "parameters": [
-          {
-            "$ref": "#/components/parameters/AccountId"
-          },
           {
             "name": "columns",
             "in": "query",
@@ -219,9 +217,6 @@
         "description": "With this endpoint you can get the report data grouped by campaigns.<Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/reports/campaigns`</Tip>",
         "tags": ["Reports"],
         "parameters": [
-          {
-            "$ref": "#/components/parameters/AccountId"
-          },
           {
             "name": "columns",
             "in": "query",
@@ -452,9 +447,6 @@
         "description": " With this endpoint you can get the report data grouped by promoters.<Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/reports/promoters`</Tip>",
         "tags": ["Reports"],
         "parameters": [
-          {
-            "$ref": "#/components/parameters/AccountId"
-          },
           {
             "name": "columns",
             "in": "query",
@@ -717,9 +709,6 @@
         "tags": ["Reports"],
         "parameters": [
           {
-            "$ref": "#/components/parameters/AccountId"
-          },
-          {
             "name": "columns",
             "in": "query",
             "required": true,
@@ -978,9 +967,6 @@
         "tags": ["Reports"],
         "parameters": [
           {
-            "$ref": "#/components/parameters/AccountId"
-          },
-          {
             "name": "columns",
             "in": "query",
             "required": true,
@@ -1082,9 +1068,6 @@
         "description": "With this endpoint you can download reports.<Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/reports/download`</Tip>",
         "tags": ["Reports"],
         "parameters": [
-          {
-            "$ref": "#/components/parameters/AccountId"
-          },
           {
             "name": "report_type",
             "in": "query",
