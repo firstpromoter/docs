@@ -1,39 +1,29 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.0.1",
   "info": {
-    "title": "FirstPromoter Admin API - Promoter Campaigns",
-    "version": "1.0.0",
-    "description": "Admin API endpoints for managing promoter campaigns in FirstPromoter"
+    "title": "FirstPromoter Promoter Campaigns API",
+    "version": "1.0",
+    "description": "API for managing promoter campaigns"
   },
   "servers": [
     {
-      "url": "https://v2.firstpromoter.com/api/v2/company",
-      "description": "Staging server"
+      "url": "https://v2.firstpromoter.com/api/v2/company"
     }
   ],
   "security": [
     {
-      "BearerAuth": [],
-      "accountId": []
+      "BearerAuth": []
     }
   ],
   "paths": {
     "/promoter_campaigns": {
       "get": {
         "summary": "Get available promoter campaigns",
+        "description": "With this endpoint you can list all promoter campaigns. \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/promoter_campaigns`</Tip>",
         "tags": ["Promoter Campaigns"],
-        "description": "Get available promoter campaigns for current company \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/promoter_campaigns`</Tip>",
-        "parameters": [
+            "parameters": [
           {
-            "in": "query",
-            "name": "filters[ids][]",
-            "description": "Filter by promoter campaign IDs",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "integer"
-              }
-            }
+            "$ref": "#/components/parameters/AccountId"
           }
         ],
         "responses": {
@@ -68,10 +58,14 @@
     },
     "/promoter_campaigns/search": {
       "get": {
-        "summary": "Search promoter campaigns",
+        "summary": "Returns results for promoter campaigns dropdown search. Max results: 5",
+        "description": "With this endpoint you can search for promoter campaigns. \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/promoter_campaigns/search?q=...`</Tip>",
         "tags": ["Promoter Campaigns"],
-        "description": "Returns results for promoter campaigns dropdown search. Max results: 5 \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/promoter_campaigns/search`</Tip>",
+
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "in": "query",
             "name": "q",
@@ -79,12 +73,12 @@
             "schema": {
               "type": "string"
             },
-            "description": "Search query string"
+            "description": "Search params"
           }
         ],
         "responses": {
           "200": {
-            "description": "Search results (limited to 5 items maximum)",
+            "description": "Search results",
             "content": {
               "application/json": {
                 "schema": {
@@ -115,9 +109,14 @@
     "/promoter_campaigns/{id}": {
       "put": {
         "summary": "Update promoter campaign",
+        "operationId": "updatePromoterCampaign",
+        "description": "With this endpoint you can update a promoter campaign. \n <Tip>**HTTP Request** <br/>`PUT https://v2.firstpromoter.com/api/v2/company/promoter_campaigns/{id}`</Tip>",
         "tags": ["Promoter Campaigns"],
-        "description": "Update promoter campaign based on id \n <Tip>**HTTP Request** <br/>`PUT https://v2.firstpromoter.com/api/v2/company/promoter_campaigns/{id}`</Tip>",
+
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "in": "path",
             "name": "id",
@@ -125,18 +124,18 @@
             "schema": {
               "type": "integer"
             },
-            "description": "ID of the promoter campaign"
+            "description": "Promoter campaign ID."
           }
         ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
                   "ref_token": {
-                    "type": "string",
-                    "description": "Reference token for the promoter campaign"
+                    "type": "string"
                   },
                   "state": {
                     "type": "string",
@@ -146,92 +145,34 @@
                       "rejected",
                       "blocked",
                       "inactive"
-                    ],
-                    "description": "State of the promoter campaign"
+                    ]
                   },
                   "coupon": {
-                    "type": "string",
-                    "description": "Coupon code"
+                    "type": "string"
                   },
                   "display_coupon": {
-                    "type": "string",
-                    "description": "Display coupon code"
+                    "type": "string"
                   },
                   "direct_url": {
-                    "type": "string",
-                    "description": "Direct URL for the promoter campaign"
-                  },
-                  "promoter_rewards_customized": {
-                    "type": "boolean",
-                    "description": "Whether promoter rewards are customized"
-                  },
-                  "referral_rewards_customized": {
-                    "type": "boolean",
-                    "description": "Whether referral rewards are customized"
+                    "type": "string"
                   },
                   "rewards_for_promoters": {
                     "type": "array",
-                    "description": "Rewards for promoters",
                     "items": {
-                      "type": "object",
-                      "required": ["apply_on", "product_ids", "reward_id"],
-                      "properties": {
-                        "apply_on": {
-                          "type": "string",
-                          "enum": [
-                            "monthly",
-                            "yearly",
-                            "one_time",
-                            "all",
-                            "specific"
-                          ],
-                          "description": "When to apply the reward"
-                        },
-                        "product_ids": {
-                          "type": "array",
-                          "description": "List of product IDs",
-                          "items": {
-                            "type": "integer"
-                          }
-                        },
-                        "reward_id": {
-                          "type": "integer",
-                          "description": "ID of the reward"
-                        }
-                      }
+                      "$ref": "#/components/schemas/RewardConfig"
                     }
                   },
                   "rewards_for_referrals": {
                     "type": "array",
-                    "description": "Rewards for referrals",
                     "items": {
-                      "type": "object",
-                      "required": ["apply_on", "product_ids", "reward_id"],
-                      "properties": {
-                        "apply_on": {
-                          "type": "string",
-                          "enum": [
-                            "monthly",
-                            "yearly",
-                            "one_time",
-                            "all",
-                            "specific"
-                          ],
-                          "description": "When to apply the reward"
-                        },
-                        "product_ids": {
-                          "type": "array",
-                          "description": "List of product IDs",
-                          "items": {
-                            "type": "integer"
-                          }
-                        },
-                        "reward_id": {
-                          "type": "integer",
-                          "description": "ID of the reward"
-                        }
-                      }
+                      "$ref": "#/components/schemas/RewardConfig"
                     }
+                  },
+                  "promoter_rewards_customized": {
+                    "type": "boolean"
+                  },
+                  "referral_rewards_customized": {
+                    "type": "boolean"
                   }
                 }
               }
@@ -244,17 +185,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PromoterCampaignDetailed"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationError"
+                  "$ref": "#/components/schemas/PromoterCampaign"
                 }
               }
             }
@@ -273,7 +204,7 @@
             }
           },
           "404": {
-            "description": "Promoter campaign not found",
+            "description": "Not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -287,10 +218,15 @@
     },
     "/promoter_campaigns/{id}/referral_links": {
       "get": {
-        "summary": "Get referral links",
+        "summary": "Get promoter campaign referral links",
+        "operationId": "getReferralLinksAssociatedWithThisPromoterCampaign",
+        "description": "With this endpoint you can get the referral links associated with this promoter campaign.<Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/promoter_campaigns/{id}/referral_links`</Tip>",
         "tags": ["Promoter Campaigns"],
-        "description": "Get referral links associated with this promoter campaign \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/promoter_campaigns/{id}/referral_links`</Tip>",
+
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "in": "path",
             "name": "id",
@@ -298,7 +234,7 @@
             "schema": {
               "type": "integer"
             },
-            "description": "ID of the promoter campaign"
+            "description": "Promoter campaign ID"
           }
         ],
         "responses": {
@@ -329,7 +265,7 @@
             }
           },
           "404": {
-            "description": "Promoter campaign not found",
+            "description": "Not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -343,10 +279,15 @@
     },
     "/promoter_campaigns/{id}/chart_data": {
       "get": {
-        "summary": "Get chart data",
+        "summary": "Get data used for chart",
         "tags": ["Promoter Campaigns"],
-        "description": "Get data used for chart \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/promoter_campaigns/{id}/chart_data`</Tip>",
+        "operationId": "getPromoterCampaignChartData",
+        "description": "With this endpoint you can get the data used for charts.<Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/promoter_campaigns/{id}/chart_data`</Tip>",
+
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "in": "path",
             "name": "id",
@@ -354,7 +295,7 @@
             "schema": {
               "type": "integer"
             },
-            "description": "ID of the promoter campaign"
+            "description": "Promoter campaign ID"
           },
           {
             "in": "query",
@@ -363,8 +304,7 @@
             "schema": {
               "type": "string",
               "format": "date"
-            },
-            "description": "Start date for the chart data"
+            }
           },
           {
             "in": "query",
@@ -373,8 +313,7 @@
             "schema": {
               "type": "string",
               "format": "date"
-            },
-            "description": "End date for the chart data"
+            }
           },
           {
             "in": "query",
@@ -389,12 +328,12 @@
                 "customers",
                 "cancellations"
               ]
-            },
-            "description": "Selection type for the chart data"
+            }
           },
           {
             "in": "query",
             "name": "with_totals",
+            "required": false,
             "schema": {
               "type": "boolean"
             },
@@ -426,7 +365,7 @@
             }
           },
           "404": {
-            "description": "Promoter campaign not found",
+            "description": "Not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -449,7 +388,7 @@
       }
     }
   },
-  "components": {
+   "components": {
     "parameters": {
       "AccountId": {
         "name": "Account-ID",
@@ -467,49 +406,17 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "description": "ID of the promoter campaign"
+            "type": "integer"
           },
           "campaign_id": {
-            "type": "integer",
-            "description": "ID of the campaign"
+            "type": "integer"
           },
           "promoter_id": {
-            "type": "integer",
-            "description": "ID of the promoter"
+            "type": "integer"
           },
           "created_at": {
             "type": "string",
-            "format": "date-time",
-            "description": "Date and time when the promoter campaign was created"
-          },
-          "promoter": {
-            "$ref": "#/components/schemas/Promoter"
-          },
-          "campaign": {
-            "$ref": "#/components/schemas/Campaign"
-          }
-        }
-      },
-      "PromoterCampaignDetailed": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "description": "ID of the promoter campaign"
-          },
-          "campaign_id": {
-            "type": "integer",
-            "description": "ID of the campaign"
-          },
-          "promoter_id": {
-            "type": "integer",
-            "description": "ID of the promoter"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Date and time when the promoter campaign was created"
+            "format": "date-time"
           },
           "promoter": {
             "$ref": "#/components/schemas/Promoter"
@@ -519,190 +426,68 @@
           },
           "state": {
             "type": "string",
-            "enum": ["pending", "accepted", "rejected", "blocked", "inactive"],
-            "description": "State of the promoter campaign"
+            "enum": ["pending", "accepted", "rejected", "blocked", "inactive"]
           },
           "stats": {
             "type": "object",
             "properties": {
               "clicks_count": {
-                "type": "integer",
-                "description": "Number of clicks"
+                "type": "integer"
               },
               "referrals_count": {
-                "type": "integer",
-                "description": "Number of referrals"
+                "type": "integer"
               },
               "sales_count": {
-                "type": "integer",
-                "description": "Number of sales"
+                "type": "integer"
               },
               "customers_count": {
-                "type": "integer",
-                "description": "Number of customers"
+                "type": "integer"
               },
               "revenue_amount": {
-                "type": "number",
-                "description": "Revenue amount"
+                "type": "number"
               }
             }
           },
           "coupon": {
-            "type": "string",
-            "nullable": true,
-            "description": "Coupon code"
+            "type": "string"
           },
           "display_coupon": {
-            "type": "string",
-            "nullable": true,
-            "description": "Display coupon code"
+            "type": "string"
           },
           "ref_token": {
-            "type": "string",
-            "description": "Reference token"
+            "type": "string"
           },
           "ref_link": {
-            "type": "string",
-            "description": "Reference link"
+            "type": "string"
           },
           "is_customized": {
-            "type": "boolean",
-            "description": "Whether the promoter campaign is customized"
+            "type": "boolean"
           },
           "direct_url": {
-            "type": "string",
-            "nullable": true,
-            "description": "Direct URL"
+            "type": "string"
           },
           "referral_rewards_customized": {
-            "type": "boolean",
-            "description": "Whether referral rewards are customized"
+            "type": "boolean"
           },
           "promoter_rewards_customized": {
-            "type": "boolean",
-            "description": "Whether promoter rewards are customized"
+            "type": "boolean"
           },
           "rewards_for_promoters": {
             "type": "array",
-            "description": "Rewards for promoters",
             "items": {
-              "type": "object",
-              "properties": {
-                "apply_on": {
-                  "type": "string",
-                  "enum": ["monthly", "yearly", "one_time", "all", "specific"],
-                  "description": "When to apply the reward"
-                },
-                "product_ids": {
-                  "type": "array",
-                  "description": "List of product IDs",
-                  "items": {
-                    "type": "integer"
-                  }
-                },
-                "reward_id": {
-                  "type": "integer",
-                  "description": "ID of the reward"
-                },
-                "reward": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "string",
-                      "description": "Name of the reward"
-                    },
-                    "promoter_reward_type": {
-                      "type": "string",
-                      "nullable": true,
-                      "description": "Type of promoter reward"
-                    },
-                    "hide_reward": {
-                      "type": "boolean",
-                      "nullable": true,
-                      "description": "Whether the reward is hidden"
-                    },
-                    "tier_level": {
-                      "type": "integer",
-                      "description": "Tier level"
-                    },
-                    "coupon": {
-                      "type": "string",
-                      "nullable": true,
-                      "description": "Coupon code"
-                    }
-                  }
-                },
-                "products": {
-                  "type": "array",
-                  "nullable": true,
-                  "description": "List of products"
-                }
-              }
+              "$ref": "#/components/schemas/Reward"
             }
           },
           "rewards_for_referrals": {
             "type": "array",
-            "description": "Rewards for referrals",
             "items": {
-              "type": "object",
-              "properties": {
-                "apply_on": {
-                  "type": "string",
-                  "enum": ["monthly", "yearly", "one_time", "all", "specific"],
-                  "description": "When to apply the reward"
-                },
-                "product_ids": {
-                  "type": "array",
-                  "description": "List of product IDs",
-                  "items": {
-                    "type": "integer"
-                  }
-                },
-                "reward_id": {
-                  "type": "integer",
-                  "description": "ID of the reward"
-                },
-                "reward": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "string",
-                      "description": "Name of the reward"
-                    },
-                    "promoter_reward_type": {
-                      "type": "string",
-                      "nullable": true,
-                      "description": "Type of promoter reward"
-                    },
-                    "hide_reward": {
-                      "type": "boolean",
-                      "nullable": true,
-                      "description": "Whether the reward is hidden"
-                    },
-                    "tier_level": {
-                      "type": "integer",
-                      "description": "Tier level"
-                    },
-                    "coupon": {
-                      "type": "string",
-                      "nullable": true,
-                      "description": "Coupon code"
-                    }
-                  }
-                },
-                "products": {
-                  "type": "array",
-                  "nullable": true,
-                  "description": "List of products"
-                }
-              }
+              "$ref": "#/components/schemas/Reward"
             }
           },
           "promo_codes": {
             "type": "array",
-            "description": "Promotion codes",
             "items": {
-              "type": "object"
+              "type": "string"
             }
           }
         }
@@ -711,17 +496,13 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "description": "ID of the promoter"
+            "type": "integer"
           },
           "email": {
-            "type": "string",
-            "format": "email",
-            "description": "Email of the promoter"
+            "type": "string"
           },
           "name": {
-            "type": "string",
-            "description": "Name of the promoter"
+            "type": "string"
           }
         }
       },
@@ -729,17 +510,83 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "description": "ID of the campaign"
+            "type": "integer"
           },
           "name": {
-            "type": "string",
-            "description": "Name of the campaign"
+            "type": "string"
           },
           "color": {
+            "type": "string"
+          }
+        }
+      },
+      "RewardConfig": {
+        "type": "object",
+        "required": ["apply_on", "product_ids", "reward_id"],
+        "properties": {
+          "apply_on": {
             "type": "string",
-            "nullable": true,
-            "description": "Color of the campaign"
+            "enum": ["monthly", "yearly", "one_time", "all", "specific"]
+          },
+          "product_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "reward_id": {
+            "type": "integer"
+          }
+        }
+      },
+      "Reward": {
+        "type": "object",
+        "properties": {
+          "apply_on": {
+            "type": "string"
+          },
+          "product_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "reward_id": {
+            "type": "integer"
+          },
+          "reward": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "promoter_reward_type": {
+                "type": "string"
+              },
+              "hide_reward": {
+                "type": "boolean"
+              },
+              "tier_level": {
+                "type": "integer"
+              },
+              "coupon": {
+                "type": "string"
+              }
+            }
+          },
+          "products": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -747,31 +594,23 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "nullable": true,
-            "description": "ID of the referral link"
+            "type": "integer"
           },
           "name": {
-            "type": "string",
-            "description": "Name of the referral link"
+            "type": "string"
           },
           "url": {
-            "type": "string",
-            "description": "URL of the referral link"
+            "type": "string"
           },
           "is_default": {
-            "type": "boolean",
-            "nullable": true,
-            "description": "Whether the referral link is the default one"
+            "type": "boolean"
           },
           "source": {
             "type": "string",
-            "description": "Source of the referral link"
+            "enum": ["campaign", "promoter"]
           },
           "sub_id": {
-            "type": "string",
-            "nullable": true,
-            "description": "Sub ID of the referral link"
+            "type": "string"
           },
           "campaign": {
             "$ref": "#/components/schemas/Campaign"
@@ -783,39 +622,39 @@
         "properties": {
           "period_from": {
             "type": "string",
-            "format": "date",
-            "description": "Start date of the period"
+            "format": "date"
           },
           "period_to": {
             "type": "string",
-            "format": "date",
-            "description": "End date of the period"
+            "format": "date"
           },
           "selection": {
             "type": "string",
-            "description": "Selection type"
+            "enum": [
+              "revenue",
+              "clicks",
+              "referrals",
+              "customers",
+              "cancellations"
+            ]
           },
           "selection_items": {
             "type": "array",
-            "description": "Selection items",
             "items": {
-              "type": "array",
-              "items": {
-                "oneOf": [
-                  {
-                    "type": "string",
-                    "format": "date"
-                  },
-                  {
-                    "type": "number"
-                  }
-                ]
+              "type": "object",
+              "properties": {
+                "date": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "value": {
+                  "type": "number"
+                }
               }
             }
           },
           "group_by": {
-            "type": "string",
-            "description": "Group by parameter (e.g., day, week, month)"
+            "type": "string"
           }
         }
       },
@@ -823,37 +662,22 @@
         "type": "object",
         "properties": {
           "message": {
-            "type": "string",
-            "description": "Error message"
+            "type": "string"
           },
           "code": {
-            "type": "string",
-            "description": "Error code"
-          }
-        }
-      },
-      "ValidationError": {
-        "type": "object",
-        "properties": {
-          "message": {
-            "type": "string",
-            "description": "Error message"
+            "type": "string"
           },
           "errors": {
             "type": "object",
-            "description": "Validation errors",
             "additionalProperties": {
               "type": "array",
               "items": {
                 "type": "string"
               }
             }
-          },
-          "code": {
-            "type": "string",
-            "description": "Error code"
           }
-        }
+        },
+        "required": ["message", "code"]
       }
     },
     "securitySchemes": {
@@ -865,8 +689,8 @@
       "accountId": {
         "type": "apiKey",
         "in": "header",
-        "name": "Account-ID",
-        "description": "Account identifier that specifies which account is making the request"
+        "name": "ACCOUNT-ID",
+        "description": "Account ID required with bearer token"
       }
     }
   }

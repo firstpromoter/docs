@@ -13,8 +13,7 @@
   ],
   "security": [
     {
-      "BearerAuth": [],
-      "accountId": []
+      "BearerAuth": []
     }
   ],
   "paths": {
@@ -24,6 +23,9 @@
         "tags": ["Referrals"],
         "description": "Get available referrals \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/referrals`</Tip>",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "in": "query",
             "name": "q",
@@ -113,6 +115,11 @@
         "summary": "Create referral",
         "tags": ["Referrals"],
         "description": "Create a new referral \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/referrals`</Tip>",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -186,6 +193,11 @@
         "summary": "Delete referrals",
         "description": "With this endpoint you can delete referrals. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`DELETE https://v2.firstpromoter.com/api/v2/company/referrals/destroy`</Tip>",
         "tags": ["Referrals"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -232,6 +244,9 @@
         "tags": ["Referrals"],
         "description": "Get a specific referral \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/referrals/{id}`</Tip>",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "in": "path",
             "name": "id",
@@ -363,6 +378,11 @@
         "summary": "Approve referrals",
         "description": "With this endpoint you can approve referrals. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/referrals/approve`</Tip>",
         "tags": ["Referrals"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -408,6 +428,11 @@
         "summary": "Disable referrals",
         "description": "With this endpoint you can disable referrals. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/referrals/disable`</Tip>",
         "tags": ["Referrals"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -453,6 +478,11 @@
         "summary": "Enable referrals",
         "description": "With this endpoint you can enable referrals. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/referrals/enable`</Tip>",
         "tags": ["Referrals"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -498,6 +528,11 @@
         "summary": "Move referrals to promoter",
         "description": "With this endpoint you can move referrals to another promoter. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/referrals/move_to_promoter`</Tip>",
         "tags": ["Referrals"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -701,6 +736,9 @@
         "description": "With this endpoint you can import previous sales from stripe. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/referrals/{id}/import_events`</Tip>",
         "tags": ["Referrals"],
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "in": "path",
             "name": "id",
