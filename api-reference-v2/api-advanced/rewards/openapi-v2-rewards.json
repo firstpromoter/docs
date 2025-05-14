@@ -13,8 +13,7 @@
   ],
   "security": [
     {
-      "BearerAuth": [],
-      "accountId": []
+      "BearerAuth": []
     }
   ],
   "paths": {
@@ -24,7 +23,9 @@
         "tags": ["Rewards"],
         "description": "Get available rewards for current company \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/rewards`</Tip>",
         "parameters": [
-      
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
           {
             "in": "query",
             "name": "scope",
@@ -78,7 +79,11 @@
         "summary": "Create reward",
         "tags": ["Rewards"],
         "description": "Create rewards for current company \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/rewards`</Tip>",
-    
+     "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+     ],
         "requestBody": {
           "required": true,
           "content": {
@@ -256,8 +261,10 @@
         "summary": "Update reward",
         "tags": ["Rewards"],
         "description": "Update reward for current company \n <Tip>**HTTP Request** <br/>`PUT https://v2.firstpromoter.com/api/v2/company/rewards/{id}`</Tip>",
-        "parameters": [
-        
+         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "in": "path",
             "name": "id",
@@ -421,7 +428,10 @@
         "summary": "Hide reward",
         "tags": ["Rewards"],
         "description": "Hide reward for current company \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/rewards/{id}/hide`</Tip>",
-        "parameters": [
+         "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "in": "path",
             "name": "id",
