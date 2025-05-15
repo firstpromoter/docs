@@ -862,7 +862,6 @@
         "description": "Account id. You can find your Account ID on Your FirstPromoter Dashboard. Navigate to Settings → Integrations",
         "schema": {
           "type": "string",
-          "example": "acc_123456"
         }
       }
     },
