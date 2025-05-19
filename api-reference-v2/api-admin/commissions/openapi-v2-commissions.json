@@ -840,7 +840,12 @@
           "paid": {
             "type": "string",
             "enum": ["yes", "no"],
-            "description": "Paid"
+            "description": "Paid filter for monetary commissions"
+          },
+          "fulfilled": {
+            "type": "string",
+            "enum": ["yes", "no"],
+            "description": "Fulfilled filter for non-monetary commissions"
           },
           "sale_amount": {
             "type": "object",
