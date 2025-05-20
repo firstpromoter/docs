@@ -1,13 +1,15 @@
 ---
-title: 'Advanced use cases & examples'
+title: "Advanced use cases & examples"
 ---
 
 ## Passing the ref id programmatically
+
 `fpr("init",{cid:"...",ref_id:"..."})`
 
 Getting the ref id from the url and passing it to fpr init
 
 <CodeGroup>
+
 ```html Custom query parameter
 <script>(function (w) { w.fpr = w.fpr || function () { w.fpr.q = w.fpr.q || []; w.fpr.q[arguments[0] == 'set' ? 'unshift' : 'push'](arguments); }; })(window);
 
@@ -30,6 +32,7 @@ Getting the ref id from the url and passing it to fpr init
 <script src="https://cdn.firstpromoter.com/fpr.js" async></script>
 ```
 
+
 ```html Custom hash
 <script>
 (function(w){w.fpr=w.fpr||function(){w.fpr.q = w.fpr.q||[];w.fpr.q[arguments[0]=='set'?'unshift':'push'](arguments);};})(window);
@@ -47,20 +50,18 @@ fpr("click");
 
 </CodeGroup>
 
-
-
 ## Passing the ref id programmatically from a query string
 
-``` html
+```html
 <script>(function(w){w.fpr=w.fpr||function(){w.fpr.q = w.fpr.q||[];w.fpr.q[arguments[0]=='set'?'unshift':'push'](arguments);};})(window);
 function getParam(param) {
 return new URLSearchParams(window.location.search).get(param);
 }
 var ref_id = getParam("sa");
 if (ref_id) {
-fpr("init", { ref_id, cid: "c19onh5t" });
+fpr("init", { ref_id, cid: "xxxxxx" });
 } else {
-fpr("init", { cid: "c19onh5t" });
+fpr("init", { cid: "xxxxxx" });
 }
 fpr("click");
 </script>
@@ -84,9 +85,7 @@ it can also be used to force new emails to be collected on page refresh
 fpr("init", {cid:"…"});
 fpr("click",{cookie_ref_id: 'xxx'});
 </script>
-
 ```
-
 
 ## Setting a default  Promoter
 
@@ -102,9 +101,9 @@ fpr("click",{cookie_ref_id: 'xxx'});
 
   if ((!hasRefId || !hasTid) && !getParam('fpr')) {
     var ref_id = "pm";
-    fpr("init", {ref_id, cid: "pdlduqv6"});
+    fpr("init", {ref_id, cid: "xxxxxx"});
   } else {
-    fpr("init", {cid: "pdlduqv6"});
+    fpr("init", {cid: "xxxxxx"});
   }
   fpr("click");
 
