@@ -1054,13 +1054,13 @@
       "BearerAuth": {
         "type": "http",
         "scheme": "bearer",
-        "description": "API key passed as a Bearer token in the Authorization header. You can find your API Key on Your FirstPromoter Dashboard. Navigate to Settings → Integrations → Manage API Keys"
+        "description": "API key passed as a Bearer token in the Authorization header. You can find your API Key on Your FirstPromoter Dashboard. Navigate to Settings → Integrations section → Manage API Keys"
       },
       "accountId": {
         "type": "apiKey",
         "in": "header",
         "name": "ACCOUNT-ID",
-        "description": "Account ID required with bearer token"
+        "description": "Your FirstPromoter Account ID. You can find this in the  Settings → Integrations section of your dashboard."
       }
     }
   }
