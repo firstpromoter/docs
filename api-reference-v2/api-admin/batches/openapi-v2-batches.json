@@ -221,10 +221,9 @@
         "name": "Account-ID",
         "in": "header",
         "required": true,
-        "description": "Account identifier that specifies which account is making the request",
+        "description": "Account id. You can find your Account ID on Your FirstPromoter Dashboard. Navigate to Settings → Integrations",
         "schema": {
-          "type": "string",
-          "example": "acc_123456"
+          "type": "string"
         }
       }
     },
@@ -312,7 +311,7 @@
       "BearerAuth": {
         "type": "http",
         "scheme": "bearer",
-        "description": "Access token passed as a Bearer token in the Authorization header"
+        "description": "API key passed as a Bearer token in the Authorization header. You can find your API Key on Your FirstPromoter Dashboard. Navigate to Settings → Integrations section → Manage API Keys"
       },
       "accountId": {
         "type": "apiKey",
