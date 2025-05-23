@@ -622,6 +622,16 @@
                       "api-reference-v2/api-advanced/payout-methods-api/delete-a-payout-method"
                     ]
                   },
+                    {
+                    "group": "Products",
+                    "pages": [
+                      "api-reference-v2/api-advanced/products-api/get-products",
+                      "api-reference-v2/api-advanced/products-api/get-product",
+                      "api-reference-v2/api-advanced/products-api/create-product",
+                      "api-reference-v2/api-advanced/products-api/update-product",
+                      "api-reference-v2/api-advanced/products-api/delete-product"
+                    ]
+                  },
                   {
                     "group": "Referrals",
                     "pages": [
