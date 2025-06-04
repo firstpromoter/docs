@@ -171,7 +171,6 @@
               "type": "string",
               "enum": [
                 "email",
-                "cust_id",
                 "auth_token",
                 "ref_token",
                 "promo_code"
@@ -1607,12 +1606,11 @@
             "type": "string",
             "enum": [
               "email",
-              "cust_id",
               "auth_token",
               "ref_token",
               "promo_code"
             ],
-            "description": "Find by attribute. Required when you want to find the promoter using another parameter like the  email, cust_id, auth_token, ref_token, or promo_code instead of an ID. \n \n  Your request should follow the format `https://v2.firstpromoter.com/api/v2/company/promoters/{email, cust_id, auth_token, ref_token, or promo_code}`"
+            "description": "Find by attribute. Required when you want to find the promoter using another parameter like the  email, auth_token, ref_token, or promo_code instead of an ID. \n \n  Your request should follow the format `https://v2.firstpromoter.com/api/v2/company/promoters/{email, auth_token, ref_token, or promo_code}`"
           },
           "cust_id": {
             "type": "string",
