@@ -1501,11 +1501,6 @@
             "nullable": true,
             "description": "Address of the promoter"
           },
-          "paypal_email": {
-            "type": "string",
-            "nullable": true,
-            "description": "PayPal email of the promoter"
-          },
           "avatar": {
             "type": "string",
             "description": "URL to the promoter's avatar image"
