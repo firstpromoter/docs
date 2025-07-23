@@ -18,6 +18,7 @@
   "paths": {
     "/contract_documents": {
       "get": {
+        "noindex": true
         "summary": "Get current version contract documents",
         "description": "Returns the current contract document  \n <Tip>**HTTP Request** <br/>` GET  https://v2.firstpromoter.com/api/v2/affiliate/contract_documents`</Tip>",
         "tags": ["Contract Documents"],
@@ -58,6 +59,7 @@
     },
     "/contract_documents/{id}": {
       "get": {
+        "noindex": true
         "summary": "Get contract documents by id (html/pdf)",
         "description": "Gets contract document and returns it in the selected format  \n <Tip>**HTTP Request** <br/>` GET  https://v2.firstpromoter.com/api/v2/affiliate/contract_documents/{id}`</Tip>",
         "tags": ["Contract Documents"],
@@ -150,6 +152,7 @@
     },
     "/contract_documents/{id}/sign": {
       "post": {
+        "noindex": true
         "summary": "Sign a document with id",
         "description": "Signs a contract document with id \n <Tip>**HTTP Request** <br/>` GET  https://v2.firstpromoter.com/api/v2/affiliate/contract_documents/{id}/sign`</Tip>",
         "tags": ["Contract Documents"],
@@ -232,6 +235,7 @@
     },
     "/contract_documents/draft": {
       "post": {
+        "noindex": true
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"

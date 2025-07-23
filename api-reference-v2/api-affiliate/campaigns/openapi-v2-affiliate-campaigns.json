@@ -18,6 +18,7 @@
   "paths": {
     "/campaigns": {
       "get": {
+        "noindex": true,
         "summary": "Get all campaigns",
         "description":"Returns all campaigns  \n <Tip>**HTTP Request** <br/>` GET  https://v2.firstpromoter.com/api/v2/affiliate/campaigns`</Tip>",
         "parameters": [
