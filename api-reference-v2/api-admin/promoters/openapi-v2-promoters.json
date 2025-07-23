@@ -1568,7 +1568,7 @@
       },
       "PromoterCreate": {
         "type": "object",
-        "required": ["email", "initial_campaign_id"],
+        "required": ["email"],
         "properties": {
           "email": {
             "type": "string",
@@ -1586,6 +1586,10 @@
           "initial_campaign_id": {
             "type": "integer",
             "description": "The ID of the campaign promoter will be added first"
+          },
+          "drip_emails":{
+            "type":"boolean",
+            "description": "Send a welcome email to the promoter"
           }
         }
       },
