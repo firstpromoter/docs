@@ -18,6 +18,7 @@
   "paths": {
     "/contracts": {
       "get": {
+        "noindex": true,
         "summary": "Get all contracts",
         "description": "Returns all contracts \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/contracts`</Tip>",
         "tags": ["Contracts"],
@@ -33,6 +34,7 @@
         }
       },
       "post": {
+        "noindex": true,
         "summary": "Create a contract. Calls the service that generates the contract documents.",
         "description": "Create a contract \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/contracts`</Tip>",
         "tags": ["Contracts"],
@@ -60,6 +62,7 @@
     },
     "/contracts/{id}": {
       "get": {
+        "noindex": true,
         "summary": "Get contract by id",
         "description": "Returns a contract by id \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/contracts/{id}`</Tip>",
         "tags": ["Contracts"],
@@ -83,6 +86,7 @@
         }
       },
       "put": {
+        "noindex": true,
         "summary": "Update a contract. Calls the service that generates the contract documents if needed.",
         "description": "Update a contract \n <Tip>**HTTP Request** <br/>`PUT https://v2.firstpromoter.com/api/v2/company/contracts/{id}`</Tip>",
         "tags": ["Contracts"],
@@ -116,6 +120,7 @@
         }
       },
       "delete": {
+        "noindex": true,
         "summary": "Delete a contract",
         "description": "Delete a contract \n <Tip>**HTTP Request** <br/>`DELETE https://v2.firstpromoter.com/api/v2/company/contracts/{id}`</Tip>",
         "tags": ["Contracts"],

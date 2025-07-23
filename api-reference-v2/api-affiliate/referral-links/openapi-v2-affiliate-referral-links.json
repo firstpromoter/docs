@@ -18,6 +18,7 @@
   "paths": {
     "/referral_links": {
       "get": {
+        "noindex": true,
         "summary": "Get current promoter referral links",
         "operationId": "getReferralLinks",
         "parameters": [
@@ -64,6 +65,7 @@
         }
       },
       "post": {
+        "noindex": true,
         "summary": "Creates a referral link",
         "operationId": "createReferralLink",
         "parameters": [
@@ -139,6 +141,7 @@
     },
     "/referral_links/{id}": {
       "put": {
+        "noindex": true,
         "summary": "Updates a referral link",
         "operationId": "updateReferralLink",
         "parameters": [
@@ -202,6 +205,7 @@
         }
       },
       "delete": {
+        "noindex": true,
         "summary": "Destroys a referral link",
         "operationId": "deleteReferralLink",
         "parameters": [

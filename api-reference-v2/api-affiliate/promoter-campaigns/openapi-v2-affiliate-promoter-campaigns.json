@@ -18,6 +18,7 @@
   "paths": {
     "/promoter_campaigns/{id}": {
       "put": {
+        "noindex": true,
         "summary": "Update promotion ref_token for the promoter_campaign",
         "tags": ["Promoter Campaigns"],
         "parameters": [

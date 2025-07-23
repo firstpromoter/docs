@@ -19,6 +19,7 @@
   "paths": {
     "/products": {
       "get": {
+        "noindex": true,
         "summary": "Get available products",
         "tags": ["Products"],
         "description": "Get available products \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/products`</Tip>",
@@ -65,6 +66,7 @@
         }
       },
       "post": {
+        "noindex": true,
         "summary": "Create product",
         "tags": ["Products"],
         "description": "Create product \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/products`</Tip>",
@@ -152,6 +154,7 @@
     },
     "/products/{id}": {
       "get": {
+        "noindex": true,
         "summary": "Get product",
         "tags": ["Products"],
         "description": "Get product based on id \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/products/{id}`</Tip>",
@@ -206,6 +209,7 @@
         }
       },
       "put": {
+        "noindex": true,
         "summary": "Update product",
         "tags": ["Products"],
         "description": "Update product based on id \n <Tip>**HTTP Request** <br/>`PUT https://v2.firstpromoter.com/api/v2/company/products/{id}`</Tip>",
@@ -309,6 +313,7 @@
         }
       },
       "delete": {
+        "noindex": true,
         "summary": "Delete product",
         "tags": ["Products"],
         "description": "Delete product based on id \n <Tip>**HTTP Request** <br/>`DELETE https://v2.firstpromoter.com/api/v2/company/products/{id}`</Tip>",
