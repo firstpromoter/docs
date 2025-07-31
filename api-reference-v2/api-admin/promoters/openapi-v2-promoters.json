@@ -93,11 +93,26 @@
             "description": "Successful response",
             "content": {
               "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Promoter"
-                  }
+               "schema": {
+                  "type": "object",
+                    "properties": {
+                        "data": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/Promoter"
+                            },
+                            "description": "List of promoters"
+                        },
+                        "meta": {
+                            "type": "object",
+                            "properties":{
+                                "pending_count": {
+                                    "type": "intger",
+                                    "description": ""
+                                }
+                            }
+                        }
+                    }
                 }
               }
             }
