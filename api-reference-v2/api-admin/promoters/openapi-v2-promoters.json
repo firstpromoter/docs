@@ -94,11 +94,24 @@
             "content": {
               "application/json": {
                "schema": {
-                   "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/Promoter"
+                  "type": "object",
+                  "properties":{
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Promoter"
+                      },
+                      "description": "List of Promoters"
                     },
-                    "description": "List of promoters"
+                    "meta": {
+                      "type":"object",
+                      "properties":{
+                        "pending_count": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
