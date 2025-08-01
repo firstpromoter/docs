@@ -101,12 +101,12 @@
     },
     "/update": {
       "put": {
-        "description": "Use this to update a lead/customer details from FirstPromoter using the API. You can find the lead either by `id` , `uid` or `email` <Tip>**HTTP Request** <br/> `PUT https://firstpromoter.com/api/v1/leads/update`</Tip>",
+        "description": "Use this to update a lead/customer details from FirstPromoter using the API. You can find the lead either by `id`, `uid` or `email` <Tip>**HTTP Request** <br/> `PUT https://firstpromoter.com/api/v1/leads/update`</Tip>",
         "parameters": [
           {
             "name": "id",
             "in": "query",
-            "description": "`required if email or uid is null` \n\n  ID of the lead or customer",
+            "description": "`required if email or uid is null` \n\n ID of the lead or customer",
             "schema": {
               "type": "string"
             }
@@ -114,7 +114,7 @@
           {
             "name": "uid",
             "in": "query",
-            "description": "`required if email or id is null` \n\n  UID of the lead or customer.",
+            "description": "`required if email or id is null` \n\n UID of the lead or customer.",
             "schema": {
               "type": "string"
             }
@@ -122,7 +122,7 @@
           {
             "name": "email",
             "in": "query",
-            "description": "`required if id and uid is null` \n\n Email of the lead or customer.",
+            "description": "`required if id and uid are null` \n\n Email of the lead or customer.",
             "schema": {
               "type": "string"
             }
@@ -154,7 +154,7 @@
           {
             "name": "soft_switch",
             "in": "query",
-            "description": "Set this to `true`, If you want to move **only** the referral (lead or customer) to another promoter.<br> **NB:** if set to `true`, the rewards/commissions associated with the referral will not be moved.",
+            "description": "Set this to `true`, If you want to move **only** the referral (lead or customer) to another promoter.\n\n **NB:** if set to `true`, the rewards/commissions associated with the referral will not be moved.",
             "schema": {
               "type": "boolean"
             }
