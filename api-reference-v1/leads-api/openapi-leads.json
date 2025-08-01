@@ -26,7 +26,7 @@
           {
             "name": "id",
             "in": "query",
-            "description": "`required if email or uid is null` \n\n  ID of the lead or customer to delete",
+            "description": "`required if email or uid is null` \n\nID of the lead or customer to delete",
             "schema": {
               "type": "string"
             }
@@ -34,7 +34,7 @@
           {
             "name": "uid",
             "in": "query",
-            "description": "`required if email or id is null` \n\n  UID of the lead or customer to delete",
+            "description": "`required if email or id is null` \n\nUID of the lead or customer to delete",
             "schema": {
               "type": "string"
             }
@@ -42,7 +42,7 @@
           {
             "name": "email",
             "in": "query",
-            "description": "`required if id and uid is null` \n\n Email of the lead or customer to delete",
+            "description": "`required if id and uid is null` \n\nEmail of the lead or customer to delete",
             "schema": {
               "type": "string"
             }
@@ -106,7 +106,7 @@
           {
             "name": "id",
             "in": "query",
-            "description": "`required if email or uid is null` \n\n ID of the lead or customer",
+            "description": "`required if email or uid is null` \n\nID of the lead or customer",
             "schema": {
               "type": "string"
             }
@@ -114,7 +114,7 @@
           {
             "name": "uid",
             "in": "query",
-            "description": "`required if email or id is null` \n\n UID of the lead or customer.",
+            "description": "`required if email or id is null` \n\nUID of the lead or customer.",
             "schema": {
               "type": "string"
             }
@@ -122,7 +122,7 @@
           {
             "name": "email",
             "in": "query",
-            "description": "`required if id and uid are null` \n\n Email of the lead or customer.",
+            "description": "`required if id and uid are null` \n\nEmail of the lead or customer.",
             "schema": {
               "type": "string"
             }
