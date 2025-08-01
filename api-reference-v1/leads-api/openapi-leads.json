@@ -146,9 +146,17 @@
           {
             "name": "new_ref_id",
             "in": "query",
-            "description": "If you want to move the lead or customer to another promoter, you can enter the referral id of the new promotion",
+            "description": "If you want to move the referral (lead or customer) to another promoter, you can enter the referral id of the new promotion",
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "soft_switch",
+            "in": "query",
+            "description": "Set this to `true`, If you want to move **only** the referral (lead or customer) to another promoter. **NB:** if set to `true`, the rewards/commissions associated with the referral will not be moved.",
+            "schema": {
+              "type": "boolean"
             }
           },
           {
