@@ -154,7 +154,7 @@
           {
             "name": "soft_switch",
             "in": "query",
-            "description": "Set this to `true`, If you want to move **only** the referral (lead or customer) to another promoter. **NB:** if set to `true`, the rewards/commissions associated with the referral will not be moved.",
+            "description": "Set this to `true`, If you want to move **only** the referral (lead or customer) to another promoter.<br> **NB:** if set to `true`, the rewards/commissions associated with the referral will not be moved.",
             "schema": {
               "type": "boolean"
             }
