@@ -392,6 +392,12 @@
             "description": "The refund amount in cents. It's used to calculate the negative commissions/rewards.",
             "schema": { "type": "string" }
           },
+           {
+            "name": "currency",
+            "in": "query",
+            "description": "This field is only required if the currency of the sale/refund is not the same as the one set on FirstPromoter settings. We'll automatically convert the amount from this currency to the default one set on your FirstPromoter account.",
+            "schema": { "type": "string" }
+          },
           {
             "name": "quantity",
             "in": "query",
