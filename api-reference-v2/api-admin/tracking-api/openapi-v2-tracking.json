@@ -630,7 +630,7 @@
                   },
                   "sale_event_id": {
                     "type": "string",
-                    "description": "The event id of the sale for which the refund is processed. Should match the event_id from sale tracking API call. Required for accurate tracking with multiple products or changing commission levels."
+                    "description": "The event id of the sale for which the refund is processed. Should match the event_id from the sales tracking API call. Required for accurate tracking of multiple products or changing commission levels."
                   },
                   "skip_email_notification": {
                     "type": "boolean",
