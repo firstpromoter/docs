@@ -1380,6 +1380,16 @@
             "nullable": true,
             "description": "Date and time when the promoter was archived, if applicable."
           },
+          "custom_fields": {
+            "type": "object",
+            "nullable": true,
+            "description": "Custom fields for the promoter, based on company settings. This is a key-value pair object where keys are custom field identifiers and values are the corresponding data."
+          },
+          "password_setup_url": {
+            "type": "string",
+            "nullable": true,
+            "description": "URL for the promoter to set up their password"
+          },
           "first_event_at": {
             "type": "string",
             "format": "date-time",
