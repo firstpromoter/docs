@@ -1544,11 +1544,6 @@
             "nullable": true,
             "description": "Description of the promoter"
           },
-          "invoice_details_validation_errors": {
-            "type": "object",
-            "nullable": true,
-            "description": "Validation errors for invoice details"
-          },
           "should_validate_invoice_details": {
             "type": "boolean",
             "description": "Should validate invoice details"
