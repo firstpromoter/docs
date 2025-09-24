@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://v2.firstpromoter.com/api/v2/company"
+      "url": "https://api.firstpromoter.com/api/v2/company"
     }
   ],
   "security": [
@@ -20,7 +20,7 @@
       "get": {
         "noindex": true,
         "summary": "Get all contracts",
-        "description": "Returns all contracts \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/contracts`</Tip>",
+        "description": "Returns all contracts \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/contracts`</Tip>",
         "tags": ["Contracts"],
         "parameters": [
           {
@@ -36,7 +36,7 @@
       "post": {
         "noindex": true,
         "summary": "Create a contract. Calls the service that generates the contract documents.",
-        "description": "Create a contract \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/contracts`</Tip>",
+        "description": "Create a contract \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/contracts`</Tip>",
         "tags": ["Contracts"],
         "parameters": [
           {
@@ -64,7 +64,7 @@
       "get": {
         "noindex": true,
         "summary": "Get contract by id",
-        "description": "Returns a contract by id \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/contracts/{id}`</Tip>",
+        "description": "Returns a contract by id \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/contracts/{id}`</Tip>",
         "tags": ["Contracts"],
         "parameters": [
           {
@@ -88,7 +88,7 @@
       "put": {
         "noindex": true,
         "summary": "Update a contract. Calls the service that generates the contract documents if needed.",
-        "description": "Update a contract \n <Tip>**HTTP Request** <br/>`PUT https://v2.firstpromoter.com/api/v2/company/contracts/{id}`</Tip>",
+        "description": "Update a contract \n <Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/contracts/{id}`</Tip>",
         "tags": ["Contracts"],
         "parameters": [
           {
@@ -122,7 +122,7 @@
       "delete": {
         "noindex": true,
         "summary": "Delete a contract",
-        "description": "Delete a contract \n <Tip>**HTTP Request** <br/>`DELETE https://v2.firstpromoter.com/api/v2/company/contracts/{id}`</Tip>",
+        "description": "Delete a contract \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/contracts/{id}`</Tip>",
         "tags": ["Contracts"],
         "parameters": [
           {

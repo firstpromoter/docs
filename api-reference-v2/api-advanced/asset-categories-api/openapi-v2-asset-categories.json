@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://v2.firstpromoter.com/api/v2/company"
+      "url": "https://api.firstpromoter.com/api/v2/company"
     }
   ],
   "security": [
@@ -20,7 +20,7 @@
       "get": {
         "noindex": true,
         "summary": "Get available asset categories",
-        "description": "Get all available asset categories /n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/assets/categories`</Tip>",
+        "description": "Get all available asset categories /n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/assets/categories`</Tip>",
         "tags": ["Asset Categories"],
         "responses": {
           "200": {
@@ -45,7 +45,7 @@
         "noindex": true,
         "summary": "Update asset categories",
         "tags": ["Asset Categories"],
-        "description": "Update asset categories. \n <Tip>**HTTP Request** <br/>`PUT https://v2.firstpromoter.com/api/v2/company/assets/categories`</Tip>",
+        "description": "Update asset categories. \n <Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/assets/categories`</Tip>",
         "requestBody": {
           "required": true,
           "content": {

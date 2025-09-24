@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://v2.firstpromoter.com/api/v2/company"
+      "url": "https://api.firstpromoter.com/api/v2/company"
     }
   ],
   "security": [
@@ -20,7 +20,7 @@
       "get": {
         "noindex": true,
         "summary": "Get available assets",
-        "description": "Get all available assets \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/assets`</Tip>",
+        "description": "Get all available assets \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/assets`</Tip>",
         "tags": ["Assets"],
         "parameters": [
           {
@@ -140,7 +140,7 @@
       "post": {
         "noindex": true,
         "summary": "Create assets",
-        "description": "Create assets \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/assets`</Tip>",
+        "description": "Create assets \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/assets`</Tip>",
         "tags": ["Assets"],
         "parameters": [
           {
@@ -238,7 +238,7 @@
       "get": {
         "noindex": true,
         "summary": "Get asset",
-        "description": "Get asset details \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/assets/{id}`</Tip>",
+        "description": "Get asset details \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/assets/{id}`</Tip>",
         "tags": ["Assets"],
         "parameters": [
           {
@@ -284,7 +284,7 @@
         "noindex": true,
         "summary": "Update asset",
         "tags": ["Assets"],
-        "description":" Update an asset \n <Tip>**HTTP Request** <br/>`PUT https://v2.firstpromoter.com/api/v2/company/assets/{id}`</Tip>",
+        "description":" Update an asset \n <Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/assets/{id}`</Tip>",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -379,7 +379,7 @@
       "put": {
         "noindex": true,
         "summary": "Update category of an asset",
-        "description": "Update category of an asset \n <Tip>**HTTP Request** <br/>`PUT https://v2.firstpromoter.com/api/v2/company/assets/update_category`</Tip>",
+        "description": "Update category of an asset \n <Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/assets/update_category`</Tip>",
         "tags": ["Assets"],
         "parameters": [
           {
@@ -461,7 +461,7 @@
       "delete": {
         "noindex": true,
         "summary": "Delete assets",
-        "description": "Delete assets \n <Tip>**HTTP Request** <br/>`DELETE https://v2.firstpromoter.com/api/v2/company/assets/destroy`</Tip>",
+        "description": "Delete assets \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/assets/destroy`</Tip>",
         "tags": ["Assets"],
         "parameters": [
           {

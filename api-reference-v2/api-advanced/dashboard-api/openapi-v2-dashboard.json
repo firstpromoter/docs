@@ -8,7 +8,7 @@
 
   "servers": [
     {
-      "url": "https://v2.firstpromoter.com/api/v2/company"
+      "url": "https://api.firstpromoter.com/api/v2/company"
     }
   ],
   "security": [
@@ -21,7 +21,7 @@
       "get": {
         "noindex": true,
         "summary": "Get dashboard stats",
-        "description": "Returns data for stats from the top and pending actions. \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/dashboards/stats`</Tip>",
+        "description": "Returns data for stats from the top and pending actions. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/dashboards/stats`</Tip>",
         "tags": ["Dashboards"],
         "parameters": [
           {
@@ -46,7 +46,7 @@
       "get": {
         "noindex": true,
         "summary": "Get dashboard trendings",
-        "description": "Returns data for stats from the top and pending actions. \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/dashboards/trendings`</Tip>",
+        "description": "Returns data for stats from the top and pending actions. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/dashboards/trendings`</Tip>",
         "tags": ["Dashboards"],
 
         "parameters": [
@@ -72,7 +72,7 @@
       "get": {
         "noindex": true,
         "summary": "Get dashboard chart data",
-        "description": "Returns data for chart. \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/dashboards/chart_data`</Tip>",
+        "description": "Returns data for chart. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/dashboards/chart_data`</Tip>",
         "tags": ["Dashboards"],
 
         "parameters": [
@@ -132,7 +132,7 @@
       "get": {
         "noindex": true,
         "summary": "Get dashboard payouts and commissions data",
-        "description": "Returns data for payouts and commissions. \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/dashboards/payouts_and_commissions`</Tip>",
+        "description": "Returns data for payouts and commissions. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/dashboards/payouts_and_commissions`</Tip>",
         "tags": ["Dashboards"],
 
         "parameters": [

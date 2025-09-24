@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://v2.firstpromoter.com/api/v2/company"
+      "url": "https://api.firstpromoter.com/api/v2/company"
     }
   ],
   "security": [
@@ -20,7 +20,7 @@
       "post": {
         "noindex": true,
         "summary": "Pay / Start payments batch",
-        "description": "This endpoint starts a payments batch. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/payments_batches/{id}/pay`</Tip>",
+        "description": "This endpoint starts a payments batch. \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/payments_batches/{id}/pay`</Tip>",
         "tags": ["Payments Batches"],
         "parameters": [
           {
@@ -158,7 +158,7 @@
       "delete": {
         "noindex": true,
         "summary": "Delete payments batch",
-        "description": "Deletes selected payments batch \n <Tip>**HTTP Request** <br/>`DELETE https://v2.firstpromoter.com/api/v2/company/payments_batches/{id}`</Tip>",
+        "description": "Deletes selected payments batch \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/payments_batches/{id}`</Tip>",
         "tags": ["Payments Batches"],
         "parameters": [
           {

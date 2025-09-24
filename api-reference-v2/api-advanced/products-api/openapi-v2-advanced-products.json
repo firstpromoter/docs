@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://v2.firstpromoter.com/api/v2/company",
+      "url": "https://api.firstpromoter.com/api/v2/company",
       "description": "Staging server"
     }
   ],
@@ -22,7 +22,7 @@
         "noindex": true,
         "summary": "Get available products",
         "tags": ["Products"],
-        "description": "Get available products \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/products`</Tip>",
+        "description": "Get available products \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/products`</Tip>",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -69,7 +69,7 @@
         "noindex": true,
         "summary": "Create product",
         "tags": ["Products"],
-        "description": "Create product \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/products`</Tip>",
+        "description": "Create product \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/products`</Tip>",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -157,7 +157,7 @@
         "noindex": true,
         "summary": "Get product",
         "tags": ["Products"],
-        "description": "Get product based on id \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/products/{id}`</Tip>",
+        "description": "Get product based on id \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/products/{id}`</Tip>",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -212,7 +212,7 @@
         "noindex": true,
         "summary": "Update product",
         "tags": ["Products"],
-        "description": "Update product based on id \n <Tip>**HTTP Request** <br/>`PUT https://v2.firstpromoter.com/api/v2/company/products/{id}`</Tip>",
+        "description": "Update product based on id \n <Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/products/{id}`</Tip>",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -316,7 +316,7 @@
         "noindex": true,
         "summary": "Delete product",
         "tags": ["Products"],
-        "description": "Delete product based on id \n <Tip>**HTTP Request** <br/>`DELETE https://v2.firstpromoter.com/api/v2/company/products/{id}`</Tip>",
+        "description": "Delete product based on id \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/products/{id}`</Tip>",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"

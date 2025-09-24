@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://v2.firstpromoter.com/api/v2/company"
+      "url": "https://api.firstpromoter.com/api/v2/company"
     }
   ],
   "security": [
@@ -21,7 +21,7 @@
         "noindex": true,
         "summary": "Get all current version contract documents",
         "tags": ["Contract Documents"],
-        "description": " Get all current version contract documents \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/contract_documents`</Tip>",
+        "description": " Get all current version contract documents \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/contract_documents`</Tip>",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -60,7 +60,7 @@
       "get": {
         "noindex": true,
         "summary": "Get contract documents by id and return it in the selected format (html/pdf)",
-        "description": "Get contract documents by id(html/pdf) \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/contract_documents/{id}`</Tip>",
+        "description": "Get contract documents by id(html/pdf) \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/contract_documents/{id}`</Tip>",
         "tags": ["Contract Documents"],
 
         "parameters": [
