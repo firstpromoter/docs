@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://v2.firstpromoter.com/api/v2/affiliate"
+      "url": "https://api.firstpromoter.com/api/v2/affiliate"
     }
   ],
   "security": [
@@ -20,7 +20,7 @@
       "get": {
         "noindex": true,
         "summary": "Get current version contract documents",
-        "description": "Returns the current contract document  \n <Tip>**HTTP Request** <br/>` GET  https://v2.firstpromoter.com/api/v2/affiliate/contract_documents`</Tip>",
+        "description": "Returns the current contract document  \n <Tip>**HTTP Request** <br/>` GET  https://api.firstpromoter.com/api/v2/affiliate/contract_documents`</Tip>",
         "tags": ["Contract Documents"],
         "parameters": [
           {
@@ -61,7 +61,7 @@
       "get": {
         "noindex": true,
         "summary": "Get contract documents by id (html/pdf)",
-        "description": "Gets contract document and returns it in the selected format  \n <Tip>**HTTP Request** <br/>` GET  https://v2.firstpromoter.com/api/v2/affiliate/contract_documents/{id}`</Tip>",
+        "description": "Gets contract document and returns it in the selected format  \n <Tip>**HTTP Request** <br/>` GET  https://api.firstpromoter.com/api/v2/affiliate/contract_documents/{id}`</Tip>",
         "tags": ["Contract Documents"],
         "parameters": [
           {
@@ -154,7 +154,7 @@
       "post": {
         "noindex": true,
         "summary": "Sign a document with id",
-        "description": "Signs a contract document with id \n <Tip>**HTTP Request** <br/>` GET  https://v2.firstpromoter.com/api/v2/affiliate/contract_documents/{id}/sign`</Tip>",
+        "description": "Signs a contract document with id \n <Tip>**HTTP Request** <br/>` GET  https://api.firstpromoter.com/api/v2/affiliate/contract_documents/{id}/sign`</Tip>",
         "tags": ["Contract Documents"],
         "parameters": [
           {
@@ -242,7 +242,7 @@
           }
         ],
         "summary": "Get the draft content of the contract",
-        "description": "Returns the draft content of the contract with user details \n <Tip>**HTTP Request** <br/>` GET  https://v2.firstpromoter.com/api/v2/affiliate/contract_documents/draft`</Tip>",
+        "description": "Returns the draft content of the contract with user details \n <Tip>**HTTP Request** <br/>` GET  https://api.firstpromoter.com/api/v2/affiliate/contract_documents/draft`</Tip>",
         "tags": ["Contract Documents"],
         "requestBody": {
           "required": true,

@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://v2.firstpromoter.com/api/v2/affiliate"
+      "url": "https://api.firstpromoter.com/api/v2/affiliate"
     }
   ],
   "security": [
