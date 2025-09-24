@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://v2.firstpromoter.com/api/v2/company",
+      "url": "https://api.firstpromoter.com/api/v2/company",
       "description": "Staging server"
     }
   ],
@@ -21,7 +21,7 @@
       "get": {
         "summary": "Get available referrals",
         "tags": ["Referrals"],
-        "description": "Get available referrals \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/referrals`</Tip>",
+        "description": "Get available referrals \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/referrals`</Tip>",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -114,7 +114,7 @@
       "post": {
         "summary": "Create referral",
         "tags": ["Referrals"],
-        "description": "Create a new referral \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/referrals`</Tip>",
+        "description": "Create a new referral \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/referrals`</Tip>",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -191,7 +191,7 @@
       },
       "delete": {
         "summary": "Delete referrals",
-        "description": "With this endpoint you can delete referrals. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`DELETE https://v2.firstpromoter.com/api/v2/company/referrals`</Tip>",
+        "description": "With this endpoint you can delete referrals. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/referrals`</Tip>",
         "tags": ["Referrals"],
         "parameters": [
           {
@@ -242,7 +242,7 @@
       "get": {
         "summary": "Get referral",
         "tags": ["Referrals"],
-        "description": "Get a specific referral \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/referrals/{id}`</Tip>",
+        "description": "Get a specific referral \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/referrals/{id}`</Tip>",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -290,7 +290,7 @@
       },
       "put": {
         "summary": "Update referral",
-        "description": "Update a specific referral. The id can be a referral ID, email, uid, or username when used with the find_by parameter in the request body. \n <Tip>**HTTP Request** <br/>`PUT https://v2.firstpromoter.com/api/v2/company/referrals/{id}`</Tip>",
+        "description": "Update a specific referral. The id can be a referral ID, email, uid, or username when used with the find_by parameter in the request body. \n <Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/referrals/{id}`</Tip>",
         "tags": ["Referrals"],
         "parameters": [
           {
@@ -333,7 +333,7 @@
                   "find_by": {
                     "type": "string",
                     "enum": ["email", "uid", "username"],
-                    "description": "Find by attribute. Required when id parameter is an email, uid, or username instead of an ID.\n\n Your request should follow the format `https://v2.firstpromoter.com/api/v2/company/referrals/{email or uid or username}`"
+                    "description": "Find by attribute. Required when id parameter is an email, uid, or username instead of an ID.\n\n Your request should follow the format `https://api.firstpromoter.com/api/v2/company/referrals/{email or uid or username}`"
                   },
                   "split_details[percentage]": {
                     "type": "number",
@@ -376,7 +376,7 @@
     "/referrals/approve": {
       "post": {
         "summary": "Approve referrals",
-        "description": "With this endpoint you can approve referrals. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/referrals/approve`</Tip>",
+        "description": "With this endpoint you can approve referrals. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/referrals/approve`</Tip>",
         "tags": ["Referrals"],
         "parameters": [
           {
@@ -426,7 +426,7 @@
     "/referrals/disable": {
       "post": {
         "summary": "Disable referrals",
-        "description": "With this endpoint you can disable referrals. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/referrals/disable`</Tip>",
+        "description": "With this endpoint you can disable referrals. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/referrals/disable`</Tip>",
         "tags": ["Referrals"],
         "parameters": [
           {
@@ -476,7 +476,7 @@
     "/referrals/enable": {
       "post": {
         "summary": "Enable referrals",
-        "description": "With this endpoint you can enable referrals. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/referrals/enable`</Tip>",
+        "description": "With this endpoint you can enable referrals. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/referrals/enable`</Tip>",
         "tags": ["Referrals"],
         "parameters": [
           {
@@ -526,7 +526,7 @@
     "/referrals/move_to_promoter": {
       "post": {
         "summary": "Move referrals to promoter",
-        "description": "With this endpoint you can move referrals to another promoter. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/referrals/move_to_promoter`</Tip>",
+        "description": "With this endpoint you can move referrals to another promoter. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/referrals/move_to_promoter`</Tip>",
         "tags": ["Referrals"],
         "parameters": [
           {
@@ -733,7 +733,7 @@
     "/referrals/{id}/import_events": {
       "post": {
         "summary": "Import previous sales from stripe",
-        "description": "With this endpoint you can import previous sales from stripe. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/referrals/{id}/import_events`</Tip>",
+        "description": "With this endpoint you can import previous sales from stripe. \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/referrals/{id}/import_events`</Tip>",
         "tags": ["Referrals"],
         "parameters": [
           {

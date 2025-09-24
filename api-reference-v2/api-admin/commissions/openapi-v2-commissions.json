@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://v2.firstpromoter.com/api/v2/company"
+      "url": "https://api.firstpromoter.com/api/v2/company"
     }
   ],
   "security": [
@@ -19,7 +19,7 @@
     "/commissions": {
       "get": {
         "summary": "Get all commissions",
-        "description": "With this endpoint you can list all rewards and commissions assigned to a promotion, promoter, campaign or entire account using the API. \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/commissions`</Tip>",
+        "description": "With this endpoint you can list all rewards and commissions assigned to a promotion, promoter, campaign or entire account using the API. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/commissions`</Tip>",
         "tags": ["Commissions"],
         "parameters": [
           {
@@ -91,7 +91,7 @@
       },
       "post": {
         "summary": "Create a commission",
-        "description": "With this endpoint you can create a commission. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/commissions`</Tip>",
+        "description": "With this endpoint you can create a commission. \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/commissions`</Tip>",
         "tags": ["Commissions"],
         "parameters": [
           {
@@ -141,7 +141,7 @@
     "/commissions/{id}": {
       "put": {
         "summary": "Update a commission",
-        "description": "With this endpoint you can update a commission. \n <Tip>**HTTP Request** <br/>`PUT https://v2.firstpromoter.com/api/v2/company/commissions/{id}`</Tip>",
+        "description": "With this endpoint you can update a commission. \n <Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/commissions/{id}`</Tip>",
         "tags": ["Commissions"],
         "parameters": [
           {
@@ -208,7 +208,7 @@
     "/commissions/approve": {
       "post": {
         "summary": "Approve commissions",
-        "description": "With this endpoint you can approve commissions. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/commissions/approve`</Tip>",
+        "description": "With this endpoint you can approve commissions. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/commissions/approve`</Tip>",
         "tags": ["Commissions"],
         "parameters": [
           {
@@ -297,7 +297,7 @@
     "/commissions/deny": {
       "post": {
         "summary": "Deny commissions",
-        "description": "With this endpoint you can deny commissions. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n  <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/commissions/deny`</Tip>",
+        "description": "With this endpoint you can deny commissions. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n  <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/commissions/deny`</Tip>",
         "tags": ["Commissions"],
         "parameters": [
           {
@@ -386,7 +386,7 @@
     "/commissions/mark_fulfilled": {
       "post": {
         "summary": "Mark nonmonetary commissions as fulfilled",
-        "description": "With this endpoint you can mark nonmonetary commissions as fulfilled. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/commissions/mark_fulfilled`</Tip>",
+        "description": "With this endpoint you can mark nonmonetary commissions as fulfilled. \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/commissions/mark_fulfilled`</Tip>",
         "tags": ["Commissions"],
         "parameters": [
           {
@@ -475,7 +475,7 @@
     "/commissions/mark_unfulfilled": {
       "post": {
         "summary": "Mark nonmonetary commissions as unfulfilled",
-        "description": "With this endpoint you can mark nonmonetary commissions as unfulfilled. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/commissions/mark_unfulfilled`</Tip>",
+        "description": "With this endpoint you can mark nonmonetary commissions as unfulfilled. \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/commissions/mark_unfulfilled`</Tip>",
         "tags": ["Commissions"],
         "parameters": [
           {
@@ -564,7 +564,7 @@
     "/commissions/destroy": {
       "delete": {
         "summary": "Delete commissions",
-        "description": "With this endpoint you can delete commissions. \n <Tip>**HTTP Request** <br/>`DELETE https://v2.firstpromoter.com/api/v2/company/commissions/destroy`</Tip>",
+        "description": "With this endpoint you can delete commissions. \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/commissions/destroy`</Tip>",
         "tags": ["Commissions"],
         "parameters": [
           {
@@ -653,7 +653,7 @@
     "/commissions/generate_payouts": {
       "post": {
         "summary": "Generate payouts for commissions",
-        "description": "With this endpoint you can generate payouts for commissions. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/company/commissions/generate_payouts`</Tip>",
+        "description": "With this endpoint you can generate payouts for commissions. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/commissions/generate_payouts`</Tip>",
         "tags": ["Commissions", "Payouts"],
         "operationId": "generatePayouts",
         "parameters": [

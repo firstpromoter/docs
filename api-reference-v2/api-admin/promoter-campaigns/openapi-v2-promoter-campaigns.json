@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://v2.firstpromoter.com/api/v2/company"
+      "url": "https://api.firstpromoter.com/api/v2/company"
     }
   ],
   "security": [
@@ -19,7 +19,7 @@
     "/promoter_campaigns": {
       "get": {
         "summary": "Get available promoter campaigns",
-        "description": "With this endpoint you can list all promoter campaigns. \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/promoter_campaigns`</Tip>",
+        "description": "With this endpoint you can list all promoter campaigns. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/promoter_campaigns`</Tip>",
         "tags": ["Promoter Campaigns"],
             "parameters": [
           {
@@ -59,7 +59,7 @@
     "/promoter_campaigns/search": {
       "get": {
         "summary": "Returns results for promoter campaigns dropdown search. Max results: 5",
-        "description": "With this endpoint you can search for promoter campaigns. \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/promoter_campaigns/search?q=...`</Tip>",
+        "description": "With this endpoint you can search for promoter campaigns. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/promoter_campaigns/search?q=...`</Tip>",
         "tags": ["Promoter Campaigns"],
 
         "parameters": [
@@ -110,7 +110,7 @@
       "put": {
         "summary": "Update promoter campaign",
         "operationId": "updatePromoterCampaign",
-        "description": "With this endpoint you can update a promoter campaign. \n <Tip>**HTTP Request** <br/>`PUT https://v2.firstpromoter.com/api/v2/company/promoter_campaigns/{id}`</Tip>",
+        "description": "With this endpoint you can update a promoter campaign. \n <Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/promoter_campaigns/{id}`</Tip>",
         "tags": ["Promoter Campaigns"],
 
         "parameters": [
@@ -220,7 +220,7 @@
       "get": {
         "summary": "Get promoter campaign referral links",
         "operationId": "getReferralLinksAssociatedWithThisPromoterCampaign",
-        "description": "With this endpoint you can get the referral links associated with this promoter campaign.<Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/promoter_campaigns/{id}/referral_links`</Tip>",
+        "description": "With this endpoint you can get the referral links associated with this promoter campaign.<Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/promoter_campaigns/{id}/referral_links`</Tip>",
         "tags": ["Promoter Campaigns"],
 
         "parameters": [
@@ -282,7 +282,7 @@
         "summary": "Get data used for chart",
         "tags": ["Promoter Campaigns"],
         "operationId": "getPromoterCampaignChartData",
-        "description": "With this endpoint you can get the data used for charts.<Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/promoter_campaigns/{id}/chart_data`</Tip>",
+        "description": "With this endpoint you can get the data used for charts.<Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/promoter_campaigns/{id}/chart_data`</Tip>",
 
         "parameters": [
           {

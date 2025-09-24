@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://v2.firstpromoter.com/api/v2/company",
+      "url": "https://api.firstpromoter.com/api/v2/company",
       "description": "Production server"
     }
   ],
@@ -20,7 +20,7 @@
     "/batch_processes": {
       "get": {
         "summary": "List in progress batch processes.",
-        "description": "List batch processes that are in progress \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/batch_processes`</Tip>",
+        "description": "List batch processes that are in progress \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/batch_processes`</Tip>",
         "operationId": "listBatchProcesses",
         "parameters": [
           {
@@ -93,7 +93,7 @@
     "/batch_processes/{id}": {
       "get": {
         "summary": "Show batch process",
-        "description": "Show details of a specific batch process \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/batch_processes/{id}`</Tip>",
+        "description": "Show details of a specific batch process \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/batch_processes/{id}`</Tip>",
         "operationId": "getBatchProcess",
         "parameters": [
           {
@@ -139,7 +139,7 @@
     "/batch_processes/progress": {
       "get": {
         "summary": "Show progress",
-        "description": "Show progress of batch process. \n <Tip>**HTTP Request** <br/>`GET https://v2.firstpromoter.com/api/v2/company/batch_processes/progress`</Tip>",
+        "description": "Show progress of batch process. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/batch_processes/progress`</Tip>",
         "operationId": "getBatchProcessProgress",
         "parameters": [
           {
