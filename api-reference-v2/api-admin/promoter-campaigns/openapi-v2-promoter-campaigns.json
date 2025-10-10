@@ -220,7 +220,7 @@
       "get": {
         "summary": "Get promoter campaign referral links",
         "operationId": "getReferralLinksAssociatedWithThisPromoterCampaign",
-        "description": "With this endpoint you can get the referral links associated with this promoter campaign.<Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/promoter_campaigns/{id}/referral_links`</Tip>",
+        "description": "With this endpoint you can get the referral links associated with this promoter campaign. <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/promoter_campaigns/{id}/referral_links`</Tip>",
         "tags": ["Promoter Campaigns"],
 
         "parameters": [
