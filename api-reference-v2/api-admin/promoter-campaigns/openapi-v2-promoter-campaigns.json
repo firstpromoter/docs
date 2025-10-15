@@ -295,7 +295,7 @@
             "schema": {
               "type": "integer"
             },
-            "description": "Promoter campaign ID"
+            "description": "Promoter campaign ID. This ID is not the promoter’s ID or the campaign’s ID. It’s the linking record that defines the promoter’s participation in that campaign. You can find this id in each object in the promoter_campaigns array when you get the details of the promoter."
           },
           {
             "in": "query",
