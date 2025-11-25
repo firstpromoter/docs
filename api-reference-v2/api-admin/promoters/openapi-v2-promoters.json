@@ -753,7 +753,11 @@
                   "drip_emails": {
                     "type": "boolean",
                     "description": "If true, it will send an email to the promoter for this action"
-                  }
+                  },
+                  "soft_move_referrals": {
+                    "type": "boolean",
+                      "description": "If `true`, move referrals to NEW campaign and future commissions from existing referrals will be tracked in the NEW campaign. However, if `false`, keep referrals in the old campaign and future commissions from existing referrals will be tracked in the OLD campaign."
+                  },
                 }
               }
             }
