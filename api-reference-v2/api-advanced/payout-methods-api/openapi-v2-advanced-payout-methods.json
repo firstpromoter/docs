@@ -58,8 +58,8 @@
         }
       },
       "post": {
-        
         "summary": "Create a payout method",
+          "description": "This endpoint creates a payout method under a promoter \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/payout_methods`</Tip>",
         "operationId": "adminCreatePayoutMethod",
         "tags": ["Payout Methods"],
         "parameters": [
@@ -148,7 +148,7 @@
         }
       },
       "put": {
-        
+             "description": "This endpoint updates a payout method under a promoter \n <Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/payout_methods`</Tip>",
         "summary": "Update a payout method",
         "operationId": "adminUpdatePayoutMethod",
         "tags": ["Payout Methods"],
