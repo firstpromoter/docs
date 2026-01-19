@@ -18,7 +18,6 @@
   "paths": {
     "/promoters/current": {
       "get": {
-        "noindex": true,
         "summary": "Get current promoter",
         "tags": ["Promoters"],
         "parameters": [
@@ -63,7 +62,6 @@
     },
     "/promoters/sub_affiliates": {
       "get": {
-        "noindex": true,
         "summary": "Get current promoter sub affiliates",
         "tags": ["Promoters"],
         "parameters": [
@@ -96,7 +94,6 @@
     },
     "/promoters/chart_data": {
       "get": {
-        "noindex": true,
         "summary": "Get chart data",
         "tags": ["Promoters"],
         "parameters": [
@@ -152,7 +149,6 @@
     },
     "/promoters/email_from_encrypted_id": {
       "get": {
-        "noindex": true,
         "summary": "Get the promoter email",
         "tags": ["Promoters"],
         "parameters": [
@@ -193,7 +189,6 @@
     },
     "/promoters/set_password": {
       "put": {
-        "noindex": true,
         "summary": "Set the user password",
         "tags": ["Promoters"],
         "parameters": [
@@ -249,7 +244,6 @@
     },
     "/promoters/archive": {
       "post": {
-        "noindex": true,
         "summary": "Archives current promoter",
         "tags": ["Promoters"],
         "parameters": [

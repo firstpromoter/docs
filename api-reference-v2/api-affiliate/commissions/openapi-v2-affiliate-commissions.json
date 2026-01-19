@@ -18,7 +18,6 @@
   "paths": {
     "/commissions": {
       "get": {
-        "noindex": true,
         "summary": "Get all commissions",
         "description": "Return all commissions \n <Tip>**HTTP Request** <br/>` GET  https://api.firstpromoter.com/api/v2/affiliate/commissions`</Tip>",
         "tags": ["Commissions"],
@@ -305,7 +304,6 @@
     },
     "/commissions/export": {
       "get": {
-        "noindex": true,
         "summary": "Export all commissions",
         "description": "Export all commissions \n <Tip>**HTTP Request** <br/>` GET  https://api.firstpromoter.com/api/v2/affiliate/commissions/export`</Tip>",
         "tags": ["Commissions"],

@@ -18,7 +18,6 @@
   "paths": {
     "/reports/overview": {
       "get": {
-        "noindex": true,
         "summary": "Get campaigns reports",
         "tags": ["Reports"],
         "parameters": [
@@ -154,7 +153,6 @@
     },
     "/reports/sub_ids": {
       "get": {
-        "noindex": true,
         "summary": "Get sub_ids report",
         "tags": ["Reports"],
         "parameters": [
@@ -282,7 +280,6 @@
     },
     "/reports/download": {
       "get": {
-        "noindex": true,
         "summary": "Download reports",
         "tags": ["Reports"],
         "parameters": [

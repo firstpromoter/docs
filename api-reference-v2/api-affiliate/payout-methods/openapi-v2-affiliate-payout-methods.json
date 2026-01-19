@@ -18,7 +18,6 @@
   "paths": {
     "/payout_methods": {
       "get": {
-        "noindex": true,
         "summary": "Get all payout methods",
         "tags": ["Payout Methods"],
         "parameters": [
@@ -68,7 +67,6 @@
         }
       },
       "post": {
-        "noindex": true,
         "summary": "Create a payout method",
         "tags": ["Payout Methods"],
         "parameters": [
@@ -114,7 +112,6 @@
     },
     "/payout_methods/{id}": {
       "get": {
-        "noindex": true,
         "summary": "Get a payout method",
         "tags": ["Payout Methods"],
 
@@ -155,7 +152,6 @@
         }
       },
       "put": {
-        "noindex": true,
         "summary": "Update a payout method",
         "tags": ["Payout Methods"],
         "parameters": [
@@ -211,7 +207,6 @@
         }
       },
       "delete": {
-        "noindex": true,
         "summary": "Delete a payout method",
         "tags": ["Payout Methods"],
 

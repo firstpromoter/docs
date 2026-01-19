@@ -18,7 +18,6 @@
   "paths": {
     "/email_settings": {
       "get": {
-        "noindex": true,
         "summary": "Get affiliate email settings",
         "tags": ["Email Settings"],
         "parameters": [
@@ -87,7 +86,6 @@
     },
     "/email_settings/{id}": {
       "put": {
-        "noindex": true,
         "summary": "Update affiliate email settings",
         "tags": ["Email Settings"],
         "parameters": [

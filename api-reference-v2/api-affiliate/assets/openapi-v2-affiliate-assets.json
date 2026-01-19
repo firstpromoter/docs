@@ -18,7 +18,6 @@
   "paths": {
     "/assets": {
       "get": {
-        "noindex": true,
         "summary": "Get available assets",
         "description": "Returns all assets \n <Tip>**HTTP Request** <br/>` GET  https://api.firstpromoter.com/api/v2/affiliate/assets`</Tip>",
         "parameters": [
@@ -194,7 +193,6 @@
     },
     "/asset_categories": {
       "get": {
-        "noindex": true,
         "summary": "Get available asset categories",
         "description":"Returns all asset categories \n <Tip>**HTTP Request** <br/>` GET  https://api.firstpromoter.com/api/v2/affiliate/asset_categories`</Tip>",
         "parameters": [

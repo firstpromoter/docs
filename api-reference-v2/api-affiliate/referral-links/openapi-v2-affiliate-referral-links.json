@@ -18,7 +18,6 @@
   "paths": {
     "/referral_links": {
       "get": {
-        "noindex": true,
         "summary": "Get current promoter referral links",
         "operationId": "getReferralLinks",
         "parameters": [

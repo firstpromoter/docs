@@ -18,7 +18,6 @@
   "paths": {
     "/promo_codes": {
       "post": {
-        "noindex": true,
         "summary": "Create promo code",
         "tags": ["Promo Codes"],
         "parameters": [
@@ -82,7 +81,6 @@
     },
     "/promo_codes/{id}": {
       "put": {
-        "noindex": true,
         "summary": "Update promo code by id",
         "description": "Can not be updated if archived and ext_id present and promoter can manage tracking coupons.",
         "tags": ["Promo Codes"],

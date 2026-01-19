@@ -18,7 +18,6 @@
   "paths": {
     "/referrals": {
       "get": {
-        "noindex": true,
         "summary": "Get available referrals",
         "operationId": "getReferrals",
         "parameters": [
@@ -173,7 +172,6 @@
         }
       },
       "post": {
-        "noindex": true,
         "summary": "Create referral",
         "operationId": "createReferral",
         "parameters": [
@@ -246,7 +244,6 @@
     },
     "/referrals/{id}": {
       "put": {
-        "noindex": true,
         "summary": "Update referral",
         "operationId": "updateReferral",
         "parameters": [
@@ -310,7 +307,6 @@
         }
       },
       "delete": {
-        "noindex": true,
         "summary": "Delete referral",
         "operationId": "deleteReferral",
         "parameters": [
@@ -348,7 +344,6 @@
     },
     "/referrals/export": {
       "get": {
-        "noindex": true,
         "summary": "Export referrals",
         "operationId": "exportReferrals",
         "parameters": [
