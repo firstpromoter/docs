@@ -19,7 +19,6 @@
   "paths": {
     "/payout_methods": {
       "get": {
-        
         "summary": "Get all payout methods",
         "description": "This endpoint gets all payout methods \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/payout_methods`</Tip>",
         "operationId": "adminGetPayoutMethods",

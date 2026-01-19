@@ -19,7 +19,6 @@
   "paths": {
     "/rewards": {
       "get": {
-        "noindex": true,
         "summary": "Get available rewards",
         "tags": ["Rewards"],
         "description": "Get available rewards for current company \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/rewards`</Tip>",
@@ -77,7 +76,6 @@
         }
       },
       "post": {
-        "noindex": true,
         "summary": "Create reward",
         "tags": ["Rewards"],
         "description": "Create rewards for current company \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/rewards`</Tip>",
@@ -260,7 +258,6 @@
     },
     "/rewards/{id}": {
       "put": {
-        "noindex": true,
         "summary": "Update reward",
         "tags": ["Rewards"],
         "description": "Update reward for current company \n <Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/rewards/{id}`</Tip>",
@@ -428,7 +425,6 @@
     },
     "/rewards/{id}/hide": {
       "post": {
-        "noindex": true,
         "summary": "Hide reward",
         "tags": ["Rewards"],
         "description": "Hide reward for current company \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/rewards/{id}/hide`</Tip>",
