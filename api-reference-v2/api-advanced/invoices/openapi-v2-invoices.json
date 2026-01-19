@@ -19,7 +19,6 @@
     "/invoices": {
       "get": {
         "summary": "Get invoices",
-        "noindex": true,
         "description": "Returns all invoices. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/invoices`</Tip>",
         "tags": ["Invoices"],
         "parameters": [
@@ -76,7 +75,6 @@
     },
     "/invoices/{id}": {
       "get": {
-        "noindex": true,
         "summary": "Get invoice by id",
         "description": "Returns single invoice \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/invoices/{id}`</Tip>",
         "tags": ["Invoices"],
@@ -135,7 +133,6 @@
     },
     "/invoices/void": {
       "post": {
-        "noindex": true,
         "summary": "Void invoices",
         "description": "Marks invoices as void \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/invoices/void`</Tip>",
         "tags": ["Invoices"],
@@ -196,7 +193,6 @@
     },
     "/invoices/finalize": {
       "post": {
-        "noindex": true,
         "summary": "Finalize invoices",
         "description": "Marks invoices as finalized \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/invoices/finalize`</Tip>",
         "tags": ["Invoices"],
@@ -257,7 +253,6 @@
     },
     "/invoices/destroy": {
       "delete": {
-        "noindex": true,
         "summary": "Destroy invoices",
         "description": "Deletes invoices \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/invoices/destroy`</Tip>",
         "tags": ["Invoices"],
@@ -311,7 +306,6 @@
     },
     "/invoices/export": {
       "get": {
-        "noindex": true,
         "summary": "Export invoices as csv",
         "description": "Exports invoices as csv \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/invoices/export`</Tip>",
         "tags": ["Invoices"],
@@ -350,7 +344,6 @@
     },
     "/invoices/export_zip": {
       "get": {
-        "noindex": true,
         "summary": "Export all invoices PDF in a single zip",
         "description": "Exports invoices PDF in a single zip \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/invoices/export_zip`</Tip>",
         "tags": ["Invoices"],
@@ -386,7 +379,6 @@
     },
     "/invoices/template": {
       "get": {
-        "noindex": true,
         "summary": "Show invoice template",
         "description": "<Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/invoices/template`</Tip>",
         "tags": ["Invoice Templates"],
@@ -427,7 +419,6 @@
     },
     "/invoices/preview_template": {
       "post": {
-        "noindex": true,
         "summary": "Show invoice template preview",
         "description": "<Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/invoices/preview_template`</Tip>",
         "tags": ["Invoice Templates"],
@@ -489,7 +480,6 @@
     },
     "/invoices/custom_template": {
       "put": {
-        "noindex": true,
         "summary": "Update invoice template",
         "description": "<Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/invoices/custom_template`</Tip>",
         "tags": ["Invoice Templates"],
@@ -547,7 +537,6 @@
     },
     "/invoices/preview": {
       "get": {
-        "noindex": true,
         "summary": "Show invoice preview",
         "description": "<Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/invoices/preview`</Tip>",
         "tags": ["Invoices"],
