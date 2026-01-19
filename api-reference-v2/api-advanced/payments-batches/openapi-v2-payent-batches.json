@@ -18,7 +18,6 @@
   "paths": {
     "/payments_batches/{id}/pay": {
       "post": {
-        "noindex": true,
         "summary": "Pay / Start payments batch",
         "description": "This endpoint starts a payments batch. \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/payments_batches/{id}/pay`</Tip>",
         "tags": ["Payments Batches"],
@@ -156,7 +155,6 @@
     },
     "/payments_batches/{id}": {
       "delete": {
-        "noindex": true,
         "summary": "Delete payments batch",
         "description": "Deletes selected payments batch \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/payments_batches/{id}`</Tip>",
         "tags": ["Payments Batches"],
