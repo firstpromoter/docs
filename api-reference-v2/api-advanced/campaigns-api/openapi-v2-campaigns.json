@@ -19,7 +19,6 @@
   "paths": {
     "/campaigns": {
       "get": {
-        "noindex": true,
         "summary": "Get all campaigns",
         "tags": ["Campaigns"],
         "description": "With this endpoint you can list all campaigns. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/campaigns`</Tip>",
@@ -68,7 +67,6 @@
         }
       },
       "post": {
-        "noindex": true,
         "summary": "Create a campaign",
         "tags": ["Campaigns"],
         "description": "With this endpoint you can create a campaign. \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/campaigns`</Tip>",
@@ -147,7 +145,6 @@
     },
     "/campaigns/{id}": {
       "get": {
-        "noindex": true,
         "summary": "Get a campaign",
         "tags": ["Campaigns"],
         "description": "With this endpoint you can get a campaign.<Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/campaigns/{id}`</Tip>",
@@ -221,7 +218,6 @@
         }
       },
       "put": {
-        "noindex": true,
         "summary": "Update a campaign",
         "tags": ["Campaigns"],
         "description": "With this endpoint you can update a campaign. \n <Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/campaigns/{id}`</Tip>",
@@ -305,7 +301,6 @@
         }
       },
       "delete": {
-        "noindex": true,
         "summary": "Delete a campaign",
         "tags": ["Campaigns"],
         "description": "With this endpoint you can delete a campaign. \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/campaigns/{id}`</Tip>",

@@ -673,10 +673,10 @@
         }
       }
     },
-    "/payouts/batch/mark_as_paid": {
+    "/payouts/mark_as_paid": {
       "post": {
         "summary": "Mark payouts as paid",
-        "description": "Marks selected payouts as paid \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/payouts/batch/mark_as_paid`</Tip>",
+        "description": "Marks selected payouts as paid \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/payouts/mark_as_paid`</Tip>",
         "operationId": "markPayoutsAsPaid",
         "parameters": [
           {
@@ -752,10 +752,10 @@
         }
       }
     },
-    "/payouts/batch/mark_as_unpaid": {
+    "/payouts/mark_as_unpaid": {
       "post": {
         "summary": "Mark payouts as unpaid",
-        "description": "Marks selected payouts as unpaid \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/payouts/batch/mark_as_unpaid`</Tip>",
+        "description": "Marks selected payouts as unpaid \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/payouts/mark_as_unpaid`</Tip>",
         "operationId": "markPayoutsAsUnpaid",
         "parameters": [
           {
@@ -831,10 +831,10 @@
         }
       }
     },
-    "/payouts/batch/destroy": {
+    "/payouts/destroy": {
       "delete": {
         "summary": "Delete payouts",
-        "description": "Deletes selected payouts \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/payouts/batch/destroy`</Tip>",
+        "description": "Deletes selected payouts \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/payouts/destroy`</Tip>",
         "operationId": "deletePayouts",
         "parameters": [
           {

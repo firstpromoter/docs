@@ -22,11 +22,19 @@
                 "groups": [
                   {
                     "group": "Overview",
-                    "pages": ["introduction", "how-it-works", "quickstart"]
+                    "pages": [
+                      "introduction",
+                      "how-it-works",
+                      "quickstart"
+                    ]
                   },
                   {
                     "group": "How to guides",
-                    "pages": ["guides/tracking-with-fprjs","guides/tracking-without-fprjs","guides/proxy-setup"]
+                    "pages": [
+                      "guides/tracking-with-fprjs",
+                      "guides/tracking-without-fprjs",
+                      "guides/proxy-setup"
+                    ]
                   },
                   {
                     "group": "Scripts",
@@ -118,7 +126,7 @@
                       "api-reference-v2/api-admin/authentication"
                     ]
                   },
-                    {
+                  {
                     "group": "Batch Processes",
                     "pages": [
                       "api-reference-v2/api-admin/batches/list-inprogress-batch-processes",
@@ -126,7 +134,7 @@
                       "api-reference-v2/api-admin/batches/show-progress"
                     ]
                   },
-                        {
+                  {
                     "group": "Tracking Api",
                     "pages": [
                       "api-reference-v2/api-admin/tracking-api/leads-and-signups",
@@ -152,8 +160,8 @@
                       "api-reference-v2/api-admin/promoters/create-promoter",
                       "api-reference-v2/api-admin/promoters/get-promoter-details",
                       "api-reference-v2/api-admin/promoters/update-promoter",
-                       "api-reference-v2/api-admin/promoters/assign-parent-promoter",
-                     "api-reference-v2/api-admin/promoters/add-promoter-to-campaign",
+                      "api-reference-v2/api-admin/promoters/assign-parent-promoter",
+                      "api-reference-v2/api-admin/promoters/add-promoter-to-campaign",
                       "api-reference-v2/api-admin/promoters/move-promoter-to-campaign",
                       "api-reference-v2/api-admin/promoters/accept-promoters",
                       "api-reference-v2/api-admin/promoters/reject-promoters",
@@ -162,9 +170,8 @@
                       "api-reference-v2/api-admin/promoters/restore-unarchived-promoters"
                     ]
                   },
-
                   {
-                     "group": "Promoter Campaigns",
+                    "group": "Promoter Campaigns",
                     "pages": [
                       "api-reference-v2/api-admin/promoter-campaigns/get-available-promoter-campaigns",
                       "api-reference-v2/api-admin/promoter-campaigns/update-promoter-campaign"
@@ -443,7 +450,7 @@
                       "api-reference-v2/api-advanced/payout-methods-api/delete-a-payout-method"
                     ]
                   },
-                    {
+                  {
                     "group": "Products",
                     "pages": [
                       "api-reference-v2/api-advanced/products-api/get-products",
@@ -462,7 +469,6 @@
                       "api-reference-v2/api-advanced/referrals/import-previous-sales-from-stripe"
                     ]
                   },
-
                   {
                     "group": "Rewards",
                     "pages": [
@@ -483,8 +489,8 @@
           },
           {
             "anchor": "Help Center",
-            "href": "https://help.firstpromoter.com/en/",
-            "icon": "square-question"
+            "icon": "square-question",
+            "href": "https://help.firstpromoter.com/en/"
           }
         ]
       },
@@ -500,11 +506,19 @@
                 "groups": [
                   {
                     "group": "Overview",
-                    "pages": ["introduction", "how-it-works", "quickstart"]
+                    "pages": [
+                      "introduction",
+                      "how-it-works",
+                      "quickstart"
+                    ]
                   },
                   {
                     "group": "How to Guides",
-                    "pages": ["guides/tracking-with-fprjs","guides/tracking-without-fprjs","guides/proxy-setup"]
+                    "pages": [
+                      "guides/tracking-with-fprjs",
+                      "guides/tracking-without-fprjs",
+                      "guides/proxy-setup"
+                    ]
                   },
                   {
                     "group": "Scripts",
@@ -657,13 +671,13 @@
           },
           {
             "anchor": "API Reference",
-            "href": "https://docs.firstpromoter.com/api-reference-v1/introduction",
-            "icon": "webhook"
+            "icon": "webhook",
+            "href": "https://docs.firstpromoter.com/api-reference-v1/introduction"
           },
           {
             "anchor": "Help Center",
-            "href": "https://help.firstpromoter.com/en/",
-            "icon": "square-question"
+            "icon": "square-question",
+            "href": "https://help.firstpromoter.com/en/"
           }
         ]
       }
