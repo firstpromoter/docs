@@ -19,7 +19,7 @@
   "paths": {
     "/payout_methods": {
       "get": {
-        "noindex": true,
+        
         "summary": "Get all payout methods",
         "description": "This endpoint gets all payout methods \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/payout_methods`</Tip>",
         "operationId": "adminGetPayoutMethods",
@@ -59,7 +59,7 @@
         }
       },
       "post": {
-        "noindex": true,
+        
         "summary": "Create a payout method",
         "operationId": "adminCreatePayoutMethod",
         "tags": ["Payout Methods"],
@@ -109,7 +109,7 @@
     },
     "/payout_methods/{id}": {
       "get": {
-        "noindex": true,
+        
         "summary": "Get a payout method",
         "description": "This endpoint gets a payout method \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/payout_methods/{id}`</Tip>",
         "operationId": "adminGetPayoutMethod",
@@ -149,7 +149,7 @@
         }
       },
       "put": {
-        "noindex": true,
+        
         "summary": "Update a payout method",
         "operationId": "adminUpdatePayoutMethod",
         "tags": ["Payout Methods"],
@@ -205,7 +205,7 @@
         }
       },
       "delete": {
-        "noindex": true,
+        
         "summary": "Delete a payout method",
         "operationId": "adminDeletePayoutMethod",
         "tags": ["Payout Methods"],
