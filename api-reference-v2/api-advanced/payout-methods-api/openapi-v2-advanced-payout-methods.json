@@ -148,7 +148,7 @@
         }
       },
       "put": {
-             "description": "This endpoint updates a payout method under a promoter \n <Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/payout_methods`</Tip>",
+             "description": "This endpoint updates a payout method under a promoter \n <Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/payout_methods/{id}`</Tip>",
         "summary": "Update a payout method",
         "operationId": "adminUpdatePayoutMethod",
         "tags": ["Payout Methods"],

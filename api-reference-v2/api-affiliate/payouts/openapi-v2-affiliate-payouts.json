@@ -16,7 +16,7 @@
     }
   ],
   "paths": {
-    "/affiliate/v1/payouts": {
+    "/payouts": {
       "get": {
         "summary": "Get all payouts",
         "tags": ["Payouts"],
@@ -167,7 +167,7 @@
         }
       }
     },
-    "/affiliate/v1/payouts/due_stats": {
+    "/payouts/due_stats": {
       "get": {
         "summary": "Get due payout stats",
         "tags": ["Payouts"],
@@ -215,7 +215,7 @@
         }
       }
     },
-    "/affiliate/v1/payouts/export": {
+    "/payouts/export": {
       "get": {
         "summary": "Export payouts",
         "tags": ["Payouts"],
