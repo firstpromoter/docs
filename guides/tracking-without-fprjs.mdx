@@ -68,7 +68,7 @@ storeReferralLinkTokenInCookies('fpr', 60);
 </CodeGroup>
 
 
-### II. Retrive referral ID/token 
+### II. Retrieve referral ID/token
 
 <CodeGroup>
 
@@ -86,7 +86,7 @@ var ref_id = getReferralLinkToken();
 </script>
 
 ```	
-```javascript client Side(cookie retrieval implementation)
+```javascript client side (cookie retrieval implementation)
 
 <script>
 // Function to retrieve referral ID/token stored in document.cookie
@@ -117,7 +117,7 @@ const cookieParser = require('cookie-parser');
 const app = express();
 app.use(cookieParser());
 app.post('/signup', (req, res) => {
-  // retreive the referral ID/token (_fprom_ref) from server-side.
+  // retrieve the referral ID/token (_fprom_ref) from server-side.
   const ref_id = req.cookies['_fprom_ref'];
   
   // make API call with ref_id to track referral

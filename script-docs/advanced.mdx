@@ -70,7 +70,7 @@ fpr("click");
 
 ## Forcing a new tid to be created or reinitializing the FirstPromoter cookies
 
-You can force a new tid to be created by invalidating the old one this can be done by passing cookie_ref_id: 'xxx' as shown in the example below
+You can force a new tid to be created by invalidating the old one. This can be done by passing cookie_ref_id: 'xxx' as shown in the example below
 
 ```js
 fpr("referral",{email: getParam("wj_lead_email")}, function(){
@@ -78,7 +78,7 @@ window.fpr("click",{cookie_ref_id: 'xxx'});
 });
 ```
 
-it can also be used to force new emails to be collected on page refresh
+It can also be used to force new emails to be collected on page refresh
 
 ```html
 <script>(function(w){w.fpr=w.fpr||function(){w.fpr.q = w.fpr.q||[];w.fpr.q[arguments[0]=='set'?'unshift':'push'](arguments);};})(window);
