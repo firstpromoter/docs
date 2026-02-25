@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "FirstPromoter Assets API",
+    "title": "FirstPromoter Campaigns API",
     "version": "2.0.0",
-    "description": "API for managing assets in FirstPromoter"
+    "description": "API for managing campaigns in FirstPromoter"
   },
   "servers": [
     {

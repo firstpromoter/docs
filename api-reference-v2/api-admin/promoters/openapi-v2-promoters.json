@@ -757,7 +757,7 @@
                   "soft_move_referrals": {
                     "type": "boolean",
                       "description": "If `true`, move referrals to NEW campaign and future commissions from existing referrals will be tracked in the NEW campaign. However, if `false`, keep referrals in the old campaign and future commissions from existing referrals will be tracked in the OLD campaign."
-                  },
+                  }
                 }
               }
             }
@@ -860,7 +860,7 @@
                   },
                   "drip_emails": {
                     "type": "boolean",
-                    "description": "If true, it will send an emails to the promoter for this action"
+                    "description": "If true, it will send an email to the promoter for this action"
                   }
                 }
               }
@@ -1140,8 +1140,7 @@
         "required": true,
         "description": "Account id. You can find your Account ID on Your FirstPromoter Dashboard. Navigate to Settings → Integrations",
         "schema": {
-          "type": "string",
-        
+          "type": "string"
         }
       }
     },
@@ -1828,6 +1827,27 @@
               ],
               "description": "Suspicion type filter"
             }
+          },
+          "inactivity": {
+            "type": "object",
+            "description": "Filter promoters by inactivity — promoters who have not performed the specified metric within the given number of days",
+            "properties": {
+              "metric": {
+                "type": "string",
+                "enum": ["referral", "customer", "click", "sale"],
+                "description": "The activity metric to measure inactivity against"
+              },
+              "days": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "Number of days of inactivity"
+              }
+            }
+          },
+          "invoice_details_status": {
+            "type": "string",
+            "enum": ["approved", "pending", "rejected", "not_submitted"],
+            "description": "Filter promoters by their invoice details status"
           }
         }
       },

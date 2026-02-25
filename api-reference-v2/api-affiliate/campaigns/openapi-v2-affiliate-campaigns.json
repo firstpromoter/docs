@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Affiliate::V1::Campaigns",
+    "title": "FirstPromoter Affiliate Campaigns API",
     "version": "1.0",
     "description": "Get all campaigns "
   },

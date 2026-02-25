@@ -59,7 +59,7 @@
             "in": "query",
             "name": "filters[promoter_id]",
             "schema": {
-              "type": "string",
+              "type": "string"
             },
             "description": "Filter the referrals by a promoter id"
           },
@@ -80,6 +80,60 @@
               ]
             },
             "description": "Filter the referrals by state"
+          },
+          {
+            "in": "query",
+            "name": "filters[customer_since][from]",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "Filter referrals where customer_since is on or after this date (ISO 8601 format: YYYY-MM-DD)"
+          },
+          {
+            "in": "query",
+            "name": "filters[customer_since][to]",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "Filter referrals where customer_since is on or before this date (ISO 8601 format: YYYY-MM-DD)"
+          },
+          {
+            "in": "query",
+            "name": "filters[created_at][from]",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "Filter referrals created on or after this date (ISO 8601 format: YYYY-MM-DD)"
+          },
+          {
+            "in": "query",
+            "name": "filters[created_at][to]",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "Filter referrals created on or before this date (ISO 8601 format: YYYY-MM-DD)"
+          },
+          {
+            "in": "query",
+            "name": "filters[cancelled_at][from]",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "Filter referrals cancelled on or after this date (ISO 8601 format: YYYY-MM-DD)"
+          },
+          {
+            "in": "query",
+            "name": "filters[cancelled_at][to]",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "Filter referrals cancelled on or before this date (ISO 8601 format: YYYY-MM-DD)"
           }
         ],
         "responses": {
@@ -139,7 +193,7 @@
                   },
                   "username": {
                     "type": "string",
-                    "description": "Username of the referral. \n\n **Note**: Reach out to us on support if you need this.It needs to be enabled before you can use it."
+                    "description": "Username of the referral. \n\n **Note**: Reach out to us on support if you need this. It needs to be enabled before you can use it."
                   },
                   "promoter_campaign_id": {
                     "type": "integer",
@@ -147,12 +201,12 @@
                   },
                   "split_details[percentage]": {
                     "type": "number",
-                    "description": "Percentage vale of the split between 0 and 100. \n\n **Note**: Reach out to us on support if you need this.It needs to be enabled before you can use it.",
+                    "description": "Percentage value of the split between 0 and 100. \n\n **Note**: Reach out to us on support if you need this. It needs to be enabled before you can use it.",
                     "default": 0
                   },
                   "split_details[promoter_campaign_id]": {
                     "type": "integer",
-                    "description": "Promoter campaign ID, on which you want the split on. \n\n **Note**: Reach out to us on support if you need this.It needs to be enabled before you can use it. ",
+                    "description": "Promoter campaign ID on which you want the split. \n\n **Note**: Reach out to us on support if you need this. It needs to be enabled before you can use it. ",
                     "default": 0
                   }
                 }
@@ -324,11 +378,11 @@
                   },
                   "username": {
                     "type": "string",
-                    "description": "Username of the referral. \n\n **Note**: Reach out to us on support if you need this.It needs to be enabled before you can use it."
+                    "description": "Username of the referral. \n\n **Note**: Reach out to us on support if you need this. It needs to be enabled before you can use it."
                   },
                   "promoter_campaign_id": {
                     "type": "integer",
-                    "description": "Promoter campaign ID, you can obtain this for each promoter form the promoters endpoint. It is the id that pairs a promoter to a campaign. Not the campaign id."
+                    "description": "Promoter campaign ID, you can obtain this for each promoter from the promoters endpoint. It is the id that pairs a promoter to a campaign. Not the campaign id."
                   },
                   "find_by": {
                     "type": "string",
@@ -337,12 +391,12 @@
                   },
                   "split_details[percentage]": {
                     "type": "number",
-                    "description": "Percentage vale of the split between 0 and 100. \n\n **Note**: Reach out to us on support if you need this.It needs to be enabled before you can use it.",
+                    "description": "Percentage value of the split between 0 and 100. \n\n **Note**: Reach out to us on support if you need this. It needs to be enabled before you can use it.",
                     "default": 0
                   },
                   "split_details[promoter_campaign_id]": {
                     "type": "integer",
-                    "description": "Promoter campaign ID, on which you want the split on. \n\n **Note**: Reach out to us on support if you need this.It needs to be enabled before you can use it. ",
+                    "description": "Promoter campaign ID on which you want the split. \n\n **Note**: Reach out to us on support if you need this. It needs to be enabled before you can use it. ",
                     "default": 0
                   }
                 }
@@ -733,7 +787,7 @@
     "/referrals/{id}/import_events": {
       "post": {
         "summary": "Import previous sales from stripe",
-        "description": "With this endpoint you can import previous sales from stripe. \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/referrals/{id}/import_events`</Tip>",
+        "description": "With this endpoint you can import previous sales from Stripe. \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/referrals/{id}/import_events`</Tip>",
         "tags": ["Referrals"],
         "parameters": [
           {

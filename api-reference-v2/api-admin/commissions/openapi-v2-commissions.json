@@ -36,7 +36,7 @@
           {
             "name": "ids[]",
             "in": "query",
-            "description": "Array of comission ids to get",
+            "description": "Array of commission ids to get",
             "required": false,
             "schema": {
               "type": "array",
