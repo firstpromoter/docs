@@ -58,7 +58,7 @@
           {
             "name": "ref_id",
             "in": "query",
-            "description": "Promotion referral id of the who owns the reward",
+            "description": "Promotion referral id of the promoter who owns the reward",
             "schema": {
               "type": "string"
             }
@@ -207,7 +207,7 @@
     },
     "/list": {
       "get": {
-        "description": "With this endpoint you can list all rewards and commissions assigned to a promotion, promoter, campaign or entire account using the API.<Note>Pagination details are held on response headers. Add `--include` option on `curl` request to see the pagination details format and links to next pages.</Note><Tip>**HTTP Request** <br/> `GET https://firstpromoter.com/api/v1/leads/list`</Tip>",
+        "description": "With this endpoint you can list all rewards and commissions assigned to a promotion, promoter, campaign or entire account using the API.<Note>Pagination details are held on response headers. Add `--include` option on `curl` request to see the pagination details format and links to next pages.</Note><Tip>**HTTP Request** <br/> `GET https://firstpromoter.com/api/v1/rewards/list`</Tip>",
         "parameters": [
           {
             "name": "promotion_id",
@@ -405,7 +405,7 @@
             "type": "object",
             "properties": {
               "url": {
-                "description": "promoter's fackbook url",
+                "description": "promoter's Facebook url",
                 "type": "string"
               }
             }
@@ -446,7 +446,7 @@
             "type": "string"
           },
           "company_name": {
-            "description": "promoter's campany name",
+            "description": "promoter's company name",
             "type": "string"
           },
           "phone_number": {
@@ -619,7 +619,7 @@
             "type": "string"
           },
           "cust_id": {
-            "description": "customer/user ID of the promoter inside your application. This will be included in the webhook event and can be used to identify the promoter in your system if you scribscibe for FirstPromoter's 'promoter_accepted' webhook."
+            "description": "customer/user ID of the promoter inside your application. This will be included in the webhook event and can be used to identify the promoter in your system if you subscribe for FirstPromoter's 'promoter_accepted' webhook."
           },
           "email": {
                         "description": "Promoter's email",
@@ -668,7 +668,7 @@
             "type": "object"
           },
           "auth_token": {
-            "description": "authetication token generated when the promoter was created",
+            "description": "authentication token generated when the promoter was created",
             "type": "string"
           }
         }

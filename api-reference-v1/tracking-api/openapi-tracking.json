@@ -210,7 +210,7 @@
           {
             "name": "currency",
             "in": "query",
-            "description": "This field is only required if the currency of the sale is not the same with the one set on FirstPromoter settings. We'll automatically convert the amount from this currency to the default one set on your FirstPromoter account.",
+            "description": "This field is only required if the currency of the sale is not the same as the one set on FirstPromoter settings. We'll automatically convert the amount from this currency to the default one set on your FirstPromoter account.",
             "schema": { "type": "string" }
           },
           {
@@ -222,13 +222,13 @@
           {
             "name": "promo_code",
             "in": "query",
-            "description": "For promo code/coupon code tracking. If you gave a unique coupon to a promoter and you added it on his promotion, you can pass it here and it will CREATE a new lead and a sale for that promoter(if doesn't exists already).",
+            "description": "For promo code/coupon code tracking. If you gave a unique coupon to a promoter and you added it on his promotion, you can pass it here and it will CREATE a new lead and a sale for that promoter (if it doesn't exist already).",
             "schema": { "type": "string" }
           },
           {
             "name": "tid",
             "in": "query",
-            "description": "you can avoid signup tracking call by providing the `_fprom_tid` cookie value(visitor tracking id) read on your system",
+            "description": "You can avoid a signup tracking call by providing the `_fprom_tid` cookie value (visitor tracking id) read on your system",
             "schema": { "type": "string" }
           },
           {
@@ -401,13 +401,13 @@
           {
             "name": "quantity",
             "in": "query",
-            "description": "number of subscriptions/items refunded. If it's only one you can skip this parameter.",
+            "description": "Number of subscriptions/items refunded. If it's only one, you can skip this parameter.",
             "schema": { "type": "string" }
           },
           {
             "name": "sale_event_id",
             "in": "query",
-            "description": "the event id of the sale for which the refund is processed. This value must match the event_id value sent in the sale tracking API call. (Note: This field is marked as optional, but if you track multiple products or change the commissions level often, it becomes required to track refunds correctly)",
+            "description": "The event id of the sale for which the refund is processed. This value must match the event_id value sent in the sale tracking API call. (Note: This field is marked as optional, but if you track multiple products or change the commission level often, it becomes required to track refunds correctly)",
             "schema": { "type": "string" }
           },
           {

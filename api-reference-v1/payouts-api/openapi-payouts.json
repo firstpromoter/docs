@@ -2,11 +2,11 @@
   "openapi": "3.0.1",
   "info": {
     "title": "FirstPromoter Payouts API",
-    "description": "The Payouts API lets you to list and change the payouts status of your promoters.",
+    "description": "The Payouts API lets you list and change the payouts status of your promoters.",
     "license": {
       "name": "MIT"
     },
-    "version": "1.0.0"
+    "version": "1.0.0" 
   },
   "servers": [
     {
@@ -325,7 +325,7 @@
           {
             "name": "campaign_id",
             "in": "query",
-            "description": "For what campaign to create the payout. If is null, we'll take the promoter's default",
+            "description": "For what campaign to create the payout. If it is null, we'll take the promoter's default",
             "schema": { "type": "string" }
           }
         ],

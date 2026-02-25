@@ -2,7 +2,7 @@
     "openapi": "3.0.1",
     "info": {
       "title": "FirstPromoter Reports API",
-      "description": "The Reports API allow you to retrieve aggregated data of your affiliate performance across 18 data points.",
+      "description": "The Reports API allows you to retrieve aggregated data of your affiliate performance across 18 data points.",
       "license": {
         "name": "MIT"
       },
@@ -60,7 +60,7 @@
             {
               "name": "sort",
               "in": "query",
-              "description": "Field used for sorting. If is not passed it takes the first field from `selected_fields[]`",
+              "description": "Field used for sorting. If not passed, it takes the first field from `selected_fields[]`",
               "schema": {
                 "type": "string",
                 "enum": [
@@ -97,7 +97,7 @@
             {
               "name": "group_by",
               "in": "query",
-              "description": "Period to group by. By default is `month`. For day grouping, reporting period span is limitd at `90 days`",
+              "description": "Period to group by. By default is `month`. For day grouping, reporting period span is limited at `90 days`",
               "schema": {
                 "type": "string",
                 "enum": ["day", "month", "year"]
@@ -198,7 +198,7 @@
             {
               "name": "group_by",
               "in": "query",
-              "description": "Period to group by. By default is month. For day grouping, reporting period span is limitd at `90 days`",
+              "description": "Period to group by. By default is month. For day grouping, reporting period span is limited at `90 days`",
               "schema": {
                 "type": "string",
                 "enum": ["day", "month", "year"]
@@ -260,7 +260,7 @@
       },
       "/promoters": {
         "get": {
-          "description": "<Note>With this endpoint you can get the report data grouped by promoters. Data is updated once a day, at midnight. This endpoint supports pagination, similar with other endpoints, by passing `page` param.<br/><br/>If you want to iterate through all promoters, you **must start with** `page=1` and continue to next pages based on header pagination links from the response. The paginated promoters are always ordered by the total revenue made (not the revenue brought during the selected period).<br/><br/>If **page param is ommited**, we'll return **top 50 promoters** by **revenue amount** on the selected period. You can get the **top 50 promoters** sorted by a different metric using the `top_50` parameter.</Note><Tip> **HTTP Request** <br/> `GET https://firstpromoter.com/api/v1/reports/promoters`</Tip>",
+          "description": "<Note>With this endpoint you can get the report data grouped by promoters. Data is updated once a day, at midnight. This endpoint supports pagination, similar to other endpoints, by passing `page` param.<br/><br/>If you want to iterate through all promoters, you **must start with** `page=1` and continue to next pages based on header pagination links from the response. The paginated promoters are always ordered by the total revenue made (not the revenue brought during the selected period).<br/><br/>If **page param is omitted**, we'll return **top 50 promoters** by **revenue amount** on the selected period. You can get the **top 50 promoters** sorted by a different metric using the `top_50` parameter.</Note><Tip> **HTTP Request** <br/> `GET https://firstpromoter.com/api/v1/reports/promoters`</Tip>",
           "parameters": [
             {
               "name": "selected_fields[]",
@@ -311,7 +311,7 @@
             {
               "name": "group_by",
               "in": "query",
-              "description": "Period to group by. By default is `month`. For day grouping, reporting period span is limitd at `90 days`",
+              "description": "Period to group by. By default is `month`. For day grouping, reporting period span is limited at `90 days`",
               "schema": {
                 "type": "string",
                 "enum": ["day", "month", "year"]

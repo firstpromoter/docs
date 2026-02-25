@@ -162,7 +162,7 @@
           {
             "name": "state",
             "in": "query",
-            "description": "Lead's state`",
+            "description": "Lead's state",
             "schema": {
               "type": "string",
               "enum": ["signup", "active", "subscribed", "denied", "cancelled"]
@@ -320,7 +320,7 @@
           {
             "name": "promotion_id",
             "in": "query",
-            "description": "List all leads and customer assigned to this promotion id",
+            "description": "List all leads and customers assigned to this promotion id",
             "schema": {
               "type": "string"
             }
@@ -328,7 +328,7 @@
           {
             "name": "ref_id",
             "in": "query",
-            "description": "List all leads and customer assigned to a promotion - find promotion by `ref_id`",
+            "description": "List all leads and customers assigned to a promotion - find promotion by `ref_id`",
             "schema": {
               "type": "string"
             }
@@ -588,7 +588,7 @@
             "enum": ["approved", "pending", "denied"]
           },
           "cust_id": {
-            "description": "Customer/user ID of the promoter inside your application. This will be included in the webhook event and can be used to identify the promoter in your system if you scribscibe for FirstPromoter's 'promoter_accepted' webhook."
+            "description": "Customer/user ID of the promoter inside your application. This will be included in the webhook event and can be used to identify the promoter in your system if you subscribe for FirstPromoter's 'promoter_accepted' webhook."
           },
           "email": {
             "description": "Promoter's email",
