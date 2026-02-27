@@ -834,7 +834,7 @@
     "/payouts/destroy": {
       "delete": {
         "summary": "Delete payouts",
-        "description": "Deletes selected payouts \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/payouts/destroy`</Tip>",
+        "description": "Deletes selected payouts \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/payouts`</Tip>",
         "operationId": "deletePayouts",
         "parameters": [
           {
