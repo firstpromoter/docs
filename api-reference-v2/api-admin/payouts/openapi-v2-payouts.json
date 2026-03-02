@@ -280,6 +280,83 @@
             }
           }
         }
+      },
+      "delete": {
+        "summary": "Delete payouts",
+        "description": "Deletes selected payouts \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/payouts`</Tip>",
+        "operationId": "deletePayouts",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ids": {
+                    "$ref": "#/components/schemas/Ids"
+                  }
+                },
+                "required": ["ids"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchActionResult"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted (Processing in background)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchActionResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/payouts/stats": {
@@ -757,85 +834,6 @@
         "summary": "Mark payouts as unpaid",
         "description": "Marks selected payouts as unpaid \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/payouts/mark_as_unpaid`</Tip>",
         "operationId": "markPayoutsAsUnpaid",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/AccountId"
-          }],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "ids": {
-                    "$ref": "#/components/schemas/Ids"
-                  }
-                },
-                "required": ["ids"]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BatchActionResult"
-                }
-              }
-            }
-          },
-          "202": {
-            "description": "Accepted (Processing in background)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BatchActionResult"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/payouts/destroy": {
-      "delete": {
-        "summary": "Delete payouts",
-        "description": "Deletes selected payouts \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/payouts`</Tip>",
-        "operationId": "deletePayouts",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
