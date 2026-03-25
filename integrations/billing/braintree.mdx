@@ -6,7 +6,17 @@ description: "Connecting FirstPromoter with Braintree"
 `Difficulty: Easy` <br/>
 `Developer Required: No`
 
+FirstPromoter enables you to automatically track sales and cancellations by connecting your Braintree account.
 
-FirstPromoter enables you to automatically track sales, refunds, upgrades and cancellations by connecting your Braintree account.
+<Note>
+Refund tracking is not currently supported for Braintree. Only successful subscription charges and cancellations are tracked.
+</Note>
 
-Click [here](https://login.firstpromoter.com?redirect=%2Fintegration%2Fbraintree) to view the guide.
+**Tracked webhook events:**
+
+| Braintree Event | What FirstPromoter tracks |
+|---|---|
+| `SubscriptionChargedSuccessfully` | Sale / commission |
+| `SubscriptionCanceled` | Cancellation |
+
+Click [here](https://login.firstpromoter.com?redirect=%2Fintegration%2Fbraintree) to view the setup guide.

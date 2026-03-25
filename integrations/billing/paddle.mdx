@@ -6,7 +6,25 @@ description: "Connecting FirstPromoter with Paddle"
 `Difficulty: Easy` <br/>
 `Developer Required: No`
 
+FirstPromoter supports both **Paddle Classic** (v1 webhooks) and **Paddle Billing** (v2 webhooks), and automatically tracks sales, refunds, and cancellations from your Paddle account.
 
-FirstPromoter enables you to automatically track sales, refunds, upgrades and cancellations from your Paddle account automatically.
+**Paddle Classic (v1) — tracked webhook events:**
 
-Click [here](https://login.firstpromoter.com?redirect=%2Fintegration%2Fpaddle) to view the guide.
+| Paddle Event | What FirstPromoter tracks |
+|---|---|
+| `payment_succeeded` | Sale / commission |
+| `subscription_payment_succeeded` | Sale / commission (recurring) |
+| `payment_refunded` | Refund |
+| `subscription_payment_refunded` | Refund (recurring) |
+| `subscription_cancelled` | Cancellation |
+
+**Paddle Billing (v2) — tracked webhook events:**
+
+| Paddle Event | What FirstPromoter tracks |
+|---|---|
+| `transaction.completed` | Sale / commission |
+| `adjustment.created` | Refund |
+| `adjustment.updated` | Refund |
+| `subscription.canceled` | Cancellation |
+
+Click [here](https://login.firstpromoter.com?redirect=%2Fintegration%2Fpaddle) to view the setup guide.

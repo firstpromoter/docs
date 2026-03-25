@@ -20,7 +20,9 @@
       "get": {
         "summary": "Get all commissions",
         "description": "With this endpoint you can list all rewards and commissions assigned to a promotion, promoter, campaign or entire account using the API. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/commissions`</Tip>",
-        "tags": ["Commissions"],
+        "tags": [
+          "Commissions"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -40,10 +42,10 @@
             "required": false,
             "schema": {
               "type": "array",
-               "items": {
-                  "type": "integer"
-                }
+              "items": {
+                "type": "integer"
               }
+            }
           },
           {
             "name": "filters",
@@ -92,7 +94,9 @@
       "post": {
         "summary": "Create a commission",
         "description": "With this endpoint you can create a commission. \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/commissions`</Tip>",
-        "tags": ["Commissions"],
+        "tags": [
+          "Commissions"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -142,7 +146,9 @@
       "put": {
         "summary": "Update a commission",
         "description": "With this endpoint you can update a commission. \n <Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/commissions/{id}`</Tip>",
-        "tags": ["Commissions"],
+        "tags": [
+          "Commissions"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -204,12 +210,13 @@
         }
       }
     },
-
     "/commissions/approve": {
       "post": {
         "summary": "Approve commissions",
         "description": "With this endpoint you can approve commissions. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/commissions/approve`</Tip>",
-        "tags": ["Commissions"],
+        "tags": [
+          "Commissions"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -232,12 +239,16 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "$ref": "#/components/schemas/BatchOperationResponse"
+                    },
                     {
                       "properties": {
                         "status": {
                           "type": "string",
-                          "enum": ["completed"],
+                          "enum": [
+                            "completed"
+                          ],
                           "description": "Status of the batch operation (always completed for synchronous operations)"
                         }
                       }
@@ -253,12 +264,16 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "$ref": "#/components/schemas/BatchOperationResponse"
+                    },
                     {
                       "properties": {
                         "status": {
                           "type": "string",
-                          "enum": ["pending"],
+                          "enum": [
+                            "pending"
+                          ],
                           "description": "Status of the batch operation (initially pending for asynchronous operations)"
                         }
                       }
@@ -298,7 +313,9 @@
       "post": {
         "summary": "Deny commissions",
         "description": "With this endpoint you can deny commissions. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n  <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/commissions/deny`</Tip>",
-        "tags": ["Commissions"],
+        "tags": [
+          "Commissions"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -321,12 +338,16 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "$ref": "#/components/schemas/BatchOperationResponse"
+                    },
                     {
                       "properties": {
                         "status": {
                           "type": "string",
-                          "enum": ["completed"],
+                          "enum": [
+                            "completed"
+                          ],
                           "description": "Status of the batch operation (always completed for synchronous operations)"
                         }
                       }
@@ -342,12 +363,16 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "$ref": "#/components/schemas/BatchOperationResponse"
+                    },
                     {
                       "properties": {
                         "status": {
                           "type": "string",
-                          "enum": ["pending"],
+                          "enum": [
+                            "pending"
+                          ],
                           "description": "Status of the batch operation (initially pending for asynchronous operations)"
                         }
                       }
@@ -387,7 +412,9 @@
       "post": {
         "summary": "Mark nonmonetary commissions as fulfilled",
         "description": "With this endpoint you can mark nonmonetary commissions as fulfilled. \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/commissions/mark_fulfilled`</Tip>",
-        "tags": ["Commissions"],
+        "tags": [
+          "Commissions"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -410,12 +437,16 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "$ref": "#/components/schemas/BatchOperationResponse"
+                    },
                     {
                       "properties": {
                         "status": {
                           "type": "string",
-                          "enum": ["completed"],
+                          "enum": [
+                            "completed"
+                          ],
                           "description": "Status of the batch operation (always completed for synchronous operations)"
                         }
                       }
@@ -431,12 +462,16 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "$ref": "#/components/schemas/BatchOperationResponse"
+                    },
                     {
                       "properties": {
                         "status": {
                           "type": "string",
-                          "enum": ["pending"],
+                          "enum": [
+                            "pending"
+                          ],
                           "description": "Status of the batch operation (initially pending for asynchronous operations)"
                         }
                       }
@@ -476,7 +511,9 @@
       "post": {
         "summary": "Mark nonmonetary commissions as unfulfilled",
         "description": "With this endpoint you can mark nonmonetary commissions as unfulfilled. \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/commissions/mark_unfulfilled`</Tip>",
-        "tags": ["Commissions"],
+        "tags": [
+          "Commissions"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -499,12 +536,16 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "$ref": "#/components/schemas/BatchOperationResponse"
+                    },
                     {
                       "properties": {
                         "status": {
                           "type": "string",
-                          "enum": ["completed"],
+                          "enum": [
+                            "completed"
+                          ],
                           "description": "Status of the batch operation (always completed for synchronous operations)"
                         }
                       }
@@ -520,12 +561,16 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "$ref": "#/components/schemas/BatchOperationResponse"
+                    },
                     {
                       "properties": {
                         "status": {
                           "type": "string",
-                          "enum": ["pending"],
+                          "enum": [
+                            "pending"
+                          ],
                           "description": "Status of the batch operation (initially pending for asynchronous operations)"
                         }
                       }
@@ -565,7 +610,9 @@
       "delete": {
         "summary": "Delete commissions",
         "description": "With this endpoint you can delete commissions. \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/commissions/destroy`</Tip>",
-        "tags": ["Commissions"],
+        "tags": [
+          "Commissions"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -588,12 +635,16 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "$ref": "#/components/schemas/BatchOperationResponse"
+                    },
                     {
                       "properties": {
                         "status": {
                           "type": "string",
-                          "enum": ["completed"],
+                          "enum": [
+                            "completed"
+                          ],
                           "description": "Status of the batch operation (always completed for synchronous operations)"
                         }
                       }
@@ -609,12 +660,16 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "$ref": "#/components/schemas/BatchOperationResponse"
+                    },
                     {
                       "properties": {
                         "status": {
                           "type": "string",
-                          "enum": ["pending"],
+                          "enum": [
+                            "pending"
+                          ],
                           "description": "Status of the batch operation (initially pending for asynchronous operations)"
                         }
                       }
@@ -654,7 +709,10 @@
       "post": {
         "summary": "Generate payouts for commissions",
         "description": "With this endpoint you can generate payouts for commissions. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/commissions/generate_payouts`</Tip>",
-        "tags": ["Commissions", "Payouts"],
+        "tags": [
+          "Commissions",
+          "Payouts"
+        ],
         "operationId": "generatePayouts",
         "parameters": [
           {
@@ -676,7 +734,9 @@
                     "description": "Commission IDs to generate payouts for. If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`."
                   }
                 },
-                "required": ["ids"]
+                "required": [
+                  "ids"
+                ]
               }
             }
           }
@@ -757,7 +817,7 @@
         "name": "Account-ID",
         "in": "header",
         "required": true,
-        "description": "Account id. You can find your Account ID on Your FirstPromoter Dashboard. Navigate to Settings → Integrations",
+        "description": "Account id. You can find your Account ID on Your FirstPromoter Dashboard. Navigate to Settings \u2192 Integrations",
         "schema": {
           "type": "string"
         }
@@ -834,16 +894,26 @@
         "properties": {
           "status": {
             "type": "string",
-            "enum": ["pending", "approved", "denied"]
+            "enum": [
+              "pending",
+              "approved",
+              "denied"
+            ]
           },
           "paid": {
             "type": "string",
-            "enum": ["yes", "no"],
+            "enum": [
+              "yes",
+              "no"
+            ],
             "description": "Paid filter for monetary commissions"
           },
           "fulfilled": {
             "type": "string",
-            "enum": ["yes", "no"],
+            "enum": [
+              "yes",
+              "no"
+            ],
             "description": "Fulfilled filter for non-monetary commissions"
           },
           "sale_amount": {
@@ -917,7 +987,11 @@
           },
           "due_period": {
             "type": "string",
-            "enum": ["next", "overdue", "custom"],
+            "enum": [
+              "next",
+              "overdue",
+              "custom"
+            ],
             "description": "Due period filter"
           },
           "promoter_id": {
@@ -963,88 +1037,178 @@
         "properties": {
           "sale_amount": {
             "type": "string",
-            "enum": ["asc", "desc"],
+            "enum": [
+              "asc",
+              "desc"
+            ],
             "description": "The sort by sale direction"
           },
           "amount": {
             "type": "string",
-            "enum": ["asc", "desc"],
+            "enum": [
+              "asc",
+              "desc"
+            ],
             "description": "The sort by amount direction"
           },
           "created_at": {
             "type": "string",
-            "enum": ["asc", "desc"],
+            "enum": [
+              "asc",
+              "desc"
+            ],
             "description": "The sort by created_at direction"
           },
           "referral": {
             "type": "string",
-            "enum": ["asc", "desc"],
+            "enum": [
+              "asc",
+              "desc"
+            ],
             "description": "The sort by referral direction"
           }
         }
       },
       "CommissionCreate": {
-        "type": "object",
-        "required": ["commission_type", "sale_amount", "amount"],
-        "properties": {
-          "commission_type": {
-            "type": "string",
-            "enum": ["sale", "custom"],
-            "description": "The commission type"
-          },
-          "referral_id": {
-            "type": "integer",
-            "description": "Referral id required only for sale commission type"
-          },
-          "plan_id": {
-            "type": "integer",
-            "description": "One of the items id from price_ids"
-          },
-          "promoter_campaign_id": {
-            "type": "integer",
-            "description": "PromoterCampaign id required for custom commission type. This ID is not the promoter’s ID or the campaign’s ID. It’s the linking record that defines the promoter’s participation in that campaign. You can find this id in each object in the promoter_campaigns array when you get the details of the promoter."
-          },
-          "sale_amount": {
-            "type": "integer",
-            "description": "Sale amount required only for sale commission type"
-          },
-          "amount": {
-            "type": "integer",
-            "description": "Commission amount required only for custom commission type"
-          },
-          "event_id": {
-            "type": "string",
-            "description": "The ID of the event that generated the sale from billing provider"
-          },
-          "event_date": {
-            "type": "string",
-            "format": "date",
-            "description": "The date of the event that generated the sale"
-          },
-          "internal_note": {
-            "type": "string",
-            "description": "Internal note visible only by the team"
-          },
-          "unit": {
-            "type": "string",
-            "enum": [
-              "cash",
-              "credits",
-              "points",
-              "free_months",
-              "mon_discount",
-              "discount_per"
+        "oneOf": [
+          {
+            "title": "Sale Commission",
+            "type": "object",
+            "required": [
+              "commission_type",
+              "referral_id",
+              "sale_amount"
             ],
-            "description": "Set the reward unit type"
+            "properties": {
+              "commission_type": {
+                "type": "string",
+                "enum": [
+                  "sale"
+                ],
+                "description": "The commission type"
+              },
+              "referral_id": {
+                "type": "integer",
+                "description": "Referral id. Required for sale commission type."
+              },
+              "plan_id": {
+                "type": "integer",
+                "description": "One of the items id from price_ids"
+              },
+              "sale_amount": {
+                "type": "integer",
+                "description": "Sale amount in cents. Required for sale commission type."
+              },
+              "event_id": {
+                "type": "string",
+                "description": "The ID of the event that generated the sale from billing provider"
+              },
+              "event_date": {
+                "type": "string",
+                "format": "date",
+                "description": "The date of the event that generated the sale"
+              },
+              "internal_note": {
+                "type": "string",
+                "description": "Internal note visible only by the team"
+              },
+              "unit": {
+                "type": "string",
+                "enum": [
+                  "cash",
+                  "credits",
+                  "points",
+                  "free_months",
+                  "mon_discount",
+                  "discount_per"
+                ],
+                "description": "Set the reward unit type"
+              },
+              "notify_promoter": {
+                "type": "boolean",
+                "description": "If true a notification email is sent to promoter if enabled on Emails section"
+              },
+              "billing_period": {
+                "type": "string",
+                "enum": [
+                  "monthly",
+                  "yearly",
+                  "one_time"
+                ],
+                "description": "The billing period of the event that generated the sale"
+              }
+            }
           },
-          "notify_promoter": {
-            "type": "boolean",
-            "description": "If true a notification email is sent to promoter if enabled on Emails section"
-          },
-          "billing_period": {
-            "type": "string",
-            "enum": ["monthly", "yearly", "one_time"],
-            "description": "The billing period of the event that generated the sale"
+          {
+            "title": "Custom Commission",
+            "type": "object",
+            "required": [
+              "commission_type",
+              "promoter_campaign_id",
+              "amount"
+            ],
+            "properties": {
+              "commission_type": {
+                "type": "string",
+                "enum": [
+                  "custom"
+                ],
+                "description": "The commission type"
+              },
+              "promoter_campaign_id": {
+                "type": "integer",
+                "description": "PromoterCampaign id. Required for custom commission type. This ID is not the promoter\u2019s ID or the campaign\u2019s ID. It\u2019s the linking record that defines the promoter\u2019s participation in that campaign. You can find this id in each object in the promoter_campaigns array when you get the details of the promoter."
+              },
+              "amount": {
+                "type": "integer",
+                "description": "Commission amount in cents. Required for custom commission type."
+              },
+              "event_id": {
+                "type": "string",
+                "description": "The ID of the event that generated the sale from billing provider"
+              },
+              "event_date": {
+                "type": "string",
+                "format": "date",
+                "description": "The date of the event that generated the sale"
+              },
+              "internal_note": {
+                "type": "string",
+                "description": "Internal note visible only by the team"
+              },
+              "unit": {
+                "type": "string",
+                "enum": [
+                  "cash",
+                  "credits",
+                  "points",
+                  "free_months",
+                  "mon_discount",
+                  "discount_per"
+                ],
+                "description": "Set the reward unit type"
+              },
+              "notify_promoter": {
+                "type": "boolean",
+                "description": "If true a notification email is sent to promoter if enabled on Emails section"
+              },
+              "billing_period": {
+                "type": "string",
+                "enum": [
+                  "monthly",
+                  "yearly",
+                  "one_time"
+                ],
+                "description": "The billing period of the event that generated the sale"
+              }
+            }
+          }
+        ],
+        "discriminator": {
+          "propertyName": "commission_type",
+          "mapping": {
+            "sale": "#/components/schemas/CommissionCreate/oneOf/0",
+            "custom": "#/components/schemas/CommissionCreate/oneOf/1"
           }
         }
       },
@@ -1154,7 +1318,11 @@
           },
           "status": {
             "type": "string",
-            "enum": ["pending", "approved", "denied"],
+            "enum": [
+              "pending",
+              "approved",
+              "denied"
+            ],
             "description": "Current status of the commission"
           },
           "metadata": {
@@ -1168,7 +1336,10 @@
           },
           "commission_type": {
             "type": "string",
-            "enum": ["sale", "custom"],
+            "enum": [
+              "sale",
+              "custom"
+            ],
             "description": "Type of commission"
           },
           "created_by_user_email": {
@@ -1352,6 +1523,11 @@
                 "description": "Reward name"
               }
             }
+          },
+          "split_details": {
+            "type": "object",
+            "nullable": true,
+            "description": "Commission split details from the associated referral, when the referral is shared between promoters"
           }
         }
       }
@@ -1360,7 +1536,7 @@
       "BearerAuth": {
         "type": "http",
         "scheme": "bearer",
-        "description": "API key passed as a Bearer token in the Authorization header. You can find your API Key on Your FirstPromoter Dashboard. Navigate to Settings → Integrations section → Manage API Keys"
+        "description": "API key passed as a Bearer token in the Authorization header. You can find your API Key on Your FirstPromoter Dashboard. Navigate to Settings \u2192 Integrations section \u2192 Manage API Keys"
       },
       "accountId": {
         "type": "apiKey",

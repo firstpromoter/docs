@@ -6,7 +6,22 @@ description: "Connecting FirstPromoter with Stripe"
 `Difficulty: Easy` <br/>
 `Developer Required: No`
 
+FirstPromoter enables you to automatically track sales, refunds, and cancellations by connecting your Stripe account in Test or Live mode.
 
-FirstPromoter enables you to automatically track sales, refunds, upgrades and cancellations by connecting your Stripe account either in Test or Live mode.
+**Tracked webhook events:**
 
-Click [here](https://login.firstpromoter.com?redirect=%2Fintegration%2Fstripe) to view the guide.
+| Stripe Event | What FirstPromoter tracks |
+|---|---|
+| `invoice.payment_succeeded` | Sale / commission |
+| `charge.succeeded` | Sale / commission (one-time charges) |
+| `charge.refunded` | Refund |
+| `charge.dispute.created` | Refund (disputed charge) |
+| `customer.subscription.deleted` | Cancellation |
+| `checkout.session.completed` | Signup |
+| `customer.discount.created` | Signup (100% discount applied) |
+
+<Note>
+Charges with an amount of zero, or with no associated customer email, are ignored. Invoices with `amount_paid` of zero are also skipped.
+</Note>
+
+Click [here](https://login.firstpromoter.com?redirect=%2Fintegration%2Fstripe) to view the setup guide.

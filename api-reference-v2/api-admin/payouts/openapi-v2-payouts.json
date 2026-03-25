@@ -8,7 +8,7 @@
   "servers": [
     {
       "url": "https://api.firstpromoter.com/api/v2/company",
-      "description": "Staging server"
+      "description": "Production server"
     }
   ],
   "security": [
@@ -20,7 +20,7 @@
     "/payouts": {
       "get": {
         "summary": "Get all payouts",
-        "description":"With this endpoint you can list all payouts. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/payouts`</Tip>",
+        "description": "With this endpoint you can list all payouts. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/payouts`</Tip>",
         "operationId": "getAdminPayouts",
         "parameters": [
           {
@@ -42,10 +42,10 @@
             "required": false,
             "schema": {
               "type": "array",
-               "items": {
-                  "type": "integer"
-                }
+              "items": {
+                "type": "integer"
               }
+            }
           },
           {
             "name": "filters[status]",
@@ -108,7 +108,11 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["next", "overdue", "custom"]
+              "enum": [
+                "next",
+                "overdue",
+                "custom"
+              ]
             }
           },
           {
@@ -221,7 +225,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           },
           {
@@ -231,7 +238,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           },
           {
@@ -241,7 +251,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           }
         ],
@@ -271,83 +284,6 @@
           },
           "403": {
             "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "summary": "Delete payouts",
-        "description": "Deletes selected payouts \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/payouts`</Tip>",
-        "operationId": "deletePayouts",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/AccountId"
-          }],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "ids": {
-                    "$ref": "#/components/schemas/Ids"
-                  }
-                },
-                "required": ["ids"]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BatchActionResult"
-                }
-              }
-            }
-          },
-          "202": {
-            "description": "Accepted (Processing in background)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BatchActionResult"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity",
             "content": {
               "application/json": {
                 "schema": {
@@ -641,7 +577,11 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["true", "false", "not_set"]
+              "enum": [
+                "true",
+                "false",
+                "not_set"
+              ]
             }
           }
         ],
@@ -687,7 +627,8 @@
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
-          }],
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -697,11 +638,19 @@
                 "properties": {
                   "method": {
                     "type": "string",
-                    "enum": ["paypal", "bank", "wise", "crypto", "dots"],
+                    "enum": [
+                      "paypal",
+                      "bank",
+                      "wise",
+                      "crypto",
+                      "dots"
+                    ],
                     "description": "Payment method"
                   }
                 },
-                "required": ["method"]
+                "required": [
+                  "method"
+                ]
               }
             }
           }
@@ -758,7 +707,8 @@
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
-          }],
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -770,7 +720,9 @@
                     "$ref": "#/components/schemas/Ids"
                   }
                 },
-                "required": ["ids"]
+                "required": [
+                  "ids"
+                ]
               }
             }
           }
@@ -837,7 +789,8 @@
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
-          }],
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -849,7 +802,91 @@
                     "$ref": "#/components/schemas/Ids"
                   }
                 },
-                "required": ["ids"]
+                "required": [
+                  "ids"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchActionResult"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted (Processing in background)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchActionResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payouts/destroy": {
+      "delete": {
+        "summary": "Delete payouts",
+        "description": "Deletes selected payouts \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/payouts/destroy`</Tip>",
+        "operationId": "deletePayouts",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ids": {
+                    "$ref": "#/components/schemas/Ids"
+                  }
+                },
+                "required": [
+                  "ids"
+                ]
               }
             }
           }
@@ -909,7 +946,7 @@
       }
     }
   },
-   "components": {
+  "components": {
     "parameters": {
       "AccountId": {
         "name": "Account-ID",
@@ -1067,19 +1104,6 @@
               "color": {
                 "type": "string",
                 "description": "Color of the campaign"
-              }
-            }
-          },
-          "invoice": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "integer",
-                "description": "ID of the invoice"
-              },
-              "number": {
-                "type": "string",
-                "description": "Invoice number"
               }
             }
           }
@@ -1574,7 +1598,11 @@
               },
               "status": {
                 "type": "string",
-                "enum": ["pending", "completed", "failed"],
+                "enum": [
+                  "pending",
+                  "completed",
+                  "failed"
+                ],
                 "description": "Status of the batch action"
               },
               "total": {
@@ -1666,7 +1694,10 @@
             "description": "Error code"
           }
         },
-        "required": ["message", "code"]
+        "required": [
+          "message",
+          "code"
+        ]
       }
     },
     "securitySchemes": {

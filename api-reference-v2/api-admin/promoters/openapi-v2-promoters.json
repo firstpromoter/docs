@@ -21,7 +21,9 @@
         "summary": "Get available promoters",
         "description": "With this endpoint you can list all promoters. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/promoters`</Tip>",
         "operationId": "getPromoters",
-        "tags": ["Promoters"],
+        "tags": [
+          "Promoters"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -66,23 +68,38 @@
               "properties": {
                 "clicks_count": {
                   "type": "string",
-                  "enum": ["asc", "desc"]
+                  "enum": [
+                    "asc",
+                    "desc"
+                  ]
                 },
                 "referrals_count": {
                   "type": "string",
-                  "enum": ["asc", "desc"]
+                  "enum": [
+                    "asc",
+                    "desc"
+                  ]
                 },
                 "customers_count": {
                   "type": "string",
-                  "enum": ["asc", "desc"]
+                  "enum": [
+                    "asc",
+                    "desc"
+                  ]
                 },
                 "revenue_amount": {
                   "type": "string",
-                  "enum": ["asc", "desc"]
+                  "enum": [
+                    "asc",
+                    "desc"
+                  ]
                 },
                 "joined_at": {
                   "type": "string",
-                  "enum": ["asc", "desc"]
+                  "enum": [
+                    "asc",
+                    "desc"
+                  ]
                 }
               }
             }
@@ -93,9 +110,9 @@
             "description": "Successful response",
             "content": {
               "application/json": {
-               "schema": {
+                "schema": {
                   "type": "object",
-                  "properties":{
+                  "properties": {
                     "data": {
                       "type": "array",
                       "items": {
@@ -104,8 +121,8 @@
                       "description": "List of Promoters"
                     },
                     "meta": {
-                      "type":"object",
-                      "properties":{
+                      "type": "object",
+                      "properties": {
                         "pending_count": {
                           "type": "integer"
                         }
@@ -125,7 +142,9 @@
         "summary": "Create promoter",
         "description": "With this endpoint you can create a promoter. \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/promoters`</Tip>",
         "operationId": "createPromoter",
-        "tags": ["Promoters"],
+        "tags": [
+          "Promoters"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -163,7 +182,9 @@
         "summary": "Get promoter details",
         "description": "With this endpoint you can get the details of a promoter. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/promoters/{id}`</Tip>",
         "operationId": "getPromoter",
-        "tags": ["Promoters"],
+        "tags": [
+          "Promoters"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -212,7 +233,9 @@
         "summary": "Update promoter",
         "operationId": "updatePromoter",
         "description": "With this endpoint you can update a promoter. \n <Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/promoters/{id}`</Tip>",
-        "tags": ["Promoters"],
+        "tags": [
+          "Promoters"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -259,7 +282,9 @@
         "summary": "Get data used for chart",
         "description": "With this endpoint you can get the data used for charts.<Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/promoters/{id}/chart_data`</Tip>",
         "operationId": "getPromoterChartData",
-        "tags": ["Promoters"],
+        "tags": [
+          "Promoters"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -330,7 +355,9 @@
         "summary": "Accept promoters",
         "description": "With this endpoint you can accept promoters. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/promoters/accept`</Tip>",
         "operationId": "acceptPromoters",
-        "tags": ["Promoters"],
+        "tags": [
+          "Promoters"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -342,7 +369,9 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["campaign_id"],
+                "required": [
+                  "campaign_id"
+                ],
                 "properties": {
                   "campaign_id": {
                     "type": "integer",
@@ -363,12 +392,16 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "$ref": "#/components/schemas/BatchOperationResponse"
+                    },
                     {
                       "properties": {
                         "status": {
                           "type": "string",
-                          "enum": ["completed"],
+                          "enum": [
+                            "completed"
+                          ],
                           "description": "Status of the batch operation (always completed for synchronous operations)"
                         }
                       }
@@ -384,12 +417,16 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "$ref": "#/components/schemas/BatchOperationResponse"
+                    },
                     {
                       "properties": {
                         "status": {
                           "type": "string",
-                          "enum": ["pending"],
+                          "enum": [
+                            "pending"
+                          ],
                           "description": "Status of the batch operation (initially pending for asynchronous operations)"
                         }
                       }
@@ -430,7 +467,9 @@
         "summary": "Reject promoters",
         "description": "With this endpoint you can reject promoters. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/promoters/reject`</Tip>",
         "operationId": "rejectPromoters",
-        "tags": ["Promoters"],
+        "tags": [
+          "Promoters"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -442,7 +481,9 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["campaign_id"],
+                "required": [
+                  "campaign_id"
+                ],
                 "properties": {
                   "campaign_id": {
                     "type": "integer",
@@ -463,12 +504,16 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "$ref": "#/components/schemas/BatchOperationResponse"
+                    },
                     {
                       "properties": {
                         "status": {
                           "type": "string",
-                          "enum": ["completed"],
+                          "enum": [
+                            "completed"
+                          ],
                           "description": "Status of the batch operation (always completed for synchronous operations)"
                         }
                       }
@@ -484,12 +529,16 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "$ref": "#/components/schemas/BatchOperationResponse"
+                    },
                     {
                       "properties": {
                         "status": {
                           "type": "string",
-                          "enum": ["pending"],
+                          "enum": [
+                            "pending"
+                          ],
                           "description": "Status of the batch operation (initially pending for asynchronous operations)"
                         }
                       }
@@ -530,7 +579,9 @@
         "summary": "Block promoters",
         "description": "With this endpoint you can block promoters. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/promoters/block`</Tip>",
         "operationId": "blockPromoters",
-        "tags": ["Promoters"],
+        "tags": [
+          "Promoters"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -542,7 +593,9 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["campaign_id"],
+                "required": [
+                  "campaign_id"
+                ],
                 "properties": {
                   "campaign_id": {
                     "type": "integer",
@@ -563,12 +616,16 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "$ref": "#/components/schemas/BatchOperationResponse"
+                    },
                     {
                       "properties": {
                         "status": {
                           "type": "string",
-                          "enum": ["completed"],
+                          "enum": [
+                            "completed"
+                          ],
                           "description": "Status of the batch operation (always completed for synchronous operations)"
                         }
                       }
@@ -584,12 +641,16 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "$ref": "#/components/schemas/BatchOperationResponse"
+                    },
                     {
                       "properties": {
                         "status": {
                           "type": "string",
-                          "enum": ["pending"],
+                          "enum": [
+                            "pending"
+                          ],
                           "description": "Status of the batch operation (initially pending for asynchronous operations)"
                         }
                       }
@@ -630,7 +691,9 @@
         "summary": "Archive promoters",
         "description": "With this endpoint you can archive promoters. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/promoters/archive`</Tip>",
         "operationId": "archivePromoters",
-        "tags": ["Promoters"],
+        "tags": [
+          "Promoters"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -658,12 +721,16 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "$ref": "#/components/schemas/BatchOperationResponse"
+                    },
                     {
                       "properties": {
                         "status": {
                           "type": "string",
-                          "enum": ["completed"],
+                          "enum": [
+                            "completed"
+                          ],
                           "description": "Status of the batch operation (always completed for synchronous operations)"
                         }
                       }
@@ -679,12 +746,16 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "$ref": "#/components/schemas/BatchOperationResponse"
+                    },
                     {
                       "properties": {
                         "status": {
                           "type": "string",
-                          "enum": ["pending"],
+                          "enum": [
+                            "pending"
+                          ],
                           "description": "Status of the batch operation (initially pending for asynchronous operations)"
                         }
                       }
@@ -725,7 +796,9 @@
         "summary": "Move promoters to campaign",
         "description": "With this endpoint you can move promoters from one campaign to another. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/promoters/move_to_campaign`</Tip>",
         "operationId": "movePromotersToCampaign",
-        "tags": ["Promoters"],
+        "tags": [
+          "Promoters"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -737,7 +810,11 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["selection", "from_campaign_id", "to_campaign_id"],
+                "required": [
+                  "selection",
+                  "from_campaign_id",
+                  "to_campaign_id"
+                ],
                 "properties": {
                   "ids": {
                     "$ref": "#/components/schemas/Ids"
@@ -756,7 +833,7 @@
                   },
                   "soft_move_referrals": {
                     "type": "boolean",
-                      "description": "If `true`, move referrals to NEW campaign and future commissions from existing referrals will be tracked in the NEW campaign. However, if `false`, keep referrals in the old campaign and future commissions from existing referrals will be tracked in the OLD campaign."
+                    "description": "If `true`, move referrals to NEW campaign and future commissions from existing referrals will be tracked in the NEW campaign. However, if `false`, keep referrals in the old campaign and future commissions from existing referrals will be tracked in the OLD campaign."
                   }
                 }
               }
@@ -770,12 +847,16 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "$ref": "#/components/schemas/BatchOperationResponse"
+                    },
                     {
                       "properties": {
                         "status": {
                           "type": "string",
-                          "enum": ["completed"],
+                          "enum": [
+                            "completed"
+                          ],
                           "description": "Status of the batch operation (always completed for synchronous operations)"
                         }
                       }
@@ -791,12 +872,16 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "$ref": "#/components/schemas/BatchOperationResponse"
+                    },
                     {
                       "properties": {
                         "status": {
                           "type": "string",
-                          "enum": ["pending"],
+                          "enum": [
+                            "pending"
+                          ],
                           "description": "Status of the batch operation (initially pending for asynchronous operations)"
                         }
                       }
@@ -837,7 +922,9 @@
         "summary": "Add promoters to campaign",
         "description": "With this endpoint you can add promoters to a campaign. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/promoters/add_to_campaign`</Tip>",
         "operationId": "addPromotersToCampaign",
-        "tags": ["Promoters"],
+        "tags": [
+          "Promoters"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -849,7 +936,10 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["selection", "campaign_id"],
+                "required": [
+                  "selection",
+                  "campaign_id"
+                ],
                 "properties": {
                   "ids": {
                     "$ref": "#/components/schemas/Ids"
@@ -874,12 +964,16 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "$ref": "#/components/schemas/BatchOperationResponse"
+                    },
                     {
                       "properties": {
                         "status": {
                           "type": "string",
-                          "enum": ["completed"],
+                          "enum": [
+                            "completed"
+                          ],
                           "description": "Status of the batch operation (always completed for synchronous operations)"
                         }
                       }
@@ -895,12 +989,16 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "$ref": "#/components/schemas/BatchOperationResponse"
+                    },
                     {
                       "properties": {
                         "status": {
                           "type": "string",
-                          "enum": ["pending"],
+                          "enum": [
+                            "pending"
+                          ],
                           "description": "Status of the batch operation (initially pending for asynchronous operations)"
                         }
                       }
@@ -941,7 +1039,9 @@
         "summary": "Assign a parent promoter",
         "description": "With this endpoint you can assign a parent promoter to your promoters. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/promoters/assign_parent`</Tip>",
         "operationId": "acceptPromoters",
-        "tags": ["Promoters"],
+        "tags": [
+          "Promoters"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -953,7 +1053,9 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["parent_promoter_id"],
+                "required": [
+                  "parent_promoter_id"
+                ],
                 "properties": {
                   "parent_promoter_id": {
                     "type": "integer",
@@ -974,12 +1076,16 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "$ref": "#/components/schemas/BatchOperationResponse"
+                    },
                     {
                       "properties": {
                         "status": {
                           "type": "string",
-                          "enum": ["completed"],
+                          "enum": [
+                            "completed"
+                          ],
                           "description": "Status of the batch operation (always completed for synchronous operations)"
                         }
                       }
@@ -995,12 +1101,16 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "$ref": "#/components/schemas/BatchOperationResponse"
+                    },
                     {
                       "properties": {
                         "status": {
                           "type": "string",
-                          "enum": ["pending"],
+                          "enum": [
+                            "pending"
+                          ],
                           "description": "Status of the batch operation (initially pending for asynchronous operations)"
                         }
                       }
@@ -1041,7 +1151,9 @@
         "summary": "Restore promoters",
         "description": "With this endpoint you can restore promoters. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/promoters/restore`</Tip>",
         "operationId": "restorePromoters",
-        "tags": ["Promoters"],
+        "tags": [
+          "Promoters"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -1069,12 +1181,16 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "$ref": "#/components/schemas/BatchOperationResponse"
+                    },
                     {
                       "properties": {
                         "status": {
                           "type": "string",
-                          "enum": ["completed"],
+                          "enum": [
+                            "completed"
+                          ],
                           "description": "Status of the batch operation (always completed for synchronous operations)"
                         }
                       }
@@ -1090,12 +1206,16 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/BatchOperationResponse" },
+                    {
+                      "$ref": "#/components/schemas/BatchOperationResponse"
+                    },
                     {
                       "properties": {
                         "status": {
                           "type": "string",
-                          "enum": ["pending"],
+                          "enum": [
+                            "pending"
+                          ],
                           "description": "Status of the batch operation (initially pending for asynchronous operations)"
                         }
                       }
@@ -1138,7 +1258,7 @@
         "name": "Account-ID",
         "in": "header",
         "required": true,
-        "description": "Account id. You can find your Account ID on Your FirstPromoter Dashboard. Navigate to Settings → Integrations",
+        "description": "Account id. You can find your Account ID on Your FirstPromoter Dashboard. Navigate to Settings \u2192 Integrations",
         "schema": {
           "type": "string"
         }
@@ -1272,7 +1392,12 @@
           "group_by": {
             "type": "string",
             "description": "Time unit used for grouping the data",
-            "enum": ["day", "week", "month", "year"]
+            "enum": [
+              "day",
+              "week",
+              "month",
+              "year"
+            ]
           }
         }
       },
@@ -1300,18 +1425,6 @@
             "type": "string",
             "nullable": true,
             "description": "Optional note about the promoter"
-          },
-          "state": {
-            "type": "string",
-            "enum": [
-              "pending",
-              "accepted",
-              "rejected",
-              "blocked",
-              "inactive",
-              "not_set"
-            ],
-            "description": "State of the promoter."
           },
           "stats": {
             "type": "object",
@@ -1361,7 +1474,11 @@
           "invoice_details_status": {
             "type": "string",
             "description": "Status of the promoter's invoice details",
-            "enum": ["pending", "approved", "denied"]
+            "enum": [
+              "pending",
+              "approved",
+              "denied"
+            ]
           },
           "profile": {
             "$ref": "#/components/schemas/PromoterProfile"
@@ -1397,16 +1514,6 @@
             "type": "string",
             "format": "date-time",
             "description": "Date and time of the promoter's first activity."
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Date and time when the promoter was created. \n ISO date format `(YYYY-MM-DD HH:MM:SS)`"
-          },
-          "updated_at": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Date and time when the promoter was last updated. \n ISO date format `(YYYY-MM-DD HH:MM:SS)`"
           },
           "promoter_campaigns": {
             "type": "array",
@@ -1472,6 +1579,79 @@
                   "type": "string",
                   "description": "Referral link for this campaign"
                 }
+              }
+            }
+          },
+          "balances": {
+            "type": "object",
+            "description": "Earnings balance breakdown for the promoter",
+            "properties": {
+              "cash": {
+                "type": "number",
+                "nullable": true
+              },
+              "credits": {
+                "type": "number",
+                "nullable": true
+              },
+              "points": {
+                "type": "number",
+                "nullable": true
+              },
+              "free_months": {
+                "type": "number",
+                "nullable": true
+              },
+              "discount": {
+                "type": "number",
+                "nullable": true
+              }
+            }
+          },
+          "track_ad_traffic": {
+            "type": "boolean",
+            "nullable": true,
+            "description": "Whether ad traffic tracking is enabled for this promoter. Null means the campaign default is used."
+          },
+          "auth_provider": {
+            "type": "string",
+            "nullable": true,
+            "description": "OAuth provider used to authenticate (e.g. google). Null if using email/password."
+          },
+          "selected_payout_method": {
+            "type": "object",
+            "nullable": true,
+            "description": "The promoter's currently selected payout method. Omitted when the `exclude_payout_method=true` query parameter is set.",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "method": {
+                "type": "string"
+              },
+              "date_added": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "is_disabled": {
+                "type": "boolean"
+              }
+            }
+          },
+          "parent_promoter": {
+            "type": "object",
+            "nullable": true,
+            "description": "The parent promoter (for sub-affiliate relationships). Only included when the `include_parent_promoter=true` query parameter is set.",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "email": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string",
+                "nullable": true
               }
             }
           }
@@ -1595,7 +1775,9 @@
       },
       "PromoterCreate": {
         "type": "object",
-        "required": ["email"],
+        "required": [
+          "email"
+        ],
         "properties": {
           "email": {
             "type": "string",
@@ -1614,8 +1796,8 @@
             "type": "integer",
             "description": "The ID of the campaign promoter will be added first"
           },
-          "drip_emails":{
-            "type":"boolean",
+          "drip_emails": {
+            "type": "boolean",
             "description": "Send a welcome email to the promoter"
           }
         }
@@ -1660,7 +1842,6 @@
           }
         }
       },
-
       "Ids": {
         "type": "array",
         "description": "Array of promoter ids. If there are more than __5__ ids on this param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`",
@@ -1792,7 +1973,10 @@
           },
           "has_wform": {
             "type": "string",
-            "enum": ["yes", "no"],
+            "enum": [
+              "yes",
+              "no"
+            ],
             "description": "Has wform filter"
           },
           "parent_promoter_id": {
@@ -1801,12 +1985,26 @@
           },
           "archived": {
             "type": "string",
-            "enum": ["true", "false", "`true`", "`false`", "`yes`", "`no`"],
+            "enum": [
+              "true",
+              "false",
+              "`true`",
+              "`false`",
+              "`yes`",
+              "`no`"
+            ],
             "description": "Archived filter"
           },
           "subscribed_to_email": {
             "type": "string",
-            "enum": ["true", "false", "`true`", "`false`", "`yes`", "`no`"],
+            "enum": [
+              "true",
+              "false",
+              "`true`",
+              "`false`",
+              "`yes`",
+              "`no`"
+            ],
             "description": "Subscribed to email filter"
           },
           "custom_field1": {
@@ -1830,11 +2028,16 @@
           },
           "inactivity": {
             "type": "object",
-            "description": "Filter promoters by inactivity — promoters who have not performed the specified metric within the given number of days",
+            "description": "Filter promoters by inactivity \u2014 promoters who have not performed the specified metric within the given number of days",
             "properties": {
               "metric": {
                 "type": "string",
-                "enum": ["referral", "customer", "click", "sale"],
+                "enum": [
+                  "referral",
+                  "customer",
+                  "click",
+                  "sale"
+                ],
                 "description": "The activity metric to measure inactivity against"
               },
               "days": {
@@ -1846,14 +2049,23 @@
           },
           "invoice_details_status": {
             "type": "string",
-            "enum": ["approved", "pending", "rejected", "not_submitted"],
+            "enum": [
+              "approved",
+              "pending",
+              "rejected",
+              "not_submitted"
+            ],
             "description": "Filter promoters by their invoice details status"
           }
         }
       },
       "CustomFieldFilter": {
         "type": "object",
-        "required": ["key", "operator", "value"],
+        "required": [
+          "key",
+          "operator",
+          "value"
+        ],
         "properties": {
           "key": {
             "type": "string",
@@ -1861,7 +2073,10 @@
           },
           "operator": {
             "type": "string",
-            "enum": ["exact", "partial"],
+            "enum": [
+              "exact",
+              "partial"
+            ],
             "description": "The custom field operator"
           },
           "value": {
@@ -1885,13 +2100,13 @@
       "BearerAuth": {
         "type": "http",
         "scheme": "bearer",
-        "description": "API key passed as a Bearer token in the Authorization header. You can find your API Key on Your FirstPromoter Dashboard. Navigate to Settings → Integrations section → Manage API Keys"
+        "description": "API key passed as a Bearer token in the Authorization header. You can find your API Key on Your FirstPromoter Dashboard. Navigate to Settings \u2192 Integrations section \u2192 Manage API Keys"
       },
       "accountId": {
         "type": "apiKey",
         "in": "header",
         "name": "ACCOUNT-ID",
-        "description": "Your FirstPromoter Account ID. You can find this in the  Settings → Integrations section of your dashboard."
+        "description": "Your FirstPromoter Account ID. You can find this in the  Settings \u2192 Integrations section of your dashboard."
       }
     }
   }

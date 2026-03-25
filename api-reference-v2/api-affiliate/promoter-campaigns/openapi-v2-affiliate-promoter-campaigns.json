@@ -19,7 +19,9 @@
     "/promoter_campaigns/{id}": {
       "put": {
         "summary": "Update promotion ref_token for the promoter_campaign",
-        "tags": ["Promoter Campaigns"],
+        "tags": [
+          "Promoter Campaigns"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -40,7 +42,9 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["ref_token"],
+                "required": [
+                  "ref_token"
+                ],
                 "properties": {
                   "ref_token": {
                     "type": "string",
@@ -99,7 +103,7 @@
       }
     }
   },
-   "components": {
+  "components": {
     "parameters": {
       "AccountId": {
         "name": "Account-ID",
@@ -239,6 +243,11 @@
           },
           "recruitment_link_url": {
             "type": "string"
+          },
+          "track_ad_traffic": {
+            "type": "boolean",
+            "nullable": true,
+            "description": "Whether ad traffic tracking is enabled for this promoter campaign"
           }
         }
       },

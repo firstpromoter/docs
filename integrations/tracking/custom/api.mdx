@@ -1,11 +1,22 @@
 ---
 title: "API Integration"
-description: "Use our the FirstPromoter Api"
+description: "Track referrals server-side with the FirstPromoter Tracking API"
 ---
 
 `Difficulty: Intermediate`<br/>
 `Developer Required: Yes`
 
-With our API you can track the referrals from your website dynamically from your backend.
+With the FirstPromoter Tracking API you can track signups, sales, refunds, and cancellations directly from your backend — no JavaScript required.
 
-Click [here](https://login.firstpromoter.com?redirect=%2Finstructions%2Fapi) to view the guide.
+**Available endpoints:**
+
+| Endpoint | Purpose |
+|---|---|
+| `POST /api/v1/track/signup` | Track a lead sign-up |
+| `POST /api/v1/track/sale` | Track a sale and generate a commission |
+| `POST /api/v1/track/refund` | Track a refund and reverse a commission |
+| `POST /api/v1/track/cancellation` | Track a subscription cancellation |
+
+See the [Tracking API reference](/api-reference-v1/tracking-api/signup) for full parameter documentation including deduplication via `event_id`, recurring commission scheduling, and custom fields.
+
+Click [here](https://login.firstpromoter.com?redirect=%2Finstructions%2Fapi) to view the in-app setup guide.

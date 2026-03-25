@@ -137,7 +137,6 @@
               "type": "string"
             }
           },
-
           {
             "name": "parent_promoter_id",
             "in": "query",
@@ -242,7 +241,6 @@
               "type": "string"
             }
           },
-
           {
             "name": "skip_email_notification",
             "in": "query",
@@ -251,7 +249,7 @@
               "type": "boolean"
             }
           },
-           {
+          {
             "name": "always_approve",
             "in": "query",
             "description": "Set this to `true` to automatically approve the promoter into the campaign without having to manually review the promoter. Please note that this feature only works when `Auto approve new promoters` is enabled/toggle on your FirstPromoter Admin panel under the Campaign settings.",
@@ -532,7 +530,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                    "$ref": "#/components/schemas/Promoter"
+                  "$ref": "#/components/schemas/Promoter"
                 }
               }
             }
@@ -542,7 +540,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                   "$ref": "#/components/schemas/AuthenticationError",
+                  "$ref": "#/components/schemas/AuthenticationError",
                   "example": "Bad credentials"
                 }
               }
@@ -560,7 +558,7 @@
                 }
               }
             }
-          }, 
+          },
           "422": {
             "description": "Unprocessable Entity Error",
             "content": {
@@ -609,7 +607,8 @@
           {
             "name": "ref_id",
             "in": "query",
-            "description": "`required if the promoter_email,auth_token, id or cust_id is null` \n\n Referral ID.",            "schema": {
+            "description": "`required if the promoter_email,auth_token, id or cust_id is null` \n\n Referral ID.",
+            "schema": {
               "type": "string"
             }
           },
@@ -974,7 +973,7 @@
     },
     "/move_to_campaign": {
       "post": {
-        "description": "This endpoint will change the promoter's campaign to another one, keeping the referral ID the same (the affiliate won’t need to update the referral link). It serves the same function as moving the promoter to another campaign from the UI.More details on how it works can be found [here](https://help.firstpromoter.com/en/articles/2509650-moving-promoters-from-one-campaign-to-another).<br/><br/>You can identify promoters by: `id`, `cust_id`, `auth_token`, `promoter_email` or `ref_id`(referral id).<Tip> **HTTP Request** <br/> `POST https://firstpromoter.com/api/v1/promoters/move_to_campaign` </Tip>",
+        "description": "This endpoint will change the promoter's campaign to another one, keeping the referral ID the same (the affiliate won\u2019t need to update the referral link). It serves the same function as moving the promoter to another campaign from the UI.More details on how it works can be found [here](https://help.firstpromoter.com/en/articles/2509650-moving-promoters-from-one-campaign-to-another).<br/><br/>You can identify promoters by: `id`, `cust_id`, `auth_token`, `promoter_email` or `ref_id`(referral id).<Tip> **HTTP Request** <br/> `POST https://firstpromoter.com/api/v1/promoters/move_to_campaign` </Tip>",
         "parameters": [
           {
             "name": "id",
@@ -1027,10 +1026,9 @@
           },
           {
             "name": "source_campaign_id",
-            "in": "query",   
+            "in": "query",
             "required": true,
             "description": "Only needed if the promoter is added to multiple campaigns. You can use this parameter to specify which campaign to change. If none is specified if will use as source the default campaign.",
-         
             "schema": {
               "type": "string"
             }
@@ -1139,7 +1137,7 @@
                         },
                         "current_promotion_reward": null,
                         "current_target_reward": null,
-                        "campaign_name": "Publishers \u0026 marketing Partners",
+                        "campaign_name": "Publishers & marketing Partners",
                         "hidden": true,
                         "visitors_count": 0,
                         "leads_count": 1,
@@ -1272,9 +1270,16 @@
                     "w8_form_url": null,
                     "w9_form_url": null,
                     "parent_promoter_id": null,
-                    "earnings_balance": { "cash": 30000 },
-                    "current_balance": { "credits": -150 },
-                    "paid_balance": { "cash": 30000, "credits": 150 },
+                    "earnings_balance": {
+                      "cash": 30000
+                    },
+                    "current_balance": {
+                      "credits": -150
+                    },
+                    "paid_balance": {
+                      "cash": 30000,
+                      "credits": 150
+                    },
                     "auth_token": "cxXz22oP5xNG2bFcXzo13N8HQ91RYed2",
                     "profile": {
                       "id": 5629748,
@@ -1314,7 +1319,7 @@
                         },
                         "current_promotion_reward": null,
                         "current_target_reward": null,
-                        "campaign_name": "Publishers \u0026 marketing Partners",
+                        "campaign_name": "Publishers & marketing Partners",
                         "hidden": false,
                         "visitors_count": 0,
                         "leads_count": 0,
@@ -1794,7 +1799,11 @@
           "status": {
             "description": "Promoter's status",
             "type": "string",
-            "enum": ["approved", "pending", "denied"]
+            "enum": [
+              "approved",
+              "pending",
+              "denied"
+            ]
           },
           "cust_id": {
             "description": "Your customer's user ID inside your application/system for the promoter. This will be included in the webhook event and can be used to identify the promoter in your system if you subscribe for FirstPromoter's webhooks.",
@@ -1916,11 +1925,45 @@
             "items": {
               "$ref": "#/components/schemas/Promotion"
             }
+          },
+          "custom_fields": {
+            "type": "object",
+            "nullable": true,
+            "description": "Key-value pairs of custom fields configured for this promoter"
+          },
+          "promo_codes": {
+            "type": "array",
+            "description": "Promo codes associated with this promoter",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "code": {
+                  "type": "string"
+                },
+                "reward": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
       "UnprocessableEntityError": {
-        "required": ["company_user.user.email", "message"],
+        "required": [
+          "company_user.user.email",
+          "message"
+        ],
         "type": "object",
         "properties": {
           "company_user.user.email": {
@@ -1938,7 +1981,9 @@
         }
       },
       "UnprocessableEntityErrorType1": {
-        "required": ["error"],
+        "required": [
+          "error"
+        ],
         "type": "object",
         "properties": {
           "error": {
@@ -1947,7 +1992,9 @@
         }
       },
       "MessageResponse": {
-        "required": ["message"],
+        "required": [
+          "message"
+        ],
         "type": "object",
         "properties": {
           "message": {
@@ -1956,7 +2003,7 @@
         }
       },
       "AuthenticationError": {
-            "type": "string"
+        "type": "string"
       }
     },
     "securitySchemes": {

@@ -6,7 +6,20 @@ description: "Connecting FirstPromoter with Recurly"
 `Difficulty: Easy` <br/>
 `Developer Required: No`
 
+FirstPromoter enables you to automatically track sales, refunds, and cancellations from your Recurly account.
 
-FirstPromoter enables you to automatically track sales, refunds, upgrades and cancellations from your Recurly account automatically.
+**Tracked webhook events:**
 
-Click [here](https://login.firstpromoter.com?redirect=%2Fintegration%2Frecurly) to view the guide.
+| Recurly Event | What FirstPromoter tracks |
+|---|---|
+| `closed_invoice_notification` | Sale / commission |
+| `paid_charge_invoice_notification` | Sale / commission |
+| `successful_refund_notification` | Refund |
+| `void_payment_notification` | Refund (voided payment) |
+| `canceled_subscription_notification` | Cancellation |
+
+<Note>
+Only invoices with a positive amount and a status of `collected` or `paid` are tracked as sales.
+</Note>
+
+Click [here](https://login.firstpromoter.com?redirect=%2Fintegration%2Frecurly) to view the setup guide.

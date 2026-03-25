@@ -6,7 +6,16 @@ description: "Connecting FirstPromoter with Chargebee"
 `Difficulty: Easy` <br/>
 `Developer Required: No`
 
+FirstPromoter enables you to automatically track sales, refunds, and cancellations by connecting your Chargebee account.
 
-FirstPromoter enables you to automatically track sales, refunds, upgrades and cancellations by connecting your Chargebee account.
+**Tracked webhook events:**
 
-Click [here](https://login.firstpromoter.com?redirect=%2Fintegration%2Fchargebee) to view the guide.
+| Chargebee Event | What FirstPromoter tracks |
+|---|---|
+| `customer_created` | Signup (only when a tracking ID or referral ID is present) |
+| `subscription_created` | Signup (including when a 100% discount is applied and no payment event fires) |
+| `payment_succeeded` | Sale / commission |
+| `payment_refunded` | Refund |
+| `subscription_cancelled` | Cancellation |
+
+Click [here](https://login.firstpromoter.com?redirect=%2Fintegration%2Fchargebee) to view the setup guide.

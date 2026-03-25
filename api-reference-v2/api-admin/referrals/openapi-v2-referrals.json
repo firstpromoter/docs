@@ -8,7 +8,7 @@
   "servers": [
     {
       "url": "https://api.firstpromoter.com/api/v2/company",
-      "description": "Staging server"
+      "description": "Production server"
     }
   ],
   "security": [
@@ -20,7 +20,9 @@
     "/referrals": {
       "get": {
         "summary": "Get available referrals",
-        "tags": ["Referrals"],
+        "tags": [
+          "Referrals"
+        ],
         "description": "Get available referrals \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/referrals`</Tip>",
         "parameters": [
           {
@@ -51,11 +53,14 @@
             "name": "filters[type]",
             "schema": {
               "type": "string",
-              "enum": ["lead", "customer"]
+              "enum": [
+                "lead",
+                "customer"
+              ]
             },
             "description": "Filter the referrals by type (lead or customer)"
           },
-            {
+          {
             "in": "query",
             "name": "filters[promoter_id]",
             "schema": {
@@ -167,7 +172,9 @@
       },
       "post": {
         "summary": "Create referral",
-        "tags": ["Referrals"],
+        "tags": [
+          "Referrals"
+        ],
         "description": "Create a new referral \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/referrals`</Tip>",
         "parameters": [
           {
@@ -180,7 +187,9 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["promoter_campaign_id"],
+                "required": [
+                  "promoter_campaign_id"
+                ],
                 "properties": {
                   "email": {
                     "type": "string",
@@ -246,7 +255,9 @@
       "delete": {
         "summary": "Delete referrals",
         "description": "With this endpoint you can delete referrals. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/referrals`</Tip>",
-        "tags": ["Referrals"],
+        "tags": [
+          "Referrals"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -295,7 +306,9 @@
     "/referrals/{id}": {
       "get": {
         "summary": "Get referral",
-        "tags": ["Referrals"],
+        "tags": [
+          "Referrals"
+        ],
         "description": "Get a specific referral \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/referrals/{id}`</Tip>",
         "parameters": [
           {
@@ -315,7 +328,11 @@
             "name": "find_by",
             "schema": {
               "type": "string",
-              "enum": ["email", "uid", "username"]
+              "enum": [
+                "email",
+                "uid",
+                "username"
+              ]
             },
             "description": "Find by attribute"
           }
@@ -345,7 +362,9 @@
       "put": {
         "summary": "Update referral",
         "description": "Update a specific referral. The id can be a referral ID, email, uid, or username when used with the find_by parameter in the request body. \n <Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/referrals/{id}`</Tip>",
-        "tags": ["Referrals"],
+        "tags": [
+          "Referrals"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -386,7 +405,11 @@
                   },
                   "find_by": {
                     "type": "string",
-                    "enum": ["email", "uid", "username"],
+                    "enum": [
+                      "email",
+                      "uid",
+                      "username"
+                    ],
                     "description": "Find by attribute. Required when id parameter is an email, uid, or username instead of an ID.\n\n Your request should follow the format `https://api.firstpromoter.com/api/v2/company/referrals/{email or uid or username}`"
                   },
                   "split_details[percentage]": {
@@ -431,7 +454,9 @@
       "post": {
         "summary": "Approve referrals",
         "description": "With this endpoint you can approve referrals. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/referrals/approve`</Tip>",
-        "tags": ["Referrals"],
+        "tags": [
+          "Referrals"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -481,7 +506,9 @@
       "post": {
         "summary": "Disable referrals",
         "description": "With this endpoint you can disable referrals. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/referrals/disable`</Tip>",
-        "tags": ["Referrals"],
+        "tags": [
+          "Referrals"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -531,7 +558,9 @@
       "post": {
         "summary": "Enable referrals",
         "description": "With this endpoint you can enable referrals. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/referrals/enable`</Tip>",
-        "tags": ["Referrals"],
+        "tags": [
+          "Referrals"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -581,7 +610,9 @@
       "post": {
         "summary": "Move referrals to promoter",
         "description": "With this endpoint you can move referrals to another promoter. \n <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note> \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/referrals/move_to_promoter`</Tip>",
-        "tags": ["Referrals"],
+        "tags": [
+          "Referrals"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -593,7 +624,10 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["promoter_campaign_id", "selection"],
+                "required": [
+                  "promoter_campaign_id",
+                  "selection"
+                ],
                 "properties": {
                   "promoter_campaign_id": {
                     "type": "integer",
@@ -602,7 +636,10 @@
                   "move_associated_commissions": {
                     "type": "boolean",
                     "description": "Move associated commissions",
-                    "enum": [true, false]
+                    "enum": [
+                      true,
+                      false
+                    ]
                   },
                   "ids": {
                     "type": "array",
@@ -629,7 +666,9 @@
                     },
                     "status": {
                       "type": "string",
-                      "enum": ["completed"]
+                      "enum": [
+                        "completed"
+                      ]
                     },
                     "total": {
                       "type": "integer"
@@ -756,7 +795,10 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message", "code"]
+                  "required": [
+                    "message",
+                    "code"
+                  ]
                 }
               }
             }
@@ -773,10 +815,16 @@
                     },
                     "code": {
                       "type": "string",
-                      "enum": ["invalid_params", "operation_failed"]
+                      "enum": [
+                        "invalid_params",
+                        "operation_failed"
+                      ]
                     }
                   },
-                  "required": ["message", "code"]
+                  "required": [
+                    "message",
+                    "code"
+                  ]
                 }
               }
             }
@@ -788,7 +836,9 @@
       "post": {
         "summary": "Import previous sales from stripe",
         "description": "With this endpoint you can import previous sales from Stripe. \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/referrals/{id}/import_events`</Tip>",
-        "tags": ["Referrals"],
+        "tags": [
+          "Referrals"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -807,7 +857,11 @@
             "name": "find_by",
             "schema": {
               "type": "string",
-              "enum": ["email", "uid", "username"]
+              "enum": [
+                "email",
+                "uid",
+                "username"
+              ]
             },
             "description": "Find by attribute"
           }
@@ -849,7 +903,7 @@
         "name": "Account-ID",
         "in": "header",
         "required": true,
-        "description": "Account id. You can find your Account ID on Your FirstPromoter Dashboard. Navigate to Settings → Integrations",
+        "description": "Account id. You can find your Account ID on Your FirstPromoter Dashboard. Navigate to Settings \u2192 Integrations",
         "schema": {
           "type": "string"
         }
@@ -930,6 +984,54 @@
             "format": "email",
             "nullable": true,
             "description": "Email address of the user who created the referral"
+          },
+          "username": {
+            "type": "string",
+            "nullable": true,
+            "description": "Username chosen by the referral"
+          },
+          "split_details": {
+            "type": "object",
+            "nullable": true,
+            "description": "Details of commission split when the referral is shared between promoters"
+          },
+          "first_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "last_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "website": {
+            "type": "string",
+            "nullable": true
+          },
+          "comment": {
+            "type": "string",
+            "nullable": true,
+            "description": "Internal note or comment on this referral"
+          },
+          "is_expired": {
+            "type": "boolean",
+            "description": "Whether the referral has expired"
+          },
+          "custom_status": {
+            "type": "object",
+            "nullable": true,
+            "description": "Custom referral status assigned to this referral, if any",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              },
+              "color": {
+                "type": "string",
+                "nullable": true
+              }
+            }
           }
         }
       },
@@ -1018,7 +1120,10 @@
           },
           "status": {
             "type": "string",
-            "enum": ["pending", "completed"],
+            "enum": [
+              "pending",
+              "completed"
+            ],
             "description": "Status of the batch operation"
           },
           "total": {
@@ -1073,7 +1178,10 @@
         "properties": {
           "type": {
             "type": "string",
-            "enum": ["lead", "customer"]
+            "enum": [
+              "lead",
+              "customer"
+            ]
           },
           "state": {
             "type": "string",
@@ -1208,13 +1316,13 @@
       "BearerAuth": {
         "type": "http",
         "scheme": "bearer",
-        "description": "API key passed as a Bearer token in the Authorization header. You can find your API Key on Your FirstPromoter Dashboard. Navigate to Settings → Integrations → Manage API Keys"
+        "description": "API key passed as a Bearer token in the Authorization header. You can find your API Key on Your FirstPromoter Dashboard. Navigate to Settings \u2192 Integrations \u2192 Manage API Keys"
       },
       "accountId": {
         "type": "apiKey",
         "in": "header",
         "name": "ACCOUNT-ID",
-        "description": "Your FirstPromoter Account ID. You can find this in the  Settings → Integrations section of your dashboard."
+        "description": "Your FirstPromoter Account ID. You can find this in the  Settings \u2192 Integrations section of your dashboard."
       }
     }
   }
