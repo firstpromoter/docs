@@ -20,9 +20,17 @@ There is currently no UI to retrieve these credentials directly. The easiest way
 4. Click on any request to `v2.firstpromoter.com`
 5. Under **Request Headers**, you will find:
    - `Authorization: Bearer {your_access_token}`
-   - `account-id: {your_account_id}`
 
-Copy both values and store them securely.
+Copy the access token and store it securely.
+
+To get your **Account ID**, make a request to the `/me` endpoint using your access token and look for the `cid` field in the response:
+
+```
+GET https://v2.firstpromoter.com/api/v2/affiliate/promoters/me
+Authorization: Bearer {your_access_token}
+```
+
+The `cid` value inside the `company` object in the response is your Account ID.
 
 <Warning>
   The access token is tied to the affiliate's session and will expire when the session ends or the user logs out. You will need to retrieve a new token each time.
