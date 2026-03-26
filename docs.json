@@ -255,15 +255,6 @@
                     ]
                   },
                   {
-                    "group": "Affiliate Contract Documents",
-                    "pages": [
-                      "api-reference-v2/api-affiliate/contract-documents/get-current-version-contract-documents-for-the-promoter",
-                      "api-reference-v2/api-affiliate/contract-documents/get-contract-documents-by-id-and-returns-it-in-the-selected-format-htmlpdf",
-                      "api-reference-v2/api-affiliate/contract-documents/sign-a-document-with-ip",
-                      "api-reference-v2/api-affiliate/contract-documents/get-the-draft-content-of-the-contract-with-user-details-parsed"
-                    ]
-                  },
-                  {
                     "group": "Affiliate Email Settings",
                     "pages": [
                       "api-reference-v2/api-affiliate/email-settings/get-affiliate-email-settings",
@@ -307,10 +298,7 @@
                     "pages": [
                       "api-reference-v2/api-affiliate/promoters/get-current-promoter",
                       "api-reference-v2/api-affiliate/promoters/get-current-promoter-sub-affiliates",
-                      "api-reference-v2/api-affiliate/promoters/get-chart-data",
-                      "api-reference-v2/api-affiliate/promoters/get-the-promoter-email",
-                      "api-reference-v2/api-affiliate/promoters/set-the-user-password",
-                      "api-reference-v2/api-affiliate/promoters/archives-current-promoter"
+                      "api-reference-v2/api-affiliate/promoters/get-chart-data"      
                     ]
                   },
                   {
