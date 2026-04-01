@@ -26,7 +26,7 @@
             {
               "name": "selected_fields[]",
               "in": "query",
-              "description": "An array of fields to return on the response. By default selected fields are `revenue_amount`, `clicks_count`, `referrals_count`, `customers_count`.",
+              "description": "An array of fields to return on the response. By default selected fields are `revenue_amount`, `clicks_count`, `referrals_count`, `customers_count`, `promoter_earnings_amount`.",
               "schema": {
                 "type": "array",
                 "items": {
