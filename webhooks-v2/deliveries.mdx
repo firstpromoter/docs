@@ -3,7 +3,7 @@ title: 'Delivery Tracking & Retries'
 description: 'Monitor delivery attempts, understand retry behaviour, and manually retry failed deliveries.'
 ---
 
-Every time FirstPromoter attempts to send a webhook, a delivery record is created and tracked. You can inspect these records via the dashboard or the Admin API to debug failed deliveries.
+Every time FirstPromoter attempts to send a webhook, a delivery record is created and tracked. You can inspect these records via the dashboard to debug failed deliveries.
 
 ## Delivery statuses
 
@@ -91,39 +91,14 @@ Set `max_retries` to `0` on a subscription to disable retries entirely.
   When the delivery record was created.
 </ResponseField>
 
-## Viewing deliveries via the API
+## Viewing deliveries
 
-**List deliveries for a subscription:**
-
-```bash
-GET /api/admin/v2/webhooks/:subscription_id/webhook_deliveries
-```
-
-**Get a single delivery:**
-
-```bash
-GET /api/admin/v2/webhooks/:subscription_id/webhook_deliveries/:delivery_id
-```
+You can view delivery history for any subscription from the **Settings → Integrations → Webhooks** page in the dashboard. Click into a subscription to see all delivery attempts, their status, response codes, and error details.
 
 ## Manually retrying a failed delivery
 
-If you want to re-attempt a `failed` delivery without waiting for the automatic retry schedule, use the retry endpoint:
-
-```bash
-POST /api/admin/v2/webhooks/:subscription_id/webhook_deliveries/:delivery_id/retry_delivery
-```
-
-This immediately enqueues a new delivery attempt regardless of how many attempts have already been made.
+If a delivery has a `failed` status you can re-attempt it directly from the dashboard without waiting for the automatic retry schedule. Navigate to the subscription's delivery history and click **Retry** on the failed delivery.
 
 ## Sending a test delivery
 
-Use the test endpoint to send a synthetic payload to your endpoint without needing to trigger a real event. This is useful when setting up a new subscription or debugging signature verification.
-
-```bash
-POST /api/admin/v2/webhooks/:subscription_id/test
-Content-Type: application/json
-
-{ "event_type": "referral.created" }
-```
-
-The test payload has `"data": { "test": true }` and does not correspond to a real resource. It is signed with your subscription's `secret_key` just like a real delivery.
+When setting up a new subscription you can send a test payload to your endpoint from the dashboard without needing to trigger a real event. Navigate to the subscription and click **Send test**. The test payload has `"data": { "test": true }` and is signed with your subscription's `secret_key` just like a real delivery.

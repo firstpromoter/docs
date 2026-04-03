@@ -1,0 +1,48 @@
+---
+title: 'Delivery & Retries'
+description: 'How v1 webhook delivery works, retry behaviour, and the fulfilment_pending response protocol.'
+---
+
+## How delivery works
+
+1. An event occurs in your FirstPromoter account.
+2. FirstPromoter sends a `POST` request to each webhook URL configured on the matching campaign.
+3. Your endpoint must respond within the request timeout with an HTTP status code.
+4. A `2xx` response acknowledges the delivery. Any other response is treated as a failure.
+
+## Setting up webhook URLs
+
+In v1, webhook URLs are configured per campaign. Navigate to **Settings → Campaigns → [your campaign] → Webhooks** and add a URL for each event you want to receive.
+
+Up to 3 webhook URLs can be configured per campaign:
+- **Default webhook URL** — receives all standard events (`lead_signup`, `lead_becomes_referral`, `new_customer`, `lead_cancelled`, `promoter_signed_up`, `promoter_accepted`, `reward_created`).
+- **Fulfilment webhook URL** — receives `fulfilment_pending` events only.
+
+## Retry behaviour
+
+If your endpoint does not respond with a success status, FirstPromoter will retry the delivery. Retry behaviour varies by event type:
+
+| Event | Retries |
+|---|---|
+| `fulfilment_pending` | Up to 7 retries spread throughout the day |
+| All other events | No automatic retries |
+
+For events other than `fulfilment_pending`, if your endpoint is unavailable at the time of delivery the event will not be re-sent. Make sure your endpoint is reliably available or use the `fulfilment_pending` response protocol to keep rewards in a pending state until you are ready.
+
+## The fulfilment_pending response protocol
+
+The `fulfilment_pending` event has special response semantics. The HTTP status code your endpoint returns controls what happens to the reward in FirstPromoter:
+
+| Your response | Outcome |
+|---|---|
+| `200 OK` | Reward is marked as **fulfilled**. No further retries. |
+| `2xx` (except 200) | Reward stays **pending**. No retry is scheduled — the event will fire again on the next fulfilment check. |
+| Any other status | **Error** — FirstPromoter retries up to 7 times throughout the day. If all retries fail, `has_issues` is set to `true` on the reward. |
+
+<Tip>
+  If you need time to process the fulfilment asynchronously, respond with `202 Accepted` to keep the reward in `pending` state, then call the FirstPromoter API to mark it as fulfilled once your processing is complete.
+</Tip>
+
+## Responding quickly
+
+Your endpoint should respond as quickly as possible — ideally under a few seconds. If your fulfilment logic is slow, acknowledge the request immediately and process the work in a background job.

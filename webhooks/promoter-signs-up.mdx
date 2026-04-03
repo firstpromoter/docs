@@ -1,347 +1,80 @@
 ---
-title: "Promoter Signs Up"
+title: 'Promoter Signs Up'
+description: 'Fired when a new promoter joins your affiliate program.'
 ---
 
-By setting up a webhook, your endpoint will receive an event when a new promoter signs up to your affiliate program.
+Your endpoint will receive this event each time a new promoter signs up to your affiliate program, whether through your signup page or via the API.
 
-## Response Parameters
+## Payload
 
-<ResponseField name="Event" type="Event Object">
+<ResponseField name="event" type="object">
   <Expandable title="properties">
-    <ResponseField name="id" type="string">
-      The Id of the event
+    <ResponseField name="id" type="number">
+      Unique ID of the event.
     </ResponseField>
     <ResponseField name="type" type="string">
-      Indicates the webhook event type, such as `promoter_signed_up`.
+      Always `promoter_signed_up` for this event.
     </ResponseField>
     <ResponseField name="created_at" type="string">
-      Timestamp of when the event occurred.
+      ISO 8601 timestamp of when the event occurred.
     </ResponseField>
   </Expandable>
 </ResponseField>
 
-<ResponseField name="Data" type="Data Object">
+<ResponseField name="data" type="object">
   <Expandable title="properties">
-    <ResponseField name="promoter" type="Promoter Object">
+    <ResponseField name="promoter" type="object">
+      The newly signed-up promoter.
       <Expandable title="properties">
-        <ResponseField name="id" type="number">
-          The Id of the promoter
-        </ResponseField>
-        <ResponseField name="status" type="string">
-          The status of the promoter
-        </ResponseField>
-        <ResponseField name="cust_id" type="string">
-          The customer id of the promoter
-        </ResponseField>
-        <ResponseField name="email" type="string">
-          The email of the promoter
-        </ResponseField>
-        <ResponseField name="created_at" type="string">
-          The date the promoter was created
-        </ResponseField>
-        <ResponseField name="temp_password" type="string">
-          The temporary password of the promoter
-        </ResponseField>
-        <ResponseField name="default_promotion_id" type="number">
-          The default promotion id of the promoter
-        </ResponseField>
-        <ResponseField name="pref" type="string">
-          The pref of the promoter
-        </ResponseField>
-        <ResponseField name="default_ref_id" type="string">
-          The default referral id of the promoter
-        </ResponseField>
-        <ResponseField name="note" type="string">
-          The note saved on the promoter profile by an admin
-        </ResponseField>
-        <ResponseField name="w8_form_url" type="string">
-          The w8 form url saved on the promoter profile by an admin
-        </ResponseField>
-        <ResponseField name="w9_form_url" type="string">
-          The w9 form url saved on the promoter profile by an admin
-        </ResponseField>
-        <ResponseField name="parent_promoter_id" type="number">
-          The parent promoter id of the promoter
-        </ResponseField>
-        <ResponseField name="earnings_balance" type="number">
-          The earnings balance of the promoter
-        </ResponseField>
-        <ResponseField name="current_balance" type="number">
-          The current balance of the promoter
-        </ResponseField>
-        <ResponseField name="paid_balance" type="number">
-          The paid balance of the promoter
-        </ResponseField>
-        <ResponseField name="auth_token" type="string">
-          The auth token of the promoter
-        </ResponseField>
-        <ResponseField name="profile" type="Profile Object">
+        <ResponseField name="id" type="number">ID of the promoter.</ResponseField>
+        <ResponseField name="status" type="string">Status of the promoter. Will typically be `pending` until accepted, or `active` if auto-approval is enabled.</ResponseField>
+        <ResponseField name="cust_id" type="string">External customer ID, if provided.</ResponseField>
+        <ResponseField name="email" type="string">Email address of the promoter.</ResponseField>
+        <ResponseField name="created_at" type="string">Timestamp of when the promoter was created.</ResponseField>
+        <ResponseField name="temp_password" type="string">Auto-generated temporary password sent to the promoter on signup.</ResponseField>
+        <ResponseField name="default_promotion_id" type="number">ID of the promoter's default promotion.</ResponseField>
+        <ResponseField name="pref" type="string">Internal preference token.</ResponseField>
+        <ResponseField name="default_ref_id" type="string">Default referral ID used in links.</ResponseField>
+        <ResponseField name="note" type="string">Admin note on the promoter's profile.</ResponseField>
+        <ResponseField name="w8_form_url" type="string">URL of the W-8 tax form, if uploaded.</ResponseField>
+        <ResponseField name="w9_form_url" type="string">URL of the W-9 tax form, if uploaded.</ResponseField>
+        <ResponseField name="parent_promoter_id" type="number">ID of the parent promoter in a multi-tier setup.</ResponseField>
+        <ResponseField name="earnings_balance" type="object">Total commissions earned, broken down by unit.</ResponseField>
+        <ResponseField name="current_balance" type="object">Current unpaid balance, broken down by unit.</ResponseField>
+        <ResponseField name="paid_balance" type="object">Total paid out balance, broken down by unit.</ResponseField>
+        <ResponseField name="auth_token" type="string">Authentication token for the promoter's affiliate dashboard.</ResponseField>
+        <ResponseField name="profile" type="object">
           <Expandable title="properties">
-            <ResponseField name="id" type="number">
-              The Id of the profile
-            </ResponseField>
-            <ResponseField name="first_name" type="string">
-              The first name of the profile
-            </ResponseField>
-            <ResponseField name="last_name" type="string">
-              The last name of the profile
-            </ResponseField>
-            <ResponseField name="website" type="string">
-              The website of the profile
-            </ResponseField>
-            <ResponseField name="company_name" type="string">
-              The company name of the profile
-            </ResponseField>
-            <ResponseField name="phone_number" type="string">
-              The phone number of the profile
-            </ResponseField>
-            <ResponseField name="address" type="string">
-              The address of the profile
-            </ResponseField>
-            <ResponseField name="vat_id" type="string">
-              The vat id of the profile
-            </ResponseField>
-            <ResponseField name="country" type="string">
-              The country of the profile
-            </ResponseField>
-            <ResponseField name="paypal_email" type="string">
-              The paypal email of the profile
-            </ResponseField>
-            <ResponseField name="avatar_url" type="string">
-              The avatar url of the profile
-            </ResponseField>
-            <ResponseField name="description" type="string">
-              The description of the profile
-            </ResponseField>
-            <ResponseField name="social_accounts" type="Social Accounts Object">
-              <Expandable title="properties">
-                <ResponseField name="tiktok" type="Social Account Object">
-                  <Expandable title="properties">
-                    <ResponseField name="url" type="string">
-                      The url of the social account
-                    </ResponseField>
-                  </Expandable>
-                </ResponseField>
-                <ResponseField name="twitch" type="Social Account Object">
-                  <Expandable title="properties">
-                    <ResponseField name="url" type="string">
-                      The url of the social account
-                    </ResponseField>
-                  </Expandable>
-                </ResponseField>
-                <ResponseField name="twitter" type="Social Account Object">
-                  <Expandable title="properties">
-                    <ResponseField name="url" type="string">
-                      The url of the social account
-                    </ResponseField>
-                  </Expandable>
-                </ResponseField>
-                <ResponseField name="youtube" type="Social Account Object">
-                  <Expandable title="properties">
-                    <ResponseField name="url" type="string">
-                      The url of the social account
-                    </ResponseField>
-                  </Expandable>
-                </ResponseField>
-                <ResponseField name="facebook" type="Social Account Object">
-                  <Expandable title="properties">
-                    <ResponseField name="url" type="string">
-                      The url of the social account
-                    </ResponseField>
-                  </Expandable>
-                </ResponseField>
-                <ResponseField name="linkedin" type="Social Account Object">
-                  <Expandable title="properties">
-                    <ResponseField name="url" type="string">
-                      The url of the social account
-                    </ResponseField>
-                  </Expandable>
-                </ResponseField>
-                <ResponseField name="instagram" type="Social Account Object">
-                  <Expandable title="properties">
-                    <ResponseField name="url" type="string">
-                      The url of the social account
-                    </ResponseField>
-                  </Expandable>
-                </ResponseField>
-              </Expandable>
+            <ResponseField name="id" type="number">ID of the profile.</ResponseField>
+            <ResponseField name="first_name" type="string">First name.</ResponseField>
+            <ResponseField name="last_name" type="string">Last name.</ResponseField>
+            <ResponseField name="website" type="string">Website URL.</ResponseField>
+            <ResponseField name="company_name" type="string">Company name.</ResponseField>
+            <ResponseField name="phone_number" type="string">Phone number.</ResponseField>
+            <ResponseField name="address" type="string">Mailing address.</ResponseField>
+            <ResponseField name="vat_id" type="string">VAT identification number.</ResponseField>
+            <ResponseField name="country" type="string">Two-letter country code.</ResponseField>
+            <ResponseField name="paypal_email" type="string">PayPal email for payouts.</ResponseField>
+            <ResponseField name="avatar_url" type="string">URL of the promoter's avatar image.</ResponseField>
+            <ResponseField name="description" type="string">Bio or description.</ResponseField>
+            <ResponseField name="social_accounts" type="object">
+              Social profile URLs keyed by platform (`twitter`, `youtube`, `facebook`, `linkedin`, `instagram`, `tiktok`, `twitch`). Each entry has a `url` string.
             </ResponseField>
           </Expandable>
         </ResponseField>
       </Expandable>
     </ResponseField>
-
-    <ResponseField name="promotions" type="Promotions Array">
-      <Expandable title="properties">
-        <ResponseField name="promotion" type="Promotion Object">
-            <Expandable title="properties">
-                <ResponseField name="id" type="number">
-                  The Id of the promotion
-                </ResponseField>
-                <ResponseField name="status" type="string">
-                  The status of the promotion
-                </ResponseField>
-                <ResponseField name="ref_id" type="string">
-                  The referral id of the promotion
-                </ResponseField>
-                <ResponseField name="promo_code" type="string">
-                  The promo code of the promotion
-                </ResponseField>
-                <ResponseField name="customer_promo_code" type="string">
-                  The customer promo code of the promotion
-                </ResponseField>
-                <ResponseField name="target_reached_at" type="string">
-                  The target reached at of the promotion
-                </ResponseField>
-                <ResponseField name="promoter_id" type="number">
-                  The promoter id of the promotion
-                </ResponseField>
-                <ResponseField name="campaign_id" type="number">
-                  The campaign id of the promotion
-                </ResponseField>
-                <ResponseField name="referral_link" type="string">
-                  The referral link of the promotion
-                </ResponseField>
-                <ResponseField name="current_offer" type="Offer Object">
-                  <Expandable title="properties">
-                    <ResponseField name="id" type="number">
-                      The Id of the offer
-                    </ResponseField>
-                    <ResponseField name="name" type="string">
-                      The name of the offer
-                    </ResponseField>
-                    <ResponseField name="amount" type="number">
-                      The amount of the offer
-                    </ResponseField>
-                    <ResponseField name="unit" type="string">
-                      The unit of the offer
-                    </ResponseField>
-                    <ResponseField name="default_promo_code" type="string">
-                      The default promo code of the offer
-                    </ResponseField>
-                  </Expandable>
-                </ResponseField>
-                <ResponseField name="current_referral_reward" type="Current referral reward Object">
-                    <Expandable title="properties">
-                        <ResponseField name="id" type="number">
-                          The Id of the referral reward
-                        </ResponseField>
-                        <ResponseField name="amount" type="number">
-                          The amount of the referral reward
-                        </ResponseField>
-                        <ResponseField name="type" type="string">
-                          The type of the referral reward
-                        </ResponseField>
-                        <ResponseField name="unit" type="string">
-                          The unit of the referral reward
-                        </ResponseField>
-                        <ResponseField name="name" type="string">
-                          The name of the referral reward
-                        </ResponseField>
-                        <ResponseField name="per_of_sale" type="number">
-                          The per of sale of the referral reward
-                        </ResponseField>
-                        <ResponseField name="default_promo_code" type="string">
-                          The default promo code of the referral reward
-                        </ResponseField>
-                    </Expandable>
-                </ResponseField>
-                <ResponseField name="current_promotion_reward" type="Current promotion reward Object">
-                    <Expandable title="properties">
-                        <ResponseField name="id" type="number">
-                          The Id of the promotion reward
-                        </ResponseField>
-                        <ResponseField name="amount" type="number">
-                          The amount of the promotion reward
-                        </ResponseField>
-                        <ResponseField name="type" type="string">
-                          The type of the promotion reward
-                        </ResponseField>
-                        <ResponseField name="unit" type="string">
-                          The unit of the promotion reward
-                        </ResponseField>
-                        <ResponseField name="name" type="string">
-                          The name of the promotion reward
-                        </ResponseField>
-                        <ResponseField name="per_of_sale" type="number">
-                          The per of sale of the promotion reward
-                        </ResponseField>
-                        <ResponseField name="default_promo_code" type="string">
-                          The default promo code of the promotion reward
-                        </ResponseField>
-                    </Expandable>
-                </ResponseField>
-                <ResponseField name="current_target_reward" type="Current target reward Object">
-                    <Expandable title="properties">
-                        <ResponseField name="id" type="number">
-                          The Id of the target reward
-                        </ResponseField>
-                        <ResponseField name="amount" type="number">
-                          The amount of the target reward
-                        </ResponseField>
-                        <ResponseField name="type" type="string">
-                          The type of the target reward
-                        </ResponseField>
-                        <ResponseField name="unit" type="string">
-                          The unit of the target reward
-                        </ResponseField>
-                        <ResponseField name="name" type="string">
-                          The name of the target reward
-                        </ResponseField>
-                        <ResponseField name="per_of_sale" type="number">
-                          The per of sale of the target reward
-                        </ResponseField>
-                        <ResponseField name="default_promo_code" type="string">
-                          The default promo code of the target reward
-                        </ResponseField>
-                    </Expandable>
-                </ResponseField>
-                <ResponseField name="campaign_name" type="string">
-                  The name of the campaign
-                </ResponseField>
-                <ResponseField name="hidden" type="boolean">
-                  Whether the campaign is hidden
-                </ResponseField>
-                <ResponseField name="visitors_count" type="number">
-                  The number of visitors
-                </ResponseField>
-                <ResponseField name="leads_count" type="number">
-                  The number of leads
-                </ResponseField>
-                <ResponseField name="customers_count" type="number">
-                  The number of customers
-                </ResponseField>
-                <ResponseField name="refunds_count" type="number">
-                  The number of refunds
-                </ResponseField>
-                <ResponseField name="cancellations_count" type="number">
-                  The number of cancellations
-                </ResponseField>
-                <ResponseField name="sales_count" type="number">
-                  The number of sales
-                </ResponseField>
-                <ResponseField name="sales_total" type="number">
-                  The total sales
-                </ResponseField>
-                <ResponseField name="refunds_total" type="number">
-                  The total refunds
-                </ResponseField>
-                <ResponseField name="active_customers_count" type="number">
-                  The number of active customers
-                </ResponseField>
-            </Expandable>
-        </ResponseField>
-      </Expandable>
+    <ResponseField name="promotions" type="array">
+      Array of campaign promotions the promoter was enrolled in at signup. See [Lead Signup](/webhooks/lead-signup) for the full promotion object structure.
     </ResponseField>
-
   </Expandable>
 </ResponseField>
 
+## Example
 
-
-<ResponseExample name="Promoter Signs Up Response" type="string">
-  ```json Response
-  {
+<ResponseExample>
+```json Response
+{
   "event": {
     "id": 22733100,
     "type": "promoter_signed_up",
@@ -352,7 +85,7 @@ By setting up a webhook, your endpoint will receive an event when a new promoter
       "id": 9000800,
       "status": "pending",
       "cust_id": null,
-      "email": "newaffiliate@mailinator.com",
+      "email": "newaffiliate@example.com",
       "created_at": "2024-10-03T11:45:10.102Z",
       "temp_password": "XPQ-rT",
       "default_promotion_id": 11027500,
@@ -400,13 +133,13 @@ By setting up a webhook, your endpoint will receive an event when a new promoter
         "target_reached_at": null,
         "promoter_id": 9000800,
         "campaign_id": 13202,
-        "referral_link": "https://www.cax.ws?_get=cx2mn",
+        "referral_link": "https://www.example.com?_get=cx2mn",
         "current_offer": {
           "id": 67212,
           "name": "5% discount coupon",
           "amount": 5,
           "unit": "discount_per",
-          "default_promo_code": " MAXADA-5"
+          "default_promo_code": "EXAMPLE-5"
         },
         "current_referral_reward": {
           "id": 128312,
@@ -419,7 +152,7 @@ By setting up a webhook, your endpoint will receive an event when a new promoter
         },
         "current_promotion_reward": null,
         "current_target_reward": null,
-        "campaign_name": "Jaquelyn Ryan",
+        "campaign_name": "Main Campaign",
         "hidden": false,
         "visitors_count": 0,
         "leads_count": 0,
@@ -434,6 +167,5 @@ By setting up a webhook, your endpoint will receive an event when a new promoter
     ]
   }
 }
-  ```
-
+```
 </ResponseExample>

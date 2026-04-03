@@ -72,23 +72,3 @@ Event types follow the format `{entity}.{action}` (e.g., `promoter.created`). Wh
 |---|---|
 | `contract_document.signed` | A promoter signed a contract document. |
 
-## Checking available event types via the API
-
-You can fetch the full list of currently supported event types from the API:
-
-```bash
-GET /api/admin/v2/webhooks/event_types
-```
-
-```json
-{
-  "data": [
-    "commission.created",
-    "commission.deleted",
-    "commission.updated",
-    "contract_document.signed",
-    "payments_batch.created",
-    ...
-  ]
-}
-```

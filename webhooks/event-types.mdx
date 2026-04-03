@@ -1,0 +1,220 @@
+---
+title: 'Event Types'
+description: 'All webhook events available in FirstPromoter, with their triggers and data payloads.'
+---
+
+Each event is sent as a `POST` request with a JSON body containing an `event` object and a `data` object. The `event.type` field tells you which event fired. See [Payload Structure](/webhooks/payload) for the common wrapper format.
+
+## Lead events
+
+These events fire when a referred lead's lifecycle changes.
+
+<AccordionGroup>
+
+<Accordion title="lead_signup">
+Fired each time a new lead signs up through a promoter's referral link.
+
+**Data fields:**
+
+| Field | Type | Description |
+|---|---|---|
+| `id` | number | ID of the lead. |
+| `status` | string | Current state (`signup`, `active`, `cancelled`). |
+| `email` | string | Email address of the lead. |
+| `uid` | string | External user ID you passed when tracking. |
+| `customer_since` | string | Timestamp of first payment. `null` until conversion. |
+| `cancelled_at` | string | Timestamp of cancellation. `null` if not cancelled. |
+| `plan_name` | string | Subscription plan name, if provided. |
+| `suspicion` | string | Fraud suspicion level (e.g., `no_suspicion`). |
+| `created_at` | string | Timestamp of when the lead was created. |
+| `split_promotion_id` | number | Split promotion ID, if applicable. |
+| `split_percentage_value` | number | Split percentage, if applicable. |
+| `promoter` | object | The promoter who referred this lead. See [Promoter object](#promoter-object). |
+| `promotion` | object | The campaign promotion that generated this lead. See [Promotion object](#promotion-object). |
+</Accordion>
+
+<Accordion title="lead_becomes_referral">
+Fired once when a lead makes their first payment and converts to an active customer.
+
+<Note>This event fires only once per lead — on the first payment. After it fires, the lead's `status` becomes `active` and `customer_since` is set.</Note>
+
+**Data fields:** Same as `lead_signup`. At the time of this event, `status` will be `active` and `customer_since` will be set.
+</Accordion>
+
+<Accordion title="new_customer">
+Fired when a referred lead becomes a paying customer for the first time.
+
+<Note>This event is similar to `lead_becomes_referral` and fires once per lead on the first payment.</Note>
+
+**Data fields:** Same as `lead_signup`. At the time of this event, `status` will be `active` and `customer_since` will be set.
+</Accordion>
+
+<Accordion title="lead_cancelled">
+Fired when a lead or customer cancels their subscription, either through your billing integration or via the API.
+
+**Data fields:** Same as `lead_signup`. At the time of this event, `status` will be `cancelled` and `cancelled_at` will be set.
+</Accordion>
+
+</AccordionGroup>
+
+## Promoter events
+
+These events fire when a promoter's status in your program changes.
+
+<AccordionGroup>
+
+<Accordion title="promoter_signed_up">
+Fired each time a new promoter joins your affiliate program, whether through your signup page or via the API.
+
+**Data fields:**
+
+| Field | Type | Description |
+|---|---|---|
+| `promoter` | object | The newly signed-up promoter. See [Promoter object](#promoter-object). `status` is typically `pending` unless auto-approval is enabled. |
+| `promotions` | array | Campaign promotions the promoter was enrolled in at signup. See [Promotion object](#promotion-object). |
+</Accordion>
+
+<Accordion title="promoter_accepted">
+Fired when a promoter is approved for a campaign — either manually by an admin or automatically if `auto_approve_promoters` is enabled.
+
+**Data fields:**
+
+| Field | Type | Description |
+|---|---|---|
+| `state` | string | Always `accepted` at time of this event. |
+| `campaign` | object | The campaign the promoter was accepted into. See [Campaign object](#campaign-object). |
+| `promoter` | object | The accepted promoter. See [Promoter object](#promoter-object). |
+| `promotion` | object | The promotion created for the promoter in this campaign. See [Promotion object](#promotion-object). |
+</Accordion>
+
+</AccordionGroup>
+
+## Reward events
+
+These events fire when rewards are created or need to be fulfilled.
+
+<AccordionGroup>
+
+<Accordion title="reward_created">
+Fired whenever a reward is generated for a promoter — for example when a referral converts or a milestone is reached.
+
+**Data fields:**
+
+| Field | Type | Description |
+|---|---|---|
+| `id` | number | ID of the reward record. |
+| `status` | string | Reward status (e.g., `approved`, `pending`). |
+| `amount` | number | Reward amount in the unit's smallest denomination. |
+| `unit` | string | Reward unit (`cash`, `points`, `free_months`, `credits`). |
+| `created_at` | string | Timestamp of when the reward was created. |
+| `event_id` | string | ID of the sale or conversion event that triggered this reward. |
+| `conversion_amount` | number | Sale amount in cents that triggered the reward. |
+| `tier_level` | number | Tier level (1 = direct referral, 2 = second tier, etc.). |
+| `split_type` | string | Split type, if the commission was shared between promoters. |
+| `lead` | object | The lead whose conversion triggered this reward. |
+| `promoter` | object | The promoter who earned the reward. See [Promoter object](#promoter-object). |
+| `promotion` | object | The promotion linked to this reward. See [Promotion object](#promotion-object). |
+</Accordion>
+
+<Accordion title="fulfilment_pending">
+Fired right after a non-monetary reward (e.g., free months, credits) is attributed to a promoter. Use this event to trigger your own fulfilment logic.
+
+Your endpoint's HTTP response code controls the fulfilment state in FirstPromoter:
+
+| Response | Outcome |
+|---|---|
+| `200` | Reward marked as fulfilled. |
+| `2xx` (not 200) | Reward stays `pending`. |
+| Any other status | Error — retried up to 7 times. |
+
+**Data fields:**
+
+| Field | Type | Description |
+|---|---|---|
+| `id` | number | ID of the reward record. |
+| `status` | string | Always `pending` at time of this event. |
+| `amount` | number | Quantity to fulfil (e.g., number of free months). |
+| `unit` | string | Reward unit (e.g., `free_months`, `credits`). |
+| `created_at` | string | Timestamp of when the reward was created. |
+| `has_issues` | boolean | Whether previous fulfilment attempts encountered errors. |
+| `reward` | object | The reward rule that generated this record. |
+| `promoter` | object | The promoter to fulfil the reward for. See [Promoter object](#promoter-object). |
+| `campaign` | object | The campaign this reward is associated with. See [Campaign object](#campaign-object). |
+</Accordion>
+
+</AccordionGroup>
+
+---
+
+## Shared objects
+
+These objects appear in multiple event payloads.
+
+### Promoter object
+
+| Field | Type | Description |
+|---|---|---|
+| `id` | number | ID of the promoter. |
+| `status` | string | Status (`active`, `pending`, `blocked`). |
+| `cust_id` | string | External customer ID. |
+| `email` | string | Email address. |
+| `created_at` | string | Timestamp of account creation. |
+| `temp_password` | string | Auto-generated temporary password from signup. |
+| `default_promotion_id` | number | ID of the promoter's default promotion. |
+| `pref` | string | Internal preference token. |
+| `default_ref_id` | string | Default referral ID used in links. |
+| `note` | string | Admin note. |
+| `w8_form_url` | string | URL of the W-8 tax form, if uploaded. |
+| `w9_form_url` | string | URL of the W-9 tax form, if uploaded. |
+| `parent_promoter_id` | number | Parent promoter ID in a multi-tier setup. |
+| `earnings_balance` | object | Total commissions earned, by unit (e.g., `{ "cash": 5000 }`). |
+| `current_balance` | object | Current unpaid balance, by unit. |
+| `paid_balance` | object | Total paid out balance, by unit. |
+| `auth_token` | string | Token for the promoter's affiliate dashboard. |
+| `profile` | object | Profile details — name, address, country, social accounts. |
+| `promotions` | array | All campaign promotions this promoter is enrolled in. |
+
+### Promotion object
+
+| Field | Type | Description |
+|---|---|---|
+| `id` | number | ID of the promotion. |
+| `status` | string | Status (`offer_running`, `offer_inactive`). |
+| `ref_id` | string | Referral ID used in links. |
+| `promo_code` | string | Promoter-facing promo code. |
+| `customer_promo_code` | string | Customer-facing discount code. |
+| `promoter_id` | number | ID of the promoter. |
+| `campaign_id` | number | ID of the campaign. |
+| `referral_link` | string | Full referral URL. |
+| `campaign_name` | string | Name of the campaign. |
+| `visitors_count` | number | Total visitors tracked. |
+| `leads_count` | number | Total leads referred. |
+| `customers_count` | number | Total customers converted. |
+| `active_customers_count` | number | Currently active customers. |
+| `sales_count` | number | Total number of sales. |
+| `sales_total` | number | Total sales value in cents. |
+| `refunds_count` | number | Total number of refunds. |
+| `refunds_total` | number | Total refund value in cents (negative). |
+| `cancellations_count` | number | Total cancellations. |
+| `current_offer` | object | Active discount offer for referrals. |
+| `current_referral_reward` | object | Active commission reward. |
+| `current_promotion_reward` | object | Active non-monetary or milestone reward. |
+| `current_target_reward` | object | Active target-based reward, if set. |
+
+### Campaign object
+
+| Field | Type | Description |
+|---|---|---|
+| `id` | number | ID of the campaign. |
+| `name` | string | Name of the campaign. |
+| `landing_url` | string | Landing page URL. |
+| `description` | string | Campaign description. |
+| `private` | boolean | Whether the campaign is invite-only. |
+| `color` | string | Display color (hex code). |
+| `default_webhook_url` | string | Default webhook URL configured on the campaign. |
+| `auto_approve_rewards` | boolean | Whether rewards are automatically approved. |
+| `auto_approve_promoters` | boolean | Whether promoters are automatically approved. |
+| `offer` | object | Active discount offer. |
+| `referral_reward` | object | Active commission reward. |
+| `promotion_reward` | object | Active non-monetary reward. |
+| `target_reward` | object | Target-based reward, if set. |

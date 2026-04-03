@@ -1,28 +1,42 @@
 ---
 title: 'Overview'
+description: 'Receive real-time events from your FirstPromoter account in your own webhook endpoint.'
 ---
 
-# Receive FirstPromoter events in your webhook endpoint
-Listen to events in your FirstPromoter account on your webhook endpoint so you can use them in your app.
+Listen to events in your FirstPromoter account on your webhook endpoint so you can trigger actions or automate processes in your application.
 
 ## Why webhooks
-After setting up your FirstPromoter account, you may want to receive events from FirstPromoter in order to trigger an action or automate a process in your application. Webhooks allow you to do this.
 
-To receive webhook events, you need to have an endpoint in your application that will accept the event. If you are using a tool like [Zapier](https://zapier.com/), [Albato](https://albato.com/apps/firstpromoter) or [Make](https://www.make.com/en/integrations/firstpromoter)  they provide these endpoints when creating an automation flow.
+After setting up your FirstPromoter account, you may want to receive events in order to trigger an action or automate a process. Webhooks allow you to do this by pushing real-time event data to your endpoint as things happen in your account.
 
- After you add the webhook to FirstPromoter, it can push real-time event data to your endpoint when events occur in your FirstPromoter account.
+If you are using a tool like [Zapier](https://zapier.com/), [Albato](https://albato.com/apps/firstpromoter), or [Make](https://www.make.com/en/integrations/firstpromoter), they provide webhook endpoints when creating an automation flow.
 
 ## How to set it up
-Navigate to your Settings page > Select Integrations> Scroll down to the webhooks section.
 
-You can also click [here]('https://login.firstpromoter.com?redirect=%settings%2Fintegrations') to go there directly.
+Navigate to **Settings → Integrations** and scroll down to the webhooks section. Add a webhook URL for each event you want to receive.
+
+## Payload structure
+
+Every webhook event is sent as a `POST` request with a JSON body containing two top-level keys:
+
+- **`event`** — metadata about the event (id, type, timestamp)
+- **`data`** — the full payload for the event (lead, promoter, reward, etc.)
 
 ## Available webhook events
-- Lead Signup
-- Lead Becomes Referral
-- Lead Cancelled
-- Promoter Signs Up
-- Promoter Accepted
-- Reward Created
-- New Customer
-- Fulfilment Pending
+
+| Event | Triggered when |
+|---|---|
+| `lead_signup` | A new lead signs up via a referral link |
+| `lead_becomes_referral` | A lead makes their first payment and becomes a customer |
+| `lead_cancelled` | A lead or customer cancels their subscription |
+| `new_customer` | A lead becomes a paying customer |
+| `promoter_signed_up` | A new promoter joins your affiliate program |
+| `promoter_accepted` | A promoter is approved for a campaign |
+| `reward_created` | A reward is generated for a promoter |
+| `fulfilment_pending` | A non-monetary reward is waiting to be fulfilled |
+
+## How to respond
+
+Your endpoint should return a `2xx` HTTP status code to acknowledge receipt. If your endpoint does not respond in time or returns a non-`2xx` status, FirstPromoter will retry the delivery.
+
+The `fulfilment_pending` event has special response semantics — see its dedicated page for details.

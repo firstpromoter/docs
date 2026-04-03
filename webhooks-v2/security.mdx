@@ -73,13 +73,7 @@ Your `secret_key` is displayed when you create a subscription and after each rot
 
 ## Rotating the secret key
 
-You can rotate a subscription's secret key at any time via the **Admin API** or the dashboard without any downtime:
-
-```bash
-POST /api/admin/v2/webhooks/:id/rotate_secret
-```
-
-After rotation, a new `secret_key` is returned. Update your application to use the new key. In-flight deliveries that were signed with the old key will still be retried using the old signature, so you may want to accept both keys briefly during the transition.
+You can rotate a subscription's secret key at any time from the dashboard without any downtime. After rotation, a new `secret_key` is returned. Update your application to use the new key. In-flight deliveries that were signed with the old key will still be retried using the old signature, so you may want to accept both keys briefly during the transition.
 
 ## Replay protection
 

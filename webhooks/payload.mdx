@@ -1,0 +1,205 @@
+---
+title: 'Payload Structure'
+description: 'The JSON payload sent to your webhook endpoint for every v1 event.'
+---
+
+Every webhook request is a `POST` with `Content-Type: application/json`. All events share the same top-level wrapper — an `event` object and a `data` object.
+
+## Top-level fields
+
+<ResponseField name="event" type="object">
+  Metadata about the event.
+  <Expandable title="properties">
+    <ResponseField name="id" type="number">
+      Unique ID of the event.
+    </ResponseField>
+    <ResponseField name="type" type="string">
+      The event type string (e.g., `lead_signup`, `reward_created`). See [Event Types](/webhooks/event-types) for all possible values.
+    </ResponseField>
+    <ResponseField name="created_at" type="string">
+      ISO 8601 timestamp of when the event occurred.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="data" type="object">
+  The payload for this event. The fields inside `data` vary by event type — see [Event Types](/webhooks/event-types) for the full breakdown of each.
+</ResponseField>
+
+## Example payloads
+
+<AccordionGroup>
+
+<Accordion title="lead_signup">
+```json
+{
+  "event": {
+    "id": 22736304,
+    "type": "lead_signup",
+    "created_at": "2024-10-03T13:45:20.103Z"
+  },
+  "data": {
+    "id": 21381518,
+    "state": "signup",
+    "email": "customer@example.com",
+    "uid": "",
+    "customer_since": null,
+    "cancelled_at": null,
+    "plan_name": null,
+    "suspicion": "no_suspicion",
+    "created_at": "2024-10-03T13:45:20.031Z",
+    "promotion": {
+      "id": 4210924,
+      "status": "offer_running",
+      "ref_id": "afpxunub",
+      "campaign_id": 13202,
+      "campaign_name": "Main Campaign",
+      "referral_link": "https://www.example.com?_get=afpxunub",
+      "current_referral_reward": {
+        "id": 128312,
+        "amount": 0,
+        "type": "per_referral",
+        "unit": "cash",
+        "name": "20% recurring commission",
+        "per_of_sale": 20
+      }
+    },
+    "promoter": {
+      "id": 3920164,
+      "status": "active",
+      "email": "promoter@example.com",
+      "default_ref_id": "myrefid",
+      "earnings_balance": { "cash": 50744 },
+      "current_balance": { "cash": 20044 },
+      "paid_balance": { "cash": 30700 },
+      "profile": {
+        "first_name": "Jane",
+        "last_name": "Smith",
+        "country": "US"
+      }
+    }
+  }
+}
+```
+</Accordion>
+
+<Accordion title="promoter_signed_up">
+```json
+{
+  "event": {
+    "id": 22733100,
+    "type": "promoter_signed_up",
+    "created_at": "2024-10-03T11:45:10.312Z"
+  },
+  "data": {
+    "promoter": {
+      "id": 9000800,
+      "status": "pending",
+      "email": "newaffiliate@example.com",
+      "created_at": "2024-10-03T11:45:10.102Z",
+      "temp_password": "XPQ-rT",
+      "default_ref_id": "cx2mn",
+      "earnings_balance": null,
+      "current_balance": null,
+      "paid_balance": null,
+      "profile": {
+        "first_name": "Jane",
+        "last_name": "Smith",
+        "website": "https://www.janesmith.com",
+        "company_name": "Smith Media",
+        "country": "US"
+      }
+    },
+    "promotions": [
+      {
+        "id": 11027500,
+        "status": "offer_running",
+        "ref_id": "cx2mn",
+        "campaign_id": 13202,
+        "campaign_name": "Main Campaign",
+        "referral_link": "https://www.example.com?_get=cx2mn"
+      }
+    ]
+  }
+}
+```
+</Accordion>
+
+<Accordion title="reward_created">
+```json
+{
+  "event": {
+    "id": 22737431,
+    "type": "reward_created",
+    "created_at": "2024-10-03T14:23:20.791Z"
+  },
+  "data": {
+    "id": 11174868,
+    "status": "approved",
+    "amount": 200,
+    "unit": "cash",
+    "created_at": "2024-10-03T14:23:20.495Z",
+    "conversion_amount": 10000,
+    "tier_level": 1,
+    "lead": {
+      "id": 21381518,
+      "state": "active",
+      "email": "customer@example.com",
+      "customer_since": "2024-10-03T14:23:20.495Z"
+    },
+    "promoter": {
+      "id": 5779418,
+      "status": "active",
+      "email": "promoter@example.com",
+      "earnings_balance": { "cash": 4200 },
+      "current_balance": { "cash": 4200 }
+    },
+    "promotion": {
+      "id": 9438768,
+      "campaign_id": 13202,
+      "campaign_name": "Main Campaign",
+      "referral_link": "https://www.example.com?_get=myrefid"
+    }
+  }
+}
+```
+</Accordion>
+
+<Accordion title="fulfilment_pending">
+```json
+{
+  "event": {
+    "id": 13007875,
+    "type": "fulfilment_pending",
+    "created_at": "2023-08-23T11:06:02.663Z"
+  },
+  "data": {
+    "id": 2429153,
+    "status": "pending",
+    "amount": 3,
+    "unit": "free_months",
+    "created_at": "2023-08-23T11:06:02.607Z",
+    "has_issues": false,
+    "reward": {
+      "id": 109465,
+      "type": "per_promotion",
+      "unit": "free_months",
+      "name": "Free subscription months"
+    },
+    "promoter": {
+      "id": 5272969,
+      "status": "active",
+      "email": "promoter@example.com",
+      "current_balance": { "free_months": 3 }
+    },
+    "campaign": {
+      "id": 17476,
+      "name": "Campaign Name",
+      "landing_url": "https://www.your-company.com"
+    }
+  }
+}
+```
+</Accordion>
+
+</AccordionGroup>
