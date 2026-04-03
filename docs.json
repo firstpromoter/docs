@@ -106,15 +106,10 @@
                   {
                     "group": "Webhooks",
                     "pages": [
-                      "webhooks/overview",
-                      "webhooks/lead-signup",
-                      "webhooks/lead-becomes-referral",
-                      "webhooks/lead-cancelled",
-                      "webhooks/reward-created",
-                      "webhooks/new-customer",
-                      "webhooks/promoter-signs-up",
-                      "webhooks/promoter-accepted",
-                      "webhooks/fulfilment-pending"
+                      "webhooks-v2/overview",
+                      "webhooks-v2/event-types",
+                      "webhooks-v2/payload",
+                      "webhooks-v2/deliveries"
                     ]
                   }
                 ]

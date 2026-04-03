@@ -1,0 +1,94 @@
+---
+title: 'Event Types'
+description: 'All event types available for webhooks v2 subscriptions.'
+---
+
+Event types follow the format `{entity}.{action}` (e.g., `promoter.created`). When subscribing, you provide the exact event type strings you want to receive.
+
+## Promoters
+
+| Event type | Description |
+|---|---|
+| `promoter.created` | A new promoter signed up or was created via the API. |
+| `promoter.updated` | A promoter's account details were changed. |
+| `promoter.deleted` | A promoter was deleted. |
+| `promoter.profile.updated` | A promoter's profile fields (name, address, etc.) were updated. |
+| `promoter.balance.updated` | A promoter's earnings, current, or paid balance changed. |
+
+## Promoter campaigns
+
+| Event type | Description |
+|---|---|
+| `promoter_campaign.created` | A promoter was added to a campaign. |
+| `promoter_campaign.updated` | A promoter's participation in a campaign was changed (e.g., status, ref_id). |
+| `promoter_campaign.deleted` | A promoter was removed from a campaign. |
+
+## Referrals
+
+| Event type | Description |
+|---|---|
+| `referral.created` | A new referral (lead or customer) was tracked. |
+| `referral.updated` | A referral's details changed (e.g., status, plan, cancellation). |
+| `referral.deleted` | A referral was deleted. |
+
+## Commissions
+
+| Event type | Description |
+|---|---|
+| `commission.created` | A new commission was created. |
+| `commission.updated` | A commission was updated (e.g., approved, denied, amount changed). The `changes` field in the payload contains the specific fields that changed. |
+| `commission.deleted` | A commission was deleted. |
+
+## Payouts
+
+| Event type | Description |
+|---|---|
+| `payout.created` | A new payout was created. |
+| `payout.updated` | A payout was updated (e.g., marked as paid). |
+| `payout.deleted` | A payout was deleted. |
+| `payout.commissions.created` | A commission was added to a payout. |
+| `payout.commissions.updated` | A payout commission record was updated. |
+| `payout.commissions.deleted` | A commission was removed from a payout. |
+
+## Payout methods
+
+| Event type | Description |
+|---|---|
+| `payout_method.created` | A promoter added a new payout method. |
+| `payout_method.updated` | A payout method was updated. |
+| `payout_method.deleted` | A payout method was removed. |
+
+## Payments batches
+
+| Event type | Description |
+|---|---|
+| `payments_batch.created` | A new payment batch was created. |
+| `payments_batch.updated` | A payment batch was updated. |
+| `payments_batch.deleted` | A payment batch was deleted. |
+
+## Contract documents
+
+| Event type | Description |
+|---|---|
+| `contract_document.signed` | A promoter signed a contract document. |
+
+## Checking available event types via the API
+
+You can fetch the full list of currently supported event types from the API:
+
+```bash
+GET /api/admin/v2/webhooks/event_types
+```
+
+```json
+{
+  "data": [
+    "commission.created",
+    "commission.deleted",
+    "commission.updated",
+    "contract_document.signed",
+    "payments_batch.created",
+    ...
+  ]
+}
+```

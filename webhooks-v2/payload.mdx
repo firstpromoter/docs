@@ -1,0 +1,178 @@
+---
+title: 'Payload Structure'
+description: 'The JSON payload sent to your webhook endpoint for every event.'
+---
+
+Every webhook request is a `POST` with a `Content-Type: application/json` body. The top-level shape is the same for all event types.
+
+## Top-level fields
+
+<ResponseField name="event_id" type="string">
+  A unique UUID for this event. Use this to deduplicate deliveries — if your endpoint receives the same `event_id` twice, you can safely ignore the second one.
+</ResponseField>
+
+<ResponseField name="event_type" type="string">
+  The event type string, e.g. `referral.created`. Matches the event types listed on the [Event Types](/webhooks-v2/event-types) page.
+</ResponseField>
+
+<ResponseField name="action" type="string">
+  The action that triggered the event. One of `created`, `updated`, or `deleted`.
+</ResponseField>
+
+<ResponseField name="entity_type" type="string">
+  The type of the resource that changed, e.g. `promoter`, `referral`, `commission`.
+</ResponseField>
+
+<ResponseField name="entity_id" type="number">
+  The database ID of the resource.
+</ResponseField>
+
+<ResponseField name="changes" type="object">
+  For `updated` events, an object containing the fields that changed. Each key maps to an array of `[old_value, new_value]`. Empty for `created` and `deleted` events (the full resource is in `data` instead).
+
+  ```json
+  {
+    "status": ["pending", "active"],
+    "email": ["old@example.com", "new@example.com"]
+  }
+  ```
+</ResponseField>
+
+<ResponseField name="data" type="object">
+  The full serialized state of the resource at the time of the event. The exact fields depend on the `entity_type`. See the examples below.
+</ResponseField>
+
+<ResponseField name="timestamp" type="string">
+  ISO 8601 timestamp of when the event occurred.
+</ResponseField>
+
+## Example payloads
+
+<AccordionGroup>
+
+<Accordion title="promoter.created">
+```json
+{
+  "event_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "event_type": "promoter.created",
+  "action": "created",
+  "entity_type": "promoter",
+  "entity_id": 12345,
+  "changes": {},
+  "data": {
+    "id": 12345,
+    "status": "active",
+    "email": "jane@example.com",
+    "cust_id": "cus_abc123",
+    "default_ref_id": "janesmith",
+    "earnings_balance": { "cash": 0 },
+    "current_balance": { "cash": 0 },
+    "paid_balance": { "cash": 0 },
+    "created_at": "2025-01-15T10:30:00Z",
+    "profile": {
+      "id": 98765,
+      "first_name": "Jane",
+      "last_name": "Smith",
+      "website": "https://janesmith.com",
+      "company_name": "",
+      "phone_number": "",
+      "address": "",
+      "country": "US",
+      "paypal_email": "",
+      "avatar_url": ""
+    }
+  },
+  "timestamp": "2025-01-15T10:30:00Z"
+}
+```
+</Accordion>
+
+<Accordion title="referral.updated">
+```json
+{
+  "event_id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+  "event_type": "referral.updated",
+  "action": "updated",
+  "entity_type": "referral",
+  "entity_id": 55678,
+  "changes": {
+    "status": ["signup", "customer"],
+    "customer_since": [null, "2025-01-20T14:00:00Z"]
+  },
+  "data": {
+    "id": 55678,
+    "status": "customer",
+    "email": "user@example.com",
+    "uid": "user_ext_id",
+    "customer_since": "2025-01-20T14:00:00Z",
+    "cancelled_at": null,
+    "plan_name": "Pro",
+    "suspicion": "no_suspicion",
+    "created_at": "2025-01-18T09:00:00Z"
+  },
+  "timestamp": "2025-01-20T14:00:05Z"
+}
+```
+</Accordion>
+
+<Accordion title="commission.updated">
+```json
+{
+  "event_id": "c3d4e5f6-a7b8-9012-cdef-012345678902",
+  "event_type": "commission.updated",
+  "action": "updated",
+  "entity_type": "commission",
+  "entity_id": 88901,
+  "changes": {
+    "status": ["pending", "approved"]
+  },
+  "data": {
+    "id": 88901,
+    "status": "approved",
+    "amount": 2500,
+    "currency": "usd",
+    "promoter_id": 12345,
+    "referral_id": 55678,
+    "created_at": "2025-01-18T09:00:00Z"
+  },
+  "timestamp": "2025-01-21T11:15:00Z"
+}
+```
+</Accordion>
+
+<Accordion title="contract_document.signed">
+```json
+{
+  "event_id": "d4e5f6a7-b8c9-0123-defa-123456789012",
+  "event_type": "contract_document.signed",
+  "action": "updated",
+  "entity_type": "contract_document",
+  "entity_id": 4421,
+  "changes": {
+    "signed_at": [null, "2025-01-22T08:45:00Z"]
+  },
+  "data": {
+    "id": 4421,
+    "promoter_id": 12345,
+    "signed_at": "2025-01-22T08:45:00Z",
+    "created_at": "2025-01-10T12:00:00Z"
+  },
+  "timestamp": "2025-01-22T08:45:03Z"
+}
+```
+</Accordion>
+
+</AccordionGroup>
+
+## Request headers
+
+In addition to the JSON body, every request includes these headers:
+
+| Header | Description |
+|---|---|
+| `Content-Type` | Always `application/json` |
+| `X-Webhook-Signature` | HMAC-SHA256 signature of the payload. See [Security](/webhooks-v2/security). |
+| `X-Event-Id` | Same value as `event_id` in the payload. Useful for logging and deduplication at the transport layer. |
+| `X-Event-Type` | Same value as `event_type` in the payload. |
+
+Any custom headers you configured on the subscription are also included.

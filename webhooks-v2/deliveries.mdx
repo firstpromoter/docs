@@ -1,0 +1,129 @@
+---
+title: 'Delivery Tracking & Retries'
+description: 'Monitor delivery attempts, understand retry behaviour, and manually retry failed deliveries.'
+---
+
+Every time FirstPromoter attempts to send a webhook, a delivery record is created and tracked. You can inspect these records via the dashboard or the Admin API to debug failed deliveries.
+
+## Delivery statuses
+
+| Status | Meaning |
+|---|---|
+| `pending` | Delivery has been queued but not yet attempted. |
+| `delivered` | Your endpoint returned a `2xx` response. |
+| `retrying` | A delivery attempt failed; more retries are scheduled. |
+| `failed` | All retry attempts were exhausted without a successful response. |
+
+## Retry behaviour
+
+When a delivery attempt fails (non-`2xx` response, timeout, or network error), FirstPromoter waits before retrying. The delay grows with each attempt:
+
+| Attempt | Delay before retry |
+|---|---|
+| 1st retry | 20 minutes |
+| 2nd retry | 40 minutes |
+| 3rd retry | 60 minutes |
+| … | … (`attempt × 20 min`) |
+
+Retries stop when the number of failed attempts reaches the `max_retries` value configured on the subscription (default: `3`). After that, the delivery is marked `failed`.
+
+Set `max_retries` to `0` on a subscription to disable retries entirely.
+
+## Delivery record fields
+
+<ResponseField name="id" type="number">
+  Internal ID of the delivery record.
+</ResponseField>
+
+<ResponseField name="event_id" type="string">
+  The UUID of the event. Matches `event_id` in the payload.
+</ResponseField>
+
+<ResponseField name="event_type" type="string">
+  The event type string, e.g. `commission.updated`.
+</ResponseField>
+
+<ResponseField name="action" type="string">
+  `created`, `updated`, or `deleted`.
+</ResponseField>
+
+<ResponseField name="entity_type" type="string">
+  The type of the resource, e.g. `referral`.
+</ResponseField>
+
+<ResponseField name="entity_id" type="number">
+  The ID of the resource.
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Current status: `pending`, `delivered`, `retrying`, or `failed`.
+</ResponseField>
+
+<ResponseField name="attempts" type="number">
+  How many delivery attempts have been made so far.
+</ResponseField>
+
+<ResponseField name="response_code" type="number">
+  The HTTP status code returned by your endpoint on the last attempt.
+</ResponseField>
+
+<ResponseField name="response_body" type="string">
+  The first 1,000 characters of your endpoint's response body.
+</ResponseField>
+
+<ResponseField name="last_error" type="string">
+  A description of the last error (e.g., timeout message, HTTP error). Up to 1,000 characters.
+</ResponseField>
+
+<ResponseField name="object_changes" type="object">
+  For `updated` events, the fields that changed (same as `changes` in the payload).
+</ResponseField>
+
+<ResponseField name="payload" type="object">
+  The full JSON payload that was (or will be) sent to your endpoint.
+</ResponseField>
+
+<ResponseField name="delivered_at" type="string">
+  ISO 8601 timestamp of the successful delivery. `null` until delivered.
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  When the delivery record was created.
+</ResponseField>
+
+## Viewing deliveries via the API
+
+**List deliveries for a subscription:**
+
+```bash
+GET /api/admin/v2/webhooks/:subscription_id/webhook_deliveries
+```
+
+**Get a single delivery:**
+
+```bash
+GET /api/admin/v2/webhooks/:subscription_id/webhook_deliveries/:delivery_id
+```
+
+## Manually retrying a failed delivery
+
+If you want to re-attempt a `failed` delivery without waiting for the automatic retry schedule, use the retry endpoint:
+
+```bash
+POST /api/admin/v2/webhooks/:subscription_id/webhook_deliveries/:delivery_id/retry_delivery
+```
+
+This immediately enqueues a new delivery attempt regardless of how many attempts have already been made.
+
+## Sending a test delivery
+
+Use the test endpoint to send a synthetic payload to your endpoint without needing to trigger a real event. This is useful when setting up a new subscription or debugging signature verification.
+
+```bash
+POST /api/admin/v2/webhooks/:subscription_id/test
+Content-Type: application/json
+
+{ "event_type": "referral.created" }
+```
+
+The test payload has `"data": { "test": true }` and does not correspond to a real resource. It is signed with your subscription's `secret_key` just like a real delivery.

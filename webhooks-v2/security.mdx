@@ -1,0 +1,92 @@
+---
+title: 'Security & Signature Verification'
+description: 'Verify that webhook requests are genuinely from FirstPromoter using HMAC-SHA256 signatures.'
+---
+
+Every webhook v2 request is signed with your subscription's `secret_key` using HMAC-SHA256. You should verify this signature before processing any payload.
+
+## How the signature is generated
+
+1. The raw JSON payload body is serialized to a string.
+2. An HMAC-SHA256 digest is computed using your `secret_key` as the key.
+3. The result is sent as the `X-Webhook-Signature` header (lowercase hex string).
+
+## Verifying the signature
+
+Compare the `X-Webhook-Signature` header against your own computed HMAC. Use a constant-time comparison to prevent timing attacks.
+
+<CodeGroup>
+
+```ruby Ruby
+require 'openssl'
+
+def verify_webhook(secret_key, payload_body, signature_header)
+  expected = OpenSSL::HMAC.hexdigest('SHA256', secret_key, payload_body)
+  ActiveSupport::SecurityUtils.secure_compare(expected, signature_header)
+end
+```
+
+```python Python
+import hmac
+import hashlib
+
+def verify_webhook(secret_key: str, payload_body: bytes, signature_header: str) -> bool:
+    expected = hmac.new(
+        secret_key.encode('utf-8'),
+        payload_body,
+        hashlib.sha256
+    ).hexdigest()
+    return hmac.compare_digest(expected, signature_header)
+```
+
+```javascript Node.js
+const crypto = require('crypto');
+
+function verifyWebhook(secretKey, payloadBody, signatureHeader) {
+  const expected = crypto
+    .createHmac('sha256', secretKey)
+    .update(payloadBody)
+    .digest('hex');
+  return crypto.timingSafeEqual(
+    Buffer.from(expected),
+    Buffer.from(signatureHeader)
+  );
+}
+```
+
+```php PHP
+function verifyWebhook(string $secretKey, string $payloadBody, string $signatureHeader): bool {
+    $expected = hash_hmac('sha256', $payloadBody, $secretKey);
+    return hash_equals($expected, $signatureHeader);
+}
+```
+
+</CodeGroup>
+
+<Warning>
+Always use the **raw request body bytes** when computing the signature, not a parsed/re-serialized version. JSON serialization may produce different whitespace or key ordering, which would cause signature verification to fail.
+</Warning>
+
+## Finding your secret key
+
+Your `secret_key` is displayed when you create a subscription and after each rotation. It is a 64-character hex string. Store it as a secret environment variable in your application.
+
+## Rotating the secret key
+
+You can rotate a subscription's secret key at any time via the **Admin API** or the dashboard without any downtime:
+
+```bash
+POST /api/admin/v2/webhooks/:id/rotate_secret
+```
+
+After rotation, a new `secret_key` is returned. Update your application to use the new key. In-flight deliveries that were signed with the old key will still be retried using the old signature, so you may want to accept both keys briefly during the transition.
+
+## Replay protection
+
+The `X-Event-Id` header (and `event_id` in the payload) is a unique UUID per event. Store processed event IDs and reject duplicates to protect against replay attacks. This is especially important if your endpoint is idempotent for other reasons.
+
+## Protecting your endpoint
+
+- Only accept requests over **HTTPS**.
+- Reject requests where the signature is missing or does not match.
+- Respond quickly (within your configured timeout). Move heavy processing to a background job.
