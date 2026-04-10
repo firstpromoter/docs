@@ -208,15 +208,27 @@
                     "type": "integer",
                     "description": "The ID of the promoter campaign"
                   },
-                  "split_details[percentage]": {
-                    "type": "number",
-                    "description": "Percentage value of the split between 0 and 100. \n\n **Note**: Reach out to us on support if you need this. It needs to be enabled before you can use it.",
-                    "default": 0
-                  },
-                  "split_details[promoter_campaign_id]": {
-                    "type": "integer",
-                    "description": "Promoter campaign ID on which you want the split. \n\n **Note**: Reach out to us on support if you need this. It needs to be enabled before you can use it. ",
-                    "default": 0
+                  "split_details": {
+                    "type": "array",
+                    "description": "Distribute the referral's commissions across multiple promoters. Each entry specifies a split partner and the percentage of every commission they receive. The primary promoter (set by the top-level `promoter_campaign_id`) automatically receives the remainder. The sum of all percentages must not exceed 100.",
+                    "items": {
+                      "type": "object",
+                      "required": ["promoter_campaign_id", "percentage"],
+                      "properties": {
+                        "promoter_campaign_id": {
+                          "type": "integer",
+                          "description": "The ID of the split partner's campaign enrollment (`promoter_campaign.id`). This is the ID that links a specific promoter to a specific campaign — not the campaign ID itself."
+                        },
+                        "percentage": {
+                          "type": "integer",
+                          "description": "The percentage of each commission this promoter receives. Must be between 0 and 100. The sum across all split entries must not exceed 100."
+                        }
+                      }
+                    },
+                    "example": [
+                      { "promoter_campaign_id": 1002, "percentage": 25 },
+                      { "promoter_campaign_id": 1003, "percentage": 30 }
+                    ]
                   }
                 }
               }
@@ -412,15 +424,27 @@
                     ],
                     "description": "Find by attribute. Required when id parameter is an email, uid, or username instead of an ID.\n\n Your request should follow the format `https://api.firstpromoter.com/api/v2/company/referrals/{email or uid or username}`"
                   },
-                  "split_details[percentage]": {
-                    "type": "number",
-                    "description": "Percentage value of the split between 0 and 100. \n\n **Note**: Reach out to us on support if you need this. It needs to be enabled before you can use it.",
-                    "default": 0
-                  },
-                  "split_details[promoter_campaign_id]": {
-                    "type": "integer",
-                    "description": "Promoter campaign ID on which you want the split. \n\n **Note**: Reach out to us on support if you need this. It needs to be enabled before you can use it. ",
-                    "default": 0
+                  "split_details": {
+                    "type": "array",
+                    "description": "Update the commission split for this referral. Pass an array of split partners and their percentages to add or replace splits. Pass an empty array (`[]`) to remove all splits. The primary promoter automatically receives the remainder of the commission after all split percentages are applied. The sum of all percentages must not exceed 100.",
+                    "items": {
+                      "type": "object",
+                      "required": ["promoter_campaign_id", "percentage"],
+                      "properties": {
+                        "promoter_campaign_id": {
+                          "type": "integer",
+                          "description": "The ID of the split partner's campaign enrollment (`promoter_campaign.id`). This is the ID that links a specific promoter to a specific campaign — not the campaign ID itself."
+                        },
+                        "percentage": {
+                          "type": "integer",
+                          "description": "The percentage of each commission this promoter receives. Must be between 0 and 100. The sum across all split entries must not exceed 100."
+                        }
+                      }
+                    },
+                    "example": [
+                      { "promoter_campaign_id": 1002, "percentage": 25 },
+                      { "promoter_campaign_id": 1003, "percentage": 30 }
+                    ]
                   }
                 }
               }
@@ -991,9 +1015,26 @@
             "description": "Username chosen by the referral"
           },
           "split_details": {
-            "type": "object",
+            "type": "array",
             "nullable": true,
-            "description": "Details of commission split when the referral is shared between promoters"
+            "description": "The commission split configuration for this referral. Each entry represents a split partner. The primary promoter (the referral owner) receives the remainder of the commission after all split percentages are applied.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "promoter_campaign_id": {
+                  "type": "integer",
+                  "description": "The ID of the split partner's campaign enrollment"
+                },
+                "promoter_id": {
+                  "type": "integer",
+                  "description": "The ID of the split partner (promoter)"
+                },
+                "percentage": {
+                  "type": "integer",
+                  "description": "The percentage of each commission this promoter receives"
+                }
+              }
+            }
           },
           "first_name": {
             "type": "string",
