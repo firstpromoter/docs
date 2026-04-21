@@ -17,18 +17,13 @@ There is currently no UI to retrieve these credentials directly. The easiest way
 1. Log in to the affiliate dashboard
 2. Open your browser's DevTools (F12 or right-click → Inspect) and go to the **Network** tab
 3. Reload the page or perform any action to trigger an API request
-4. Click on any request to `v2.firstpromoter.com`
+4. Click on any request to `api.fprom.io`
 5. Under **Request Headers**, you will find:
    - `Authorization: Bearer {your_access_token}`
 
 Copy the access token and store it securely.
 
-To get your **Account ID**, make a request to the `/me` endpoint using your access token and look for the `cid` field in the response:
-
-```
-GET https://v2.firstpromoter.com/api/v2/affiliate/promoters/me
-Authorization: Bearer {your_access_token}
-```
+To get your **Account ID**, check for a request to the `/me` endpoint using your access token and look for the `cid` field in the response:
 
 The `cid` value inside the `company` object in the response is your Account ID.
 
@@ -48,7 +43,7 @@ ACCOUNT-ID: {your_account_id}
 #### Example Request
 
 ```
-GET https://v2.firstpromoter.com/api/v2/affiliate/promoters/me
+GET https://api.firstpromoter.com/api/v2/affiliate/campaigns
 Authorization: Bearer 01234567890abcdef
 ACCOUNT-ID: 123456
 ```
