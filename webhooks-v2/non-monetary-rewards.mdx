@@ -1,0 +1,215 @@
+---
+title: 'Non-Monetary Rewards'
+description: 'How to listen to webhook events and use the API to fulfill non-monetary rewards such as points, credits, and free months.'
+---
+
+Non-monetary rewards are commissions where affiliates (promoters) or referred customers earn something other than a cash payout — such as points, credits, free months, or discounts. Because there is no payment provider involved, **your system is responsible for delivering the reward**. FirstPromoter handles tracking, approval, and state management. Your integration handles the actual delivery and marks each reward as complete.
+
+## Supported reward types
+
+| Type | Description |
+|---|---|
+| `points` | Loyalty or reward points |
+| `credits` | Account credits |
+| `free_months` | Free subscription months |
+| `mon_discount` | Fixed monetary discount |
+| `discount_per` | Percentage-based discount |
+
+These can be configured independently for **promoters** (what the affiliate earns) and **referrals** (what the referred customer receives) within a campaign.
+
+## The complete flow
+
+```
+Sale tracked
+     │
+     ▼
+Commission created → status: pending
+     │  webhook: commission.created
+     ▼
+Commission approved → status: approved
+     │  webhook: commission.updated  (changes.status: ["pending", "approved"])
+     ▼
+Your system delivers the reward
+     │  POST /commissions/mark_fulfilled
+     ▼
+Commission marked as fulfilled
+```
+
+## Webhook events to listen to
+
+Subscribe to the following event types when creating your webhook subscription in **Settings → Integrations → Webhooks**. See [Event Types](/webhooks-v2/event-types) for the full list.
+
+### `commission.created`
+
+Fired when a new commission is tracked and enters `pending` status.
+
+Use this to log or notify internally that a reward has been earned. **Do not fulfill the reward at this stage** — the commission has not been approved yet.
+
+### `commission.updated`
+
+Fired when a commission is updated. Filter on `changes.status` in the payload to react to specific transitions:
+
+| `changes.status` | Meaning |
+|---|---|
+| `["pending", "approved"]` | Commission was approved — deliver the reward and call `mark_fulfilled` |
+| `["pending", "denied"]` | Commission was denied — no reward should be issued |
+
+**This is your trigger to act.** When `changes.status` shows `["pending", "approved"]`, deliver the reward in your system and call the `mark_fulfilled` endpoint.
+
+## Example payloads
+
+<AccordionGroup>
+
+<Accordion title="commission.created (non-monetary)">
+```json
+{
+  "event_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "event_type": "commission.created",
+  "action": "created",
+  "entity_type": "commission",
+  "entity_id": 88901,
+  "changes": {},
+  "data": {
+    "id": 88901,
+    "status": "pending",
+    "amount": 500,
+    "unit": "points",
+    "promoter_id": 12345,
+    "referral_id": 55678,
+    "created_at": "2025-01-18T09:00:00Z"
+  },
+  "timestamp": "2025-01-18T09:00:01Z"
+}
+```
+</Accordion>
+
+<Accordion title="commission.updated (approved)">
+```json
+{
+  "event_id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+  "event_type": "commission.updated",
+  "action": "updated",
+  "entity_type": "commission",
+  "entity_id": 88901,
+  "changes": {
+    "status": ["pending", "approved"]
+  },
+  "data": {
+    "id": 88901,
+    "status": "approved",
+    "amount": 500,
+    "unit": "points",
+    "promoter_id": 12345,
+    "referral_id": 55678,
+    "created_at": "2025-01-18T09:00:00Z"
+  },
+  "timestamp": "2025-01-19T10:30:00Z"
+}
+```
+</Accordion>
+
+</AccordionGroup>
+
+## API endpoints
+
+All requests require the `Account-ID` header. You can find your Account ID in **Settings → Integrations**.
+
+### List commissions
+
+Retrieve commissions filtered by status or unit type.
+
+```bash
+GET https://api.firstpromoter.com/api/v2/company/commissions?status=approved
+```
+
+| Query parameter | Description |
+|---|---|
+| `status` | Filter by status: `pending`, `approved`, `denied` |
+| `unit` | Filter by reward type: `points`, `credits`, `free_months`, `mon_discount`, `discount_per` |
+
+### Approve commissions
+
+If auto-approve is not enabled on your campaign, commissions must be approved before a payout record is created.
+
+```bash
+POST https://api.firstpromoter.com/api/v2/company/commissions/approve
+Account-ID: <your-account-id>
+Content-Type: application/json
+
+{
+  "ids": [88901, 88902]
+}
+```
+
+<Info>
+If more than 5 IDs are provided, the operation runs asynchronously and the response will have status `in_progress`. Poll or listen to `commission.updated` events to track completion.
+</Info>
+
+### Mark commissions as fulfilled
+
+Call this after you have delivered the reward in your system. This moves the linked payout to `completed` and triggers the `payout.updated` webhook.
+
+```bash
+POST https://api.firstpromoter.com/api/v2/company/commissions/mark_fulfilled
+Account-ID: <your-account-id>
+Content-Type: application/json
+
+{
+  "ids": [88901, 88902]
+}
+```
+
+<Warning>
+This endpoint only works on **non-monetary commissions** that have an associated payout record. If the commission has not been approved yet, the call will return an error. Ensure the commission is in `approved` status before calling this.
+</Warning>
+
+### Mark commissions as unfulfilled
+
+To reverse a fulfillment — for example if delivery failed on your end — move the payout back to `pending`:
+
+```bash
+POST https://api.firstpromoter.com/api/v2/company/commissions/mark_unfulfilled
+Account-ID: <your-account-id>
+Content-Type: application/json
+
+{
+  "ids": [88901]
+}
+```
+
+## Rewards for promoters vs. referrals
+
+Both promoter rewards and referral rewards can be non-monetary and follow the same webhook and API flow. Use the payload data to distinguish which party should receive the reward.
+
+| | Promoter reward | Referral reward |
+|---|---|---|
+| Who receives it | The affiliate who drove the sale | The customer who was referred |
+| Configured in | Campaign → Promoter rewards | Campaign → Referral rewards |
+| Webhook events | Same (`commission.*`, `payout.*`) | Same |
+| API endpoints | Same | Same |
+
+## Recommended integration pattern
+
+<Steps>
+
+<Step title="Listen to commission.updated">
+  When `changes.status` is `["pending", "approved"]`, read the `amount`, `unit`, and promoter or referral ID from the payload.
+</Step>
+
+<Step title="Deliver the reward in your system">
+  Apply the points, credits, or discount in your platform.
+</Step>
+
+<Step title="Call mark_fulfilled">
+  POST to `/commissions/mark_fulfilled` with the commission ID to confirm delivery and close the loop in FirstPromoter.
+</Step>
+
+</Steps>
+
+## Setup checklist
+
+<Check>Campaign has a non-monetary reward type configured (points, credits, free months, or discount)</Check>
+<Check>Webhook subscription created for `commission.created` and `commission.updated`</Check>
+<Check>Your endpoint verifies the `X-Webhook-Signature` header before processing. See [Security](/webhooks-v2/security).</Check>
+<Check>Your system calls `mark_fulfilled` after successfully delivering the reward</Check>
+<Check>Auto-approve is enabled on the campaign, or you have a flow to call the approve endpoint before fulfilling</Check>

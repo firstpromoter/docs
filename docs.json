@@ -109,7 +109,8 @@
                       "webhooks-v2/overview",
                       "webhooks-v2/event-types",
                       "webhooks-v2/payload",
-                      "webhooks-v2/deliveries"
+                      "webhooks-v2/deliveries",
+                      "webhooks-v2/non-monetary-rewards"
                     ]
                   }
                 ]

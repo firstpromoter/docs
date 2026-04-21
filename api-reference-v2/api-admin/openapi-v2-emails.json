@@ -8,7 +8,7 @@
 
   "servers": [
     {
-      "url": "https://firstpromoter.com/api/v2/company"
+      "url": "https://api.firstpromoter.com/api/v2/company"
     }
   ],
   "security": [
