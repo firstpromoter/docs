@@ -16,8 +16,6 @@ Webhooks v2 is a complete rewrite of the FirstPromoter webhook system. Instead o
 | Retry control | Basic | Configurable retries (0–10) per subscription |
 | Timeout | Fixed 15 s | Configurable per subscription (1–120 s) |
 | Custom headers | Not supported | Arbitrary key/value headers |
-| Signature | None | HMAC-SHA256 on every request |
-| Secret rotation | No | Rotate any time without downtime |
 
 ## Setting up a subscription
 
@@ -61,16 +59,12 @@ Navigate to **Settings → Integrations → Webhooks** and click **Add new webho
   ```
 </ResponseField>
 
-<ResponseField name="secret_key" type="string">
-  Auto-generated 64-character hex string used to sign payloads. See [Security](/webhooks-v2/security).
-</ResponseField>
-
 ## How delivery works
 
 1. An event occurs in your account (e.g., a referral is created).
 2. FirstPromoter checks your active subscriptions for matching event types and campaign filters.
 3. A delivery record is created for each matching subscription and dispatched asynchronously.
-4. Your endpoint receives a `POST` request with a JSON payload and signature headers.
+4. Your endpoint receives a `POST` request with a JSON payload.
 5. Respond with any `2xx` status code to acknowledge the delivery.
 6. If the response is not `2xx`, the delivery is retried according to your `max_retries` setting.
 
