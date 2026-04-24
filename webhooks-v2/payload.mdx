@@ -61,14 +61,11 @@ Every webhook request is a `POST` with a `Content-Type: application/json` body. 
   "changes": {},
   "data": {
     "id": 12345,
-    "status": "active",
     "email": "jane@example.com",
+    "name": "Jane Smith",
     "cust_id": "cus_abc123",
-    "default_ref_id": "janesmith",
-    "earnings_balance": { "cash": 0 },
-    "current_balance": { "cash": 0 },
-    "paid_balance": { "cash": 0 },
-    "created_at": "2025-01-15T10:30:00Z",
+    "balances": {},
+    "joined_at": "2025-01-15T10:30:00Z",
     "profile": {
       "id": 98765,
       "first_name": "Jane",
@@ -79,7 +76,7 @@ Every webhook request is a `POST` with a `Content-Type: application/json` body. 
       "address": "",
       "country": "US",
       "paypal_email": "",
-      "avatar_url": ""
+      "avatar": ""
     }
   },
   "timestamp": "2025-01-15T10:30:00Z"
@@ -96,18 +93,16 @@ Every webhook request is a `POST` with a `Content-Type: application/json` body. 
   "entity_type": "referral",
   "entity_id": 55678,
   "changes": {
-    "status": ["signup", "customer"],
+    "state": ["signup", "active"],
     "customer_since": [null, "2025-01-20T14:00:00Z"]
   },
   "data": {
     "id": 55678,
-    "status": "customer",
+    "state": "active",
     "email": "user@example.com",
     "uid": "user_ext_id",
     "customer_since": "2025-01-20T14:00:00Z",
-    "cancelled_at": null,
-    "plan_name": "Pro",
-    "suspicion": "no_suspicion",
+    "fraud_check": "no_suspicion",
     "created_at": "2025-01-18T09:00:00Z"
   },
   "timestamp": "2025-01-20T14:00:05Z"
@@ -130,9 +125,12 @@ Every webhook request is a `POST` with a `Content-Type: application/json` body. 
     "id": 88901,
     "status": "approved",
     "amount": 2500,
-    "currency": "usd",
-    "promoter_id": 12345,
-    "referral_id": 55678,
+    "unit": "cash",
+    "referral": {
+      "id": 55678,
+      "email": "user@example.com",
+      "uid": "user_ext_id"
+    },
     "created_at": "2025-01-18T09:00:00Z"
   },
   "timestamp": "2025-01-21T11:15:00Z"

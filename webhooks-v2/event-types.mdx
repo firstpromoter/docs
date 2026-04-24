@@ -28,8 +28,9 @@ Event types follow the format `{entity}.{action}` (e.g., `promoter.created`). Wh
 | Event type | Description |
 | --- | --- |
 | `referral.created` | A new referral (lead or customer) was tracked. |
-| `referral.updated` | A referral's details changed (e.g., status, plan, cancellation). |
+| `referral.updated` | A referral's details changed (e.g., state, plan, cancellation). |
 | `referral.deleted` | A referral was deleted. |
+| `referral.moved` | A referral was moved from one campaign to another. Only fires when an affiliate crosses a campaign upgrade/downgrade threshold and the campaign has referral moving enabled. |
 
 ## Commissions
 

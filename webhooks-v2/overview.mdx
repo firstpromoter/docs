@@ -13,8 +13,8 @@ Webhooks v2 is a complete rewrite of the FirstPromoter webhook system. Instead o
 | Event types | Fixed predefined list | Dynamic pattern-based selection |
 | Campaign filtering | No — all events always fired | Subscribe to specific campaigns |
 | Delivery tracking | Limited | Full history with status and response details |
-| Retry control | Basic | Configurable retries (0–10) per subscription |
-| Timeout | Fixed 15 s | Configurable per subscription (1–120 s) |
+| Retry control | Basic | 3 retries by default |
+| Timeout | Fixed 15 s | 30 s by default |
 | Custom headers | Not supported | Arbitrary key/value headers |
 
 ## Setting up a subscription
@@ -43,14 +43,6 @@ Navigate to **Settings → Integrations → Webhooks** and click **Add new webho
   Enable or pause delivery without deleting the subscription. Defaults to `true`.
 </ResponseField>
 
-<ResponseField name="timeout" type="number">
-  HTTP request timeout in seconds. Defaults to `30`, maximum `120`.
-</ResponseField>
-
-<ResponseField name="max_retries" type="number">
-  How many times to retry a failed delivery before marking it as `failed`. Defaults to `3`, range `0–10`.
-</ResponseField>
-
 <ResponseField name="headers" type="object">
   Custom HTTP headers to include on every request. Useful for API keys or authorization tokens your endpoint requires.
 
@@ -66,6 +58,4 @@ Navigate to **Settings → Integrations → Webhooks** and click **Add new webho
 3. A delivery record is created for each matching subscription and dispatched asynchronously.
 4. Your endpoint receives a `POST` request with a JSON payload.
 5. Respond with any `2xx` status code to acknowledge the delivery.
-6. If the response is not `2xx`, the delivery is retried according to your `max_retries` setting.
-
-Your endpoint must respond within the configured `timeout`. If it does not respond in time, the attempt counts as a failure and will be retried.
+6. If the response is not `2xx`, the delivery is automatically retried.

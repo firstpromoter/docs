@@ -74,8 +74,11 @@ Fired when a commission is updated. Filter on `changes.status` in the payload to
     "status": "pending",
     "amount": 500,
     "unit": "points",
-    "promoter_id": 12345,
-    "referral_id": 55678,
+    "referral": {
+      "id": 55678,
+      "email": "user@example.com",
+      "uid": "user_ext_id"
+    },
     "created_at": "2025-01-18T09:00:00Z"
   },
   "timestamp": "2025-01-18T09:00:01Z"
@@ -99,8 +102,11 @@ Fired when a commission is updated. Filter on `changes.status` in the payload to
     "status": "approved",
     "amount": 500,
     "unit": "points",
-    "promoter_id": 12345,
-    "referral_id": 55678,
+    "referral": {
+      "id": 55678,
+      "email": "user@example.com",
+      "uid": "user_ext_id"
+    },
     "created_at": "2025-01-18T09:00:00Z"
   },
   "timestamp": "2025-01-19T10:30:00Z"
