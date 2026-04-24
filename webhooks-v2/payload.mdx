@@ -171,7 +171,6 @@ In addition to the JSON body, every request includes these headers:
 | Header | Description |
 |---|---|
 | `Content-Type` | Always `application/json` |
-| `X-Webhook-Signature` | HMAC-SHA256 signature of the payload. See [Security](/webhooks-v2/security). |
 | `X-Event-Id` | Same value as `event_id` in the payload. Useful for logging and deduplication at the transport layer. |
 | `X-Event-Type` | Same value as `event_type` in the payload. |
 
