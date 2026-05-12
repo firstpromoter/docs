@@ -71,7 +71,6 @@
             "schema": {
               "type": "string",
               "enum": [
-                "cash",
                 "points",
                 "credits",
                 "free_months",
