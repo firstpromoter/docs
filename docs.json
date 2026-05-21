@@ -476,7 +476,6 @@
                       "api-reference-v2/api-admin/webhooks/get-webhook-subscription",
                       "api-reference-v2/api-admin/webhooks/update-webhook-subscription",
                       "api-reference-v2/api-admin/webhooks/delete-webhook-subscription",
-                      "api-reference-v2/api-admin/webhooks/list-event-types",
                       "api-reference-v2/api-admin/webhooks/test-webhook",
                       "api-reference-v2/api-admin/webhooks/list-webhook-deliveries"
                     ]

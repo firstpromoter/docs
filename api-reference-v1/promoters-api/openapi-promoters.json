@@ -294,7 +294,7 @@
     },
     "/update": {
       "put": {
-        "description": "You can identify promoters by: `id`, `cust_id`, `auth_token` or `ref_id`(referral id). You need to pass at least one of these parameters.",
+        "description": "You can identify promoters by: `id`, `email`, `cust_id`, `auth_token` or `ref_id`(referral id). You need to pass at least one of these parameters.",
         "parameters": [
           {
             "name": "id",
