@@ -1,0 +1,141 @@
+---
+title: "WordPress"
+description: "Add FirstPromoter affiliate tracking to your WordPress website using our dedicated plugin."
+---
+
+`Difficulty: Easy` <br/>
+`Developer Required: No`
+
+FirstPromoter has a dedicated WordPress plugin that handles click tracking, referral tracking, and sales tracking with built-in support for WooCommerce, MemberPress, Contact Form 7, OptimizePress, custom forms, URL-based email capture, and payment links.
+
+---
+
+## Installing the plugin
+
+1. Log in to your WordPress admin dashboard.
+2. Go to **Plugins → Add New**.
+3. Search for **"FirstPromoter"** in the search bar.
+4. Click **Install Now**, then **Activate**.
+
+Alternatively, download the plugin directly from the WordPress Plugin Directory and upload it manually via **Plugins → Add New → Upload Plugin**.
+
+---
+
+## Base configuration
+
+Once activated, go to **FirstPromoter** in the WordPress admin sidebar.
+
+### Account ID
+
+Required for the tracking script to work on your site.
+
+1. In your FirstPromoter dashboard, go to **Settings → Integrations**.
+2. Copy your **Account ID** and paste it into the **Account ID** field in the plugin settings.
+
+### API Key
+
+Required for sale tracking (WooCommerce, MemberPress, Contact Form 7).
+
+1. In your FirstPromoter dashboard, go to **Settings → Integrations → Manage API keys**.
+2. Copy your **API key** and paste it into the **API Key** field in the plugin settings.
+
+### Cross-domain tracking *(optional)*
+
+If you have multiple domains that need to share tracking data, enter them as a comma-separated list in the **Cross-domain tracking** field.
+
+```
+example.com, shop.example.com
+```
+
+Not needed if you are only using subdomains of the same root domain.
+
+### Force tracking for ad-blockers *(optional)*
+
+Enable **Force tracking even in privacy browsers or with ad-blockers** to use a server-side fallback that keeps referral attribution working when the client-side script is blocked.
+
+---
+
+## Integrations
+
+### WooCommerce
+
+The plugin automatically tracks WooCommerce account registrations, checkouts, refunds, and cancellations.
+
+**Signup tracking** — Enable **Capture email on new account creation** and/or **Capture email on checkout** to record the customer's email when they register or complete a purchase. No API key required.
+
+**Sale tracking** — Enable **Send sale to FirstPromoter on checkout** to send order data (amount, order ID, coupon codes) to FirstPromoter when an order is marked as processing or completed. Requires an API key.
+
+The plugin also handles:
+- **Refunds** — automatically generates a negative commission when an order is refunded.
+- **Cancellations** — updates the customer's status in FirstPromoter when an order is cancelled.
+
+---
+
+### MemberPress
+
+**Signup tracking** — Member registrations are captured automatically when the integration is enabled. No API key required.
+
+**Sale tracking** — Enable **Track sales/transactions via API** to send transaction data to FirstPromoter. Requires an API key.
+
+Enable **Track recurring payments via API** to track subscription renewals. Requires an API key.
+
+<Note>
+  If you are already using FirstPromoter's native Stripe integration to track payments, leave MemberPress sale tracking **disabled** to avoid duplicate commissions being recorded.
+</Note>
+
+---
+
+### Contact Form 7
+
+Enable Contact Form 7 tracking to automatically capture form submissions and send them to FirstPromoter. The plugin auto-detects email fields — any field with "email" in its name is captured. Requires an API key.
+
+---
+
+### OptimizePress
+
+Enable OptimizePress tracking to capture form submissions from OptimizePress pages. No API key required.
+
+---
+
+### Custom form tracking
+
+Track email submissions from any form on your site using CSS selectors.
+
+1. Enable **Custom Form Tracking** in the plugin settings.
+2. For each form, enter:
+   - **Email input selector** — CSS selector for the email field (e.g. `input[name="email"]`).
+   - **Submit selector** — CSS selector for the submit button or form element (e.g. `button[type="submit"]`).
+3. To track multiple forms, check **I have multiple forms to track** and add additional selector pairs.
+
+The plugin uses a MutationObserver to detect dynamically loaded forms, including popups and AJAX-injected content. A server-side AJAX fallback is included for cases where ad-blockers interfere (requires **Force tracking** to be enabled).
+
+---
+
+### URL email capture
+
+Useful when an external checkout or funnel redirects back to your WordPress site with the customer's email in the URL (e.g. a thank-you page).
+
+1. Enable **URL Email Capture** in the plugin settings.
+2. Enter the **Email URL Parameter Key** — the query parameter name that contains the email.
+   - Example: for `/thank-you?email=user@example.com`, enter `email`.
+3. *(Optional)* Enter the **UID URL Parameter Key** if your platform also passes a user ID.
+   - Example: for `/thank-you?email=user@example.com&uid=12345`, enter `uid`.
+
+No API key required.
+
+---
+
+### Payment links
+
+Automatically appends the FirstPromoter tracking ID to payment links on your pages as the `client_reference_id` parameter, so conversions through direct payment links are attributed to the right affiliate.
+
+1. Enable **Payment Links** in the plugin settings.
+2. Enter the **Payment Link URL Prefix** — links starting with this value will be updated automatically. Defaults to `https://buy.stripe.com/`. Use a comma to separate multiple prefixes.
+
+```
+https://buy.stripe.com/, https://checkout.mybrand.com/
+```
+
+<Note>
+  This integration is for direct payment links embedded on your WordPress pages. If you are not placing `buy.stripe.com` links (or equivalent) directly on your site, this integration is not needed.
+</Note>
