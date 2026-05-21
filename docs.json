@@ -31,6 +31,7 @@
                   {
                     "group": "How to guides",
                     "pages": [
+                      "guides/integrate-your-website",
                       "guides/tracking-with-fprjs",
                       "guides/tracking-without-fprjs",
                       "guides/proxy-setup"
@@ -338,6 +339,19 @@
                     ]
                   },
                   {
+                    "group": "Webhooks",
+                    "pages": [
+                      "api-reference-v2/api-admin/webhooks/list-webhook-subscriptions",
+                      "api-reference-v2/api-admin/webhooks/create-webhook-subscription",
+                      "api-reference-v2/api-admin/webhooks/get-webhook-subscription",
+                      "api-reference-v2/api-admin/webhooks/update-webhook-subscription",
+                      "api-reference-v2/api-admin/webhooks/delete-webhook-subscription",
+                      "api-reference-v2/api-admin/webhooks/list-event-types",
+                      "api-reference-v2/api-admin/webhooks/test-webhook",
+                      "api-reference-v2/api-admin/webhooks/list-webhook-deliveries"
+                    ]
+                  },
+                  {
                     "group": "Assets",
                     "pages": [
                       "api-reference-v2/api-advanced/assets/get-assets",
@@ -503,6 +517,7 @@
                   {
                     "group": "How to Guides",
                     "pages": [
+                      "guides/integrate-your-website",
                       "guides/tracking-with-fprjs",
                       "guides/tracking-without-fprjs",
                       "guides/proxy-setup"

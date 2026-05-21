@@ -299,8 +299,8 @@
           {
             "name": "id",
             "in": "query",
-            "required": true,
-            "description": "Promoter's ID inside FirstPromoter",
+            "required": false,
+            "description": "`Required if email is not provided.` The promoter's ID inside FirstPromoter.",
             "schema": {
               "type": "string"
             }
@@ -308,8 +308,8 @@
           {
             "name": "email",
             "in": "query",
-            "required": true,
-            "description": "Promoter's email",
+            "required": false,
+            "description": "`Required if id is not provided.` The promoter's email address.",
             "schema": {
               "type": "string",
               "format": "email"

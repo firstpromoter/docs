@@ -1,0 +1,215 @@
+---
+title: "Integrate Your Website"
+description: "Connect your website to FirstPromoter so clicks, sign-ups, and sales are tracked and attributed to the right affiliate."
+---
+
+Website integration is what makes FirstPromoter actually work. Without it, FirstPromoter cannot tell which affiliate sent a visitor, whether that visitor signed up, or whether they made a purchase.
+
+The full integration has three parts:
+
+| Part | What it does | Required? |
+|---|---|---|
+| **Click tracking** | Detects when a visitor arrives through an affiliate link | Yes |
+| **Referral tracking** | Records who signed up or filled a form | Yes |
+| **Sales tracking** | Attributes purchases to the right affiliate | Yes (to generate commissions) |
+
+<Note>
+  Before you start, find your **Account ID** in your FirstPromoter dashboard under **Settings → Integrations**. You'll need it in the steps below.
+</Note>
+
+---
+
+## Step 1 — Choose your integration path
+
+Pick the option that matches your website setup:
+
+<CardGroup cols={3}>
+  <Card title="WordPress" icon="wordpress" href="/integrations/tracking/platform/wordpress">
+    Use our WordPress plugin for click tracking, referral tracking, and WooCommerce / MemberPress sales — no custom code needed.
+  </Card>
+  <Card title="Platform (no-code)" icon="grid-2" href="#platform-integrations">
+    Using Kajabi, HighLevel, ClickFunnels, Ghost, Thinkific, SamCart, or similar? We have ready-made guides for each.
+  </Card>
+  <Card title="Custom website / app" icon="code" href="#custom-website-or-app">
+    Any other website, SaaS app, or JavaScript framework. Requires adding a script tag and one function call.
+  </Card>
+</CardGroup>
+
+---
+
+## Platform integrations
+
+If you use one of the platforms below, follow the dedicated guide — it handles click and referral tracking for that platform's specific forms and checkout flows.
+
+<CardGroup cols={2}>
+  <Card title="HighLevel" href="/integrations/tracking/platform/highlevel" />
+  <Card title="ClickFunnels" href="/integrations/tracking/platform/clickfunnels" />
+  <Card title="Kajabi" href="/integrations/tracking/platform/kajabi" />
+  <Card title="Ghost" href="/integrations/tracking/platform/ghost" />
+  <Card title="Thinkific" href="/integrations/tracking/platform/thinkific" />
+  <Card title="SamCart" href="/integrations/tracking/platform/samcart" />
+  <Card title="ThriveCart" href="/integrations/tracking/platform/thrivecart" />
+  <Card title="Kartra" href="/integrations/tracking/platform/kartra" />
+  <Card title="Calendly" href="/integrations/tracking/platform/calendly" />
+  <Card title="Dropfunnels" href="/integrations/tracking/platform/dropfunnels" />
+  <Card title="KickPages" href="/integrations/tracking/platform/kickpages" />
+  <Card title="Chargebee (hosted pages)" href="/integrations/tracking/platform/chargebee/hosted-pages" />
+</CardGroup>
+
+After completing the platform guide, jump to [Step 3 — Sales tracking](#step-3--sales-tracking) to finish your setup.
+
+---
+
+## Custom website or app
+
+### Step 2a — Add the click tracking script
+
+Add the following snippet to the `<head>` section of every public-facing page on your website. Replace `YOUR_ACCOUNT_ID` with the Account ID from your FirstPromoter dashboard.
+
+```html
+<script>
+  (function(w){w.fpr=w.fpr||function(){w.fpr.q=w.fpr.q||[];w.fpr.q[arguments[0]=='set'?'unshift':'push'](arguments);};})(window);
+  fpr("init", {cid:"YOUR_ACCOUNT_ID"});
+  fpr("click");
+</script>
+<script src="https://cdn.firstpromoter.com/fpr.js" async></script>
+```
+
+<Tip>
+  Adding this to every page (not just the homepage) ensures clicks are tracked no matter which page an affiliate links to. The script loads asynchronously and will not slow down your site.
+</Tip>
+
+<AccordionGroup>
+  <Accordion title="WordPress (without plugin)">
+    Add the script to your `header.php` file before the closing `</head>` tag, or use a plugin like **Insert Headers and Footers** to paste it into the head section without editing theme files.
+  </Accordion>
+  <Accordion title="React / Vue / Angular">
+    Add the script tags to your `public/index.html` file inside the `<head>` section.
+  </Accordion>
+  <Accordion title="Next.js">
+    1. Create `/public/fprmain.js` and paste the `fpr("init", ...)` and `fpr("click")` lines into it.
+    2. In `_document.tsx`, load both `/fprmain.js` and `https://cdn.firstpromoter.com/fpr.js` inside the `<Head>` component.
+
+    See the [full Next.js example](/integrations/tracking/custom/js) for a working code snippet.
+  </Accordion>
+  <Accordion title="Nuxt.js">
+    Create `/public/fprmain.js` with the init and click lines, then use the `useHead` composable on your marketing pages to load it alongside `fpr.js`.
+  </Accordion>
+  <Accordion title="Google Tag Manager">
+    Follow the [GTM integration guide](/integrations/tracking/custom/gtm) to add the scripts through a custom HTML tag.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+### Step 2b — Add referral tracking
+
+When a visitor signs up or submits a form, you need to send their email (or user ID) to FirstPromoter. This is what creates the referral record and links the sign-up to the affiliate.
+
+Call the following **after** the main script and **after** you have the user's email — typically on your sign-up success callback or thank-you page:
+
+```html
+<script>
+  fpr("referral", {email: "actual_user@email.com"});
+</script>
+```
+
+Replace `"actual_user@email.com"` with the real email of the user who just signed up. You can also pass a `uid` (user ID from your database) instead of or in addition to the email:
+
+```javascript
+fpr("referral", {email: "actual_user@email.com", uid: "cus_12345"});
+```
+
+<Note>
+  The `fpr("referral", ...)` call must run **after** the user has successfully signed up — not before. If you redirect immediately after the call, the request may be cancelled by the browser. In that case, place the script on the thank-you/confirmation page instead.
+</Note>
+
+**Where to place this call:**
+
+- **Simple HTML form** — listen for the form submit event, read the email input value, and call `fpr("referral", {email: emailValue})`.
+- **React / Vue / Angular** — call it inside the success callback of your registration API request.
+- **Thank-you page with email in the URL** — read the email from the URL and pass it directly: `fpr("referral", {email: new URLSearchParams(location.search).get("email")})`.
+- **Server-side only** — use the [Tracking API](/integrations/tracking/custom/api) to make the call from your backend instead.
+
+For detailed examples per framework, see the [JavaScript integration guide](/integrations/tracking/custom/js).
+
+---
+
+## Step 3 — Sales tracking
+
+Sales tracking tells FirstPromoter which purchases to credit to which affiliate and triggers commission creation.
+
+### Option A — Connect a billing provider (recommended)
+
+If you use one of the following billing providers, connect it directly in FirstPromoter and sales are tracked automatically:
+
+<CardGroup cols={3}>
+  <Card title="Stripe" href="/integrations/billing/stripe" />
+  <Card title="Chargebee" href="/integrations/billing/chargebee" />
+  <Card title="Paddle" href="/integrations/billing/paddle" />
+  <Card title="Recurly" href="/integrations/billing/recurly" />
+  <Card title="Braintree" href="/integrations/billing/braintree" />
+</CardGroup>
+
+Go to **Settings → Integrations** in your FirstPromoter dashboard to connect your billing provider.
+
+For Stripe-specific checkout setups, see also:
+- [Stripe Checkout](/integrations/tracking/custom/stripe-checkout)
+- [Stripe Payment Links](/integrations/tracking/platform/stripe/payment-links)
+- [Stripe Pricing Table](/integrations/tracking/platform/stripe/pricing-table)
+
+### Option B — Use the Tracking API
+
+If you use a different billing provider or have a custom payment flow, send a sale event to FirstPromoter from your backend whenever a payment is confirmed:
+
+```sh
+curl --request POST \
+  --url https://api.firstpromoter.com/api/v2/track/sale \
+  --header 'Account-ID: YOUR_ACCOUNT_ID' \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "email": "customer@email.com",
+    "uid": "cus_12345",
+    "sale_amount": 4900,
+    "currency": "usd",
+    "order_id": "order_001"
+  }'
+```
+
+See the full [Sales Tracking API reference](/api-reference-v2/api-admin/tracking-api/sales) for all available parameters.
+
+<Note>
+  `sale_amount` is in **cents** (e.g. `4900` = $49.00).
+</Note>
+
+---
+
+## Step 4 — Test your integration
+
+Before going live, verify each part is working:
+
+<Steps>
+  <Step title="Test click tracking">
+    Copy an affiliate's referral link from the FirstPromoter dashboard and visit it in your browser. A click should appear on that affiliate's record within a few seconds.
+  </Step>
+  <Step title="Test referral tracking">
+    After visiting via the referral link, sign up as a test user on your website. Check the **Referrals** tab in FirstPromoter — a new lead should appear linked to the affiliate.
+  </Step>
+  <Step title="Test sales tracking">
+    Complete a test purchase (use a Stripe test card if on Stripe). A new sale and commission should appear in FirstPromoter.
+  </Step>
+</Steps>
+
+<Tip>
+  Check your browser console for errors after adding the scripts. Common issues are a wrong Account ID or calling `fpr("referral", ...)` before the main script has loaded.
+</Tip>
+
+---
+
+## Need help?
+
+- [Full fpr.js script reference](/script-docs/fpr-js-docs) — every method and option explained
+- [Tracking without fpr.js (API only)](/guides/tracking-without-fprjs) — pure API approach with no frontend script
+- [Proxy setup](/guides/proxy-setup) — keep tracking working when ad-blockers are active
+- [Support](mailto:support@firstpromoter.com) — reach the team if you're still stuck
