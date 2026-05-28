@@ -191,11 +191,11 @@
           },
           {
             "name": "id",
-            "description": "Id of the promoter",
+            "description": "The promoter's numeric ID, or the value of the attribute specified in `find_by` (e.g. an email address, auth token, ref token, promo code, or cust_id)",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer"
+              "type": "string"
             }
           },
           {
@@ -206,6 +206,7 @@
               "type": "string",
               "enum": [
                 "email",
+                "cust_id",
                 "auth_token",
                 "ref_token",
                 "promo_code"
@@ -1814,11 +1815,12 @@
             "type": "string",
             "enum": [
               "email",
+              "cust_id",
               "auth_token",
               "ref_token",
               "promo_code"
             ],
-            "description": "Find by attribute. Required when you want to find the promoter using another parameter like the  email, auth_token, ref_token, or promo_code instead of an ID. \n \n  Your request should follow the format `https://api.firstpromoter.com/api/v2/company/promoters/{email, auth_token, ref_token, or promo_code}`"
+            "description": "Find by attribute. Required when you want to find the promoter using another parameter like the email, cust_id, auth_token, ref_token, or promo_code instead of an ID. \n \n  Your request should follow the format `https://api.firstpromoter.com/api/v2/company/promoters/{email, cust_id, auth_token, ref_token, or promo_code}`"
           },
           "cust_id": {
             "type": "string",
