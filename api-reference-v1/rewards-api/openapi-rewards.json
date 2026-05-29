@@ -83,7 +83,7 @@
             "name": "amount",
             "in": "query",
             "required": true,
-            "description": "Amount of the reward. For reward_type `cash`(monetary commission) the amount is in cents",
+            "description": "Amount of the reward",
             "schema": {
               "type": "integer"
             }
@@ -294,7 +294,7 @@
             "enum": ["approved", "pending", "denied"]
           },
           "amount": {
-            "description": "amount of the reward. For reward_type `cash`(monetary commission) the amount is in cents",
+            "description": "amount of the reward",
             "type": "integer"
           },
           "unit": {
