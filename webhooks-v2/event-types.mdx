@@ -12,7 +12,6 @@ Event types follow the format `{entity}.{action}` (e.g., `promoter.created`). Wh
 | `promoter.created` | A new promoter signed up or was created via the API. |
 | `promoter.updated` | A promoter's account details were changed. |
 | `promoter.deleted` | A promoter was deleted. |
-| `promoter.profile.updated` | A promoter's profile fields (name, address, etc.) were updated. |
 | `promoter.balance.updated` | A promoter's earnings, current, or paid balance changed. |
 
 ## Promoter campaigns
@@ -22,6 +21,11 @@ Event types follow the format `{entity}.{action}` (e.g., `promoter.created`). Wh
 | `promoter_campaign.created` | A promoter was added to a campaign. |
 | `promoter_campaign.updated` | A promoter's participation in a campaign was changed (e.g., status, ref\_token). |
 | `promoter_campaign.deleted` | A promoter was removed from a campaign. |
+| `promoter_campaign.accepted` | A promoter's campaign application was accepted. |
+| `promoter_campaign.pending` | A promoter's campaign participation was set to pending review. |
+| `promoter_campaign.rejected` | A promoter's campaign application was rejected. |
+| `promoter_campaign.blocked` | A promoter was blocked from a campaign. |
+| `promoter_campaign.inactive` | A promoter was set to inactive in a campaign. |
 
 ## Referrals
 
@@ -30,6 +34,8 @@ Event types follow the format `{entity}.{action}` (e.g., `promoter.created`). Wh
 | `referral.created` | A new referral (lead or customer) was tracked. |
 | `referral.updated` | A referral's details changed (e.g., state, plan, cancellation). |
 | `referral.deleted` | A referral was deleted. |
+| `referral.converted` | A referral (lead) was converted to a customer. |
+| `referral.cancelled` | A referral was cancelled. |
 | `referral.moved` | A referral was moved from one campaign to another. Only fires when an affiliate crosses a campaign upgrade/downgrade threshold and the campaign has referral moving enabled. |
 
 ## Commissions
@@ -37,19 +43,26 @@ Event types follow the format `{entity}.{action}` (e.g., `promoter.created`). Wh
 | Event type | Description |
 | --- | --- |
 | `commission.created` | A new commission was created. |
-| `commission.updated` | A commission was updated (e.g., approved, denied). The `changes` field in the payload contains the specific fields that changed. |
+| `commission.updated` | A commission was updated. The `changes` field in the payload contains the specific fields that changed. |
 | `commission.deleted` | A commission was deleted. |
+| `commission.approved` | A commission was approved. |
+| `commission.pending` | A commission was set to pending. |
+| `commission.denied` | A commission was denied. |
 
 ## Payouts
 
 | Event type | Description |
 | --- | --- |
 | `payout.created` | A new payout was created. |
-| `payout.updated` | A payout was updated (e.g., marked as paid). |
+| `payout.updated` | A payout was updated. |
 | `payout.deleted` | A payout was deleted. |
-| `payout.commissions.created` | A commission was added to a payout. |
-| `payout.commissions.updated` | A payout commission record was updated. |
-| `payout.commissions.deleted` | A commission was removed from a payout. |
+| `payout.pending` | A payout was set to pending. |
+| `payout.processing` | A payout started processing. |
+| `payout.completed` | A payout was completed successfully. |
+| `payout.failed` | A payout failed. |
+| `payout.cancelled` | A payout was cancelled. |
+| `payout.commissions.added` | A commission was added to a payout. |
+| `payout.commissions.removed` | A commission was removed from a payout. |
 
 ## Payout methods
 
@@ -66,6 +79,10 @@ Event types follow the format `{entity}.{action}` (e.g., `promoter.created`). Wh
 | `payments_batch.created` | A new payment batch was created. |
 | `payments_batch.updated` | A payment batch was updated. |
 | `payments_batch.deleted` | A payment batch was deleted. |
+| `payments_batch.initiated` | A payment batch was initiated. |
+| `payments_batch.processing` | A payment batch started processing. |
+| `payments_batch.completed` | A payment batch completed successfully. |
+| `payments_batch.failed` | A payment batch failed. |
 
 ## Contract documents
 
