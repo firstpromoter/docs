@@ -1,0 +1,133 @@
+---
+title: 'Available Tools'
+description: 'Full reference for every tool exposed by the FirstPromoter MCP server.'
+---
+
+<Warning>
+  The FirstPromoter MCP server is experimental. Tool names and parameters may change without notice.
+</Warning>
+
+All tools are scoped to the company you authorized during the OAuth consent step. Tools that accept `campaign_id` parameters are additionally filtered to campaigns your account has access to.
+
+## Reports & analytics
+
+| Tool | Description |
+|---|---|
+| `get_company_context` | Campaigns, currency, active/pending promoter counts. The entry point for orienting the model to your account. |
+| `get_dashboard_stats` | Revenue, referrals, customers, accepted/pending promoters, pending commissions. |
+| `get_dashboard_trending` | Top 3 trending promoters and campaigns over the last 30 days. |
+| `get_overview_report` | Revenue, referrals, customers, clicks, sales, refunds, and earnings grouped by day, week, month, or year. Accepts `start_date`, `end_date`, `group_by`, `campaign_id`. |
+| `get_promoters_report` | Performance ranking per promoter for a date range. Accepts `start_date`, `end_date`, `campaign_id`, `sort_by`, `limit`. |
+| `get_campaigns_report` | Performance ranking per campaign for a date range. |
+| `get_urls_report` | Landing-page traffic broken down by clicks, customers, sales, and revenue. |
+| `get_traffic_sources_report` | Where referral traffic comes from — direct, organic, social, paid. |
+
+## Campaigns
+
+| Tool | Description |
+|---|---|
+| `list_campaigns` | Every campaign with key metrics. |
+| `get_campaign` | Full detail for one campaign by ID. |
+| `create_campaign` | New campaign in the company's default program; attach rewards in the same call. |
+| `update_campaign` | Change name, landing URL, cookie life, referral param, visibility, attached rewards. |
+
+## Promoters
+
+| Tool | Description |
+|---|---|
+| `list_promoters` | Filterable by status, signup/approval date, campaign, revenue. Supports a `q` parameter for fuzzy search across email, first/last name, and website. |
+| `get_promoter` | Detailed profile, balances, campaign membership, and all profile fields (name, country, address, social URLs, business details). |
+| `create_promoter` | New promoter on an initial campaign with profile data. |
+| `update_promoter` | Every field the admin Edit modal exposes: email, name, website, company name and number, VAT ID, phone, address, country, PayPal email, social URLs (Facebook, Twitter, Instagram, YouTube, LinkedIn, Twitch, TikTok), admin note, custom fields, and behaviour flags. |
+| `accept_promoter` | Accept a pending promoter, scoped to a campaign. Verifies the state change persisted before reporting success. |
+| `reject_promoter` | Reject a pending promoter, scoped to a campaign. |
+| `block_promoter` | Block an active promoter, scoped to a campaign. |
+| `add_promoter_to_campaign` | Enrol in an additional campaign without affecting existing memberships. |
+| `move_promoter_to_campaign` | Move between campaigns; optionally soft-move existing referrals. |
+| `assign_parent_promoter` | Set or remove the parent in a sub-affiliate hierarchy. |
+| `restore_promoter` | Bring an archived promoter back — history and referrals preserved. |
+| `update_promoter_campaign` | Per-promoter overrides on a specific campaign: ref token, coupon, display coupon, direct URL, state, and reward override. |
+
+## Referrals
+
+| Tool | Description |
+|---|---|
+| `list_referrals` | Filter by state, date range, campaign, promoter; sorted newest first. |
+| `get_referral` | Single referral with promoter, campaign, customer email, and the full event log. |
+
+## Commissions & payouts
+
+| Tool | Description |
+|---|---|
+| `list_commissions` | Filter by status, date, campaign, promoter. |
+| `list_payouts` | Cash rewards paid to promoters; amounts in cents. |
+| `mark_commission_fulfilled` | For non-monetary commissions only (badges, points, free months). |
+| `mark_commission_unfulfilled` | Revert a fulfilled non-monetary commission. |
+
+## Rewards
+
+| Tool | Description |
+|---|---|
+| `list_rewards` | All reward rules defined in the company. |
+| `get_reward` | Single reward with name, type, schemas, tier level, and coupon. |
+| `create_reward` | New commission or discount rule. |
+| `update_reward` | Change name, type, schemas, coupon, tier. |
+| `hide_reward` | Soft-delete a reward. Existing attachments and pending commissions keep working, but it can no longer be attached to new campaigns or promoters. |
+
+## Promo codes
+
+| Tool | Description |
+|---|---|
+| `list_promo_codes` | Codes attached to promoters or campaigns. Optionally filter by promoter campaign or include archived. |
+| `get_promo_code` | Single code with reward and scope details. |
+| `create_promo_code` | New code attached to a reward, optionally scoped to a specific promoter and campaign. |
+| `update_promo_code` | Change code, description, reward, scope. |
+| `archive_promo_code` | Soft-delete. Preserved for historical reporting; new redemptions are rejected. |
+
+## Products
+
+| Tool | Description |
+|---|---|
+| `list_products` | SKUs that can have product-specific commission rules attached. |
+| `get_product` | Single product detail. |
+| `create_product` | New product with name, external billing-provider ID, and prices. |
+| `update_product` | Update name, external ID, or prices. |
+| `delete_product` | Permanent delete. Historical sales referencing the product keep the name as a snapshot. |
+
+## Assets
+
+| Tool | Description |
+|---|---|
+| `list_assets` | Marketing assets (banners, swipe copy, images) promoters can download. |
+| `get_asset` | Single asset detail. |
+
+## Contracts
+
+| Tool | Description |
+|---|---|
+| `list_contracts` | Affiliate program contracts (Terms of Service, NDAs) that promoters agree to. |
+| `get_contract` | Single contract detail. |
+
+## Emails
+
+| Tool | Description |
+|---|---|
+| `list_emails` | Filter by status (`draft`, `scheduled`, `sent`, `failed`) and trigger event (`promoter_accepted`, `lead_signup`, `reward_created`, etc.). Useful for mapping an existing onboarding sequence. |
+| `get_email` | Full HTML body and trigger configuration for a single email. |
+| `create_email` | Draft a new transactional email tied to a trigger event. Created in draft status with the trigger disabled — an admin must review and enable it from the dashboard before anything sends. Merge tags like `{{promoter.first_name}}` are supported. |
+| `update_email` | Edit name, subject, body, or trigger on a non-sent email. Cannot touch emails already in sent status, and cannot flip a draft into a scheduled send. |
+
+## What's not exposed
+
+Money-movement operations are intentionally kept out of the MCP surface:
+
+- Creating payment batches, paying out a batch, marking payouts paid/unpaid, deleting payouts
+- Voiding, finalizing, or destroying invoices
+- Generating payouts from commissions
+- Creating, approving, or denying commissions
+- Splitting commissions or importing previous sales from Stripe
+- Bulk referral operations (approve/disable/enable/delete by query, move referrals to another promoter)
+- Send-now, send-test, and broadcast email delivery
+- Promoter archiving (restore is available; archive is not)
+
+These remain dashboard-only. The AI helps you draft and configure; the human commits the money decisions.

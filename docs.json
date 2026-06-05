@@ -114,6 +114,13 @@
                       "webhooks-v2/deliveries",
                       "webhooks-v2/non-monetary-rewards"
                     ]
+                  },
+                  {
+                    "group": "MCP Server (Experimental)",
+                    "pages": [
+                      "mcp/overview",
+                      "mcp/tools"
+                    ]
                   }
                 ]
               },

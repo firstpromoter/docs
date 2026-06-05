@@ -1,0 +1,74 @@
+---
+title: 'MCP Server'
+description: 'Connect AI tools like Claude and ChatGPT directly to your FirstPromoter account.'
+---
+
+<Warning>
+  The FirstPromoter MCP server is experimental. The tool surface and authentication flow may change without notice.
+</Warning>
+
+The FirstPromoter MCP server lets AI clients like Claude and ChatGPT query your affiliate program and take actions on your behalf — without copying data in and out.
+
+## Example prompts
+
+- "Help me create a new campaign with a 20% sale reward."
+- "How are my campaigns performing this month?"
+- "Show me pending commissions."
+- "Who are my top promoters by revenue?"
+- "Find any promoter with 'gmail' in their email."
+- "Block promoter Alice on the X campaign."
+- "Draft a 3-email onboarding sequence for newly accepted promoters."
+
+## Core capabilities
+
+53 tools covering reads, mutations, and destructive operations across your entire affiliate program. All mutating tools require explicit user approval through a confirmation card — it resolves IDs to human-readable names and shows a field-level diff before applying any change.
+
+Money-movement operations (payouts, invoices, commission creation, payment batches) are intentionally not exposed — they remain dashboard-only. The AI helps you draft and configure; the human commits the money decisions.
+
+## Connect
+
+### Claude (Desktop or Web)
+
+<Note>
+  Adding custom connectors requires a paid Claude plan.
+</Note>
+
+1. Navigate to **Customize** and click the **+** icon.
+2. Select **Add custom connector**.
+3. Fill in the connector details:
+   - **Name**: FirstPromoter
+   - **URL**: `https://mcp.firstpromoter.com`
+4. Submit. Claude will automatically start the OAuth flow. If it doesn't, click **Connect** on the FirstPromoter tool and try again.
+5. Log in with your FirstPromoter account and select the account you want to connect.
+
+### ChatGPT
+
+<Note>
+  Adding custom connectors requires Developer Mode to be enabled.
+</Note>
+
+1. Open ChatGPT, click your profile picture, then go to **Settings**.
+2. Navigate to **Apps & Connectors** (or **Apps**).
+3. Click **Advanced Settings** and toggle **Developer Mode** to ON.
+4. Go back to the Apps or Connectors page and click **Create**.
+5. Fill in the connector details:
+   - **Name**: FirstPromoter
+   - **MCP Server URL**: `https://mcp.firstpromoter.com`
+6. Submit. ChatGPT will automatically start the OAuth flow. If it doesn't, click **Connect** and try again.
+7. Log in and select the FirstPromoter account to connect.
+
+### Claude Code (CLI)
+
+```bash
+claude mcp add firstpromoter --transport http https://mcp.firstpromoter.com
+```
+
+Run `/mcp` inside a session to verify the connection and browse available tools.
+
+### Cursor / other MCP clients
+
+Add a server entry pointing to `https://mcp.firstpromoter.com` with transport `http`. The client will handle the OAuth flow the first time you use it.
+
+## Availability
+
+Your account must have the **AI Assistant** feature enabled — see **Settings → Others → AI Features**.
