@@ -121,6 +121,12 @@
                       "mcp/overview",
                       "mcp/tools"
                     ]
+                  },
+                  {
+                    "group": "Automation",
+                    "pages": [
+                      "automation/n8n-node"
+                    ]
                   }
                 ]
               },
