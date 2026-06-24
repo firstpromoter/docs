@@ -473,6 +473,13 @@
                     ]
                   },
                   {
+                    "group": "Custom Referral Statuses",
+                    "pages": [
+                      "api-reference-v2/api-advanced/custom-referral-statuses/get-custom-referral-statuses",
+                      "api-reference-v2/api-advanced/custom-referral-statuses/update-custom-referral-statuses"
+                    ]
+                  },
+                  {
                     "group": "Rewards",
                     "pages": [
                       "api-reference-v2/api-advanced/rewards/get-rewards",
