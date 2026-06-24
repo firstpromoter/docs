@@ -140,24 +140,6 @@
             },
             "description": "Filter referrals cancelled on or before this date (ISO 8601 format: YYYY-MM-DD)"
           },
-          {
-            "in": "query",
-            "name": "filters[custom_status_id]",
-            "schema": {
-              "oneOf": [
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "type": "integer"
-                  }
-                }
-              ]
-            },
-            "description": "Filter referrals by custom status ID. Accepts a single ID or an array of IDs."
-          }
         ],
         "responses": {
           "200": {
@@ -225,11 +207,6 @@
                   "promoter_campaign_id": {
                     "type": "integer",
                     "description": "The ID of the promoter campaign"
-                  },
-                  "custom_status_id": {
-                    "type": "integer",
-                    "nullable": true,
-                    "description": "ID of a custom referral status to assign. Must be the `id` of an existing custom referral status belonging to your account. Pass `null` to clear the status. Use the `GET /api/admin/v1/custom_referral_statuses` endpoint to retrieve available status IDs."
                   },
                   "split_details": {
                     "type": "array",
@@ -446,11 +423,6 @@
                       "username"
                     ],
                     "description": "Find by attribute. Required when id parameter is an email, uid, or username instead of an ID.\n\n Your request should follow the format `https://api.firstpromoter.com/api/v2/company/referrals/{email or uid or username}`"
-                  },
-                  "custom_status_id": {
-                    "type": "integer",
-                    "nullable": true,
-                    "description": "ID of a custom referral status to assign. Must be the `id` of an existing custom referral status belonging to your account. Pass `null` to clear the status. Use the `GET /api/admin/v1/custom_referral_statuses` endpoint to retrieve available status IDs."
                   },
                   "split_details": {
                     "type": "array",
