@@ -1084,42 +1084,6 @@
           "is_expired": {
             "type": "boolean",
             "description": "Whether the referral has expired"
-          },
-          "custom_status": {
-            "type": "object",
-            "nullable": true,
-            "description": "Custom referral status assigned to this referral, if any. `null` when no status is set.",
-            "properties": {
-              "id": {
-                "type": "integer",
-                "description": "ID of the custom referral status"
-              },
-              "name": {
-                "type": "string",
-                "description": "Display name of the status"
-              },
-              "description": {
-                "type": "string",
-                "nullable": true,
-                "description": "Optional description of the status"
-              },
-              "order": {
-                "type": "integer",
-                "description": "Display order of the status"
-              },
-              "company_id": {
-                "type": "integer",
-                "description": "ID of the company this status belongs to"
-              },
-              "created_at": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "updated_at": {
-                "type": "string",
-                "format": "date-time"
-              }
-            }
           }
         }
       },
