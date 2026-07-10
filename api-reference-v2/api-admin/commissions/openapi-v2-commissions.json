@@ -1112,6 +1112,10 @@
                 "type": "string",
                 "description": "Internal note visible only by the team"
               },
+              "external_note": {
+                "type": "string",
+                "description": "External note visible by the promoter"
+              },
               "unit": {
                 "type": "string",
                 "enum": [
@@ -1175,6 +1179,10 @@
               "internal_note": {
                 "type": "string",
                 "description": "Internal note visible only by the team"
+              },
+              "external_note": {
+                "type": "string",
+                "description": "External note visible by the promoter"
               },
               "unit": {
                 "type": "string",
