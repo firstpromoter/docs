@@ -45,7 +45,7 @@ Your endpoint will receive this event each time a lead signs up via a referral l
       Name of the plan the lead is subscribed to.
     </ResponseField>
     <ResponseField name="suspicion" type="string">
-      Fraud suspicion level (e.g., `no_suspicion`, `self_referral`).
+      Fraud suspicion level: `no_suspicion`, `same_ip_suspicion`, `same_promoter_email`, or `ad_source`. `same_ip_suspicion` and `same_promoter_email` both indicate a self-referral.
     </ResponseField>
     <ResponseField name="username" type="string">
       Username of the lead, if provided.
