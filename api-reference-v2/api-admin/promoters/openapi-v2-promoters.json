@@ -116,7 +116,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/Promoter"
+                        "$ref": "#/components/schemas/PromoterListItem"
                       },
                       "description": "List of Promoters"
                     },
@@ -1653,6 +1653,245 @@
               "name": {
                 "type": "string",
                 "nullable": true
+              }
+            }
+          }
+        }
+      },
+      "PromoterListItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Id of the promoter"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email address of the promoter"
+          },
+          "name": {
+            "type": "string",
+            "description": "Full name of the promoter"
+          },
+          "cust_id": {
+            "type": "string",
+            "nullable": true,
+            "description": "Cust ID of the promoter"
+          },
+          "note": {
+            "type": "string",
+            "nullable": true,
+            "description": "Optional note about the promoter"
+          },
+          "stats": {
+            "type": "object",
+            "description": "Performance statistics for the promoter",
+            "properties": {
+              "clicks_count": {
+                "type": "integer",
+                "description": "Number of clicks generated"
+              },
+              "referrals_count": {
+                "type": "integer",
+                "description": "Number of referrals generated"
+              },
+              "sales_count": {
+                "type": "integer",
+                "description": "Number of sales generated"
+              },
+              "customers_count": {
+                "type": "integer",
+                "description": "Number of customers referred"
+              },
+              "revenue_amount": {
+                "type": "integer",
+                "description": "Total revenue generated"
+              },
+              "active_customers_count": {
+                "type": "integer",
+                "description": "Number of active customers"
+              }
+            }
+          },
+          "is_customized": {
+            "type": "boolean",
+            "description": "Whether the promoter has customized settings"
+          },
+          "fraud_suspicions": {
+            "type": "array",
+            "description": "List of potential fraud flags",
+            "items": {
+              "type": "string"
+            }
+          },
+          "is_confirmed": {
+            "type": "boolean",
+            "description": "Whether the promoter has confirmed their account"
+          },
+          "invoice_details_status": {
+            "type": "string",
+            "description": "Status of the promoter's invoice details",
+            "enum": [
+              "pending",
+              "approved",
+              "denied"
+            ]
+          },
+          "profile": {
+            "$ref": "#/components/schemas/PromoterProfile"
+          },
+          "joined_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time when the promoter joined."
+          },
+          "last_login_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "Date and time of the promoter's last login."
+          },
+          "archived_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "Date and time when the promoter was archived, if applicable."
+          },
+          "custom_fields": {
+            "type": "object",
+            "nullable": true,
+            "description": "Custom fields for the promoter, based on company settings. This is a key-value pair object where keys are custom field identifiers and values are the corresponding data."
+          },
+          "password_setup_url": {
+            "type": "string",
+            "nullable": true,
+            "description": "URL for the promoter to set up their password"
+          },
+          "first_event_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time of the promoter's first activity."
+          },
+          "promoter_campaigns": {
+            "type": "array",
+            "description": "List of campaigns associated with the promoter",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "description": "ID of the promoter-campaign association"
+                },
+                "campaign_id": {
+                  "type": "integer",
+                  "description": "ID of the campaign"
+                },
+                "promoter_id": {
+                  "type": "integer",
+                  "description": "ID of the promoter"
+                },
+                "state": {
+                  "type": "string",
+                  "description": "State of the promoter in this campaign",
+                  "enum": [
+                    "pending",
+                    "accepted",
+                    "rejected",
+                    "blocked",
+                    "inactive",
+                    "not_set"
+                  ]
+                },
+                "created_at": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "When the promoter was added to the campaign"
+                },
+                "campaign": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "description": "ID of the campaign"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Name of the campaign"
+                    },
+                    "color": {
+                      "type": "string",
+                      "description": "Color code associated with the campaign"
+                    }
+                  }
+                },
+                "coupon": {
+                  "type": "string",
+                  "description": "Coupon code for this campaign"
+                },
+                "ref_token": {
+                  "type": "string",
+                  "description": "Referral token for this campaign"
+                },
+                "ref_link": {
+                  "type": "string",
+                  "description": "Referral link for this campaign"
+                }
+              }
+            }
+          },
+          "balances": {
+            "type": "object",
+            "description": "Earnings balance breakdown for the promoter",
+            "properties": {
+              "cash": {
+                "type": "number",
+                "nullable": true
+              },
+              "credits": {
+                "type": "number",
+                "nullable": true
+              },
+              "points": {
+                "type": "number",
+                "nullable": true
+              },
+              "free_months": {
+                "type": "number",
+                "nullable": true
+              },
+              "discount": {
+                "type": "number",
+                "nullable": true
+              }
+            }
+          },
+          "track_ad_traffic": {
+            "type": "boolean",
+            "nullable": true,
+            "description": "Whether ad traffic tracking is enabled for this promoter. Null means the campaign default is used."
+          },
+          "auth_provider": {
+            "type": "string",
+            "nullable": true,
+            "description": "OAuth provider used to authenticate (e.g. google). Null if using email/password."
+          },
+          "selected_payout_method": {
+            "type": "object",
+            "nullable": true,
+            "description": "The promoter's currently selected payout method. Omitted when the `exclude_payout_method=true` query parameter is set.",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "method": {
+                "type": "string"
+              },
+              "date_added": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "is_disabled": {
+                "type": "boolean"
               }
             }
           }
