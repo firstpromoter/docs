@@ -1,0 +1,169 @@
+---
+title: "Mobile Attribution Providers (Branch.io, AppsFlyer, Adjust)"
+description: "Use a deep linking/attribution provider to solve new-install (deferred) referral tracking on iOS and Android, and report the result to FirstPromoter."
+---
+
+[Deep Linking for Mobile Apps](/guides/mobile-deep-linking) covers tracking referrals when the user **already has your app installed**. This guide solves the harder case: **the user doesn't have your app yet.**
+
+When someone taps an affiliate link without your app installed, iOS and Android route them to the App Store / Play Store. Neither platform passes the original link's query parameters through that install — by the time the app opens for the first time, the referral ID (`fpr=joe13`) is gone. This is why "deferred deep linking" tools exist. FirstPromoter doesn't run its own — instead, you point one of these providers at your app and forward whatever referral ID it recovers into FirstPromoter's Tracking API, the same way as the direct-install case.
+
+<Note>
+  This guide uses **Branch.io** as the worked example since it's the most commonly used for this pattern, but **AppsFlyer** (OneLink) and **Adjust** solve the same problem the same way — a redirect link with custom data, an SDK that reads that data back on first open, and an attribution callback in your app code. If you're already using one of those for ad attribution, reuse it here instead of adding Branch.
+</Note>
+
+---
+
+## How it works end to end
+
+| Step | What happens |
+|---|---|
+| 1 | Affiliate's FirstPromoter referral ID (`ref_id`) is embedded as custom data on a Branch link |
+| 2 | Affiliate shares the **Branch link** instead of the raw FirstPromoter link |
+| 3 | No app installed → Branch redirects to the App Store / Play Store |
+| 4 | App installed → opened for the first time → Branch SDK resolves the original link's custom data |
+| 5 | Already installed → tapping the link opens the app directly with the same custom data |
+| 6 | Your app reads the `ref_id` out of Branch's session params and reports it to FirstPromoter |
+
+---
+
+## Step 1 — Generate a Branch link carrying the FirstPromoter referral ID
+
+For each affiliate, once you have their FirstPromoter referral link (e.g. `https://yourapp.com/r?fpr=joe13`), create a corresponding Branch link with the `ref_id` stored as custom data, and the FirstPromoter link set as the desktop/web fallback so anyone opening it on desktop still lands on your normal site:
+
+```sh
+curl -X POST https://api2.branch.io/v1/url \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "branch_key": "key_live_YOUR_BRANCH_KEY",
+    "channel": "affiliate",
+    "feature": "referral",
+    "data": {
+      "fpr_ref_id": "joe13",
+      "$desktop_url": "https://yourapp.com/r?fpr=joe13",
+      "$fallback_url": "https://yourapp.com/r?fpr=joe13"
+    }
+  }'
+```
+
+Share the resulting `https://yourapp.app.link/...` URL as the affiliate's mobile referral link (in addition to, or instead of, the plain FirstPromoter one, depending on where you expect it to be shared).
+
+<Tip>
+  You can automate this: whenever FirstPromoter creates or returns a promoter's referral link (via the dashboard, or the [Promoter API](/api-reference-v2/api-admin)), call the Branch URL API from your backend to mint the matching Branch link, and show that to the affiliate instead.
+</Tip>
+
+---
+
+## Step 2 — Initialize the Branch SDK and read the referral ID
+
+<CodeGroup>
+
+```dart Flutter (flutter_branch_sdk)
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+
+Future<void> initBranch() async {
+  await FlutterBranchSdk.init(enableLogging: true);
+
+  FlutterBranchSdk.listSession().listen((data) {
+    if (data.containsKey('+clicked_branch_link') && data['+clicked_branch_link'] == true) {
+      final refId = data['fpr_ref_id'] as String?;
+      if (refId != null) storeReferralId(refId);
+    }
+  });
+}
+```
+
+```swift iOS (Branch native SDK)
+// AppDelegate.swift — application(_:didFinishLaunchingWithOptions:)
+Branch.getInstance().initSession(launchOptions: launchOptions) { (params, error) in
+    if let refId = params?["fpr_ref_id"] as? String {
+        UserDefaults.standard.set(refId, forKey: "fpr_ref_id")
+    }
+}
+```
+
+```kotlin Android (Branch native SDK)
+// In onStart() of your launcher Activity
+Branch.sessionBuilder(this).withCallback { referringParams, error ->
+    if (error == null) {
+        val refId = referringParams?.optString("fpr_ref_id")
+        if (!refId.isNullOrEmpty()) {
+            getSharedPreferences("fpr", MODE_PRIVATE).edit()
+                .putString("fpr_ref_id", refId)
+                .apply()
+        }
+    }
+}.withData(intent?.data).init()
+```
+
+```javascript React Native (react-native-branch)
+import branch from 'react-native-branch';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+branch.subscribe(({ error, params }) => {
+  if (error) return;
+  if (params?.['+clicked_branch_link']) {
+    const refId = params.fpr_ref_id;
+    if (refId) AsyncStorage.setItem('fpr_ref_id', refId);
+  }
+});
+```
+
+</CodeGroup>
+
+<Note>
+  Branch returns the same `fpr_ref_id` custom data key whether the link was opened directly (app already installed) or resolved after a fresh install (deferred) — your app doesn't need separate logic for the two cases. That's the problem Branch (or an equivalent provider) is solving for you.
+</Note>
+
+---
+
+## Step 3 — Report the referral ID to FirstPromoter
+
+Once `fpr_ref_id` is captured, the rest is identical to the direct deep-linking flow — send it to your backend, and have your backend call the FirstPromoter Tracking API:
+
+```sh
+curl --request POST \
+  --url https://api.firstpromoter.com/api/v2/track/signup \
+  --header 'Account-ID: YOUR_ACCOUNT_ID' \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "email": "customer@email.com",
+    "uid": "cus_12345",
+    "ref_id": "joe13"
+}'
+```
+
+<Warning>
+  As with direct deep linking, keep your FirstPromoter API key on your backend only — never call this endpoint directly from the mobile app. See [Deep Linking for Mobile Apps → Step 3](/guides/mobile-deep-linking#step-3-report-the-referral-to-firstpromoter) for the sales-tracking call and full parameter list.
+</Warning>
+
+---
+
+## Using AppsFlyer or Adjust instead
+
+The pattern is the same; only the SDK callback differs:
+
+| Provider | Where you set the custom data | Where you read it back |
+|---|---|---|
+| **Branch.io** | `data` object on link creation | `initSession`/`listSession` callback params |
+| **AppsFlyer (OneLink)** | deep link value / OneLink template parameters | `onAppOpenAttribution` / `onConversionDataSuccess` callback |
+| **Adjust** | `deep_link_value` on the tracker/link | `attributionCallback` on the `Adjust` instance |
+
+Whichever you use, the goal is the same: get the FirstPromoter `ref_id` out of the provider's attribution payload, then make the same two Tracking API calls (`/track/signup`, `/track/sale`) from your backend described in Step 3 above and in the [Deep Linking guide](/guides/mobile-deep-linking).
+
+---
+
+## Choosing whether you need this at all
+
+Adding an attribution provider is real integration work and (beyond free tiers) an ongoing cost. Consider whether you need it:
+
+- If your affiliates mostly share links in **contexts where the app is very likely already installed** (e.g. existing customers referring other existing users of the same category of app), the direct deep-linking flow in the [previous guide](/guides/mobile-deep-linking) may be enough on its own.
+- If a meaningful share of referred signups are **brand-new users installing your app for the first time**, you need deferred deep linking to avoid losing that attribution — this guide's approach (or the Android-only Play Install Referrer API from the previous guide) is required.
+
+---
+
+## Need help?
+
+- [Deep Linking for Mobile Apps](/guides/mobile-deep-linking) — the direct-install flow and full Tracking API parameter reference
+- [Tracking API reference](/api-reference-v2/api-admin/tracking-api/leads-and-signups)
+- [Support](mailto:support@firstpromoter.com) — reach the team if you're still stuck

@@ -34,7 +34,9 @@
                       "guides/integrate-your-website",
                       "guides/tracking-with-fprjs",
                       "guides/tracking-without-fprjs",
-                      "guides/proxy-setup"
+                      "guides/proxy-setup",
+                      "guides/mobile-deep-linking",
+                      "guides/mobile-attribution-providers"
                     ]
                   },
                   {
@@ -541,7 +543,9 @@
                       "guides/integrate-your-website",
                       "guides/tracking-with-fprjs",
                       "guides/tracking-without-fprjs",
-                      "guides/proxy-setup"
+                      "guides/proxy-setup",
+                      "guides/mobile-deep-linking",
+                      "guides/mobile-attribution-providers"
                     ]
                   },
                   {

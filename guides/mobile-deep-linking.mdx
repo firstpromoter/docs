@@ -1,0 +1,208 @@
+---
+title: "Deep Linking for Mobile Apps (Flutter, iOS, Android, React Native)"
+description: "Track affiliate referrals inside native mobile apps by capturing the referral ID from a deep link and reporting it to FirstPromoter's Tracking API."
+---
+
+FirstPromoter's standard integration (`fpr.js` + cookies) is built for browsers. A native mobile app has no cookies and no `document`, so referral tracking has to be done a different way: **capture the referral ID from the incoming link, then report it to FirstPromoter yourself via the Tracking API.**
+
+<Note>
+  This guide covers the case where the user **already has your app installed** — tapping the affiliate's link opens the app directly and the referral data survives the trip. If the user does **not** have the app installed yet, the link has to go through the App Store / Play Store first, and standard deep links **lose the referral data** in that round-trip. That "deferred deep linking" problem is covered separately in [Mobile Attribution Providers](/guides/mobile-attribution-providers) — read this guide first, since the concepts (extracting the ref ID, calling the Tracking API) are the same either way.
+</Note>
+
+---
+
+## How it works
+
+| Step | What happens |
+|---|---|
+| 1. Affiliate shares their link | The same referral link FirstPromoter already generates, e.g. `https://yourapp.com/r?fpr=joe13` |
+| 2. Link opens your app | Configured as a Universal Link (iOS) / App Link (Android) so it opens the app instead of a browser, if installed |
+| 3. App reads the referral ID | Your app extracts `fpr` (or whichever parameter is used) from the incoming URL |
+| 4. App stores it | Persist it locally until the user signs up — this replaces the `_fprom_ref` cookie a website would use |
+| 5. Your backend reports it | On signup/purchase, your backend calls FirstPromoter's [Tracking API](/api-reference-v2/api-admin/tracking-api/leads-and-signups) with the referral ID |
+
+<Tip>
+  The supported query parameters for a referral link are `fpr`, `via`, `fp_ref`, `deal`, `ref`, `_from`, `_by`, `_go`. Pick one and use it consistently — `fpr` is the default used throughout this guide.
+</Tip>
+
+---
+
+## Step 1 — Make your referral link open the app
+
+For the link to open your app directly (instead of a mobile browser) when the app is already installed, register your domain as:
+
+- **iOS — Universal Links**: host an `apple-app-site-association` file at `https://yourapp.com/.well-known/apple-app-site-association` and enable the **Associated Domains** capability (`applinks:yourapp.com`) in Xcode.
+- **Android — App Links**: host an `assetlinks.json` file at `https://yourapp.com/.well-known/assetlinks.json` and add an `<intent-filter android:autoVerify="true">` in your `AndroidManifest.xml` matching your domain.
+
+<Note>
+  A misconfigured `apple-app-site-association` or `assetlinks.json` is the most common reason deep links silently fall back to the browser instead of opening the app. Verify both files are served over HTTPS with no redirects and a `Content-Type` of `application/json`.
+</Note>
+
+If you don't want to set up Universal/App Links yet, a custom URL scheme (`yourapp://ref?fpr=joe13`) works too, but it can't be used as the affiliate-facing link on its own (it won't resolve in a browser or `sms`/social share preview) — pair it with a normal `https://` fallback link that redirects to it, or use one of the frameworks below which handle both.
+
+---
+
+## Step 2 — Capture the referral ID on app open
+
+<CodeGroup>
+
+```dart Flutter (app_links package)
+import 'package:app_links/app_links.dart';
+
+final _appLinks = AppLinks();
+
+Future<void> initDeepLinkListener() async {
+  // Handles the link that launched the app (cold start)
+  final initialUri = await _appLinks.getInitialLink();
+  _handleIncomingLink(initialUri);
+
+  // Handles links received while the app is already running
+  _appLinks.uriLinkStream.listen(_handleIncomingLink);
+}
+
+void _handleIncomingLink(Uri? uri) {
+  if (uri == null) return;
+  final refId = uri.queryParameters['fpr'];
+  if (refId != null) {
+    storeReferralId(refId); // persist with shared_preferences / secure storage
+  }
+}
+```
+
+```swift iOS (Universal Links, SceneDelegate/AppDelegate)
+func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+    guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+          let url = userActivity.webpageURL,
+          let components = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return }
+
+    if let refId = components.queryItems?.first(where: { $0.name == "fpr" })?.value {
+        UserDefaults.standard.set(refId, forKey: "fpr_ref_id")
+    }
+}
+```
+
+```kotlin Android (App Links)
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    handleIntent(intent)
+}
+
+override fun onNewIntent(intent: Intent) {
+    super.onNewIntent(intent)
+    handleIntent(intent)
+}
+
+private fun handleIntent(intent: Intent) {
+    val data: Uri? = intent.data
+    val refId = data?.getQueryParameter("fpr")
+    if (refId != null) {
+        getSharedPreferences("fpr", MODE_PRIVATE).edit()
+            .putString("fpr_ref_id", refId)
+            .apply()
+    }
+}
+```
+
+```javascript React Native (Linking API)
+import { Linking } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+function extractRefId(url) {
+  if (!url) return null;
+  const { queryParams } = Linking.parse(url); // or new URL(url).searchParams
+  return queryParams?.fpr ?? null;
+}
+
+// Cold start
+Linking.getInitialURL().then((url) => {
+  const refId = extractRefId(url);
+  if (refId) AsyncStorage.setItem('fpr_ref_id', refId);
+});
+
+// While app is running
+Linking.addEventListener('url', ({ url }) => {
+  const refId = extractRefId(url);
+  if (refId) AsyncStorage.setItem('fpr_ref_id', refId);
+});
+```
+
+</CodeGroup>
+
+<Tip>
+  If you use React Navigation, wire this into its own [deep linking config](https://reactnavigation.org/docs/deep-linking/) `getStateFromPath`/`subscribe` instead of a second parallel `Linking` listener, to avoid handling the same URL twice.
+</Tip>
+
+---
+
+## Step 3 — Report the referral to FirstPromoter
+
+<Warning>
+  Never embed your FirstPromoter API key in the mobile app. The Tracking API requires a `Bearer` API key that can create signups and sales on your account — anyone who decompiles your app binary would be able to extract it. Send the stored referral ID from the app to **your own backend**, and make the FirstPromoter API call from there.
+</Warning>
+
+**When the user signs up** (client → your backend → FirstPromoter):
+
+```sh
+curl --request POST \
+  --url https://api.firstpromoter.com/api/v2/track/signup \
+  --header 'Account-ID: YOUR_ACCOUNT_ID' \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "email": "customer@email.com",
+    "uid": "cus_12345",
+    "ref_id": "joe13",
+    "skip_email_notification": true
+}'
+```
+
+- Send either `email` or `uid` (or both) — whichever you have at signup time.
+- `ref_id` is the value you captured from the `fpr` parameter in Step 2.
+
+See the full [Leads & Sign-ups API reference](/api-reference-v2/api-admin/tracking-api/leads-and-signups) for all parameters.
+
+**When the user makes a purchase** (in-app purchase confirmed server-side, subscription webhook, etc.):
+
+```sh
+curl --request POST \
+  --url https://api.firstpromoter.com/api/v2/track/sale \
+  --header 'Account-ID: YOUR_ACCOUNT_ID' \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "email": "customer@email.com",
+    "uid": "cus_12345",
+    "event_id": "txn_00123",
+    "amount": 4900
+}'
+```
+
+- `amount` is in **cents** (`4900` = $49.00), except for zero-decimal currencies (e.g. `JPY`), which are sent as whole values.
+- `event_id` must be unique per transaction — it's how FirstPromoter deduplicates retried webhook/receipt calls.
+- If you already reported the signup with a `ref_id`, you don't need to pass it again on the sale call — FirstPromoter matches the sale to the lead by `email`/`uid`.
+
+See the full [Sales Tracking API reference](/api-reference-v2/api-admin/tracking-api/sales).
+
+---
+
+## Limitations of direct deep linking
+
+This approach only works when **the app is already installed**. If it isn't:
+
+- Tapping the link opens the App Store / Play Store listing (or a fallback web page) instead of the app.
+- The `fpr` parameter is **not** carried through the install — the app has no way to read it on first open, because the OS doesn't pass launch parameters from an unrelated store install.
+
+This is a limitation of iOS/Android themselves, not FirstPromoter — every affiliate/attribution tool runs into it. There is one native, first-party workaround on Android only:
+
+- **Google Play Install Referrer API** lets you append a referrer string to the Play Store URL (`&referrer=fpr%3Djoe13`), which Google stores and your app can read via the `com.android.installreferrer` library on first open after install — no third-party SDK required. There is no iOS equivalent.
+
+If you need reliable new-install attribution on **both** iOS and Android, see [Mobile Attribution Providers](/guides/mobile-attribution-providers), which covers using a service like Branch.io to bridge that gap and still report into FirstPromoter using the same API calls from Step 3.
+
+---
+
+## Need help?
+
+- [Tracking API reference](/api-reference-v2/api-admin/tracking-api/leads-and-signups) — full parameter documentation
+- [Mobile Attribution Providers](/guides/mobile-attribution-providers) — solving new-install (deferred) attribution with Branch.io or similar
+- [Tracking without fpr.js](/guides/tracking-without-fprjs) — the same API-only pattern used here, written for websites
+- [Support](mailto:support@firstpromoter.com) — reach the team if you're still stuck
