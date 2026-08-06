@@ -2039,6 +2039,11 @@
           "drip_emails": {
             "type": "boolean",
             "description": "Send a welcome email to the promoter"
+          },
+          "always_approve": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether the promoter should be automatically accepted into the campaign upon creation. Set to `false` to create the promoter in a pending state instead, requiring manual acceptance or rejection."
           }
         }
       },
