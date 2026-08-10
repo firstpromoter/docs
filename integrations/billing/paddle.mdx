@@ -18,13 +18,36 @@ FirstPromoter supports both **Paddle Classic** (v1 webhooks) and **Paddle Billin
 | `subscription_payment_refunded` | Refund (recurring) |
 | `subscription_cancelled` | Cancellation |
 
+<Note>
+VAT-only refunds (`refund_type` of `vat`) are ignored.
+</Note>
+
 **Paddle Billing (v2) — tracked webhook events:**
 
 | Paddle Event | What FirstPromoter tracks |
 |---|---|
 | `transaction.completed` | Sale / commission |
-| `adjustment.created` | Refund |
-| `adjustment.updated` | Refund |
+| `adjustment.created` | Refund — only when the adjustment's `action` is `chargeback` |
+| `adjustment.updated` | Refund — only when the adjustment's `action` is `refund` |
 | `subscription.canceled` | Cancellation |
+
+<Note>
+Sales with a zero or negative amount are ignored, as are refunds and chargebacks that resolve to a zero amount.
+</Note>
+
+## Paddle fees and commission amounts
+
+The Paddle integration form has an **Exclude Paddle's fees** toggle that controls the amount commissions are calculated on:
+
+| Toggle | Commission is calculated on |
+|---|---|
+| Off | Your earnings **plus** Paddle's fee |
+| On | Your net earnings, after Paddle's fee is deducted |
+
+This applies to both Paddle Classic and Paddle Billing, and it affects refund amounts as well as sales.
+
+<Note>
+Changing this toggle only affects sales and refunds tracked from that point on. Commissions already recorded are not recalculated.
+</Note>
 
 Click [here](https://login.firstpromoter.com?redirect=%2Fintegration%2Fpaddle) to view the setup guide.
