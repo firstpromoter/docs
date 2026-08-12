@@ -1,0 +1,264 @@
+---
+title: 'Embed the Dashboard & Auto-Login Promoters'
+description: 'Embed the full promoter dashboard inside your own app as an iframe and automatically sign promoters in — no separate URL, no credentials.'
+---
+
+FirstPromoter lets you embed the complete promoter dashboard inside your own app and automatically log the visiting promoter in, so they never have to leave your app or enter credentials manually. Your backend requests a short-lived access token for the promoter, and you pass that token to the iframe.
+
+<Note>
+  **Requirements**
+  - A custom domain configured on your FirstPromoter account
+  - Business plan or higher
+  - Server-side access to make authenticated API requests — the access token must always be generated on your backend. Never call this endpoint or expose your API key from the browser.
+</Note>
+
+## How it works
+
+<Steps>
+  <Step title="Your promoter logs into your app">
+    They're already authenticated in your product, and you know their FirstPromoter promoter ID (or the `cust_id` you assigned them).
+  </Step>
+  <Step title="Your backend requests an access token">
+    Your server calls the `iframe_login` endpoint with that promoter's ID. FirstPromoter returns a bearer token scoped to that promoter and your account.
+  </Step>
+  <Step title="You render the iframe with the token">
+    Pass the token as the `tk` query parameter on the iframe `src`. FirstPromoter validates it and loads the dashboard already signed in.
+  </Step>
+</Steps>
+
+## Step 1 — Get your API credentials
+
+Go to **Settings → Integrations → Manage API Keys** and note two values:
+
+- **Account ID** — identifies your FirstPromoter account
+- **API Key** — used to authenticate the server-side request (use a v2 key)
+
+Keep both server-side only.
+
+## Step 2 — Generate an access token
+
+From your backend, make a `POST` request to the iframe login endpoint:
+
+```
+POST https://v2.firstpromoter.com/api/v2/promoters/iframe_login
+```
+
+<ParamField query="promoter_id" type="integer">
+  The FirstPromoter promoter ID. Provide this or `cust_id`.
+</ParamField>
+<ParamField query="cust_id" type="string">
+  The external customer ID you assigned this promoter when they signed up. Provide this or `promoter_id`.
+</ParamField>
+<ParamField header="Authorization" type="string" required>
+  `Bearer {your_api_key}`
+</ParamField>
+<ParamField header="Account-Id" type="string" required>
+  `{your_account_id}`
+</ParamField>
+
+The request body is empty. On success you get back a bearer token:
+
+<ResponseField name="access_token" type="string">
+  Short-lived bearer token for this promoter, scoped to your account.
+</ResponseField>
+<ResponseField name="expires_in" type="integer">
+  Token lifetime in seconds. Defaults to `86400` (24 hours).
+</ResponseField>
+
+```json
+{
+  "access_token": "xxxxxxxxxxxxxxx",
+  "expires_in": 86400
+}
+```
+
+<Warning>
+  Generate a fresh token on every page load — don't cache or reuse tokens across sessions or share one token between promoters.
+</Warning>
+
+## Step 3 — Find the promoter's ID
+
+You need the FirstPromoter `promoter_id` (not your own internal user ID) — or the `cust_id` you gave them. Get it from:
+
+- The API response when the promoter was originally created
+- The [Promoters API](/api-reference-v2/api-admin/promoters/get-available-promoters) filtered by `cust_id`
+- The `promoter_accepted` webhook payload
+
+## Step 4 — Embed the iframe
+
+Use the access token as the `tk` query parameter on the iframe `src`:
+
+```html
+<iframe
+  src="https://your.custom.domain/iframe?tk={access_token}"
+  allow="clipboard-write"
+  width="100%"
+  height="850px"
+  frameborder="0"
+>
+</iframe>
+```
+
+<Note>
+  `allow="clipboard-write"` is required for the copy-to-clipboard buttons inside the dashboard (referral links, promo codes, etc.).
+</Note>
+
+### Targeting a specific campaign
+
+If a promoter belongs to more than one campaign and you want the dashboard to open directly on a particular one, append `campaign_id`:
+
+```
+/iframe?tk={access_token}&campaign_id={campaign_id}
+```
+
+You can also pass a comma-separated list — the dashboard opens on the first matching campaign the promoter belongs to:
+
+```
+/iframe?tk={access_token}&campaign_id={id1},{id2}
+```
+
+## Code examples
+
+<CodeGroup>
+
+```js Node.js (Express)
+const express = require("express");
+const app = express();
+
+app.get("/dashboard", async (req, res) => {
+  const promoterId = req.user.firstpromoterPromoterId; // your stored promoter ID
+
+  const response = await fetch(
+    `https://v2.firstpromoter.com/api/v2/promoters/iframe_login?promoter_id=${promoterId}`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.FP_API_KEY}`,
+        "Account-Id": process.env.FP_ACCOUNT_ID,
+      },
+    }
+  );
+
+  const { access_token } = await response.json();
+  res.render("dashboard", { accessToken: access_token });
+});
+```
+
+```php PHP
+<?php
+$promoterId = $currentUser->firstpromoter_promoter_id;
+
+$ch = curl_init(
+  "https://v2.firstpromoter.com/api/v2/promoters/iframe_login?promoter_id=" . urlencode($promoterId)
+);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+  "Authorization: Bearer " . $_ENV["FP_API_KEY"],
+  "Account-Id: " . $_ENV["FP_ACCOUNT_ID"],
+]);
+
+$response = json_decode(curl_exec($ch), true);
+curl_close($ch);
+
+$accessToken = $response["access_token"];
+?>
+```
+
+```sh cURL
+curl --request POST \
+  --url 'https://v2.firstpromoter.com/api/v2/promoters/iframe_login?promoter_id=12345' \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Account-Id: YOUR_ACCOUNT_ID'
+```
+
+</CodeGroup>
+
+Then render the iframe once you have the token:
+
+<CodeGroup>
+
+```jsx React
+import { useEffect, useState } from "react";
+
+export function PromoterDashboard() {
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    fetch("/api/fp-token")
+      .then((res) => res.json())
+      .then((data) => setToken(data.token));
+  }, []);
+
+  if (!token) return <p>Loading dashboard…</p>;
+
+  return (
+    <iframe
+      src={`https://your.custom.domain/iframe?tk=${token}`}
+      allow="clipboard-write"
+      width="100%"
+      height="850px"
+      frameBorder="0"
+    />
+  );
+}
+```
+
+```vue Vue
+<template>
+  <iframe
+    v-if="token"
+    :src="`https://your.custom.domain/iframe?tk=${token}`"
+    allow="clipboard-write"
+    width="100%"
+    height="850px"
+    frameborder="0"
+  />
+  <p v-else>Loading dashboard…</p>
+</template>
+
+<script setup>
+import { ref, onMounted } from "vue";
+
+const token = ref(null);
+
+onMounted(async () => {
+  const res = await fetch("/api/fp-token");
+  const data = await res.json();
+  token.value = data.token;
+});
+</script>
+```
+
+```html Vanilla JS
+<div id="fp-dashboard"></div>
+
+<script>
+  fetch("/api/fp-token")
+    .then((res) => res.json())
+    .then(({ token }) => {
+      const iframe = document.createElement("iframe");
+      iframe.src = `https://your.custom.domain/iframe?tk=${token}`;
+      iframe.allow = "clipboard-write";
+      iframe.width = "100%";
+      iframe.height = "850px";
+      iframe.frameBorder = "0";
+      document.getElementById("fp-dashboard").appendChild(iframe);
+    });
+</script>
+```
+
+</CodeGroup>
+
+`/api/fp-token` above is your own protected backend route that performs the Step 2 request and returns `{ token: access_token }` — the same pattern as the Node.js example.
+
+## Security considerations
+
+- **Never call `iframe_login` from the browser.** Your API key must stay server-side behind a route that requires the visitor to already be authenticated in your app.
+- **Only embed the iframe on authenticated, non-public pages.** The token grants full dashboard access for that promoter.
+- **Generate a fresh token on every page load.** Tokens expire after `expires_in` seconds (24 hours by default) — don't cache or share them between users.
+
+## Related
+
+- [Log promoters out of the embedded dashboard](/advanced/embed-dashboard-logout)
+- [Promoters API reference](/api-reference-v2/api-admin/promoters/get-available-promoters)

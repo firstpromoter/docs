@@ -40,6 +40,13 @@
                     ]
                   },
                   {
+                    "group": "Advanced",
+                    "pages": [
+                      "advanced/embed-dashboard-login",
+                      "advanced/embed-dashboard-logout"
+                    ]
+                  },
+                  {
                     "group": "Scripts",
                     "pages": [
                       "script-docs/fpr-js-docs",
@@ -546,6 +553,13 @@
                       "guides/proxy-setup",
                       "guides/mobile-deep-linking",
                       "guides/mobile-attribution-providers"
+                    ]
+                  },
+                  {
+                    "group": "Advanced",
+                    "pages": [
+                      "advanced/embed-dashboard-login",
+                      "advanced/embed-dashboard-logout"
                     ]
                   },
                   {

@@ -1,0 +1,114 @@
+---
+title: "Log Promoters Out of the Embedded Dashboard"
+description: "End a specific promoter's embedded dashboard session from your backend, or let promoters sign out from inside the iframe itself."
+---
+
+If you [embed the promoter dashboard and auto-login promoters](/advanced/embed-dashboard-login), you'll also want a way to end that session — either because the promoter logged out of your app, or because you want to immediately cut off a specific promoter's access instead of waiting for their token to expire.
+
+There are two independent ways a promoter's embedded session ends:
+
+<CardGroup cols={2}>
+  <Card title="Self-service logout" icon="right-from-bracket">
+    The promoter clicks **Log out** inside the embedded dashboard itself. No API call needed — this happens automatically.
+  </Card>
+  <Card title="Targeted logout (your backend)" icon="server">
+    Your backend calls `iframe_logout` for a specific promoter, revoking their access immediately — for example when the corresponding user logs out of your app.
+  </Card>
+</CardGroup>
+
+## Self-service logout
+
+When a promoter clicks **Log out** from the account menu inside the embedded dashboard, FirstPromoter invalidates that session's token and returns them to a signed-out state within the iframe. This requires no setup and no API call on your side — it's built into the dashboard.
+
+<Note>
+  This only ends the *current* session token. If your app issues a fresh token on every page load (as recommended in the [login guide](/advanced/embed-dashboard-login)), reloading the page after this will silently log the promoter back in. If you want the logout to stick, pair it with the targeted logout below, triggered from your own app's logout flow.
+</Note>
+
+## Targeted logout (from your backend)
+
+Call this whenever you want to end a **specific promoter's** embedded session from your side — typically when that user logs out of your app, or when you need to immediately revoke their access (e.g. they were suspended). It targets one promoter at a time by `promoter_id` or `cust_id`, so it never affects any other promoter's session.
+
+```
+POST https://v2.firstpromoter.com/api/v2/promoters/iframe_logout
+```
+
+<ParamField query="promoter_id" type="integer">
+  The FirstPromoter promoter ID whose session to end. Provide this or `cust_id`.
+</ParamField>
+<ParamField query="cust_id" type="string">
+  The external customer ID you assigned this promoter. Provide this or `promoter_id`.
+</ParamField>
+<ParamField header="Authorization" type="string" required>
+  `Bearer {your_api_key}`
+</ParamField>
+<ParamField header="Account-Id" type="string" required>
+  `{your_account_id}`
+</ParamField>
+
+The request body is empty. A `200 OK` with no body confirms the session was revoked; a `404` means no promoter matched the `promoter_id`/`cust_id` you passed.
+
+<Warning>
+  This revokes **every currently active access token that promoter has under your account** — including any not-yet-expired tokens from earlier `iframe_login` calls (e.g. from other tabs or an earlier page load). It does not touch that same person's sessions under any other FirstPromoter account they may also be a promoter for.
+</Warning>
+
+### Example
+
+<CodeGroup>
+
+```js Node.js (Express)
+app.post("/logout", async (req, res) => {
+  const promoterId = req.user.firstpromoterPromoterId;
+
+  await fetch(
+    `https://v2.firstpromoter.com/api/v2/promoters/iframe_logout?promoter_id=${promoterId}`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.FP_API_KEY}`,
+        "Account-Id": process.env.FP_ACCOUNT_ID,
+      },
+    }
+  );
+
+  // ...continue your own app's logout flow
+  res.redirect("/login");
+});
+```
+
+```php PHP
+<?php
+$promoterId = $currentUser->firstpromoter_promoter_id;
+
+$ch = curl_init(
+  "https://v2.firstpromoter.com/api/v2/promoters/iframe_logout?promoter_id=" . urlencode($promoterId)
+);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+  "Authorization: Bearer " . $_ENV["FP_API_KEY"],
+  "Account-Id: " . $_ENV["FP_ACCOUNT_ID"],
+]);
+curl_exec($ch);
+curl_close($ch);
+?>
+```
+
+```sh cURL
+curl --request POST \
+  --url 'https://v2.firstpromoter.com/api/v2/promoters/iframe_logout?promoter_id=12345' \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Account-Id: YOUR_ACCOUNT_ID'
+```
+
+</CodeGroup>
+
+### When to call this
+
+- **On your app's own logout action** — call it alongside your normal sign-out logic so the dashboard doesn't silently re-authenticate on the next page load.
+- **When suspending or deactivating a user** — revoke dashboard access immediately rather than waiting up to 24 hours for their last token to expire.
+- **Before switching which promoter is shown in the same embedded iframe** — e.g. an admin view of your app that lets staff preview different promoters' dashboards.
+
+## Related
+
+- [Embed the dashboard & auto-login promoters](/advanced/embed-dashboard-login)
+- [Promoters API reference](/api-reference-v2/api-admin/promoters/get-available-promoters)
