@@ -1,0 +1,95 @@
+---
+title: "Make.com"
+description: "Integrate FirstPromoter v2 with Make (formerly Integromat) to automate your affiliate program alongside thousands of other apps."
+---
+
+# What is Make?
+
+[Make](https://www.make.com/) (formerly Integromat) is a visual, no-code automation platform. You build "scenarios" that connect FirstPromoter to other apps using modules — triggers that watch for events, and actions that perform tasks — without writing any code.
+
+The FirstPromoter app is available in Make's app directory at [apps.make.com/firstpromoter](https://www.make.com/en/integrations/firstpromoter).
+
+# Requirements
+
+- A Make account
+- Authentication credentials — v2 API key and Account ID. See [Setting up a connection](#setting-up-a-connection) below.
+
+# Available modules
+
+## Triggers
+
+| Trigger | Description |
+|---|---|
+| Watch Campaigns | Fires when a webhook event for a campaign is received |
+| Watch NMI | Fires when a transaction is refunded, voided, or sold |
+
+Both triggers are instant (webhook-based) — Make gives you a webhook URL to register in your FirstPromoter account, the same way it works with [Zapier](/automation/zapier#registering-the-webhook-in-firstpromoter).
+
+## Actions
+
+| Action | Description |
+|---|---|
+| Create a Lead | Assigns a new lead to an affiliate/promoter |
+| Create a Promoter | Creates a new promoter account |
+| Track a Sale and Commission | Records a sale and generates the resulting commission |
+| Track a Refund | Creates a negative commission for an existing sale |
+| Cancel a Tracked Sale | Marks a customer as cancelled and adjusts MRR |
+| Make an API Call | Performs a custom authenticated request against any FirstPromoter v2 API endpoint |
+
+<Tip>
+  **Make an API Call** is useful for any FirstPromoter v2 endpoint that doesn't have a dedicated module yet — see the [API Reference](/api-reference-v2/api-admin/introduction) for available endpoints.
+</Tip>
+
+# Setting up a connection
+
+Like every FirstPromoter v2 integration, Make connects using your Account ID and a v2 API key.
+
+| Field | Required | Description |
+| --- | --- | --- |
+| Account ID | yes | FirstPromoter Account ID |
+| API Key | yes | v2 API key |
+
+<Tip>
+  **Get your credentials on FirstPromoter**
+
+  1. Log in to your **FirstPromoter** dashboard.
+  2. Go to **Settings → Integrations → API integration** section.
+     - Copy your **Account id**.
+  3. Click **Manage API keys**
+     - Add a new API key or copy an existing one.
+</Tip>
+
+# Building a scenario
+
+<Steps>
+  <Step title="Step 1">
+    In Make, create a new scenario and click the **+** button to add a module.
+  </Step>
+  <Step title="Step 2">
+    Search for **FirstPromoter** and select the trigger or action module you want to use.
+  </Step>
+  <Step title="Step 3">
+    Click **Add** next to the connection field to create a new FirstPromoter connection.
+  </Step>
+  <Step title="Step 4">
+    Enter your **Account ID** and **v2 API key**, then click **Save**.
+  </Step>
+  <Step title="Step 5">
+    If you're adding a trigger module (**Watch Campaigns** or **Watch NMI**), copy the webhook URL Make generates for that module.
+  </Step>
+  <Step title="Step 6">
+    In FirstPromoter, go to **Settings → Integrations → Webhooks**, click **Add new webhook**, paste the URL, select the matching event and campaign(s), then save. See [Webhooks overview](/webhooks-v2/overview) for details.
+  </Step>
+  <Step title="Step 7">
+    Map the module's fields to data from earlier steps in your scenario — for sale tracking, either **Email** or **UID** is required to identify the customer.
+  </Step>
+  <Step title="Step 8">
+    Run the scenario once to test, then turn scheduling on to activate it.
+  </Step>
+</Steps>
+
+# Related
+
+- [Set up webhooks in FirstPromoter](/webhooks-v2/overview)
+- [Zapier integration](/automation/zapier)
+- [n8n node](/automation/n8n-node)

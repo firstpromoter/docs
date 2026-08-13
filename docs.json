@@ -111,6 +111,14 @@
                           "integrations/tracking/custom/paddle-checkout",
                           "integrations/tracking/custom/gtm"
                         ]
+                      },
+                      {
+                        "group": "Automation",
+                        "pages": [
+                          "automation/n8n-node",
+                          "automation/zapier",
+                          "automation/make"
+                        ]
                       }
                     ]
                   },
@@ -129,12 +137,6 @@
                     "pages": [
                       "mcp/overview",
                       "mcp/tools"
-                    ]
-                  },
-                  {
-                    "group": "Automation",
-                    "pages": [
-                      "automation/n8n-node"
                     ]
                   }
                 ]

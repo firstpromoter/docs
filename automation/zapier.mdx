@@ -1,0 +1,169 @@
+---
+title: "Zapier"
+description: "Integrate FirstPromoter v2 with Zapier to connect your affiliate program to thousands of other apps."
+---
+
+# What is Zapier?
+
+[Zapier](https://zapier.com/) is a no-code automation platform that connects FirstPromoter to thousands of other apps — Slack, Gmail, Salesforce, Shopify, and more — so data and actions move between them automatically, without writing any code.
+
+Each automation ("Zap") has two parts:
+
+- **Trigger** — an event in FirstPromoter (or another app) that starts the workflow, e.g. a new referral or a new commission.
+- **Action** — the task Zapier performs automatically in response, e.g. tracking a sale or creating a promoter.
+
+# Requirements
+
+- A Zapier account
+- Authentication credentials — v2 API key and Account ID. See [Setting up credentials](#setting-up-credentials) below.
+
+# Installing the FirstPromoter app
+
+The FirstPromoter v2 app on Zapier is installed via invite link rather than the public Zapier directory.
+
+<Steps>
+  <Step title="Step 1">
+    Make sure you're logged into Zapier.
+  </Step>
+  <Step title="Step 2">
+    Open the [FirstPromoter v2 app invite link](https://zapier.com/developer/public-invite/215402/39aea398460ea85023d7fa0799366cc6/).
+  </Step>
+  <Step title="Step 3">
+    Click **Accept invite & Build a Zap**.
+  </Step>
+</Steps>
+
+# Available triggers
+
+Triggers fire when something happens in FirstPromoter — commonly used ones include:
+
+| Trigger | Fires when |
+|---|---|
+| Referral Created | A new referral/lead is recorded |
+| Referral Converted | A referral converts into a paying customer |
+| Referral Cancelled | A referral's subscription is cancelled |
+| Promoter Created | A new promoter signs up |
+| Promoter Updated | A promoter's details change |
+| Promoter Balance Updated | A promoter's payable balance changes |
+| Promoter Campaign Created | A promoter is added to a campaign |
+| Promoter Campaign Accepted | A promoter's campaign application is accepted |
+| Promoter Campaign Pending | A promoter applies to a campaign |
+| Commission Created | A new commission is generated |
+| Commission Pending | A commission enters pending status |
+| Commission Approved | A commission is approved for payout |
+
+<Note>
+  This is not exhaustive — the FirstPromoter v2 Zapier app exposes triggers for most events FirstPromoter can emit. Search the full list from within the trigger picker when building your Zap.
+</Note>
+
+# Available actions
+
+Actions perform a task in FirstPromoter from another app's event — commonly used ones include:
+
+- Track a sale and commission
+- Track a refund (creates a negative commission)
+- Track a signup/lead
+- Create a promoter
+
+# Setting up credentials
+
+Both triggers and actions connect using the same FirstPromoter account credentials:
+
+| Field | Required | Description |
+| --- | --- | --- |
+| Account ID | yes | FirstPromoter Account ID |
+| API Key | yes | v2 API key |
+
+<Tip>
+  **Get your credentials on FirstPromoter**
+
+  1. Log in to your **FirstPromoter** dashboard.
+  2. Go to **Settings → Integrations → API integration** section.
+     - Copy your **Account id**.
+  3. Click **Manage API keys**
+     - Add a new API key or copy an existing one.
+</Tip>
+
+# Configuring a trigger
+
+<Steps>
+  <Step title="Step 1">
+    Create or open a Zap and click the **Trigger** step.
+  </Step>
+  <Step title="Step 2">
+    Search for and select **FirstPromoter v2 with triggers**.
+  </Step>
+  <Step title="Step 3">
+    Choose the trigger event (e.g. **Referral Created**), then click **Sign in**.
+  </Step>
+  <Step title="Step 4">
+    Enter your **v2 API key** and **Account ID**, then click **Connect**. Click **Continue** once the connection is established.
+  </Step>
+  <Step title="Step 5">
+    Copy the webhook URL Zapier generates — you'll paste this into FirstPromoter in the next section.
+  </Step>
+  <Step title="Step 6">
+    After creating the matching webhook in FirstPromoter (below), come back and click **Test trigger**.
+  </Step>
+  <Step title="Step 7">
+    Select the received sample record and click **Continue**.
+  </Step>
+</Steps>
+
+## Registering the webhook in FirstPromoter
+
+FirstPromoter triggers are webhook-based — Zapier gives you a URL, and you register that URL as a webhook in your FirstPromoter account so events actually get sent to it.
+
+<Steps>
+  <Step title="Step 1">
+    In FirstPromoter, go to **Settings → Integrations → Webhooks** and click **Add new webhook**.
+  </Step>
+  <Step title="Step 2">
+    Paste the webhook URL you copied from Zapier.
+  </Step>
+  <Step title="Step 3">
+    Select the event that matches the trigger you chose in Zapier, then click **Apply**.
+  </Step>
+  <Step title="Step 4">
+    Select which campaign(s) should send data through this webhook.
+  </Step>
+  <Step title="Step 5">
+    Click **Select event**, choose an event to send, and click **Run test** to confirm delivery.
+  </Step>
+  <Step title="Step 6">
+    Once the test succeeds, click **Add webhook**.
+  </Step>
+</Steps>
+
+<Tip>
+  See [Webhooks overview](/webhooks-v2/overview) for more on setting up and managing webhooks.
+</Tip>
+
+# Configuring an action
+
+<Steps>
+  <Step title="Step 1">
+    Open your Zap and click the **Action** step.
+  </Step>
+  <Step title="Step 2">
+    Search for and select **FirstPromoter v2 with triggers**.
+  </Step>
+  <Step title="Step 3">
+    Choose the action event (e.g. **Track a sale and commission**).
+  </Step>
+  <Step title="Step 4">
+    Select your existing connected account, or sign in with your **v2 API key** and **Account ID** if this is a new connection.
+  </Step>
+  <Step title="Step 5">
+    Map the fields using data from your trigger step. For sale tracking, either **Email** or **UID** is required to identify the customer.
+  </Step>
+  <Step title="Step 6">
+    Test the action, then publish your Zap.
+  </Step>
+</Steps>
+
+# Related
+
+- [Set up webhooks in FirstPromoter](/webhooks-v2/overview)
+- [n8n node](/automation/n8n-node)
+- [Make.com integration](/automation/make)
