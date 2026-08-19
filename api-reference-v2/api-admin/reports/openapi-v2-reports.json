@@ -20,7 +20,9 @@
       "get": {
         "summary": "Get reports for overview",
         "description": "Get reports for overview \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/reports/overview`</Tip>",
-        "tags": ["Reports"],
+        "tags": [
+          "Reports"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -71,7 +73,12 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["day", "week", "month", "year"]
+              "enum": [
+                "day",
+                "week",
+                "month",
+                "year"
+              ]
             }
           },
           {
@@ -100,7 +107,10 @@
               "type": "object",
               "additionalProperties": {
                 "type": "string",
-                "enum": ["asc", "desc"]
+                "enum": [
+                  "asc",
+                  "desc"
+                ]
               }
             }
           }
@@ -217,7 +227,9 @@
       "get": {
         "summary": "Get reports for campaigns",
         "description": "With this endpoint you can get the report data grouped by campaigns.<Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/reports/campaigns`</Tip>",
-        "tags": ["Reports"],
+        "tags": [
+          "Reports"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -268,7 +280,12 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["day", "week", "month", "year"]
+              "enum": [
+                "day",
+                "week",
+                "month",
+                "year"
+              ]
             }
           },
           {
@@ -297,7 +314,10 @@
               "type": "object",
               "additionalProperties": {
                 "type": "string",
-                "enum": ["asc", "desc"]
+                "enum": [
+                  "asc",
+                  "desc"
+                ]
               }
             }
           }
@@ -450,7 +470,9 @@
       "get": {
         "summary": "Get reports for promoters",
         "description": " With this endpoint you can get the report data grouped by promoters.<Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/reports/promoters`</Tip>",
-        "tags": ["Reports"],
+        "tags": [
+          "Reports"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -503,7 +525,12 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["day", "week", "month", "year"]
+              "enum": [
+                "day",
+                "week",
+                "month",
+                "year"
+              ]
             },
             "description": "Time period grouping"
           },
@@ -535,7 +562,10 @@
               "type": "object",
               "additionalProperties": {
                 "type": "string",
-                "enum": ["asc", "desc"]
+                "enum": [
+                  "asc",
+                  "desc"
+                ]
               }
             },
             "description": "Sorting parameters"
@@ -565,7 +595,11 @@
                             "type": "string"
                           }
                         },
-                        "required": ["id", "email", "name"]
+                        "required": [
+                          "id",
+                          "email",
+                          "name"
+                        ]
                       },
                       "id": {
                         "type": "integer"
@@ -714,7 +748,9 @@
       "get": {
         "summary": "Get reports for traffic sources",
         "description": "With this endpoint you can get the report data grouped by traffic sources. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/reports/traffic_sources`</Tip>",
-        "tags": ["Reports"],
+        "tags": [
+          "Reports"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -759,7 +795,12 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["day", "week", "month", "year"]
+              "enum": [
+                "day",
+                "week",
+                "month",
+                "year"
+              ]
             },
             "description": "Time period grouping"
           },
@@ -791,7 +832,10 @@
               "type": "object",
               "additionalProperties": {
                 "type": "string",
-                "enum": ["asc", "desc"]
+                "enum": [
+                  "asc",
+                  "desc"
+                ]
               }
             },
             "description": "Sorting parameters"
@@ -975,7 +1019,9 @@
       "get": {
         "summary": "Get reports for URLs",
         "description": "With this endpoint you can get the report data grouped by URLs.<Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/reports/urls`</Tip>",
-        "tags": ["Reports"],
+        "tags": [
+          "Reports"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -1019,7 +1065,12 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["day", "week", "month", "year"]
+              "enum": [
+                "day",
+                "week",
+                "month",
+                "year"
+              ]
             }
           },
           {
@@ -1048,7 +1099,10 @@
               "type": "object",
               "additionalProperties": {
                 "type": "string",
-                "enum": ["asc", "desc"]
+                "enum": [
+                  "asc",
+                  "desc"
+                ]
               }
             }
           }
@@ -1065,7 +1119,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden"
@@ -1080,7 +1142,9 @@
       "get": {
         "summary": "Download reports",
         "description": "With this endpoint you can download reports.<Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/reports/download`</Tip>",
-        "tags": ["Reports"],
+        "tags": [
+          "Reports"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -1125,7 +1189,12 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["day", "week", "month", "year"]
+              "enum": [
+                "day",
+                "week",
+                "month",
+                "year"
+              ]
             }
           },
           {
@@ -1175,7 +1244,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden"
@@ -1193,7 +1270,7 @@
         "name": "Account-ID",
         "in": "header",
         "required": true,
-        "description": "Account id. You can find your Account ID on Your FirstPromoter Dashboard. Navigate to Settings → Integrations",
+        "description": "Account id. You can find your Account ID on Your FirstPromoter Dashboard. Navigate to Settings \u2192 Integrations",
         "schema": {
           "type": "string",
           "example": "acc_123456"
@@ -1258,7 +1335,7 @@
       "BearerAuth": {
         "type": "http",
         "scheme": "bearer",
-        "description": "API key passed as a Bearer token in the Authorization header. You can find your API Key on Your FirstPromoter Dashboard. Navigate to Settings → Integrations → Manage API Keys"
+        "description": "API key passed as a Bearer token in the Authorization header. You can find your API Key on Your FirstPromoter Dashboard. Navigate to Settings \u2192 Integrations \u2192 Manage API Keys"
       }
     }
   }

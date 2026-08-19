@@ -75,7 +75,15 @@
             }
           },
           "401": {
-            "description": "Unauthenticated or missing bearer token"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden - invalid user type or insufficient permissions",
@@ -121,7 +129,15 @@
             }
           },
           "401": {
-            "description": "Unauthenticated or missing bearer token"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden - invalid user type or insufficient permissions",
@@ -129,6 +145,20 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found \u2014 no batch process exists with the given id for this company",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Record not found",
+                  "code": "not_found"
                 }
               }
             }
@@ -199,7 +229,15 @@
             }
           },
           "401": {
-            "description": "Unauthenticated or missing bearer token"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden - invalid user type or insufficient permissions",
@@ -221,7 +259,7 @@
         "name": "Account-ID",
         "in": "header",
         "required": true,
-        "description": "Account ID. You can find your Account ID on Your FirstPromoter Dashboard. Navigate to Settings → Integrations",
+        "description": "Account ID. You can find your Account ID on Your FirstPromoter Dashboard. Navigate to Settings \u2192 Integrations",
         "schema": {
           "type": "string"
         }
@@ -311,7 +349,7 @@
       "BearerAuth": {
         "type": "http",
         "scheme": "bearer",
-        "description": "API key passed as a Bearer token in the Authorization header. You can find your API Key on Your FirstPromoter Dashboard. Navigate to Settings → Integrations section → Manage API Keys"
+        "description": "API key passed as a Bearer token in the Authorization header. You can find your API Key on Your FirstPromoter Dashboard. Navigate to Settings \u2192 Integrations section \u2192 Manage API Keys"
       },
       "accountId": {
         "type": "apiKey",

@@ -21,7 +21,9 @@
         "summary": "Get promo codes",
         "operationId": "getPromoCodes",
         "description": "With this endpoint you can list all promo codes. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/promo_codes`</Tip>",
-        "tags": ["Promo Codes"],
+        "tags": [
+          "Promo Codes"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -51,7 +53,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -69,7 +79,9 @@
         "summary": "Create promo code (Stripe Only)",
         "operationId": "createPromoCode",
         "description": "With this endpoint you can create a new promo code. \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/promo_codes`</Tip>",
-        "tags": ["Promo Codes"],
+        "tags": [
+          "Promo Codes"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -81,7 +93,11 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["code", "reward_id", "promoter_campaign_id"],
+                "required": [
+                  "code",
+                  "reward_id",
+                  "promoter_campaign_id"
+                ],
                 "properties": {
                   "code": {
                     "type": "string",
@@ -124,7 +140,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -143,7 +167,9 @@
       "get": {
         "summary": "Get promo code by id",
         "operationId": "getPromoCode",
-        "tags": ["Promo Codes"],
+        "tags": [
+          "Promo Codes"
+        ],
         "description": "With this endpoint you can get the details of a specific promo code. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/promo_codes/{id}`</Tip>",
         "parameters": [
           {
@@ -171,7 +197,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -189,7 +223,9 @@
         "summary": "Update promo code by id",
         "description": "Update promo code by id. Can not be updated if archived and ext_id present. \n<Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/promo_codes/{id}`</Tip>",
         "operationId": "updatePromoCode",
-        "tags": ["Promo Codes"],
+        "tags": [
+          "Promo Codes"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -248,7 +284,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -266,7 +310,9 @@
         "summary": "Archive promo code by id",
         "description": "Archive promo code by id. \n<Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/promo_codes/{id}`</Tip>",
         "operationId": "archivePromoCode",
-        "tags": ["Promo Codes"],
+        "tags": [
+          "Promo Codes"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -286,7 +332,15 @@
             "description": "Promo code archived successfully"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -308,7 +362,7 @@
         "name": "Account-ID",
         "in": "header",
         "required": true,
-        "description": "Account id. You can find your Account ID on Your FirstPromoter Dashboard. Navigate to Settings → Integrations",
+        "description": "Account id. You can find your Account ID on Your FirstPromoter Dashboard. Navigate to Settings \u2192 Integrations",
         "schema": {
           "type": "string"
         }
@@ -384,7 +438,7 @@
       "BearerAuth": {
         "type": "http",
         "scheme": "bearer",
-        "description": "API key passed as a Bearer token in the Authorization header. You can find your API Key on Your FirstPromoter Dashboard. Navigate to Settings → Integrations section → Manage API Keys"
+        "description": "API key passed as a Bearer token in the Authorization header. You can find your API Key on Your FirstPromoter Dashboard. Navigate to Settings \u2192 Integrations section \u2192 Manage API Keys"
       },
       "accountId": {
         "type": "apiKey",

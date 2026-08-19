@@ -20,7 +20,9 @@
       "get": {
         "summary": "Get invoices",
         "description": "Returns all invoices. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/invoices`</Tip>",
-        "tags": ["Invoices"],
+        "tags": [
+          "Invoices"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -38,7 +40,12 @@
             "name": "filters[status]",
             "schema": {
               "type": "string",
-              "enum": ["draft", "open", "paid", "voided"]
+              "enum": [
+                "draft",
+                "open",
+                "paid",
+                "voided"
+              ]
             },
             "description": "Filter by status"
           }
@@ -65,7 +72,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden"
@@ -77,7 +92,9 @@
       "get": {
         "summary": "Get invoice by id",
         "description": "Returns single invoice \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/invoices/{id}`</Tip>",
-        "tags": ["Invoices"],
+        "tags": [
+          "Invoices"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -116,7 +133,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -135,7 +160,9 @@
       "post": {
         "summary": "Void invoices",
         "description": "Marks invoices as void \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/invoices/void`</Tip>",
-        "tags": ["Invoices"],
+        "tags": [
+          "Invoices"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -173,7 +200,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden"
@@ -195,7 +230,9 @@
       "post": {
         "summary": "Finalize invoices",
         "description": "Marks invoices as finalized \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/invoices/finalize`</Tip>",
-        "tags": ["Invoices"],
+        "tags": [
+          "Invoices"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -233,7 +270,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden"
@@ -255,7 +300,9 @@
       "delete": {
         "summary": "Destroy invoices",
         "description": "Deletes invoices \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/invoices/destroy`</Tip>",
-        "tags": ["Invoices"],
+        "tags": [
+          "Invoices"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -293,7 +340,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden"
@@ -308,7 +363,9 @@
       "get": {
         "summary": "Export invoices as csv",
         "description": "Exports invoices as csv \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/invoices/export`</Tip>",
-        "tags": ["Invoices"],
+        "tags": [
+          "Invoices"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -334,7 +391,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden"
@@ -346,7 +411,9 @@
       "get": {
         "summary": "Export all invoices PDF in a single zip",
         "description": "Exports invoices PDF in a single zip \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/invoices/export_zip`</Tip>",
-        "tags": ["Invoices"],
+        "tags": [
+          "Invoices"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -369,7 +436,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden"
@@ -381,7 +456,9 @@
       "get": {
         "summary": "Show invoice template",
         "description": "<Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/invoices/template`</Tip>",
-        "tags": ["Invoice Templates"],
+        "tags": [
+          "Invoice Templates"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -409,7 +486,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden"
@@ -421,7 +506,9 @@
       "post": {
         "summary": "Show invoice template preview",
         "description": "<Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/invoices/preview_template`</Tip>",
-        "tags": ["Invoice Templates"],
+        "tags": [
+          "Invoice Templates"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -443,7 +530,9 @@
                     "description": "According to this value, the invoice will contain VAT info or not"
                   }
                 },
-                "required": ["html"]
+                "required": [
+                  "html"
+                ]
               }
             }
           }
@@ -470,7 +559,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden"
@@ -482,7 +579,9 @@
       "put": {
         "summary": "Update invoice template",
         "description": "<Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/invoices/custom_template`</Tip>",
-        "tags": ["Invoice Templates"],
+        "tags": [
+          "Invoice Templates"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -500,7 +599,9 @@
                     "description": "The new invoice template html"
                   }
                 },
-                "required": ["html"]
+                "required": [
+                  "html"
+                ]
               }
             }
           }
@@ -527,7 +628,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden"
@@ -539,7 +648,9 @@
       "get": {
         "summary": "Show invoice preview",
         "description": "<Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/invoices/preview`</Tip>",
-        "tags": ["Invoices"],
+        "tags": [
+          "Invoices"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -587,7 +698,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden"
@@ -637,7 +756,12 @@
           },
           "status": {
             "type": "string",
-            "enum": ["draft", "open", "paid", "voided"]
+            "enum": [
+              "draft",
+              "open",
+              "paid",
+              "voided"
+            ]
           },
           "promoter": {
             "type": "object",
@@ -692,7 +816,11 @@
           },
           "status": {
             "type": "string",
-            "enum": ["pending", "completed", "failed"]
+            "enum": [
+              "pending",
+              "completed",
+              "failed"
+            ]
           },
           "total": {
             "type": "integer"

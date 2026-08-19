@@ -40,7 +40,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["lead", "customer"]
+              "enum": [
+                "lead",
+                "customer"
+              ]
             }
           },
           {
@@ -128,7 +131,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           },
           {
@@ -138,7 +144,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           }
         ],
@@ -157,7 +166,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -185,7 +202,10 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["email", "promoter_campaign_id"],
+                "required": [
+                  "email",
+                  "promoter_campaign_id"
+                ],
                 "properties": {
                   "email": {
                     "type": "string",
@@ -217,7 +237,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -292,7 +320,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -327,7 +363,15 @@
             "description": "Successfully deleted"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -357,7 +401,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["lead", "customer"]
+              "enum": [
+                "lead",
+                "customer"
+              ]
             }
           },
           {
@@ -407,7 +454,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -423,7 +478,7 @@
       }
     }
   },
-   "components": {
+  "components": {
     "parameters": {
       "AccountId": {
         "name": "Account-ID",
@@ -530,7 +585,10 @@
             }
           }
         },
-        "required": ["message", "code"]
+        "required": [
+          "message",
+          "code"
+        ]
       }
     },
     "securitySchemes": {

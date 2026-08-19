@@ -19,7 +19,9 @@
     "/reports/overview": {
       "get": {
         "summary": "Get campaigns reports",
-        "tags": ["Reports"],
+        "tags": [
+          "Reports"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -70,7 +72,12 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["day", "week", "month", "year"]
+              "enum": [
+                "day",
+                "week",
+                "month",
+                "year"
+              ]
             }
           },
           {
@@ -99,7 +106,10 @@
               "type": "object",
               "additionalProperties": {
                 "type": "string",
-                "enum": ["asc", "desc"]
+                "enum": [
+                  "asc",
+                  "desc"
+                ]
               }
             }
           }
@@ -154,7 +164,9 @@
     "/reports/sub_ids": {
       "get": {
         "summary": "Get sub_ids report",
-        "tags": ["Reports"],
+        "tags": [
+          "Reports"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -197,7 +209,12 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["day", "week", "month", "year"]
+              "enum": [
+                "day",
+                "week",
+                "month",
+                "year"
+              ]
             }
           },
           {
@@ -226,7 +243,10 @@
               "type": "object",
               "additionalProperties": {
                 "type": "string",
-                "enum": ["asc", "desc"]
+                "enum": [
+                  "asc",
+                  "desc"
+                ]
               }
             }
           }
@@ -281,7 +301,9 @@
     "/reports/download": {
       "get": {
         "summary": "Download reports",
-        "tags": ["Reports"],
+        "tags": [
+          "Reports"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -292,7 +314,12 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["overview", "traffic_sources", "urls", "sub_ids"]
+              "enum": [
+                "overview",
+                "traffic_sources",
+                "urls",
+                "sub_ids"
+              ]
             }
           },
           {
@@ -320,7 +347,12 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["day", "week", "month", "year"]
+              "enum": [
+                "day",
+                "week",
+                "month",
+                "year"
+              ]
             }
           },
           {
@@ -354,7 +386,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden"
@@ -366,7 +406,7 @@
       }
     }
   },
-   "components": {
+  "components": {
     "parameters": {
       "AccountId": {
         "name": "Account-ID",
@@ -390,7 +430,10 @@
             "type": "string"
           }
         },
-        "required": ["message", "code"]
+        "required": [
+          "message",
+          "code"
+        ]
       },
       "ReportData": {
         "type": "object",

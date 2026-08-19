@@ -2336,8 +2336,7 @@
       "PromoterCreate": {
         "type": "object",
         "required": [
-          "email",
-          "initial_campaign_id"
+          "email"
         ],
         "properties": {
           "email": {
@@ -2355,7 +2354,7 @@
           },
           "initial_campaign_id": {
             "type": "integer",
-            "description": "The ID of the campaign promoter will be added first"
+            "description": "The ID of the campaign promoter will be added first. Defaults to the company's default campaign if omitted."
           },
           "drip_emails": {
             "type": "boolean",

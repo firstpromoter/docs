@@ -19,7 +19,9 @@
     "/promoters/current": {
       "get": {
         "summary": "Get current promoter",
-        "tags": ["Promoters"],
+        "tags": [
+          "Promoters"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -37,7 +39,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -63,7 +73,9 @@
     "/promoters/sub_affiliates": {
       "get": {
         "summary": "Get current promoter sub affiliates",
-        "tags": ["Promoters"],
+        "tags": [
+          "Promoters"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -84,7 +96,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden"
@@ -95,7 +115,9 @@
     "/promoters/chart_data": {
       "get": {
         "summary": "Get chart data",
-        "tags": ["Promoters"],
+        "tags": [
+          "Promoters"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -142,7 +164,15 @@
         ],
         "responses": {
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           }
         }
       }
@@ -150,7 +180,9 @@
     "/promoters/email_from_encrypted_id": {
       "get": {
         "summary": "Get the promoter email",
-        "tags": ["Promoters"],
+        "tags": [
+          "Promoters"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -190,7 +222,9 @@
     "/promoters/set_password": {
       "put": {
         "summary": "Set the user password",
-        "tags": ["Promoters"],
+        "tags": [
+          "Promoters"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -202,7 +236,10 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["id", "user"],
+                "required": [
+                  "id",
+                  "user"
+                ],
                 "properties": {
                   "id": {
                     "type": "string",
@@ -210,7 +247,10 @@
                   },
                   "user": {
                     "type": "object",
-                    "required": ["new_password", "new_password_confirmation"],
+                    "required": [
+                      "new_password",
+                      "new_password_confirmation"
+                    ],
                     "properties": {
                       "new_password": {
                         "type": "string"
@@ -245,7 +285,9 @@
     "/promoters/archive": {
       "post": {
         "summary": "Archives current promoter",
-        "tags": ["Promoters"],
+        "tags": [
+          "Promoters"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -256,7 +298,15 @@
             "description": "Successful response"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "422": {
             "description": "Unprocessable Entity"
@@ -265,7 +315,7 @@
       }
     }
   },
-   "components": {
+  "components": {
     "parameters": {
       "AccountId": {
         "name": "Account-ID",

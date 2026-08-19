@@ -19,7 +19,9 @@
     "/promo_codes": {
       "post": {
         "summary": "Create promo code",
-        "tags": ["Promo Codes"],
+        "tags": [
+          "Promo Codes"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -83,7 +85,9 @@
       "put": {
         "summary": "Update promo code by id",
         "description": "Can not be updated if archived and ext_id present and promoter can manage tracking coupons.",
-        "tags": ["Promo Codes"],
+        "tags": [
+          "Promo Codes"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -119,7 +123,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -136,7 +148,9 @@
       "delete": {
         "summary": "Archive promo code by id",
         "description": "Archive promo code by id only if promo code is created by current promoter.",
-        "tags": ["Promo Codes"],
+        "tags": [
+          "Promo Codes"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -155,7 +169,15 @@
             "description": "Promo code archived successfully"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -171,7 +193,7 @@
       }
     }
   },
-   "components": {
+  "components": {
     "parameters": {
       "AccountId": {
         "name": "Account-ID",
@@ -187,7 +209,11 @@
     "schemas": {
       "PromoCodeCreate": {
         "type": "object",
-        "required": ["code", "reward_id", "promoter_campaign_id"],
+        "required": [
+          "code",
+          "reward_id",
+          "promoter_campaign_id"
+        ],
         "properties": {
           "code": {
             "type": "string",

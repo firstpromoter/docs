@@ -20,7 +20,9 @@
       "get": {
         "summary": "Get current version contract documents",
         "description": "Returns the current contract document  \n <Tip>**HTTP Request** <br/>` GET  https://api.firstpromoter.com/api/v2/affiliate/contract_documents`</Tip>",
-        "tags": ["Contract Documents"],
+        "tags": [
+          "Contract Documents"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -41,7 +43,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -60,7 +70,9 @@
       "get": {
         "summary": "Get contract documents by id (html/pdf)",
         "description": "Gets contract document and returns it in the selected format  \n <Tip>**HTTP Request** <br/>` GET  https://api.firstpromoter.com/api/v2/affiliate/contract_documents/{id}`</Tip>",
-        "tags": ["Contract Documents"],
+        "tags": [
+          "Contract Documents"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -80,7 +92,10 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["html", "pdf"]
+              "enum": [
+                "html",
+                "pdf"
+              ]
             },
             "description": "Format of the document content"
           }
@@ -113,7 +128,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -152,7 +175,9 @@
       "post": {
         "summary": "Sign a document with id",
         "description": "Signs a contract document with id \n <Tip>**HTTP Request** <br/>` GET  https://api.firstpromoter.com/api/v2/affiliate/contract_documents/{id}/sign`</Tip>",
-        "tags": ["Contract Documents"],
+        "tags": [
+          "Contract Documents"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -205,7 +230,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -239,7 +272,9 @@
         ],
         "summary": "Get the draft content of the contract",
         "description": "Returns the draft content of the contract with user details \n <Tip>**HTTP Request** <br/>` GET  https://api.firstpromoter.com/api/v2/affiliate/contract_documents/draft`</Tip>",
-        "tags": ["Contract Documents"],
+        "tags": [
+          "Contract Documents"
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -325,7 +360,9 @@
           },
           "status": {
             "type": "string",
-            "enum": ["signed"]
+            "enum": [
+              "signed"
+            ]
           },
           "signed_ip": {
             "type": "string"

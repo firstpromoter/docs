@@ -20,8 +20,10 @@
       "get": {
         "summary": "Get available promoter campaigns",
         "description": "With this endpoint you can list all promoter campaigns. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/promoter_campaigns`</Tip>",
-        "tags": ["Promoter Campaigns"],
-            "parameters": [
+        "tags": [
+          "Promoter Campaigns"
+        ],
+        "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
           }
@@ -41,7 +43,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -60,8 +70,9 @@
       "get": {
         "summary": "Returns results for promoter campaigns dropdown search. Max results: 5",
         "description": "With this endpoint you can search for promoter campaigns. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/promoter_campaigns/search?q=...`</Tip>",
-        "tags": ["Promoter Campaigns"],
-
+        "tags": [
+          "Promoter Campaigns"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -91,7 +102,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -111,8 +130,9 @@
         "summary": "Update promoter campaign",
         "operationId": "updatePromoterCampaign",
         "description": "With this endpoint you can update a promoter campaign. \n <Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/promoter_campaigns/{id}`</Tip>",
-        "tags": ["Promoter Campaigns"],
-
+        "tags": [
+          "Promoter Campaigns"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -124,7 +144,7 @@
             "schema": {
               "type": "integer"
             },
-            "description": "Promoter campaign ID. This ID is not the promoter’s ID or the campaign’s ID. It’s the linking record that defines the promoter’s participation in that campaign. You can find this id in each object in the promoter_campaigns array when you get the details of the promoter."
+            "description": "Promoter campaign ID. This ID is not the promoter\u2019s ID or the campaign\u2019s ID. It\u2019s the linking record that defines the promoter\u2019s participation in that campaign. You can find this id in each object in the promoter_campaigns array when you get the details of the promoter."
           }
         ],
         "requestBody": {
@@ -191,7 +211,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -221,8 +249,9 @@
         "summary": "Get promoter campaign referral links",
         "operationId": "getReferralLinksAssociatedWithThisPromoterCampaign",
         "description": "With this endpoint you can get the referral links associated with this promoter campaign. <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/promoter_campaigns/{id}/referral_links`</Tip>",
-        "tags": ["Promoter Campaigns"],
-
+        "tags": [
+          "Promoter Campaigns"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -252,7 +281,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -280,10 +317,11 @@
     "/promoter_campaigns/{id}/chart_data": {
       "get": {
         "summary": "Get data used for chart",
-        "tags": ["Promoter Campaigns"],
+        "tags": [
+          "Promoter Campaigns"
+        ],
         "operationId": "getPromoterCampaignChartData",
         "description": "With this endpoint you can get the data used for charts.<Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/promoter_campaigns/{id}/chart_data`</Tip>",
-
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -295,7 +333,7 @@
             "schema": {
               "type": "integer"
             },
-            "description": "Promoter campaign ID. This ID is not the promoter’s ID or the campaign’s ID. It’s the linking record that defines the promoter’s participation in that campaign. You can find this id in each object in the promoter_campaigns array when you get the details of the promoter."
+            "description": "Promoter campaign ID. This ID is not the promoter\u2019s ID or the campaign\u2019s ID. It\u2019s the linking record that defines the promoter\u2019s participation in that campaign. You can find this id in each object in the promoter_campaigns array when you get the details of the promoter."
           },
           {
             "in": "query",
@@ -352,7 +390,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -388,7 +434,7 @@
       }
     }
   },
-   "components": {
+  "components": {
     "parameters": {
       "AccountId": {
         "name": "Account-ID",
@@ -425,7 +471,13 @@
           },
           "state": {
             "type": "string",
-            "enum": ["pending", "accepted", "rejected", "blocked", "inactive"]
+            "enum": [
+              "pending",
+              "accepted",
+              "rejected",
+              "blocked",
+              "inactive"
+            ]
           },
           "stats": {
             "type": "object",
@@ -521,11 +573,21 @@
       },
       "RewardConfig": {
         "type": "object",
-        "required": ["apply_on", "product_ids", "reward_id"],
+        "required": [
+          "apply_on",
+          "product_ids",
+          "reward_id"
+        ],
         "properties": {
           "apply_on": {
             "type": "string",
-            "enum": ["monthly", "yearly", "one_time", "all", "specific"]
+            "enum": [
+              "monthly",
+              "yearly",
+              "one_time",
+              "all",
+              "specific"
+            ]
           },
           "product_ids": {
             "type": "array",
@@ -606,7 +668,10 @@
           },
           "source": {
             "type": "string",
-            "enum": ["campaign", "promoter"]
+            "enum": [
+              "campaign",
+              "promoter"
+            ]
           },
           "sub_id": {
             "type": "string"
@@ -676,20 +741,23 @@
             }
           }
         },
-        "required": ["message", "code"]
+        "required": [
+          "message",
+          "code"
+        ]
       }
     },
     "securitySchemes": {
       "BearerAuth": {
         "type": "http",
         "scheme": "bearer",
-        "description": "API key passed as a Bearer token in the Authorization header. You can find your API Key on Your FirstPromoter Dashboard. Navigate to Settings → Integrations section → Manage API Keys"
+        "description": "API key passed as a Bearer token in the Authorization header. You can find your API Key on Your FirstPromoter Dashboard. Navigate to Settings \u2192 Integrations section \u2192 Manage API Keys"
       },
       "accountId": {
         "type": "apiKey",
         "in": "header",
         "name": "ACCOUNT-ID",
-        "description": "Your FirstPromoter Account ID. You can find this in the  Settings → Integrations section of your dashboard."
+        "description": "Your FirstPromoter Account ID. You can find this in the  Settings \u2192 Integrations section of your dashboard."
       }
     }
   }

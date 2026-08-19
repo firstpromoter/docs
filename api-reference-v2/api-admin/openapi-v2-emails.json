@@ -5,7 +5,6 @@
     "version": "2.0.0",
     "description": "API for managing email templates and triggers"
   },
-
   "servers": [
     {
       "url": "https://api.firstpromoter.com/api/v2/company"
@@ -20,7 +19,9 @@
     "/emails": {
       "get": {
         "summary": "Get available emails",
-        "tags": ["Emails"],
+        "tags": [
+          "Emails"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -41,7 +42,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["yes", "no"]
+              "enum": [
+                "yes",
+                "no"
+              ]
             }
           },
           {
@@ -125,7 +129,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           },
           {
@@ -135,7 +142,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           }
         ],
@@ -144,13 +154,23 @@
             "description": "Success"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           }
         }
       },
       "post": {
         "summary": "Create email",
-        "tags": ["Emails"],
+        "tags": [
+          "Emails"
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -183,7 +203,11 @@
                   },
                   "trigger": {
                     "type": "object",
-                    "required": ["enabled", "trigger_on", "settings"],
+                    "required": [
+                      "enabled",
+                      "trigger_on",
+                      "settings"
+                    ],
                     "properties": {
                       "enabled": {
                         "type": "boolean",
@@ -208,7 +232,12 @@
                         "properties": {
                           "delay_interval": {
                             "type": "string",
-                            "enum": ["second", "minute", "hour", "day"],
+                            "enum": [
+                              "second",
+                              "minute",
+                              "hour",
+                              "day"
+                            ],
                             "description": "Delay interval is required when trigger_on is 'promoter_accepted'"
                           },
                           "delay_value": {
@@ -235,7 +264,10 @@
                           },
                           "frequency": {
                             "type": "string",
-                            "enum": ["weekly", "monthly"],
+                            "enum": [
+                              "weekly",
+                              "monthly"
+                            ],
                             "description": "Required for recurring trigger_on"
                           },
                           "day": {
@@ -268,7 +300,15 @@
             "description": "Success"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           }
         }
       }
@@ -276,7 +316,9 @@
     "/emails/{id}": {
       "get": {
         "summary": "Get email by id",
-        "tags": ["Emails"],
+        "tags": [
+          "Emails"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -296,13 +338,23 @@
             "description": "Success"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           }
         }
       },
       "put": {
         "summary": "Update email",
-        "tags": ["Emails"],
+        "tags": [
+          "Emails"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -332,13 +384,23 @@
             "description": "Success"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           }
         }
       },
       "delete": {
         "summary": "Delete email",
-        "tags": ["Emails"],
+        "tags": [
+          "Emails"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -358,7 +420,15 @@
             "description": "Success"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           }
         }
       }
@@ -366,7 +436,9 @@
     "/emails/{id}/copy": {
       "post": {
         "summary": "Copy email",
-        "tags": ["Emails"],
+        "tags": [
+          "Emails"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -386,7 +458,15 @@
             "description": "Success"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           }
         }
       }
@@ -394,7 +474,9 @@
     "/emails/{id}/send_now": {
       "post": {
         "summary": "Send email",
-        "tags": ["Emails"],
+        "tags": [
+          "Emails"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -414,7 +496,15 @@
             "description": "Success"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           }
         }
       }
@@ -422,7 +512,9 @@
     "/emails/{id}/send_test": {
       "post": {
         "summary": "Send test email",
-        "tags": ["Emails"],
+        "tags": [
+          "Emails"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -442,7 +534,15 @@
             "description": "Success"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           }
         }
       }
@@ -450,7 +550,9 @@
     "/emails/template": {
       "get": {
         "summary": "Get the html of the company email theme",
-        "tags": ["Emails"],
+        "tags": [
+          "Emails"
+        ],
         "responses": {
           "200": {
             "description": "Success"
@@ -461,14 +563,18 @@
     "/emails/custom_template": {
       "patch": {
         "summary": "Updates the html of the company email theme",
-        "tags": ["Emails"],
+        "tags": [
+          "Emails"
+        ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["html"],
+                "required": [
+                  "html"
+                ],
                 "properties": {
                   "html": {
                     "type": "string",
@@ -484,7 +590,15 @@
             "description": "Success"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           }
         }
       }
@@ -492,13 +606,23 @@
     "/emails/test_custom_template": {
       "post": {
         "summary": "Sends a test email to current user with the custom template",
-        "tags": ["Emails"],
+        "tags": [
+          "Emails"
+        ],
         "responses": {
           "200": {
             "description": "Success"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           }
         }
       }
@@ -546,7 +670,11 @@
           },
           "trigger": {
             "type": "object",
-            "required": ["enabled", "trigger_on", "settings"],
+            "required": [
+              "enabled",
+              "trigger_on",
+              "settings"
+            ],
             "properties": {
               "enabled": {
                 "type": "boolean",
@@ -572,7 +700,12 @@
                 "properties": {
                   "delay_interval": {
                     "type": "string",
-                    "enum": ["second", "minute", "hour", "day"],
+                    "enum": [
+                      "second",
+                      "minute",
+                      "hour",
+                      "day"
+                    ],
                     "description": "Delay interval is required when trigger_on is 'promoter_accepted'"
                   },
                   "delay_value": {
@@ -599,7 +732,10 @@
                   },
                   "frequency": {
                     "type": "string",
-                    "enum": ["weekly", "monthly"],
+                    "enum": [
+                      "weekly",
+                      "monthly"
+                    ],
                     "description": "Required for recurring trigger_on"
                   },
                   "day": {

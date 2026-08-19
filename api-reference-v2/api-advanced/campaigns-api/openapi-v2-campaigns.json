@@ -15,12 +15,13 @@
       "BearerAuth": []
     }
   ],
-
   "paths": {
     "/campaigns": {
       "get": {
         "summary": "Get all campaigns",
-        "tags": ["Campaigns"],
+        "tags": [
+          "Campaigns"
+        ],
         "description": "With this endpoint you can list all campaigns. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/campaigns`</Tip>",
         "parameters": [
           {
@@ -42,7 +43,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -68,7 +77,9 @@
       },
       "post": {
         "summary": "Create a campaign",
-        "tags": ["Campaigns"],
+        "tags": [
+          "Campaigns"
+        ],
         "description": "With this endpoint you can create a campaign. \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/campaigns`</Tip>",
         "parameters": [
           {
@@ -146,7 +157,9 @@
     "/campaigns/{id}": {
       "get": {
         "summary": "Get a campaign",
-        "tags": ["Campaigns"],
+        "tags": [
+          "Campaigns"
+        ],
         "description": "With this endpoint you can get a campaign.<Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/campaigns/{id}`</Tip>",
         "parameters": [
           {
@@ -173,7 +186,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -219,7 +240,9 @@
       },
       "put": {
         "summary": "Update a campaign",
-        "tags": ["Campaigns"],
+        "tags": [
+          "Campaigns"
+        ],
         "description": "With this endpoint you can update a campaign. \n <Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/campaigns/{id}`</Tip>",
         "parameters": [
           {
@@ -256,7 +279,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -302,7 +333,9 @@
       },
       "delete": {
         "summary": "Delete a campaign",
-        "tags": ["Campaigns"],
+        "tags": [
+          "Campaigns"
+        ],
         "description": "With this endpoint you can delete a campaign. \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/campaigns/{id}`</Tip>",
         "parameters": [
           {
@@ -329,7 +362,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -447,7 +488,11 @@
           },
           "track_ad_traffic": {
             "type": "string",
-            "enum": ["pending", "allow", "block"],
+            "enum": [
+              "pending",
+              "allow",
+              "block"
+            ],
             "description": "How to handle ad traffic"
           },
           "auto_approve_promoters": {
@@ -475,7 +520,11 @@
               },
               "metric": {
                 "type": "string",
-                "enum": ["customers", "revenue", "active_customers"],
+                "enum": [
+                  "customers",
+                  "revenue",
+                  "active_customers"
+                ],
                 "description": "Metric used for the upgrade"
               },
               "move_referrals_on_level_change": {
@@ -515,7 +564,13 @@
               "properties": {
                 "apply_on": {
                   "type": "string",
-                  "enum": ["monthly", "yearly", "one_time", "all", "specific"],
+                  "enum": [
+                    "monthly",
+                    "yearly",
+                    "one_time",
+                    "all",
+                    "specific"
+                  ],
                   "description": "When the reward applies"
                 },
                 "product_ids": {
@@ -580,7 +635,13 @@
               "properties": {
                 "apply_on": {
                   "type": "string",
-                  "enum": ["monthly", "yearly", "one_time", "all", "specific"],
+                  "enum": [
+                    "monthly",
+                    "yearly",
+                    "one_time",
+                    "all",
+                    "specific"
+                  ],
                   "description": "When the reward applies"
                 },
                 "product_ids": {
@@ -642,7 +703,10 @@
       },
       "Link": {
         "type": "object",
-        "required": ["name", "url"],
+        "required": [
+          "name",
+          "url"
+        ],
         "properties": {
           "id": {
             "type": "integer"
@@ -660,7 +724,11 @@
       },
       "UpgradeDetails": {
         "type": "object",
-        "required": ["campaign_id", "amount", "metric"],
+        "required": [
+          "campaign_id",
+          "amount",
+          "metric"
+        ],
         "properties": {
           "campaign_id": {
             "type": "integer"
@@ -670,17 +738,30 @@
           },
           "metric": {
             "type": "string",
-            "enum": ["customers", "revenue"]
+            "enum": [
+              "customers",
+              "revenue"
+            ]
           }
         }
       },
       "Reward": {
         "type": "object",
-        "required": ["apply_on", "product_ids", "reward_id"],
+        "required": [
+          "apply_on",
+          "product_ids",
+          "reward_id"
+        ],
         "properties": {
           "apply_on": {
             "type": "string",
-            "enum": ["monthly", "yearly", "one_time", "all", "specific"]
+            "enum": [
+              "monthly",
+              "yearly",
+              "one_time",
+              "all",
+              "specific"
+            ]
           },
           "product_ids": {
             "type": "array",
@@ -733,7 +814,11 @@
           },
           "track_ad_traffic": {
             "type": "string",
-            "enum": ["pending", "allow", "block"]
+            "enum": [
+              "pending",
+              "allow",
+              "block"
+            ]
           },
           "links": {
             "type": "array",
@@ -794,7 +879,11 @@
           },
           "track_ad_traffic": {
             "type": "string",
-            "enum": ["pending", "allow", "block"]
+            "enum": [
+              "pending",
+              "allow",
+              "block"
+            ]
           },
           "links": {
             "type": "array",

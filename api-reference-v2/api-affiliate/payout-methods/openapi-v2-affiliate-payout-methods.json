@@ -19,7 +19,9 @@
     "/payout_methods": {
       "get": {
         "summary": "Get all payout methods",
-        "tags": ["Payout Methods"],
+        "tags": [
+          "Payout Methods"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -59,7 +61,15 @@
             }
           },
           "401": {
-            "$ref": "#/components/responses/Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "$ref": "#/components/responses/Forbidden"
@@ -68,7 +78,9 @@
       },
       "post": {
         "summary": "Create a payout method",
-        "tags": ["Payout Methods"],
+        "tags": [
+          "Payout Methods"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -99,7 +111,15 @@
             "$ref": "#/components/responses/ValidationError"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "$ref": "#/components/responses/Forbidden"
@@ -113,8 +133,9 @@
     "/payout_methods/{id}": {
       "get": {
         "summary": "Get a payout method",
-        "tags": ["Payout Methods"],
-
+        "tags": [
+          "Payout Methods"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -141,7 +162,15 @@
             }
           },
           "401": {
-            "$ref": "#/components/responses/Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "$ref": "#/components/responses/Forbidden"
@@ -153,7 +182,9 @@
       },
       "put": {
         "summary": "Update a payout method",
-        "tags": ["Payout Methods"],
+        "tags": [
+          "Payout Methods"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -193,7 +224,15 @@
             "$ref": "#/components/responses/ValidationError"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "$ref": "#/components/responses/Forbidden"
@@ -208,8 +247,9 @@
       },
       "delete": {
         "summary": "Delete a payout method",
-        "tags": ["Payout Methods"],
-
+        "tags": [
+          "Payout Methods"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -229,7 +269,15 @@
             "description": "Payout method deleted successfully"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "$ref": "#/components/responses/Forbidden"
@@ -244,7 +292,7 @@
       }
     }
   },
-   "components": {
+  "components": {
     "parameters": {
       "AccountId": {
         "name": "Account-ID",
@@ -266,7 +314,14 @@
           },
           "method": {
             "type": "string",
-            "enum": ["paypal", "bank", "wise", "crypto", "custom", "dots"]
+            "enum": [
+              "paypal",
+              "bank",
+              "wise",
+              "crypto",
+              "custom",
+              "dots"
+            ]
           },
           "date_added": {
             "type": "string",
@@ -444,11 +499,21 @@
       },
       "PayoutMethodCreate": {
         "type": "object",
-        "required": ["method", "details"],
+        "required": [
+          "method",
+          "details"
+        ],
         "properties": {
           "method": {
             "type": "string",
-            "enum": ["paypal", "bank", "wise", "crypto", "custom", "dots"]
+            "enum": [
+              "paypal",
+              "bank",
+              "wise",
+              "crypto",
+              "custom",
+              "dots"
+            ]
           },
           "is_disabled": {
             "type": "boolean"
@@ -463,11 +528,20 @@
       },
       "PayoutMethodUpdate": {
         "type": "object",
-        "required": ["details"],
+        "required": [
+          "details"
+        ],
         "properties": {
           "method": {
             "type": "string",
-            "enum": ["paypal", "bank", "wise", "crypto", "custom", "dots"]
+            "enum": [
+              "paypal",
+              "bank",
+              "wise",
+              "crypto",
+              "custom",
+              "dots"
+            ]
           },
           "is_disabled": {
             "type": "boolean"

@@ -20,7 +20,9 @@
       "post": {
         "summary": "Pay / Start payments batch",
         "description": "This endpoint starts a payments batch. \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/payments_batches/{id}/pay`</Tip>",
-        "tags": ["Payments Batches"],
+        "tags": [
+          "Payments Batches"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -51,7 +53,9 @@
                     "description": "Optional OTP code"
                   }
                 },
-                "required": ["otp"]
+                "required": [
+                  "otp"
+                ]
               }
             }
           }
@@ -112,7 +116,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden - Invalid OTP or insufficient permissions",
@@ -157,7 +169,9 @@
       "delete": {
         "summary": "Delete payments batch",
         "description": "Deletes selected payments batch \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/payments_batches/{id}`</Tip>",
-        "tags": ["Payments Batches"],
+        "tags": [
+          "Payments Batches"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -177,7 +191,15 @@
             "description": "Successfully deleted"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden - Insufficient permissions",
@@ -201,7 +223,7 @@
       }
     }
   },
-   "components": {
+  "components": {
     "parameters": {
       "AccountId": {
         "name": "Account-ID",

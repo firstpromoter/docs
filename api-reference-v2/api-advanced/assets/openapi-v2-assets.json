@@ -20,7 +20,9 @@
       "get": {
         "summary": "Get available assets",
         "description": "Get all available assets \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/assets`</Tip>",
-        "tags": ["Assets"],
+        "tags": [
+          "Assets"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -41,7 +43,12 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["image", "document", "link", "text"]
+              "enum": [
+                "image",
+                "document",
+                "link",
+                "text"
+              ]
             }
           },
           {
@@ -62,7 +69,9 @@
                 },
                 {
                   "type": "string",
-                  "enum": ["not_set"]
+                  "enum": [
+                    "not_set"
+                  ]
                 }
               ]
             }
@@ -122,7 +131,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -139,7 +156,9 @@
       "post": {
         "summary": "Create assets",
         "description": "Create assets \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/assets`</Tip>",
-        "tags": ["Assets"],
+        "tags": [
+          "Assets"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -151,7 +170,10 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["name", "asset_type"],
+                "required": [
+                  "name",
+                  "asset_type"
+                ],
                 "properties": {
                   "name": {
                     "type": "string",
@@ -159,7 +181,12 @@
                   },
                   "asset_type": {
                     "type": "string",
-                    "enum": ["image", "document", "link", "text"],
+                    "enum": [
+                      "image",
+                      "document",
+                      "link",
+                      "text"
+                    ],
                     "description": "Type of the asset"
                   },
                   "file": {
@@ -217,7 +244,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -236,7 +271,9 @@
       "get": {
         "summary": "Get asset",
         "description": "Get asset details \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/assets/{id}`</Tip>",
-        "tags": ["Assets"],
+        "tags": [
+          "Assets"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -263,7 +300,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -279,8 +324,10 @@
       },
       "put": {
         "summary": "Update asset",
-        "tags": ["Assets"],
-        "description":" Update an asset \n <Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/assets/{id}`</Tip>",
+        "tags": [
+          "Assets"
+        ],
+        "description": " Update an asset \n <Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/assets/{id}`</Tip>",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -308,7 +355,12 @@
                   },
                   "asset_type": {
                     "type": "string",
-                    "enum": ["image", "document", "link", "text"],
+                    "enum": [
+                      "image",
+                      "document",
+                      "link",
+                      "text"
+                    ],
                     "description": "Type of the asset"
                   },
                   "file": {
@@ -356,7 +408,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -375,7 +435,9 @@
       "put": {
         "summary": "Update category of an asset",
         "description": "Update category of an asset \n <Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/assets/update_category`</Tip>",
-        "tags": ["Assets"],
+        "tags": [
+          "Assets"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -387,7 +449,9 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["category_id"],
+                "required": [
+                  "category_id"
+                ],
                 "properties": {
                   "ids": {
                     "type": "array",
@@ -427,7 +491,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -456,7 +528,9 @@
       "delete": {
         "summary": "Delete assets",
         "description": "Delete assets \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/assets/destroy`</Tip>",
-        "tags": ["Assets"],
+        "tags": [
+          "Assets"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -503,7 +577,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -529,7 +611,7 @@
       }
     }
   },
-   "components": {
+  "components": {
     "parameters": {
       "AccountId": {
         "name": "Account-ID",
@@ -588,7 +670,12 @@
           },
           "asset_type": {
             "type": "string",
-            "enum": ["image", "document", "link", "text"]
+            "enum": [
+              "image",
+              "document",
+              "link",
+              "text"
+            ]
           },
           "url": {
             "type": "string"
@@ -660,7 +747,10 @@
           },
           "status": {
             "type": "string",
-            "enum": ["pending", "completed"]
+            "enum": [
+              "pending",
+              "completed"
+            ]
           },
           "total": {
             "type": "integer"

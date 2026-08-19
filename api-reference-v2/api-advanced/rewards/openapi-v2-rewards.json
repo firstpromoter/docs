@@ -20,7 +20,9 @@
     "/rewards": {
       "get": {
         "summary": "Get available rewards",
-        "tags": ["Rewards"],
+        "tags": [
+          "Rewards"
+        ],
         "description": "Get available rewards for current company \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/rewards`</Tip>",
         "parameters": [
           {
@@ -31,7 +33,10 @@
             "name": "scope",
             "schema": {
               "type": "string",
-              "enum": ["promoters", "referrals"]
+              "enum": [
+                "promoters",
+                "referrals"
+              ]
             },
             "description": "Scope of the rewards"
           }
@@ -51,7 +56,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -77,20 +90,26 @@
       },
       "post": {
         "summary": "Create reward",
-        "tags": ["Rewards"],
+        "tags": [
+          "Rewards"
+        ],
         "description": "Create rewards for current company \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/rewards`</Tip>",
-     "parameters": [
+        "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
           }
-     ],
+        ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["name", "is_promoter_reward", "schemas"],
+                "required": [
+                  "name",
+                  "is_promoter_reward",
+                  "schemas"
+                ],
                 "properties": {
                   "name": {
                     "type": "string",
@@ -102,12 +121,21 @@
                   },
                   "promoter_reward_type": {
                     "type": "string",
-                    "enum": ["sale", "tier", "target", "custom"],
+                    "enum": [
+                      "sale",
+                      "tier",
+                      "target",
+                      "custom"
+                    ],
                     "description": "Type of promoter reward. Required only for promoter rewards."
                   },
                   "tier_reward_mode": {
                     "type": "string",
-                    "enum": ["tier_commission_mode", "tier_override_mode", "tier_net_override_mode"],
+                    "enum": [
+                      "tier_commission_mode",
+                      "tier_override_mode",
+                      "tier_net_override_mode"
+                    ],
                     "description": "Mode of tier reward. Required only for tier rewards."
                   },
                   "tier_level": {
@@ -124,7 +152,11 @@
                   },
                   "duration": {
                     "type": "string",
-                    "enum": ["once", "forever", "repeating"],
+                    "enum": [
+                      "once",
+                      "forever",
+                      "repeating"
+                    ],
                     "description": "Duration type of the reward"
                   },
                   "duration_in_months": {
@@ -152,11 +184,22 @@
                     "description": "Reward schemas",
                     "items": {
                       "type": "object",
-                      "required": ["unit", "amount", "flat_amount"],
+                      "required": [
+                        "unit",
+                        "amount",
+                        "flat_amount"
+                      ],
                       "properties": {
                         "unit": {
                           "type": "string",
-                          "enum": ["cash", "free_months", "credits", "points", "mon_discount", "discount_per"],
+                          "enum": [
+                            "cash",
+                            "free_months",
+                            "credits",
+                            "points",
+                            "mon_discount",
+                            "discount_per"
+                          ],
                           "description": "Unit of the reward"
                         },
                         "amount": {
@@ -172,21 +215,41 @@
                           "description": "Rules for the reward schema",
                           "items": {
                             "type": "object",
-                            "required": ["type", "condition", "value", "operator"],
+                            "required": [
+                              "type",
+                              "condition",
+                              "value",
+                              "operator"
+                            ],
                             "properties": {
                               "type": {
                                 "type": "string",
-                                "enum": ["customer_sales_count", "customer_age_in_months", "promoter_campaign_customers_count", "promoter_campaign_revenue"],
+                                "enum": [
+                                  "customer_sales_count",
+                                  "customer_age_in_months",
+                                  "promoter_campaign_customers_count",
+                                  "promoter_campaign_revenue"
+                                ],
                                 "description": "Type of the rule"
                               },
                               "condition": {
                                 "type": "string",
-                                "enum": ["less than", "less than or equal to", "equal to", "greater than or equal to", "greater than", "multiple of"],
+                                "enum": [
+                                  "less than",
+                                  "less than or equal to",
+                                  "equal to",
+                                  "greater than or equal to",
+                                  "greater than",
+                                  "multiple of"
+                                ],
                                 "description": "Condition of the rule"
                               },
                               "filter_by": {
                                 "type": "string",
-                                "enum": ["price", null],
+                                "enum": [
+                                  "price",
+                                  null
+                                ],
                                 "description": "Filter by attribute"
                               },
                               "value": {
@@ -195,7 +258,10 @@
                               },
                               "operator": {
                                 "type": "string",
-                                "enum": ["and", "or"],
+                                "enum": [
+                                  "and",
+                                  "or"
+                                ],
                                 "description": "Logical operator to combine with other rules"
                               }
                             }
@@ -231,7 +297,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -259,9 +333,11 @@
     "/rewards/{id}": {
       "put": {
         "summary": "Update reward",
-        "tags": ["Rewards"],
+        "tags": [
+          "Rewards"
+        ],
         "description": "Update reward for current company \n <Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/rewards/{id}`</Tip>",
-         "parameters": [
+        "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
           },
@@ -291,12 +367,21 @@
                   },
                   "promoter_reward_type": {
                     "type": "string",
-                    "enum": ["sale", "tier", "target", "custom"],
+                    "enum": [
+                      "sale",
+                      "tier",
+                      "target",
+                      "custom"
+                    ],
                     "description": "Type of promoter reward"
                   },
                   "tier_reward_mode": {
                     "type": "string",
-                    "enum": ["tier_commission_mode", "tier_override_mode", "tier_net_override_mode"],
+                    "enum": [
+                      "tier_commission_mode",
+                      "tier_override_mode",
+                      "tier_net_override_mode"
+                    ],
                     "description": "Mode of tier reward. Required only for tier rewards."
                   },
                   "tier_level": {
@@ -313,7 +398,11 @@
                   },
                   "duration": {
                     "type": "string",
-                    "enum": ["once", "forever", "repeating"],
+                    "enum": [
+                      "once",
+                      "forever",
+                      "repeating"
+                    ],
                     "description": "Duration type of the reward"
                   },
                   "duration_in_months": {
@@ -344,7 +433,14 @@
                       "properties": {
                         "unit": {
                           "type": "string",
-                          "enum": ["cash", "free_months", "credits", "points", "mon_discount", "discount_per"],
+                          "enum": [
+                            "cash",
+                            "free_months",
+                            "credits",
+                            "points",
+                            "mon_discount",
+                            "discount_per"
+                          ],
                           "description": "Unit of the reward"
                         },
                         "amount": {
@@ -363,17 +459,32 @@
                             "properties": {
                               "type": {
                                 "type": "string",
-                                "enum": ["customer_sales_count", "customer_age_in_months", "promoter_campaign_customers_count", "promoter_campaign_revenue"],
+                                "enum": [
+                                  "customer_sales_count",
+                                  "customer_age_in_months",
+                                  "promoter_campaign_customers_count",
+                                  "promoter_campaign_revenue"
+                                ],
                                 "description": "Type of the rule"
                               },
                               "condition": {
                                 "type": "string",
-                                "enum": ["less than", "less than or equal to", "equal to", "greater than or equal to", "greater than", "multiple of"],
+                                "enum": [
+                                  "less than",
+                                  "less than or equal to",
+                                  "equal to",
+                                  "greater than or equal to",
+                                  "greater than",
+                                  "multiple of"
+                                ],
                                 "description": "Condition of the rule"
                               },
                               "filter_by": {
                                 "type": "string",
-                                "enum": ["price", null],
+                                "enum": [
+                                  "price",
+                                  null
+                                ],
                                 "description": "Filter by attribute"
                               },
                               "value": {
@@ -382,7 +493,10 @@
                               },
                               "operator": {
                                 "type": "string",
-                                "enum": ["and", "or"],
+                                "enum": [
+                                  "and",
+                                  "or"
+                                ],
                                 "description": "Logical operator to combine with other rules"
                               }
                             }
@@ -408,7 +522,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -426,9 +548,11 @@
     "/rewards/{id}/hide": {
       "post": {
         "summary": "Hide reward",
-        "tags": ["Rewards"],
+        "tags": [
+          "Rewards"
+        ],
         "description": "Hide reward for current company \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/rewards/{id}/hide`</Tip>",
-         "parameters": [
+        "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
           },
@@ -447,7 +571,15 @@
             "description": "Reward hidden successfully"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -494,7 +626,12 @@
           },
           "promoter_reward_type": {
             "type": "string",
-            "enum": ["sale", "tier", "target", null],
+            "enum": [
+              "sale",
+              "tier",
+              "target",
+              null
+            ],
             "description": "Type of promoter reward"
           },
           "coupon": {
@@ -518,7 +655,12 @@
           },
           "duration": {
             "type": "string",
-            "enum": ["once", "forever", "repeating", null],
+            "enum": [
+              "once",
+              "forever",
+              "repeating",
+              null
+            ],
             "nullable": true,
             "description": "Duration type of the reward"
           },
@@ -552,7 +694,12 @@
           },
           "tier_reward_mode": {
             "type": "string",
-            "enum": ["tier_commission_mode", "tier_override_mode", "tier_net_override_mode", null],
+            "enum": [
+              "tier_commission_mode",
+              "tier_override_mode",
+              "tier_net_override_mode",
+              null
+            ],
             "nullable": true,
             "description": "Mode of tier reward"
           },
@@ -569,7 +716,14 @@
               "properties": {
                 "unit": {
                   "type": "string",
-                  "enum": ["cash", "free_months", "credits", "points", "mon_discount", "discount_per"],
+                  "enum": [
+                    "cash",
+                    "free_months",
+                    "credits",
+                    "points",
+                    "mon_discount",
+                    "discount_per"
+                  ],
                   "description": "Unit of the reward"
                 },
                 "amount": {
@@ -588,12 +742,24 @@
                     "properties": {
                       "type": {
                         "type": "string",
-                        "enum": ["customer_sales_count", "customer_age_in_months", "promoter_campaign_customers_count", "promoter_campaign_revenue"],
+                        "enum": [
+                          "customer_sales_count",
+                          "customer_age_in_months",
+                          "promoter_campaign_customers_count",
+                          "promoter_campaign_revenue"
+                        ],
                         "description": "Type of the rule"
                       },
                       "condition": {
                         "type": "string",
-                        "enum": ["less than", "less than or equal to", "equal to", "greater than or equal to", "greater than", "multiple of"],
+                        "enum": [
+                          "less than",
+                          "less than or equal to",
+                          "equal to",
+                          "greater than or equal to",
+                          "greater than",
+                          "multiple of"
+                        ],
                         "description": "Condition of the rule"
                       },
                       "filter_by": {
@@ -607,7 +773,10 @@
                       },
                       "operator": {
                         "type": "string",
-                        "enum": ["and", "or"],
+                        "enum": [
+                          "and",
+                          "or"
+                        ],
                         "description": "Logical operator to combine with other rules"
                       }
                     }

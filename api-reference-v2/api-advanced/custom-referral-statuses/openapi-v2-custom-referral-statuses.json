@@ -20,7 +20,9 @@
     "/custom_referral_statuses": {
       "get": {
         "summary": "List custom referral statuses",
-        "tags": ["Custom Referral Statuses"],
+        "tags": [
+          "Custom Referral Statuses"
+        ],
         "description": "Returns all custom referral statuses for your account, ordered by the `order` field ascending.\n\n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/admin/v1/custom_referral_statuses`</Tip>",
         "parameters": [
           {
@@ -42,7 +44,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -60,7 +70,9 @@
     "/custom_referral_statuses/update": {
       "put": {
         "summary": "Create, update, or delete custom referral statuses",
-        "tags": ["Custom Referral Statuses"],
+        "tags": [
+          "Custom Referral Statuses"
+        ],
         "description": "Batch operation to create, update, and/or delete custom referral statuses in a single request. Pass an array of status objects under the `custom_referral_statuses` key.\n\n- **Create**: omit `id`\n- **Update**: include the existing `id`\n- **Delete**: include `id` and set `_destroy` to `true`\n\n <Note>Both `name` and `order` must be unique within your account. Leading and trailing whitespace is stripped from `name`.</Note>\n\n <Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/admin/v1/custom_referral_statuses/update`</Tip>",
         "parameters": [
           {
@@ -73,14 +85,19 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["custom_referral_statuses"],
+                "required": [
+                  "custom_referral_statuses"
+                ],
                 "properties": {
                   "custom_referral_statuses": {
                     "type": "array",
                     "description": "Array of custom referral status objects to create, update, or delete",
                     "items": {
                       "type": "object",
-                      "required": ["name", "order"],
+                      "required": [
+                        "name",
+                        "order"
+                      ],
                       "properties": {
                         "id": {
                           "type": "integer",
@@ -106,9 +123,20 @@
                       }
                     },
                     "example": [
-                      { "name": "Hot Lead", "description": "High-intent prospect", "order": 1 },
-                      { "id": 42, "name": "Qualified", "order": 2 },
-                      { "id": 55, "_destroy": true }
+                      {
+                        "name": "Hot Lead",
+                        "description": "High-intent prospect",
+                        "order": 1
+                      },
+                      {
+                        "id": 42,
+                        "name": "Qualified",
+                        "order": 2
+                      },
+                      {
+                        "id": 55,
+                        "_destroy": true
+                      }
                     ]
                   }
                 }
@@ -141,7 +169,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -173,7 +209,7 @@
         "name": "Account-ID",
         "in": "header",
         "required": true,
-        "description": "Your FirstPromoter Account ID. Found in Settings → Integrations.",
+        "description": "Your FirstPromoter Account ID. Found in Settings \u2192 Integrations.",
         "schema": {
           "type": "string"
         }
@@ -241,7 +277,7 @@
       "BearerAuth": {
         "type": "http",
         "scheme": "bearer",
-        "description": "API key passed as a Bearer token in the Authorization header. Found in Settings → Integrations → Manage API Keys."
+        "description": "API key passed as a Bearer token in the Authorization header. Found in Settings \u2192 Integrations \u2192 Manage API Keys."
       }
     }
   }

@@ -20,7 +20,9 @@
       "get": {
         "summary": "Get all contracts",
         "description": "Returns all contracts \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/contracts`</Tip>",
-        "tags": ["Contracts"],
+        "tags": [
+          "Contracts"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -28,14 +30,24 @@
         ],
         "responses": {
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           }
         }
       },
       "post": {
         "summary": "Create a contract. Calls the service that generates the contract documents.",
         "description": "Create a contract \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/contracts`</Tip>",
-        "tags": ["Contracts"],
+        "tags": [
+          "Contracts"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -53,7 +65,15 @@
         },
         "responses": {
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           }
         }
       }
@@ -62,7 +82,9 @@
       "get": {
         "summary": "Get contract by id",
         "description": "Returns a contract by id \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/contracts/{id}`</Tip>",
-        "tags": ["Contracts"],
+        "tags": [
+          "Contracts"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -78,14 +100,24 @@
         ],
         "responses": {
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           }
         }
       },
       "put": {
         "summary": "Update a contract. Calls the service that generates the contract documents if needed.",
         "description": "Update a contract \n <Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/contracts/{id}`</Tip>",
-        "tags": ["Contracts"],
+        "tags": [
+          "Contracts"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -111,14 +143,24 @@
         },
         "responses": {
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           }
         }
       },
       "delete": {
         "summary": "Delete a contract",
         "description": "Delete a contract \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/contracts/{id}`</Tip>",
-        "tags": ["Contracts"],
+        "tags": [
+          "Contracts"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -134,13 +176,20 @@
         ],
         "responses": {
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           }
         }
       }
     }
   },
-
   "components": {
     "parameters": {
       "AccountId": {
@@ -157,7 +206,11 @@
     "schemas": {
       "ContractCreate": {
         "type": "object",
-        "required": ["name", "checkbox_label", "content_hosted"],
+        "required": [
+          "name",
+          "checkbox_label",
+          "content_hosted"
+        ],
         "properties": {
           "name": {
             "type": "string",

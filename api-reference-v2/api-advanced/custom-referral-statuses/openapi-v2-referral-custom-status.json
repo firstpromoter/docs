@@ -20,7 +20,9 @@
     "/referrals/{id}": {
       "put": {
         "summary": "Set custom status on a referral",
-        "tags": ["Custom Referral Statuses"],
+        "tags": [
+          "Custom Referral Statuses"
+        ],
         "description": "Assign or clear a custom status on an existing referral by passing `custom_status_id`. \n\nFirst use `GET /api/admin/v1/custom_referral_statuses` to retrieve the IDs of your available statuses, then pass the desired `id` here. Pass `null` to remove the status.\n\n<Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/referrals/{id}`</Tip>",
         "parameters": [
           {
@@ -50,7 +52,11 @@
                   },
                   "find_by": {
                     "type": "string",
-                    "enum": ["email", "uid", "username"],
+                    "enum": [
+                      "email",
+                      "uid",
+                      "username"
+                    ],
                     "description": "Required when the `id` path parameter is an email, uid, or username instead of a numeric ID."
                   }
                 }
@@ -83,14 +89,30 @@
               }
             }
           },
-          "401": { "description": "Unauthorized" },
-          "403": { "description": "Forbidden" },
-          "404": { "description": "Referral not found" },
+          "401": {
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Referral not found"
+          },
           "422": {
             "description": "Validation error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/Error" }
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
               }
             }
           }
@@ -104,33 +126,69 @@
         "name": "Account-ID",
         "in": "header",
         "required": true,
-        "description": "Your FirstPromoter Account ID. Found in Settings → Integrations.",
-        "schema": { "type": "string" }
+        "description": "Your FirstPromoter Account ID. Found in Settings \u2192 Integrations.",
+        "schema": {
+          "type": "string"
+        }
       }
     },
     "schemas": {
       "Referral": {
         "type": "object",
         "properties": {
-          "id": { "type": "integer" },
-          "email": { "type": "string", "format": "email" },
-          "uid": { "type": "string", "nullable": true },
+          "id": {
+            "type": "integer"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "uid": {
+            "type": "string",
+            "nullable": true
+          },
           "state": {
             "type": "string",
-            "enum": ["subscribed", "signup", "active", "cancelled", "refunded", "denied", "pending", "moved"]
+            "enum": [
+              "subscribed",
+              "signup",
+              "active",
+              "cancelled",
+              "refunded",
+              "denied",
+              "pending",
+              "moved"
+            ]
           },
           "custom_status": {
             "type": "object",
             "nullable": true,
             "description": "The custom status assigned to this referral after the update. `null` if no status is set.",
             "properties": {
-              "id": { "type": "integer" },
-              "name": { "type": "string" },
-              "description": { "type": "string", "nullable": true },
-              "order": { "type": "integer" },
-              "company_id": { "type": "integer" },
-              "created_at": { "type": "string", "format": "date-time" },
-              "updated_at": { "type": "string", "format": "date-time" }
+              "id": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string",
+                "nullable": true
+              },
+              "order": {
+                "type": "integer"
+              },
+              "company_id": {
+                "type": "integer"
+              },
+              "created_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "updated_at": {
+                "type": "string",
+                "format": "date-time"
+              }
             }
           }
         }
@@ -138,8 +196,12 @@
       "Error": {
         "type": "object",
         "properties": {
-          "message": { "type": "string" },
-          "code": { "type": "string" }
+          "message": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
         }
       }
     },
@@ -147,7 +209,7 @@
       "BearerAuth": {
         "type": "http",
         "scheme": "bearer",
-        "description": "API key passed as a Bearer token in the Authorization header. Found in Settings → Integrations → Manage API Keys."
+        "description": "API key passed as a Bearer token in the Authorization header. Found in Settings \u2192 Integrations \u2192 Manage API Keys."
       }
     }
   }

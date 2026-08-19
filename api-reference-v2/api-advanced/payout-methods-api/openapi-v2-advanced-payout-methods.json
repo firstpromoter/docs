@@ -13,7 +13,7 @@
   "security": [
     {
       "BearerAuth": [],
-       "accountId": []
+      "accountId": []
     }
   ],
   "paths": {
@@ -22,9 +22,10 @@
         "summary": "Get all payout methods",
         "description": "This endpoint gets all payout methods \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/payout_methods`</Tip>",
         "operationId": "adminGetPayoutMethods",
-        "tags": ["Payout Methods"],
+        "tags": [
+          "Payout Methods"
+        ],
         "parameters": [
-      
           {
             "name": "filters[promoter_id]",
             "in": "query",
@@ -50,7 +51,15 @@
             }
           },
           "401": {
-            "$ref": "#/components/responses/Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "$ref": "#/components/responses/Forbidden"
@@ -59,9 +68,11 @@
       },
       "post": {
         "summary": "Create a payout method",
-          "description": "This endpoint creates a payout method under a promoter \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/payout_methods`</Tip>",
+        "description": "This endpoint creates a payout method under a promoter \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/payout_methods`</Tip>",
         "operationId": "adminCreatePayoutMethod",
-        "tags": ["Payout Methods"],
+        "tags": [
+          "Payout Methods"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -92,7 +103,15 @@
             "$ref": "#/components/responses/ValidationError"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "$ref": "#/components/responses/Forbidden"
@@ -108,13 +127,13 @@
     },
     "/payout_methods/{id}": {
       "get": {
-        
         "summary": "Get a payout method",
         "description": "This endpoint gets a payout method \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/payout_methods/{id}`</Tip>",
         "operationId": "adminGetPayoutMethod",
-        "tags": ["Payout Methods"],
+        "tags": [
+          "Payout Methods"
+        ],
         "parameters": [
-
           {
             "name": "id",
             "in": "path",
@@ -137,7 +156,15 @@
             }
           },
           "401": {
-            "$ref": "#/components/responses/Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "$ref": "#/components/responses/Forbidden"
@@ -148,13 +175,13 @@
         }
       },
       "put": {
-             "description": "This endpoint updates a payout method under a promoter \n <Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/payout_methods/{id}`</Tip>",
+        "description": "This endpoint updates a payout method under a promoter \n <Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/payout_methods/{id}`</Tip>",
         "summary": "Update a payout method",
         "operationId": "adminUpdatePayoutMethod",
-        "tags": ["Payout Methods"],
-
+        "tags": [
+          "Payout Methods"
+        ],
         "parameters": [
-       
           {
             "name": "id",
             "in": "path",
@@ -190,7 +217,15 @@
             "$ref": "#/components/responses/ValidationError"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "$ref": "#/components/responses/Forbidden"
@@ -204,11 +239,11 @@
         }
       },
       "delete": {
-        
         "summary": "Delete a payout method",
         "operationId": "adminDeletePayoutMethod",
-        "tags": ["Payout Methods"],
-
+        "tags": [
+          "Payout Methods"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -228,7 +263,15 @@
             "description": "Payout method deleted"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "$ref": "#/components/responses/Forbidden"
@@ -243,7 +286,7 @@
       }
     }
   },
-   "components": {
+  "components": {
     "parameters": {
       "AccountId": {
         "name": "Account-ID",
@@ -265,7 +308,14 @@
           },
           "method": {
             "type": "string",
-            "enum": ["paypal", "bank", "wise", "crypto", "custom", "dots"]
+            "enum": [
+              "paypal",
+              "bank",
+              "wise",
+              "crypto",
+              "custom",
+              "dots"
+            ]
           },
           "date_added": {
             "type": "string",
@@ -304,11 +354,22 @@
       },
       "PayoutMethodCreate": {
         "type": "object",
-        "required": ["method", "details", "promoter_id"],
+        "required": [
+          "method",
+          "details",
+          "promoter_id"
+        ],
         "properties": {
           "method": {
             "type": "string",
-            "enum": ["paypal", "bank", "wise", "crypto", "custom", "dots"]
+            "enum": [
+              "paypal",
+              "bank",
+              "wise",
+              "crypto",
+              "custom",
+              "dots"
+            ]
           },
           "is_disabled": {
             "type": "boolean"
@@ -341,11 +402,22 @@
       },
       "PayoutMethodUpdate": {
         "type": "object",
-        "required": ["details","method","promoter_id"],
+        "required": [
+          "details",
+          "method",
+          "promoter_id"
+        ],
         "properties": {
           "method": {
             "type": "string",
-            "enum": ["paypal", "bank", "wise", "crypto", "custom", "dots"]
+            "enum": [
+              "paypal",
+              "bank",
+              "wise",
+              "crypto",
+              "custom",
+              "dots"
+            ]
           },
           "is_disabled": {
             "type": "boolean"
@@ -378,7 +450,9 @@
       },
       "PaypalDetails": {
         "type": "object",
-        "required": ["paypal_email"],
+        "required": [
+          "paypal_email"
+        ],
         "properties": {
           "paypal_email": {
             "type": "string",
@@ -388,7 +462,9 @@
       },
       "WiseDetails": {
         "type": "object",
-        "required": ["wise_email"],
+        "required": [
+          "wise_email"
+        ],
         "properties": {
           "wise_email": {
             "type": "string",
@@ -398,7 +474,10 @@
       },
       "CryptoDetails": {
         "type": "object",
-        "required": ["wallet_address", "crypto_currency"],
+        "required": [
+          "wallet_address",
+          "crypto_currency"
+        ],
         "properties": {
           "wallet_address": {
             "type": "string"
@@ -410,7 +489,10 @@
       },
       "BankDetails": {
         "type": "object",
-        "required": ["bank_country", "account_holder_name"],
+        "required": [
+          "bank_country",
+          "account_holder_name"
+        ],
         "properties": {
           "bank_country": {
             "type": "string",
@@ -640,7 +722,10 @@
               "example": {
                 "message": "Validation failed: Details paypal email can't be blank",
                 "errors": {
-                  "details.paypal_email": ["can't be blank", "is invalid"]
+                  "details.paypal_email": [
+                    "can't be blank",
+                    "is invalid"
+                  ]
                 },
                 "code": "invalid_record"
               }

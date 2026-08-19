@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "FirstPromoter Admin API — Webhooks",
+    "title": "FirstPromoter Admin API \u2014 Webhooks",
     "version": "2.0.0",
     "description": "Manage webhook subscriptions and inspect deliveries."
   },
@@ -20,20 +20,30 @@
     "/webhooks": {
       "get": {
         "summary": "List webhook subscriptions",
-        "tags": ["Webhooks"],
+        "tags": [
+          "Webhooks"
+        ],
         "description": "Returns a paginated list of all webhook subscriptions for your account, ordered by creation date descending. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/webhooks`</Tip>",
         "parameters": [
-          { "$ref": "#/components/parameters/AccountId" },
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "name": "per_page",
             "in": "query",
-            "schema": { "type": "integer", "default": 25 },
+            "schema": {
+              "type": "integer",
+              "default": 25
+            },
             "description": "Number of results per page."
           },
           {
             "name": "page",
             "in": "query",
-            "schema": { "type": "integer", "default": 1 },
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
             "description": "Page number."
           }
         ],
@@ -44,27 +54,47 @@
               "application/json": {
                 "schema": {
                   "type": "array",
-                  "items": { "$ref": "#/components/schemas/WebhookSubscription" }
+                  "items": {
+                    "$ref": "#/components/schemas/WebhookSubscription"
+                  }
                 }
               }
             }
           },
-          "401": { "description": "Unauthorized" },
-          "403": { "description": "Forbidden" }
+          "401": {
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          }
         }
       },
       "post": {
         "summary": "Create a webhook subscription",
-        "tags": ["Webhooks"],
-        "description": "Creates a new webhook subscription. The `secret_key` is auto-generated and returned only in this response — store it immediately. \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/webhooks`</Tip>",
+        "tags": [
+          "Webhooks"
+        ],
+        "description": "Creates a new webhook subscription. The `secret_key` is auto-generated and returned only in this response \u2014 store it immediately. \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/webhooks`</Tip>",
         "parameters": [
-          { "$ref": "#/components/parameters/AccountId" }
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
         ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/WebhookSubscriptionInput" }
+              "schema": {
+                "$ref": "#/components/schemas/WebhookSubscriptionInput"
+              }
             }
           }
         },
@@ -73,17 +103,33 @@
             "description": "Subscription created",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/WebhookSubscription" }
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookSubscription"
+                }
               }
             }
           },
-          "401": { "description": "Unauthorized" },
-          "403": { "description": "Forbidden" },
+          "401": {
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
           "422": {
             "description": "Validation error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/Error" }
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
               }
             }
           }
@@ -93,10 +139,14 @@
     "/webhooks/event_types": {
       "get": {
         "summary": "List supported event types",
-        "tags": ["Webhooks"],
+        "tags": [
+          "Webhooks"
+        ],
         "description": "Returns a sorted list of all event type strings that can be subscribed to. Use these values in the `event_types` array when creating or updating a subscription. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/webhooks/event_types`</Tip>",
         "parameters": [
-          { "$ref": "#/components/parameters/AccountId" }
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
         ],
         "responses": {
           "200": {
@@ -108,7 +158,9 @@
                   "properties": {
                     "data": {
                       "type": "array",
-                      "items": { "type": "string" },
+                      "items": {
+                        "type": "string"
+                      },
                       "example": [
                         "commission.created",
                         "commission.deleted",
@@ -145,18 +197,34 @@
               }
             }
           },
-          "401": { "description": "Unauthorized" },
-          "403": { "description": "Forbidden" }
+          "401": {
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          }
         }
       }
     },
     "/webhooks/test": {
       "post": {
         "summary": "Send a test webhook delivery",
-        "tags": ["Webhooks"],
-        "description": "Sends a sample payload for the given event type to the specified URL immediately. Useful for verifying that your endpoint is reachable and processing payloads correctly before creating a subscription. \n\n The signature in the test request is generated with a random secret (not a saved subscription's secret), so signature verification will fail — this is expected during testing. \n\n Returns the HTTP status and body received from your endpoint. \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/webhooks/test`</Tip>",
+        "tags": [
+          "Webhooks"
+        ],
+        "description": "Sends a sample payload for the given event type to the specified URL immediately. Useful for verifying that your endpoint is reachable and processing payloads correctly before creating a subscription. \n\n The signature in the test request is generated with a random secret (not a saved subscription's secret), so signature verification will fail \u2014 this is expected during testing. \n\n Returns the HTTP status and body received from your endpoint. \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/webhooks/test`</Tip>",
         "parameters": [
-          { "$ref": "#/components/parameters/AccountId" }
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
         ],
         "requestBody": {
           "required": true,
@@ -164,12 +232,15 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["url", "event_type"],
+                "required": [
+                  "url",
+                  "event_type"
+                ],
                 "properties": {
                   "url": {
                     "type": "string",
                     "format": "uri",
-                    "description": "The URL to send the test payload to. Must be a public URL — requests to private/internal networks are blocked."
+                    "description": "The URL to send the test payload to. Must be a public URL \u2014 requests to private/internal networks are blocked."
                   },
                   "event_type": {
                     "type": "string",
@@ -186,8 +257,12 @@
                   "headers": {
                     "type": "object",
                     "description": "Custom HTTP headers to include in the test request.",
-                    "additionalProperties": { "type": "string" },
-                    "example": { "X-Api-Key": "my-secret-token" }
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "example": {
+                      "X-Api-Key": "my-secret-token"
+                    }
                   }
                 }
               }
@@ -196,33 +271,53 @@
         },
         "responses": {
           "200": {
-            "description": "Test delivery sent — response mirrors what your endpoint returned."
+            "description": "Test delivery sent \u2014 response mirrors what your endpoint returned."
           },
           "400": {
             "description": "Invalid URL (private network or malformed URI)",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/Error" }
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
               }
             }
           },
-          "401": { "description": "Unauthorized" },
-          "403": { "description": "Forbidden" }
+          "401": {
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          }
         }
       }
     },
     "/webhooks/{id}": {
       "get": {
         "summary": "Get a webhook subscription",
-        "tags": ["Webhooks"],
+        "tags": [
+          "Webhooks"
+        ],
         "description": "Returns the details of a single webhook subscription. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/webhooks/{id}`</Tip>",
         "parameters": [
-          { "$ref": "#/components/parameters/AccountId" },
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": { "type": "integer" },
+            "schema": {
+              "type": "integer"
+            },
             "description": "ID of the webhook subscription."
           }
         ],
@@ -231,26 +326,48 @@
             "description": "Webhook subscription details",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/WebhookSubscription" }
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookSubscription"
+                }
               }
             }
           },
-          "401": { "description": "Unauthorized" },
-          "403": { "description": "Forbidden" },
-          "404": { "description": "Not found" }
+          "401": {
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          }
         }
       },
       "put": {
         "summary": "Update a webhook subscription",
-        "tags": ["Webhooks"],
+        "tags": [
+          "Webhooks"
+        ],
         "description": "Updates an existing webhook subscription. Only fields you include in the request body are changed. \n <Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/webhooks/{id}`</Tip>",
         "parameters": [
-          { "$ref": "#/components/parameters/AccountId" },
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": { "type": "integer" },
+            "schema": {
+              "type": "integer"
+            },
             "description": "ID of the webhook subscription."
           }
         ],
@@ -258,7 +375,9 @@
           "required": true,
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/WebhookSubscriptionInput" }
+              "schema": {
+                "$ref": "#/components/schemas/WebhookSubscriptionInput"
+              }
             }
           }
         },
@@ -267,18 +386,36 @@
             "description": "Subscription updated",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/WebhookSubscription" }
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookSubscription"
+                }
               }
             }
           },
-          "401": { "description": "Unauthorized" },
-          "403": { "description": "Forbidden" },
-          "404": { "description": "Not found" },
+          "401": {
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
           "422": {
             "description": "Validation error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/Error" }
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
               }
             }
           }
@@ -286,50 +423,84 @@
       },
       "delete": {
         "summary": "Delete a webhook subscription",
-        "tags": ["Webhooks"],
+        "tags": [
+          "Webhooks"
+        ],
         "description": "Permanently deletes a webhook subscription and all its delivery records. \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/webhooks/{id}`</Tip>",
         "parameters": [
-          { "$ref": "#/components/parameters/AccountId" },
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": { "type": "integer" },
+            "schema": {
+              "type": "integer"
+            },
             "description": "ID of the webhook subscription."
           }
         ],
         "responses": {
-          "200": { "description": "Subscription deleted successfully" },
-          "401": { "description": "Unauthorized" },
-          "403": { "description": "Forbidden" },
-          "404": { "description": "Not found" }
+          "200": {
+            "description": "Subscription deleted successfully"
+          },
+          "401": {
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          }
         }
       }
     },
     "/webhooks/{webhook_id}/webhook_deliveries": {
       "get": {
         "summary": "List deliveries for a subscription",
-        "tags": ["Webhook Deliveries"],
+        "tags": [
+          "Webhook Deliveries"
+        ],
         "description": "Returns a paginated list of delivery attempts for the given subscription, ordered most-recent first. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/webhooks/{webhook_id}/webhook_deliveries`</Tip>",
         "parameters": [
-          { "$ref": "#/components/parameters/AccountId" },
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "name": "webhook_id",
             "in": "path",
             "required": true,
-            "schema": { "type": "integer" },
+            "schema": {
+              "type": "integer"
+            },
             "description": "ID of the webhook subscription."
           },
           {
             "name": "per_page",
             "in": "query",
-            "schema": { "type": "integer", "default": 25 },
+            "schema": {
+              "type": "integer",
+              "default": 25
+            },
             "description": "Number of results per page."
           },
           {
             "name": "page",
             "in": "query",
-            "schema": { "type": "integer", "default": 1 },
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
             "description": "Page number."
           }
         ],
@@ -340,36 +511,60 @@
               "application/json": {
                 "schema": {
                   "type": "array",
-                  "items": { "$ref": "#/components/schemas/WebhookDelivery" }
+                  "items": {
+                    "$ref": "#/components/schemas/WebhookDelivery"
+                  }
                 }
               }
             }
           },
-          "401": { "description": "Unauthorized" },
-          "403": { "description": "Forbidden" },
-          "404": { "description": "Subscription not found" }
+          "401": {
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Subscription not found"
+          }
         }
       }
     },
     "/webhooks/{webhook_id}/webhook_deliveries/{id}": {
       "get": {
         "summary": "Get a delivery",
-        "tags": ["Webhook Deliveries"],
+        "tags": [
+          "Webhook Deliveries"
+        ],
         "description": "Returns the full details of a single delivery attempt, including the complete payload that was sent and the response received from your endpoint. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/webhooks/{webhook_id}/webhook_deliveries/{id}`</Tip>",
         "parameters": [
-          { "$ref": "#/components/parameters/AccountId" },
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "name": "webhook_id",
             "in": "path",
             "required": true,
-            "schema": { "type": "integer" },
+            "schema": {
+              "type": "integer"
+            },
             "description": "ID of the webhook subscription."
           },
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": { "type": "integer" },
+            "schema": {
+              "type": "integer"
+            },
             "description": "ID of the delivery."
           }
         ],
@@ -378,35 +573,59 @@
             "description": "Webhook delivery details",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/WebhookDelivery" }
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookDelivery"
+                }
               }
             }
           },
-          "401": { "description": "Unauthorized" },
-          "403": { "description": "Forbidden" },
-          "404": { "description": "Not found" }
+          "401": {
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          }
         }
       }
     },
     "/webhooks/{webhook_id}/webhook_deliveries/{id}/retry_delivery": {
       "post": {
         "summary": "Retry a failed delivery",
-        "tags": ["Webhook Deliveries"],
+        "tags": [
+          "Webhook Deliveries"
+        ],
         "description": "Re-queues a failed delivery for immediate retry. The delivery's `status` is reset to `pending` and `attempts` is reset to `0`. \n\n Returns `422` if the subscription's `max_retries` limit has already been reached. \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/webhooks/{webhook_id}/webhook_deliveries/{id}/retry_delivery`</Tip>",
         "parameters": [
-          { "$ref": "#/components/parameters/AccountId" },
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
           {
             "name": "webhook_id",
             "in": "path",
             "required": true,
-            "schema": { "type": "integer" },
+            "schema": {
+              "type": "integer"
+            },
             "description": "ID of the webhook subscription."
           },
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": { "type": "integer" },
+            "schema": {
+              "type": "integer"
+            },
             "description": "ID of the delivery to retry."
           }
         ],
@@ -415,18 +634,36 @@
             "description": "Delivery re-queued",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/WebhookDelivery" }
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookDelivery"
+                }
               }
             }
           },
-          "401": { "description": "Unauthorized" },
-          "403": { "description": "Forbidden" },
-          "404": { "description": "Not found" },
+          "401": {
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
           "422": {
             "description": "Max retries already reached",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/Error" }
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
               }
             }
           }
@@ -446,8 +683,10 @@
         "name": "Account-ID",
         "in": "header",
         "required": true,
-        "description": "Account ID. Found in your FirstPromoter dashboard under Settings → Integrations.",
-        "schema": { "type": "string" }
+        "description": "Account ID. Found in your FirstPromoter dashboard under Settings \u2192 Integrations.",
+        "schema": {
+          "type": "string"
+        }
       }
     },
     "schemas": {
@@ -470,15 +709,24 @@
           },
           "event_types": {
             "type": "array",
-            "items": { "type": "string" },
+            "items": {
+              "type": "string"
+            },
             "description": "Event type strings this subscription is listening to.",
-            "example": ["referral.created", "commission.created"]
+            "example": [
+              "referral.created",
+              "commission.created"
+            ]
           },
           "campaign_ids": {
             "type": "array",
-            "items": { "type": "integer" },
+            "items": {
+              "type": "integer"
+            },
             "description": "Campaign IDs that trigger this subscription. `[1]` means all campaigns.",
-            "example": [1]
+            "example": [
+              1
+            ]
           },
           "active": {
             "type": "boolean",
@@ -499,8 +747,12 @@
           "headers": {
             "type": "object",
             "description": "Custom HTTP headers sent with every delivery request.",
-            "additionalProperties": { "type": "string" },
-            "example": { "Authorization": "Bearer my-token" }
+            "additionalProperties": {
+              "type": "string"
+            },
+            "example": {
+              "Authorization": "Bearer my-token"
+            }
           },
           "basic_auth_user": {
             "type": "string",
@@ -533,9 +785,14 @@
           },
           "event_types": {
             "type": "array",
-            "items": { "type": "string" },
+            "items": {
+              "type": "string"
+            },
             "description": "One or more event type strings to subscribe to. Required when creating. Use the `event_types` endpoint to list all supported values.",
-            "example": ["referral.created", "commission.created"]
+            "example": [
+              "referral.created",
+              "commission.created"
+            ]
           },
           "active": {
             "type": "boolean",
@@ -543,13 +800,13 @@
           },
           "timeout": {
             "type": "integer",
-            "description": "Request timeout in seconds. Must be 1–120. Defaults to 30.",
+            "description": "Request timeout in seconds. Must be 1\u2013120. Defaults to 30.",
             "minimum": 1,
             "maximum": 120
           },
           "max_retries": {
             "type": "integer",
-            "description": "Automatic retry count for failed deliveries. Must be 0–10. Defaults to 3.",
+            "description": "Automatic retry count for failed deliveries. Must be 0\u201310. Defaults to 3.",
             "minimum": 0,
             "maximum": 10
           },
@@ -559,15 +816,23 @@
           },
           "campaign_ids": {
             "type": "array",
-            "items": { "type": "integer" },
+            "items": {
+              "type": "integer"
+            },
             "description": "Restrict this subscription to events from specific campaigns. Pass `[1]` (the default) to receive events from all campaigns.",
-            "example": [1]
+            "example": [
+              1
+            ]
           },
           "headers": {
             "type": "object",
             "description": "Custom HTTP headers to include in every delivery request.",
-            "additionalProperties": { "type": "string" },
-            "example": { "Authorization": "Bearer my-token" }
+            "additionalProperties": {
+              "type": "string"
+            },
+            "example": {
+              "Authorization": "Bearer my-token"
+            }
           },
           "basic_auth_user": {
             "type": "string",
@@ -575,7 +840,7 @@
           },
           "basic_auth_password": {
             "type": "string",
-            "description": "HTTP Basic Auth password. Write-only — never returned in responses. Encrypted at rest."
+            "description": "HTTP Basic Auth password. Write-only \u2014 never returned in responses. Encrypted at rest."
           }
         }
       },
@@ -609,8 +874,13 @@
           },
           "status": {
             "type": "string",
-            "enum": ["pending", "delivered", "retrying", "failed"],
-            "description": "Current delivery status. `pending` — queued for delivery. `delivered` — endpoint responded with 2xx. `retrying` — delivery failed, waiting for next retry attempt. `failed` — all retry attempts exhausted."
+            "enum": [
+              "pending",
+              "delivered",
+              "retrying",
+              "failed"
+            ],
+            "description": "Current delivery status. `pending` \u2014 queued for delivery. `delivered` \u2014 endpoint responded with 2xx. `retrying` \u2014 delivery failed, waiting for next retry attempt. `failed` \u2014 all retry attempts exhausted."
           },
           "attempts": {
             "type": "integer",
@@ -634,8 +904,13 @@
           "object_changes": {
             "type": "object",
             "nullable": true,
-            "description": "For `updated` events — a map of changed fields to `[old_value, new_value]` pairs.",
-            "example": { "state": ["lead", "customer"] }
+            "description": "For `updated` events \u2014 a map of changed fields to `[old_value, new_value]` pairs.",
+            "example": {
+              "state": [
+                "lead",
+                "customer"
+              ]
+            }
           },
           "payload": {
             "type": "object",

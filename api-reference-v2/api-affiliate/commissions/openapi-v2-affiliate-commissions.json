@@ -20,7 +20,9 @@
       "get": {
         "summary": "Get all commissions",
         "description": "Return all commissions \n <Tip>**HTTP Request** <br/>` GET  https://api.firstpromoter.com/api/v2/affiliate/commissions`</Tip>",
-        "tags": ["Commissions"],
+        "tags": [
+          "Commissions"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -41,7 +43,11 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["pending", "approved", "denied"]
+              "enum": [
+                "pending",
+                "approved",
+                "denied"
+              ]
             }
           },
           {
@@ -51,7 +57,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["yes", "no"]
+              "enum": [
+                "yes",
+                "no"
+              ]
             }
           },
           {
@@ -155,7 +164,11 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["next", "overdue", "custom"]
+              "enum": [
+                "next",
+                "overdue",
+                "custom"
+              ]
             }
           },
           {
@@ -174,7 +187,12 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["true", "false", "1", "0"]
+              "enum": [
+                "true",
+                "false",
+                "1",
+                "0"
+              ]
             }
           },
           {
@@ -184,7 +202,12 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["true", "false", "yes", "no"]
+              "enum": [
+                "true",
+                "false",
+                "yes",
+                "no"
+              ]
             }
           },
           {
@@ -231,7 +254,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           },
           {
@@ -241,7 +267,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           },
           {
@@ -251,7 +280,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           },
           {
@@ -261,7 +293,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           }
         ],
@@ -306,7 +341,9 @@
       "get": {
         "summary": "Export all commissions",
         "description": "Export all commissions \n <Tip>**HTTP Request** <br/>` GET  https://api.firstpromoter.com/api/v2/affiliate/commissions/export`</Tip>",
-        "tags": ["Commissions"],
+        "tags": [
+          "Commissions"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -343,7 +380,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -369,7 +414,11 @@
           },
           "status": {
             "type": "string",
-            "enum": ["pending", "approved", "denied"]
+            "enum": [
+              "pending",
+              "approved",
+              "denied"
+            ]
           },
           "external_note": {
             "type": "string",
@@ -395,7 +444,10 @@
           },
           "commission_type": {
             "type": "string",
-            "enum": ["sale", "custom"]
+            "enum": [
+              "sale",
+              "custom"
+            ]
           },
           "sale_amount": {
             "type": "number"
@@ -517,11 +569,18 @@
           "properties": {
             "status": {
               "type": "string",
-              "enum": ["pending", "approved", "denied"]
+              "enum": [
+                "pending",
+                "approved",
+                "denied"
+              ]
             },
             "paid": {
               "type": "string",
-              "enum": ["yes", "no"]
+              "enum": [
+                "yes",
+                "no"
+              ]
             }
           }
         }

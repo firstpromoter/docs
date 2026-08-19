@@ -33,7 +33,7 @@
               "type": "integer"
             }
           }
-],
+        ],
         "responses": {
           "200": {
             "description": "List of referral links",
@@ -49,7 +49,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -96,7 +104,9 @@
                     "description": "Url"
                   }
                 },
-                "required": ["promoter_campaign_id"]
+                "required": [
+                  "promoter_campaign_id"
+                ]
               }
             }
           }
@@ -113,7 +123,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -156,7 +174,7 @@
               "type": "integer"
             }
           }
-],
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -189,7 +207,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -220,13 +246,21 @@
               "type": "integer"
             }
           }
-],
+        ],
         "responses": {
           "200": {
             "description": "Referral link deleted successfully"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -242,7 +276,7 @@
       }
     }
   },
-   "components": {
+  "components": {
     "parameters": {
       "AccountId": {
         "name": "Account-ID",
@@ -275,7 +309,10 @@
           },
           "source": {
             "type": "string",
-            "enum": ["campaign", "promoter"]
+            "enum": [
+              "campaign",
+              "promoter"
+            ]
           },
           "sub_id": {
             "type": "string",
@@ -308,7 +345,10 @@
             "type": "string"
           }
         },
-        "required": ["message", "code"]
+        "required": [
+          "message",
+          "code"
+        ]
       }
     },
     "securitySchemes": {

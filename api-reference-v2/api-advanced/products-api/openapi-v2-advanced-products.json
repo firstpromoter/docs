@@ -20,7 +20,9 @@
     "/products": {
       "get": {
         "summary": "Get available products",
-        "tags": ["Products"],
+        "tags": [
+          "Products"
+        ],
         "description": "Get available products \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/products`</Tip>",
         "parameters": [
           {
@@ -50,7 +52,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -66,7 +76,9 @@
       },
       "post": {
         "summary": "Create product",
-        "tags": ["Products"],
+        "tags": [
+          "Products"
+        ],
         "description": "Create product \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/products`</Tip>",
         "parameters": [
           {
@@ -79,7 +91,10 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["name", "prices"],
+                "required": [
+                  "name",
+                  "prices"
+                ],
                 "properties": {
                   "name": {
                     "type": "string",
@@ -94,7 +109,9 @@
                     "description": "List of prices for the product",
                     "items": {
                       "type": "object",
-                      "required": ["ext_id"],
+                      "required": [
+                        "ext_id"
+                      ],
                       "properties": {
                         "ext_id": {
                           "type": "string",
@@ -135,7 +152,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -153,7 +178,9 @@
     "/products/{id}": {
       "get": {
         "summary": "Get product",
-        "tags": ["Products"],
+        "tags": [
+          "Products"
+        ],
         "description": "Get product based on id \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/products/{id}`</Tip>",
         "parameters": [
           {
@@ -181,7 +208,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -207,7 +242,9 @@
       },
       "put": {
         "summary": "Update product",
-        "tags": ["Products"],
+        "tags": [
+          "Products"
+        ],
         "description": "Update product based on id \n <Tip>**HTTP Request** <br/>`PUT https://api.firstpromoter.com/api/v2/company/products/{id}`</Tip>",
         "parameters": [
           {
@@ -229,7 +266,9 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["prices"],
+                "required": [
+                  "prices"
+                ],
                 "properties": {
                   "name": {
                     "type": "string",
@@ -284,7 +323,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -310,7 +357,9 @@
       },
       "delete": {
         "summary": "Delete product",
-        "tags": ["Products"],
+        "tags": [
+          "Products"
+        ],
         "description": "Delete product based on id \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/products/{id}`</Tip>",
         "parameters": [
           {
@@ -331,7 +380,15 @@
             "description": "Product deleted successfully"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -363,7 +420,7 @@
         "name": "Account-ID",
         "in": "header",
         "required": true,
-        "description": "Account ID. You can find your Account ID on Your FirstPromoter Dashboard. Navigate to Settings → Integrations",
+        "description": "Account ID. You can find your Account ID on Your FirstPromoter Dashboard. Navigate to Settings \u2192 Integrations",
         "schema": {
           "type": "string"
         }
@@ -451,7 +508,7 @@
       "BearerAuth": {
         "type": "http",
         "scheme": "bearer",
-        "description": "API key passed as a Bearer token in the Authorization header. You can find your API Key on Your FirstPromoter Dashboard. Navigate to Settings → Integrations section → Manage API Keys"
+        "description": "API key passed as a Bearer token in the Authorization header. You can find your API Key on Your FirstPromoter Dashboard. Navigate to Settings \u2192 Integrations section \u2192 Manage API Keys"
       },
       "accountId": {
         "type": "apiKey",

@@ -19,7 +19,9 @@
     "/payouts": {
       "get": {
         "summary": "Get all payouts",
-        "tags": ["Payouts"],
+        "tags": [
+          "Payouts"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -89,7 +91,11 @@
             "description": "Due period filter",
             "schema": {
               "type": "string",
-              "enum": ["next", "overdue", "custom"]
+              "enum": [
+                "next",
+                "overdue",
+                "custom"
+              ]
             }
           },
           {
@@ -159,7 +165,15 @@
             }
           },
           "401": {
-            "$ref": "#/components/responses/Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "$ref": "#/components/responses/Forbidden"
@@ -170,7 +184,9 @@
     "/payouts/due_stats": {
       "get": {
         "summary": "Get due payout stats",
-        "tags": ["Payouts"],
+        "tags": [
+          "Payouts"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -207,7 +223,15 @@
             }
           },
           "401": {
-            "$ref": "#/components/responses/Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "$ref": "#/components/responses/Forbidden"
@@ -218,7 +242,9 @@
     "/payouts/export": {
       "get": {
         "summary": "Export payouts",
-        "tags": ["Payouts"],
+        "tags": [
+          "Payouts"
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -262,7 +288,15 @@
             }
           },
           "401": {
-            "$ref": "#/components/responses/Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "$ref": "#/components/responses/Forbidden"
@@ -505,7 +539,11 @@
             },
             "due_period": {
               "type": "string",
-              "enum": ["next", "overdue", "custom"]
+              "enum": [
+                "next",
+                "overdue",
+                "custom"
+              ]
             },
             "period_start": {
               "type": "string",

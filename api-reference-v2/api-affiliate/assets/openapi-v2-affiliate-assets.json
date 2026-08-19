@@ -144,7 +144,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -194,7 +202,7 @@
     "/asset_categories": {
       "get": {
         "summary": "Get available asset categories",
-        "description":"Returns all asset categories \n <Tip>**HTTP Request** <br/>` GET  https://api.firstpromoter.com/api/v2/affiliate/asset_categories`</Tip>",
+        "description": "Returns all asset categories \n <Tip>**HTTP Request** <br/>` GET  https://api.firstpromoter.com/api/v2/affiliate/asset_categories`</Tip>",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
@@ -205,7 +213,15 @@
             "description": "Successful operation"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           }
         }
       }
