@@ -134,7 +134,29 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden \u2014 the authenticated user does not have permission to perform this action",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "message": "You don't have enough rights to perform this action",
+                  "code": "forbidden"
+                }
+              }
+            }
           }
         }
       },
@@ -191,7 +213,57 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden \u2014 the authenticated user does not have permission to perform this action",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "message": "You don't have enough rights to perform this action",
+                  "code": "forbidden"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "message": "Record not found",
+                  "code": "not_found"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "message": "param is missing or the value is empty or invalid: email",
+                  "code": "invalid_params"
+                }
+              }
+            }
           }
         }
       }
@@ -245,7 +317,29 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden \u2014 the authenticated user does not have permission to perform this action",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "message": "You don't have enough rights to perform this action",
+                  "code": "forbidden"
+                }
+              }
+            }
           },
           "404": {
             "description": "Promoter not found",
@@ -257,6 +351,20 @@
                 "example": {
                   "message": "Record not found",
                   "code": "not_found"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "message": "Cannot find promoter by email",
+                  "code": "invalid_params"
                 }
               }
             }
@@ -325,7 +433,43 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden \u2014 the authenticated user does not have permission to perform this action",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "message": "You don't have enough rights to perform this action",
+                  "code": "forbidden"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "message": "Record not found",
+                  "code": "not_found"
+                }
+              }
+            }
           }
         }
       }
@@ -398,7 +542,43 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden \u2014 the authenticated user does not have permission to perform this action",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "message": "You don't have enough rights to perform this action",
+                  "code": "forbidden"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "message": "Record not found",
+                  "code": "not_found"
+                }
+              }
+            }
           }
         }
       }
@@ -490,7 +670,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -602,7 +790,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -714,7 +910,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -819,7 +1023,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -945,7 +1157,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -1062,7 +1282,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -1174,7 +1402,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -1279,7 +1515,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -2092,7 +2336,8 @@
       "PromoterCreate": {
         "type": "object",
         "required": [
-          "email"
+          "email",
+          "initial_campaign_id"
         ],
         "properties": {
           "email": {
