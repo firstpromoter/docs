@@ -16,16 +16,21 @@ Every time FirstPromoter attempts to send a webhook, a delivery record is create
 
 ## Retry behaviour
 
-When a delivery attempt fails (non-`2xx` response, timeout, or network error), FirstPromoter waits before retrying. The delay grows with each attempt:
+When a delivery attempt fails (non-`2xx` response, timeout, or network error), FirstPromoter waits before retrying. The delay uses exponential backoff, roughly doubling with each attempt:
 
 | Attempt | Delay before retry |
 |---|---|
-| 1st retry | 20 minutes |
-| 2nd retry | 40 minutes |
-| 3rd retry | 60 minutes |
-| … | … (`attempt × 20 min`) |
+| 1st retry | ~2 minutes |
+| 2nd retry | ~4 minutes |
+| 3rd retry | ~8 minutes |
+| 4th retry | ~16 minutes |
+| 5th retry | ~32 minutes |
+| 6th retry | ~1 hour |
+| 7th retry | ~2 hours |
+| 8th retry | ~4 hours |
+| 9th retry | ~8.5 hours |
 
-Retries stop when the number of failed attempts reaches the `max_retries` value configured on the subscription (default: `3`). After that, the delivery is marked `failed`.
+Retries stop when the number of failed attempts reaches the `max_retries` value configured on the subscription (default: `10`, configurable from `0`–`10`). After that, the delivery is marked `failed`. At the default of `10`, retries span roughly 17 hours from the first failure.
 
 Set `max_retries` to `0` on a subscription to disable retries entirely.
 
@@ -97,7 +102,11 @@ You can view delivery history for any subscription from the **Settings → Integ
 
 ## Manually retrying a failed delivery
 
-If a delivery has a `failed` status you can re-attempt it directly from the dashboard without waiting for the automatic retry schedule. Navigate to the subscription's delivery history and click **Retry** on the failed delivery.
+You can re-attempt a delivery directly from the dashboard without waiting for the automatic retry schedule, as long as it still has retry budget remaining (its `attempts` count is below the subscription's `max_retries`). Navigate to the subscription's delivery history and click **Retry** on the delivery.
+
+<Note>
+A delivery only reaches `failed` status once it has exhausted the subscription's `max_retries`, so a delivery that is already `failed` cannot be retried as-is — increase `max_retries` on the subscription first to free up retry budget, then retry the delivery.
+</Note>
 
 ## Sending a test delivery
 
