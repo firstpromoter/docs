@@ -18,10 +18,10 @@ There are two independent ways a promoter's embedded session ends:
 
 ## Self-service logout
 
-When a promoter clicks **Log out** from the account menu inside the embedded dashboard, FirstPromoter invalidates that session's token and returns them to a signed-out state within the iframe. This requires no setup and no API call on your side — it's built into the dashboard.
+When a promoter clicks **Log out** from the account menu inside the embedded dashboard, FirstPromoter revokes **every active session that promoter currently has under your account** — not just the tab or page they clicked logout from — and returns them to a signed-out state within the iframe. This requires no setup and no API call on your side — it's built into the dashboard.
 
 <Note>
-  This only ends the *current* session token. If your app issues a fresh token on every page load (as recommended in the [login guide](/advanced/embed-dashboard-login)), reloading the page after this will silently log the promoter back in. If you want the logout to stick, pair it with the targeted logout below, triggered from your own app's logout flow.
+  Because every session is revoked, this also signs the promoter out of any other tab where you've embedded their dashboard. If your app issues a fresh token on every page load (as recommended in the [login guide](/advanced/embed-dashboard-login)), reloading the page after this will silently log the promoter back in. If you want the logout to stick, pair it with the targeted logout below, triggered from your own app's logout flow.
 </Note>
 
 ## Targeted logout (from your backend)
@@ -38,6 +38,9 @@ POST https://v2.firstpromoter.com/api/v2/promoters/iframe_logout
 <ParamField query="cust_id" type="string">
   The external customer ID you assigned this promoter. Provide this or `promoter_id`.
 </ParamField>
+<ParamField query="session_token" type="string">
+  Optional. The `access_token` value returned by a specific [`iframe_login`](/advanced/embed-dashboard-login) call. Pass this to revoke **only that one session** instead of every active session — see [Ending a single session](#ending-a-single-session) below. If provided, this takes priority over `promoter_id`/`cust_id`; if left blank, the request falls back to revoking all of the promoter's sessions.
+</ParamField>
 <ParamField header="Authorization" type="string" required>
   `Bearer {your_api_key}`
 </ParamField>
@@ -45,11 +48,24 @@ POST https://v2.firstpromoter.com/api/v2/promoters/iframe_logout
   `{your_account_id}`
 </ParamField>
 
-The request body is empty. A `200 OK` with no body confirms the session was revoked; a `404` means no promoter matched the `promoter_id`/`cust_id` you passed.
+The request body is empty. A `200 OK` with no body confirms the session was revoked; a `404` means no promoter matched the `promoter_id`/`cust_id` you passed (or, when using `session_token`, that the token doesn't exist, is already revoked, belongs to a different account, or doesn't belong to a promoter).
 
 <Warning>
-  This revokes **every currently active access token that promoter has under your account** — including any not-yet-expired tokens from earlier `iframe_login` calls (e.g. from other tabs or an earlier page load). It does not touch that same person's sessions under any other FirstPromoter account they may also be a promoter for.
+  Without `session_token`, this revokes **every currently active access token that promoter has under your account** — including any not-yet-expired tokens from earlier `iframe_login` calls (e.g. from other tabs or an earlier page load). It does not touch that same person's sessions under any other FirstPromoter account they may also be a promoter for.
 </Warning>
+
+### Ending a single session
+
+If you embed the dashboard in multiple places at once for the same promoter (e.g. several open tabs, or a mobile and web session) and only want to end one of them, pass `session_token` instead of `promoter_id`/`cust_id`. Its value is the `access_token` your backend received from the corresponding `iframe_login` call — so you'll need to have stored that value per-session in order to target it later.
+
+```sh cURL
+curl --request POST \
+  --url 'https://v2.firstpromoter.com/api/v2/promoters/iframe_logout?session_token=THE_ACCESS_TOKEN_FROM_IFRAME_LOGIN' \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Account-Id: YOUR_ACCOUNT_ID'
+```
+
+All of the promoter's other active sessions remain untouched.
 
 ### Example
 
