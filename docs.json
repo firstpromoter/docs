@@ -88,6 +88,7 @@
                           "integrations/tracking/platform/kartra",
                           "integrations/tracking/platform/dropfunnels",
                           "integrations/tracking/platform/calendly",
+                          "integrations/tracking/platform/demio",
                           "integrations/tracking/platform/kickpages",
                           "integrations/tracking/platform/thinkific",
                           {
@@ -606,6 +607,7 @@
                           "integrations/tracking/platform/kartra",
                           "integrations/tracking/platform/dropfunnels",
                           "integrations/tracking/platform/calendly",
+                          "integrations/tracking/platform/demio",
                           "integrations/tracking/platform/kickpages",
                           "integrations/tracking/platform/thinkific",
                           {
