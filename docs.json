@@ -91,6 +91,11 @@
                           "integrations/tracking/platform/demio",
                           "integrations/tracking/platform/kickpages",
                           "integrations/tracking/platform/thinkific",
+                          "integrations/tracking/platform/hubspot",
+                          "integrations/tracking/platform/jotform",
+                          "integrations/tracking/platform/typeform",
+                          "integrations/tracking/platform/webinarjam",
+                          "integrations/tracking/platform/recurly-hosted-pages",
                           {
                             "group": "Chargebee",
                             "pages": [
@@ -610,6 +615,11 @@
                           "integrations/tracking/platform/demio",
                           "integrations/tracking/platform/kickpages",
                           "integrations/tracking/platform/thinkific",
+                          "integrations/tracking/platform/hubspot",
+                          "integrations/tracking/platform/jotform",
+                          "integrations/tracking/platform/typeform",
+                          "integrations/tracking/platform/webinarjam",
+                          "integrations/tracking/platform/recurly-hosted-pages",
                           {
                             "group": "Chargebee",
                             "pages": [
