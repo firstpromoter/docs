@@ -134,7 +134,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "description": "Unauthorized — the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
             "content": {
               "application/json": {
                 "schema": {
@@ -145,7 +145,7 @@
             }
           },
           "403": {
-            "description": "Forbidden \u2014 the authenticated user does not have permission to perform this action",
+            "description": "Forbidden — the authenticated user does not have permission to perform this action",
             "content": {
               "application/json": {
                 "schema": {
@@ -213,7 +213,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "description": "Unauthorized — the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
             "content": {
               "application/json": {
                 "schema": {
@@ -224,7 +224,7 @@
             }
           },
           "403": {
-            "description": "Forbidden \u2014 the authenticated user does not have permission to perform this action",
+            "description": "Forbidden — the authenticated user does not have permission to perform this action",
             "content": {
               "application/json": {
                 "schema": {
@@ -317,7 +317,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "description": "Unauthorized — the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
             "content": {
               "application/json": {
                 "schema": {
@@ -328,7 +328,7 @@
             }
           },
           "403": {
-            "description": "Forbidden \u2014 the authenticated user does not have permission to perform this action",
+            "description": "Forbidden — the authenticated user does not have permission to perform this action",
             "content": {
               "application/json": {
                 "schema": {
@@ -433,7 +433,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "description": "Unauthorized — the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
             "content": {
               "application/json": {
                 "schema": {
@@ -444,7 +444,131 @@
             }
           },
           "403": {
-            "description": "Forbidden \u2014 the authenticated user does not have permission to perform this action",
+            "description": "Forbidden — the authenticated user does not have permission to perform this action",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "message": "You don't have enough rights to perform this action",
+                  "code": "forbidden"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "message": "Record not found",
+                  "code": "not_found"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/promoters/{id}/referral_links": {
+      "get": {
+        "summary": "Get promoter referral links",
+        "description": "With this endpoint you can get the list of referral links for a single promoter (their default link plus any campaign or custom links). \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/promoters/{id}/referral_links`</Tip>",
+        "operationId": "getPromoterReferralLinks",
+        "tags": [
+          "Promoters"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Id of the promoter",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "url": {
+                        "type": "string"
+                      },
+                      "is_default": {
+                        "type": "boolean",
+                        "nullable": true
+                      },
+                      "source": {
+                        "type": "string",
+                        "enum": [
+                          "campaign",
+                          "promoter"
+                        ]
+                      },
+                      "sub_id": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "campaign": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "color": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "language": {
+                            "type": "string",
+                            "nullable": true
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized — the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden — the authenticated user does not have permission to perform this action",
             "content": {
               "application/json": {
                 "schema": {
@@ -542,7 +666,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "description": "Unauthorized — the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
             "content": {
               "application/json": {
                 "schema": {
@@ -553,7 +677,7 @@
             }
           },
           "403": {
-            "description": "Forbidden \u2014 the authenticated user does not have permission to perform this action",
+            "description": "Forbidden — the authenticated user does not have permission to perform this action",
             "content": {
               "application/json": {
                 "schema": {
@@ -576,6 +700,807 @@
                 "example": {
                   "message": "Record not found",
                   "code": "not_found"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/promoters/{id}/traffic_sources_report": {
+      "get": {
+        "summary": "Get reports for promoter traffic sources",
+        "description": "With this endpoint you can get the traffic sources report for a single promoter, broken down by source and grouped over time. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/promoters/{id}/traffic_sources_report`</Tip>",
+        "operationId": "getPromoterTrafficSourcesReport",
+        "tags": [
+          "Promoters"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Id of the promoter",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "columns",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "clicks_count",
+                  "revenue_amount",
+                  "promoter_earnings_amount",
+                  "referrals_count",
+                  "customers_count",
+                  "sales_count",
+                  "refunds_count",
+                  "cancelled_customers_count",
+                  "referrals_to_customers_cr",
+                  "clicks_to_customers_cr",
+                  "clicks_to_referrals_cr"
+                ]
+              }
+            },
+            "description": "Fields to be included in the report"
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Search query string, matched against the traffic source name"
+          },
+          {
+            "name": "group_by",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "day",
+                "week",
+                "month",
+                "year"
+              ]
+            },
+            "description": "Time period grouping"
+          },
+          {
+            "name": "start_date",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "Start date for the report period"
+          },
+          {
+            "name": "end_date",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "End date for the report period"
+          },
+          {
+            "name": "sorting",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string",
+                "enum": [
+                  "asc",
+                  "desc"
+                ]
+              }
+            },
+            "description": "Sorting parameters"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 20
+            },
+            "description": "Maximum number of traffic sources to return"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "source": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "clicks_count": {
+                            "type": "integer"
+                          },
+                          "revenue_amount": {
+                            "type": "number"
+                          },
+                          "promoter_earnings_amount": {
+                            "type": "number"
+                          },
+                          "referrals_count": {
+                            "type": "integer"
+                          },
+                          "customers_count": {
+                            "type": "integer"
+                          },
+                          "sales_count": {
+                            "type": "integer"
+                          },
+                          "refunds_count": {
+                            "type": "integer"
+                          },
+                          "cancelled_customers_count": {
+                            "type": "integer"
+                          },
+                          "referrals_to_customers_cr": {
+                            "type": "number"
+                          },
+                          "clicks_to_customers_cr": {
+                            "type": "number"
+                          },
+                          "clicks_to_referrals_cr": {
+                            "type": "number"
+                          }
+                        }
+                      },
+                      "sub_data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "period": {
+                              "type": "string"
+                            },
+                            "id": {
+                              "type": "string"
+                            },
+                            "data": {
+                              "type": "object",
+                              "properties": {
+                                "clicks_count": {
+                                  "type": "integer"
+                                },
+                                "revenue_amount": {
+                                  "type": "number"
+                                },
+                                "promoter_earnings_amount": {
+                                  "type": "number"
+                                },
+                                "referrals_count": {
+                                  "type": "integer"
+                                },
+                                "customers_count": {
+                                  "type": "integer"
+                                },
+                                "sales_count": {
+                                  "type": "integer"
+                                },
+                                "refunds_count": {
+                                  "type": "integer"
+                                },
+                                "cancelled_customers_count": {
+                                  "type": "integer"
+                                },
+                                "referrals_to_customers_cr": {
+                                  "type": "number"
+                                },
+                                "clicks_to_customers_cr": {
+                                  "type": "number"
+                                },
+                                "clicks_to_referrals_cr": {
+                                  "type": "number"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized — the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden — the authenticated user does not have permission to perform this action",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "message": "You don't have enough rights to perform this action",
+                  "code": "forbidden"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "message": "Record not found",
+                  "code": "not_found"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "param is missing or the value is empty: columns"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "invalid_params"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/promoters/{id}/overview_report": {
+      "get": {
+        "summary": "Get reports for promoter overview",
+        "description": "With this endpoint you can get the overview report for a single promoter, grouped over time. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/promoters/{id}/overview_report`</Tip>",
+        "operationId": "getPromoterOverviewReport",
+        "tags": [
+          "Promoters"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Id of the promoter",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "columns",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "active_customers",
+                  "monthly_churn",
+                  "clicks_count",
+                  "net_revenue_amount",
+                  "revenue_amount",
+                  "referrals_count",
+                  "customers_count",
+                  "sales_count",
+                  "refunds_count",
+                  "cancelled_customers_count",
+                  "promoter_earnings_amount",
+                  "non_link_customers",
+                  "referrals_to_customers_cr",
+                  "3m_epc",
+                  "6m_epc",
+                  "clicks_to_customers_cr",
+                  "clicks_to_referrals_cr",
+                  "promoter_paid_amount",
+                  "signups_count"
+                ]
+              }
+            },
+            "description": "Fields to be included in the report"
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Search query string"
+          },
+          {
+            "name": "group_by",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "day",
+                "week",
+                "month",
+                "year"
+              ]
+            },
+            "description": "Time period grouping"
+          },
+          {
+            "name": "start_date",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "Start date for the report period"
+          },
+          {
+            "name": "end_date",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "End date for the report period"
+          },
+          {
+            "name": "sorting",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string",
+                "enum": [
+                  "asc",
+                  "desc"
+                ]
+              }
+            },
+            "description": "Sorting parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "period": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "revenue_amount": {
+                            "type": "number"
+                          },
+                          "net_revenue_amount": {
+                            "type": "number"
+                          },
+                          "promoter_earnings_amount": {
+                            "type": "number"
+                          },
+                          "customers_count": {
+                            "type": "integer"
+                          },
+                          "referrals_count": {
+                            "type": "integer"
+                          },
+                          "clicks_count": {
+                            "type": "integer"
+                          },
+                          "active_customers": {
+                            "type": "integer"
+                          },
+                          "3m_epc": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized — the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden — the authenticated user does not have permission to perform this action",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "message": "You don't have enough rights to perform this action",
+                  "code": "forbidden"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "message": "Record not found",
+                  "code": "not_found"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "param is missing or the value is empty: columns"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "invalid_params"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/promoters/{id}/urls_report": {
+      "get": {
+        "summary": "Get reports for promoter URLs",
+        "description": "With this endpoint you can get the report data for a single promoter, grouped by URL. \n <Tip>**HTTP Request** <br/>`GET https://api.firstpromoter.com/api/v2/company/promoters/{id}/urls_report`</Tip>",
+        "operationId": "getPromoterUrlsReport",
+        "tags": [
+          "Promoters"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Id of the promoter",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "columns",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "clicks_count",
+                  "revenue_amount",
+                  "promoter_earnings_amount",
+                  "referrals_count",
+                  "customers_count",
+                  "sales_count",
+                  "refunds_count",
+                  "cancelled_customers_count",
+                  "referrals_to_customers_cr",
+                  "clicks_to_customers_cr",
+                  "clicks_to_referrals_cr",
+                  "url"
+                ]
+              }
+            },
+            "description": "Fields to be included in the report"
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Search query string"
+          },
+          {
+            "name": "group_by",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "day",
+                "week",
+                "month",
+                "year"
+              ]
+            },
+            "description": "Time period grouping"
+          },
+          {
+            "name": "start_date",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "Start date for the report period"
+          },
+          {
+            "name": "end_date",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "End date for the report period"
+          },
+          {
+            "name": "sorting",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string",
+                "enum": [
+                  "asc",
+                  "desc"
+                ]
+              }
+            },
+            "description": "Sorting parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "clicks_count": {
+                            "type": "integer"
+                          },
+                          "revenue_amount": {
+                            "type": "number"
+                          },
+                          "promoter_earnings_amount": {
+                            "type": "number"
+                          },
+                          "referrals_count": {
+                            "type": "integer"
+                          },
+                          "customers_count": {
+                            "type": "integer"
+                          },
+                          "sales_count": {
+                            "type": "integer"
+                          },
+                          "refunds_count": {
+                            "type": "integer"
+                          },
+                          "cancelled_customers_count": {
+                            "type": "integer"
+                          },
+                          "referrals_to_customers_cr": {
+                            "type": "number"
+                          },
+                          "clicks_to_customers_cr": {
+                            "type": "number"
+                          },
+                          "clicks_to_referrals_cr": {
+                            "type": "number"
+                          }
+                        }
+                      },
+                      "sub_data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "period": {
+                              "type": "string"
+                            },
+                            "id": {
+                              "type": "string"
+                            },
+                            "data": {
+                              "type": "object",
+                              "properties": {
+                                "clicks_count": {
+                                  "type": "integer"
+                                },
+                                "revenue_amount": {
+                                  "type": "number"
+                                },
+                                "promoter_earnings_amount": {
+                                  "type": "number"
+                                },
+                                "referrals_count": {
+                                  "type": "integer"
+                                },
+                                "customers_count": {
+                                  "type": "integer"
+                                },
+                                "sales_count": {
+                                  "type": "integer"
+                                },
+                                "refunds_count": {
+                                  "type": "integer"
+                                },
+                                "cancelled_customers_count": {
+                                  "type": "integer"
+                                },
+                                "referrals_to_customers_cr": {
+                                  "type": "number"
+                                },
+                                "clicks_to_customers_cr": {
+                                  "type": "number"
+                                },
+                                "clicks_to_referrals_cr": {
+                                  "type": "number"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized — the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden — the authenticated user does not have permission to perform this action",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "message": "You don't have enough rights to perform this action",
+                  "code": "forbidden"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "message": "Record not found",
+                  "code": "not_found"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "param is missing or the value is empty: columns"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "invalid_params"
+                    }
+                  }
                 }
               }
             }
@@ -670,7 +1595,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "description": "Unauthorized — the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
             "content": {
               "application/json": {
                 "schema": {
@@ -790,7 +1715,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "description": "Unauthorized — the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
             "content": {
               "application/json": {
                 "schema": {
@@ -910,7 +1835,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "description": "Unauthorized — the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1023,7 +1948,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "description": "Unauthorized — the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1157,7 +2082,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "description": "Unauthorized — the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1282,7 +2207,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "description": "Unauthorized — the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1402,7 +2327,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "description": "Unauthorized — the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1515,7 +2440,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "description": "Unauthorized — the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1555,7 +2480,7 @@
         "name": "Account-ID",
         "in": "header",
         "required": true,
-        "description": "Account id. You can find your Account ID on Your FirstPromoter Dashboard. Navigate to Settings \u2192 Integrations",
+        "description": "Account id. You can find your Account ID on Your FirstPromoter Dashboard. Navigate to Settings → Integrations",
         "schema": {
           "type": "string"
         }
@@ -2594,7 +3519,7 @@
           },
           "inactivity": {
             "type": "object",
-            "description": "Filter promoters by inactivity \u2014 promoters who have not performed the specified metric within the given number of days",
+            "description": "Filter promoters by inactivity — promoters who have not performed the specified metric within the given number of days",
             "properties": {
               "metric": {
                 "type": "string",
@@ -2666,13 +3591,13 @@
       "BearerAuth": {
         "type": "http",
         "scheme": "bearer",
-        "description": "API key passed as a Bearer token in the Authorization header. You can find your API Key on Your FirstPromoter Dashboard. Navigate to Settings \u2192 Integrations section \u2192 Manage API Keys"
+        "description": "API key passed as a Bearer token in the Authorization header. You can find your API Key on Your FirstPromoter Dashboard. Navigate to Settings → Integrations section → Manage API Keys"
       },
       "accountId": {
         "type": "apiKey",
         "in": "header",
         "name": "ACCOUNT-ID",
-        "description": "Your FirstPromoter Account ID. You can find this in the  Settings \u2192 Integrations section of your dashboard."
+        "description": "Your FirstPromoter Account ID. You can find this in the  Settings → Integrations section of your dashboard."
       }
     }
   }
