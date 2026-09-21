@@ -71,7 +71,8 @@
                       {
                         "group": "Payout Provider",
                         "pages": [
-                          "integrations/payouts/tipalti"
+                          "integrations/payouts/tipalti",
+                          "integrations/payouts/wise"
                         ]
                       },
                       {
