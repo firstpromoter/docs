@@ -69,6 +69,12 @@
                         ]
                       },
                       {
+                        "group": "Payout Provider",
+                        "pages": [
+                          "integrations/payouts/tipalti"
+                        ]
+                      },
+                      {
                         "group": "Platform",
                         "pages": [
                           "integrations/tracking/platform/wordpress",
