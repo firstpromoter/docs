@@ -17,8 +17,8 @@ Wise account for you and keeps each payout's status in sync.
 
 Once connected:
 
-- Promoters add their **Wise email address** as a payout method in the affiliate portal — the email of the Wise account
-  they want to be paid into.
+- Promoters **connect their own Wise account** from the affiliate portal, the same way they would connect Stripe.
+  FirstPromoter reads the bank account details Wise issued them and pays those — no bank numbers are typed anywhere.
 - Paying a batch of payouts becomes a **one-click** action in FirstPromoter. Every payout run creates one batch of
   transfers in your Wise account, which you pay from your Wise balance with a single approval in Wise.
 - Payout statuses (sent, cancelled, refunded) flow back into FirstPromoter automatically.
@@ -78,9 +78,6 @@ Once connected:
   </Step>
   <Step title="Enable it">
     Click **Enable**. For your security, enabling a payout integration requires a two-factor verification step.
-
-    When you enable Wise, FirstPromoter also creates Wise recipients for any promoters who already have a Wise email
-    saved, so existing promoters do not have to re-enter anything.
   </Step>
   <Step title="Offer it to promoters">
     Wise now appears in **Payouts → Payout terms** as an available payout method. Enable it there for it to show up in
@@ -112,39 +109,59 @@ ignored, so Wise's automatic retries are safe.
 
 # How promoters connect
 
-Promoters set Wise up themselves, from the affiliate portal:
+Promoters connect their own Wise account themselves, from the affiliate portal. Any Wise account works — **personal or
+business** — and it does not have to be in the same country or currency as yours.
 
 <Steps>
   <Step title="Open payout methods">
     The promoter goes to **My payouts → Payout methods** and adds **Wise**.
   </Step>
-  <Step title="Enter the Wise email">
-    They enter the **email address of their Wise account** — that is all Wise needs for this type of recipient. No bank
-    details, IBANs or account numbers are entered in FirstPromoter.
+  <Step title="Connect Wise">
+    They click **Connect Wise** and are taken to Wise, where they log in and approve FirstPromoter's access. If their
+    Wise login has more than one profile, they choose the one they want to be paid into.
   </Step>
-  <Step title="FirstPromoter creates the recipient">
-    FirstPromoter creates an email recipient in your Wise account for that promoter. This happens in the background and
-    usually takes a few seconds.
+  <Step title="Back to the portal">
+    Wise sends them back to the affiliate portal. FirstPromoter reads the **account details** Wise issued for that
+    profile and turns them into a recipient in your Wise account, so payouts reach them as an ordinary bank transfer.
   </Step>
 </Steps>
+
+<Note>
+  **What FirstPromoter stores.** Only what Wise hands over: which Wise profile was connected, the account details Wise
+  issued for it (shown back to the promoter masked, for example *USD · Checking ····1234*) and the recipient created
+  from them in your Wise account. The promoter never types an IBAN, routing number or account number into
+  FirstPromoter, and neither you nor FirstPromoter can see or act on their Wise account beyond reading those details.
+</Note>
+
+## The promoter needs active account details
+
+Wise issues **account details** — the bank details other people can send money to — per currency, and only once the
+account is verified. A promoter can only be paid when their connected profile has **active account details in a
+currency you can pay**: ideally your account currency, otherwise another active currency, which Wise converts into on
+the way.
+
+If Wise has not issued any yet, the payout method stays **Pending** with a *details not issued* note. The promoter
+opens Wise → **Account details**, gets the details issued for the currency they want (Wise may ask them to verify their
+identity or make a first top-up), and then presses **Refresh** on the payout method in the portal. FirstPromoter reads
+the details again and the card flips to **Ready**.
 
 Statuses shown on the payout method:
 
 | Badge | Meaning |
 | --- | --- |
-| **Ready** | The recipient was created in Wise. The promoter can be included in payouts |
-| **Pending** | The recipient is still being created in Wise |
-| **Invalid** | Wise rejected the email. The error Wise returned is shown on the card — the promoter can correct the address and it is retried straight away |
+| **Connected** | The Wise account is linked, FirstPromoter is reading the account details |
+| **Pending** | Wise has not issued usable account details for this profile yet — the reason is shown on the card, with a **Refresh** button to check again |
+| **Ready** | A recipient was created from the promoter's account details. They can be included in payouts |
 
 As with any payout method, one that you disable in FirstPromoter is excluded from payouts — that is a FirstPromoter
-state and nothing is changed in your Wise account.
+state and nothing is changed in the promoter's Wise account.
 
-<Note>
-  **The email does not have to belong to an existing Wise account.** If the address is not registered with Wise yet, or
-  belongs to an account that cannot receive the currency, Wise still accepts the transfer and then asks the recipient
-  to claim it. In FirstPromoter that payout stays **processing** with a *waiting for recipient* note until they do —
-  see [Unclaimed emails](#unclaimed-emails) below.
-</Note>
+## How a promoter disconnects
+
+The promoter removes the **Wise** payout method in **My payouts → Payout methods**. That deletes the connection and the
+stored details from FirstPromoter; nothing in their Wise account changes and payouts already on their way are still
+delivered by Wise. They can also revoke FirstPromoter's access at any time from their Wise account settings — the
+payout method then stops working and shows as needing to be connected again.
 
 # Paying promoters
 
@@ -192,7 +209,7 @@ What the statuses mean:
 | `processing` | **Processing** — Wise is working on the transfer |
 | `funds_converted` | **Processing** — the currency conversion is done, the payout is on its way |
 | `bounced_back` | **Processing**, with an alert on the payout — Wise could not deliver and is retrying or returning the money |
-| `waiting_recipient_input_to_proceed` | **Processing**, with a *waiting for recipient* alert — see below |
+| `waiting_recipient_input_to_proceed` | **Processing**, with an alert on the payout — Wise is waiting on something from the recipient before it can continue |
 
 <Tip>
   FirstPromoter only marks a payout as **failed** for the three statuses above, because those are the only ones where
@@ -202,16 +219,8 @@ What the statuses mean:
 
 Failed payouts stay selectable — fix the cause in Wise (or with the promoter) and include them in a new payout run.
 
-### Unclaimed emails
-
-When you pay an email address that has no Wise account yet, Wise emails the recipient and asks them to sign up and add
-their bank details so the money can be delivered. Until they do, the transfer sits in
-`waiting_recipient_input_to_proceed` and the payout shows **processing** with a *waiting for recipient* alert in
-FirstPromoter.
-
-There is nothing to do on your side: the transfer stays in progress until the recipient claims it, and FirstPromoter
-marks the payout as completed at the next check once Wise sends it. If Wise eventually cancels or refunds the transfer
-instead, the payout is marked as failed and can be paid again.
+Promoters who have not connected their Wise account, or whose account details are not usable yet, are not sent to Wise
+at all. Their payouts are marked as failed with the reason, so you can see exactly who still has to finish connecting.
 
 # Troubleshooting
 
@@ -236,23 +245,31 @@ instead, the payout is marked as failed and can be paid again.
     Once it is paid, FirstPromoter detects it automatically — no re-run is needed. Cancelling the batch in Wise instead
     will mark the payouts as failed in FirstPromoter on the next check, and they can be paid again in a new run.
   </Accordion>
-  <Accordion title="A promoter's Wise email is rejected">
-    Wise validates the address when the recipient is created. A rejected payout method shows Wise's own message, such
-    as a malformed email address or a name that Wise will not accept for the recipient. The promoter can correct the
-    email in **My payouts → Payout methods** and the recipient is created again straight away.
+  <Accordion title="A promoter's payout method stays Pending">
+    **Pending** means Wise has not given FirstPromoter usable account details for the connected profile yet. The card
+    shows the reason; the two common ones are:
+
+    - **Details not issued.** Wise has not issued account details for that profile in any currency you can pay. The
+      promoter opens Wise → **Account details**, gets them issued for the currency they want — Wise may first ask them
+      to verify their identity or top the account up — and then presses **Refresh** on the payout method.
+    - **Details not usable yet.** Wise returned details it will not yet accept as a recipient, which normally means the
+      account is still being verified. This is not the promoter's mistake and there is nothing to correct; **Refresh**
+      once Wise finishes.
 
     A promoter whose payout method is not **Ready** at the moment you pay is not sent to Wise at all — their payout is
-    marked as failed with the reason, so you can see exactly who needs to fix their details.
+    marked as failed with the reason, so you can see exactly who still has to finish.
   </Accordion>
   <Accordion title="Unsupported currency or destination">
-    Wise cannot send every currency to every country, and email recipients can only receive the currencies Wise
-    supports for that route. If Wise rejects a transfer for this reason, the payout fails with Wise's message and the
-    promoter should be paid with a different payout method. Your FirstPromoter account currency also has to be one Wise
-    can hold as a balance, because batches are funded from that balance.
+    Promoters are paid into the account details Wise issued them, in their currency — FirstPromoter prefers details in
+    your account currency and otherwise lets Wise convert. If a promoter's only account details are in a currency Wise
+    cannot pay from your balance, or Wise rejects the route, the payout fails with Wise's message and they should be
+    paid with a different payout method. Your FirstPromoter account currency also has to be one Wise can hold as a
+    balance, because batches are funded from that balance.
   </Accordion>
   <Accordion title="A payout stays processing">
     First check what Wise itself says about the transfer — the Wise status is shown on the payout. `bounced_back` and
-    `waiting_recipient_input_to_proceed` are both normal "not finished yet" states and resolve on their own.
+    `waiting_recipient_input_to_proceed` (Wise is waiting on the recipient for something) are both normal "not finished
+    yet" states and usually resolve on their own.
 
     FirstPromoter re-checks in-flight transfers on a widening schedule for up to 30 days, so a missed webhook only
     delays an update, it never loses it. A transfer that is still not final after 30 days is marked as failed.
@@ -263,8 +280,9 @@ instead, the payout is marked as failed and can be paid again.
     two-factor verification step.
 
     Disconnecting does not touch anything in your Wise account: recipients, transfers already created and your balance
-    all stay exactly as they are, and transfers in flight are still paid by Wise. Promoters keep their saved Wise email,
-    so reconnecting and enabling the integration again re-creates their recipients automatically.
+    all stay exactly as they are, and transfers in flight are still paid by Wise. Promoters keep their own Wise
+    connection, so re-enabling the integration puts them back in the payout runs — a promoter only has to act if their
+    payout method shows **Pending** afterwards, where **Refresh** is enough.
   </Accordion>
   <Accordion title="Moving from sandbox to production">
     Switching the environment does **not** carry anything over — Wise's sandbox and live environments are separate
@@ -273,7 +291,8 @@ instead, the payout is marked as failed and can be paid again.
     1. Switch the environment to **Production** on the Wise card.
     2. Click **Connect Wise** and authorise with your live Wise Business account.
     3. Pick the business profile you want to pay from and run **Test connection**.
-    4. Click **Enable**. Promoters' saved Wise emails are turned into recipients in the live account automatically.
+    4. Click **Enable**. Promoters then connect their Wise account again from the portal, because a connection made in
+       sandbox exists only there.
   </Accordion>
   <Accordion title="Can I keep using Wise manually as well?">
     Yes. Transfers and batches you create yourself in Wise are unaffected — FirstPromoter only tracks the transfers it
