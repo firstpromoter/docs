@@ -1654,6 +1654,27 @@
                 "nullable": true
               }
             }
+          },
+          "assigned_to": {
+            "type": "array",
+            "description": "The team members this promoter is assigned to. Empty when nobody is assigned. Assignments are what an Affiliate Manager sees, so a manager only reads promoters that list them here.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "description": "ID of the team member (company user), which is also what the `assigned_to` filter takes"
+                },
+                "name": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "email": {
+                  "type": "string",
+                  "nullable": true
+                }
+              }
+            }
           }
         }
       },
@@ -2056,6 +2077,20 @@
               "not_submitted"
             ],
             "description": "Filter promoters by their invoice details status"
+          },
+          "assigned_to": {
+            "oneOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "not_set"
+                ]
+              }
+            ],
+            "description": "Filter promoters by the team member they are assigned to. Takes a team member (company user) ID, or `not_set` for the promoters nobody is assigned to."
           }
         }
       },
