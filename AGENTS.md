@@ -8,13 +8,16 @@ The public FirstPromoter documentation site, built with [Mintlify](https://mintl
 
 ## Commands
 
+Use the monorepo Docker stack (`make start` at its root) for local development; the docs are served on http://localhost:3003. For a standalone checkout, run from the directory containing `docs.json`:
+
 ```bash
-npm i -g mintlify     # once
-mintlify dev          # preview at http://localhost:3000
-mintlify install      # if dev refuses to start, reinstall dependencies
+npm i -g mint         # current Mintlify CLI; Node.js 20.17+ required
+mint dev --port 3003 --no-open
+mint validate         # check MDX and the documentation build
+mint broken-links     # check internal links
 ```
 
-In the monorepo docker stack the site is served on http://localhost:3003.
+See the [CLI reference](https://www.mintlify.com/docs/cli/commands). The existing Docker configuration still invokes the legacy `mintlify` CLI; migrating the container is a separate build change.
 
 ## Layout
 
@@ -36,10 +39,10 @@ images/, logo/, downloadables/
 
 ## Rules
 
-- **Every new page must be added to `docs.json`** under the right version and group, or it will not appear in the navigation. The file has two `versions` entries (`v2` first, then `v1`); put new content under `v2` unless it documents the legacy API.
+- **New navigable pages must be added to `docs.json`** under the right version and group. Reusable snippets and intentionally unlisted pages do not need navigation entries. The file has two `versions` entries (`v2` first, then `v1`); put new content under `v2` unless it documents the legacy API.
 - **Pages are MDX** with a frontmatter `title` (and usually `description`). Use Mintlify components (`<Note>`, `<Warning>`, `<Steps>`, `<Tabs>`, `<CodeGroup>`, `<ParamField>`, `<ResponseField>`) rather than raw HTML.
-- **API reference pages mirror `fpr-api`.** When an endpoint, parameter or response field changes in `fpr-api` (`/api/v2/company/`, `/api/v2/affiliate/`, `/api/v2/track/`), update the matching page here in the same change set. Do not document endpoints that are not released.
-- **Webhook docs mirror `fpr-api/app/services/webhooks/`**: event types and payload shapes in `webhooks-v2/` must match what the API sends.
+- **API reference pages mirror `fpr-api`.** Public v2 endpoints use `/api/v2/company/`, `/api/v2/affiliate/` and `/api/v2/track/`. Verify their routes, authentication, parameters and serializers in the matching API branch; the dashboard's `/api/admin/v1/` and `/api/affiliate/v1/` endpoints are separate. Prepare docs alongside API changes, but coordinate merging to `main` with the API release because it publishes the site.
+- **Webhook docs mirror the delivery implementation**: check `fpr-api/app/services/webhook_event_listener.rb`, its payload serializers and `app/workers/webhook_delivery_worker.rb` for v2; legacy delivery lives under `app/models/webhooks/`. Event types, payloads and signatures must match the corresponding version.
 - **Reuse snippets** from `snippets/` for text that appears on several pages instead of copying it.
 - Keep images in `images/`; prefer PNG screenshots sized for the page width.
 - Do not edit `docs-main-mintlify.textClipping` or the `Dockerfile` unless the task is about the docs build itself.
