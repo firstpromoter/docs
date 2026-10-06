@@ -5,7 +5,8 @@ description: "Pay your promoters from your own Wise Business account, one click 
 
 <Note>
   **Beta.** The Wise payout integration is available as a beta feature and appears with a **Beta** label in
-  **Settings → Integrations**. The setup flow and field names described here may still change.
+  **Settings → Integrations**. Contact FirstPromoter to confirm availability for your account before connecting a live
+  Wise account. The setup flow and field names described here may still change.
 </Note>
 
 # What it does
@@ -34,7 +35,7 @@ Once connected:
 | What you need | Where it comes from |
 | --- | --- |
 | A **Wise Business account** | [wise.com/business](https://wise.com/business). A personal Wise account cannot be used to pay promoters through the integration |
-| **Authorisation for FirstPromoter** | FirstPromoter is a Wise partner application. You grant access by clicking **Connect Wise** in FirstPromoter and approving the request in Wise — no API keys or personal tokens are copied by hand |
+| **Authorisation for FirstPromoter** | The FirstPromoter Wise partner application must be enabled for your account. You grant access by clicking **Connect Wise** in FirstPromoter and approving the request in Wise — no API keys or personal tokens are copied by hand |
 | A **business profile** | After connecting, you pick which of your Wise profiles the payouts are sent from. Only business profiles are offered. If your Wise login has exactly one business profile, FirstPromoter selects it for you |
 | A funded **balance** in your payout currency | Batches are funded from your Wise balance in your FirstPromoter account currency. Each promoter receives exactly the payout amount; Wise's fee is added on top and taken from the same balance, so keep a little headroom. Top it up in Wise before a payout run |
 | The right **environment** | **Sandbox** connects to Wise's test environment (no real money moves), **Production** to your live Wise account. The two are completely separate accounts |
@@ -91,8 +92,8 @@ FirstPromoter keeps payouts in sync with Wise in two ways, and you do not have t
 
 - **Polling.** After a batch is sent, FirstPromoter asks Wise for the state of every transfer that is still in flight —
   first after a couple of minutes, then with a growing gap (minutes, then hours) while nothing changes. Polling
-  continues for up to **30 days**; a transfer that has still not reached a final state by then is marked as failed so
-  it stops blocking the payout.
+  continues until Wise confirms a final state. After **30 days**, FirstPromoter adds a warning and keeps checking.
+  The payout stays processing to prevent a duplicate payment; check the transfer in Wise before taking further action.
 - **Webhooks.** When you enable the integration, FirstPromoter subscribes to Wise's transfer state-change
   notifications for the selected profile automatically. The **webhook URL** is shown read-only on the Wise card in
   FirstPromoter, so you can see where the events go. There is nothing to register in Wise by hand, and the
@@ -271,8 +272,8 @@ at all. Their payouts are marked as failed with the reason, so you can see exact
     `waiting_recipient_input_to_proceed` (Wise is waiting on the recipient for something) are both normal "not finished
     yet" states and usually resolve on their own.
 
-    FirstPromoter re-checks in-flight transfers on a widening schedule for up to 30 days, so a missed webhook only
-    delays an update, it never loses it. A transfer that is still not final after 30 days is marked as failed.
+    FirstPromoter keeps checking in-flight transfers. After 30 days it adds a warning, but keeps the payout processing
+    until Wise confirms a final state. Check the transfer in Wise before retrying or sending another payment.
   </Accordion>
   <Accordion title="Disconnecting Wise">
     **Disconnect** in the Wise card revokes FirstPromoter's access, removes the webhook subscription, clears the stored
