@@ -10,7 +10,7 @@ FirstPromoter can prepare payout batches in your own Wise Business account and t
 - A Wise Business account with access to API tokens.
 - A full-access personal API token created for that Business account.
 - Two-factor authentication enabled for the FirstPromoter admin managing the connection.
-- Receiving account details in your FirstPromoter company currency, supplied by affiliates or saved as recipients in Wise.
+- A discoverable Wise balance or receiving account details in your FirstPromoter company currency.
 
 You do not need a Wise Platform partner agreement, an OAuth client ID or secret, or API tokens from your affiliates. Wise documents this workflow in its [Business payouts guide](https://docs.wise.com/guides/product/send-money/use-cases/payouts-smbs).
 
@@ -37,22 +37,23 @@ You do not need a Wise Platform partner agreement, an OAuth client ID or secret,
 
 In the affiliate portal, open **My payouts → Payout methods**, add or edit Wise, and choose a receiving destination:
 
-- **Wise balance:** open **Home → the payout currency → Account details** in Wise. Copy the account holder and receiving details into FirstPromoter. Use the details for the selected payment route, not a card number or an external bank account. A payment to these details is credited to the relevant Wise currency balance. Account-detail availability depends on your country and currency; see [Wise's receiving guide](https://wise.com/help/articles/2898124/how-do-i-receive-money-to-my-wise-account-details).
+- **Wise balance:** choose **Wisetag**, **Email** or **Phone number**, enter your identifier, and select **Find in Wise**. Check the returned name and select **Use this recipient**. FirstPromoter sends to that Wise balance; bank details are not required. For phone numbers, include the country code.
+- **Wise balance using receiving details:** if lookup is unavailable, select **Use Wise receiving account details instead**. In Wise, open **Home → the payout currency → Account details** and copy the receiving details for the selected payment route. Availability depends on country and currency; see [Wise's receiving guide](https://wise.com/help/articles/2898124/how-do-i-receive-money-to-my-wise-account-details).
 - **Bank account:** provide your own bank account's receiving details for the payout currency. The payout goes to that bank account.
 - **Arrange with the company (email only):** keep the existing email-based CSV or admin-assisted setup.
 
-FirstPromoter asks Wise which fields the payment route requires and updates the form when you choose your country or recipient type. Save the method and complete the verification prompt if requested. FirstPromoter creates the recipient on the company's paying Business profile and assigns it to your payout method. You do not share an API token or sign in to Wise through FirstPromoter.
+For account details, FirstPromoter asks Wise which fields the payment route requires and updates the form when you choose your country or recipient type. Save the method and complete the verification prompt if requested. For a balance lookup, FirstPromoter keeps the confirmed Wise contact and checks the quoted balance recipient before each transfer. For receiving details, it creates the recipient on the company's paying Business profile. You do not share an API token or sign in to Wise through FirstPromoter.
 
 The admin sees your chosen destination and Wise's account summary. Only you and authorized company users can access your payout details. Affiliates cannot browse the company's Wise recipient list. Changing the destination clears the old fields so you can enter the new account details.
 
 ### If Wise cannot find an email
 
-To allow another Wise user to find you, open **Settings → Privacy and security → Find me by** in Wise and enable email. Check that you shared the email associated with the intended Wise profile. [Wise's discoverability guide](https://wise.com/help/articles/6QCvTerNg7bhJGr7KzpQm5/how-do-i-manage-my-discoverability-settings-on-wise) explains the privacy settings.
+Open **Settings → Privacy and security → Find me by** in Wise. Enable **Wisetag** and copy it exactly. If email or phone discovery options are available, you can enable them too. Some accounts only show Wisetag, so an email toggle is not required. Check that you are sharing the identifier for the intended Wise profile. [Wise's discoverability guide](https://wise.com/help/articles/6QCvTerNg7bhJGr7KzpQm5/how-do-i-manage-my-discoverability-settings-on-wise) explains the privacy settings.
 
-You can keep discoverability off and use your Wise currency account details instead. Saving an email in FirstPromoter does not verify a Wise account or select a particular balance. The account-details workflow above does not depend on email discovery.
+You can keep discoverability off and use your Wise currency account details instead. The email-only manual option does not verify a Wise account or select a balance. The balance lookup must return a recipient for you to confirm. The account-details workflow above does not depend on email discovery.
 
 <Note>
-  Wise's separate email-claim transfer flow is not used for automated batches. Its availability depends on the transaction, and Wise does not support testing email-recipient transfers in sandbox. See [Wise's recipient reference](https://docs.wise.com/api-reference/recipient/recipientcreate).
+  Balance lookup only works when Wise can resolve an existing discoverable recipient and permits the route for the paying account. If lookup is unavailable, use receiving account details. Wise's separate email-claim transfer flow is not used for automated batches. Its availability depends on the transaction, and Wise does not support testing email-recipient transfers in sandbox. See [Wise's recipient reference](https://docs.wise.com/api-reference/recipient/recipientcreate).
 </Note>
 
 ### Admin-assisted recipient assignment
