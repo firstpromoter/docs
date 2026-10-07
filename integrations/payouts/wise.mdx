@@ -1,0 +1,98 @@
+---
+title: Wise payouts
+description: Prepare affiliate payout batches with your Wise Business API token, then approve them in Wise.
+---
+
+FirstPromoter can prepare payout batches in your own Wise Business account and track each transfer until it settles. You review and fund the batch in Wise. FirstPromoter does not hold your money.
+
+## Requirements
+
+- A Wise Business account with access to API tokens.
+- A full-access personal API token created for that Business account.
+- Two-factor authentication enabled for the FirstPromoter admin managing the connection.
+- A discoverable Wise balance or receiving account details in your FirstPromoter company currency.
+
+You do not need a Wise Platform partner agreement, an OAuth client ID or secret, or API tokens from your affiliates. Wise documents this workflow in its [Business payouts guide](https://docs.wise.com/guides/product/send-money/use-cases/payouts-smbs).
+
+## Connect your Business account
+
+<Steps>
+  <Step title="Create an API token in Wise">
+    In Wise, open **Connect and manage apps → API tokens**, add a token, and select full access. Complete Wise's verification and copy the token.
+  </Step>
+  <Step title="Save the token in FirstPromoter">
+    Open **Settings → Integrations → Wise**. Choose **Production** for a real Wise account, paste your token, and select **Save token**. Confirm with your FirstPromoter verification code.
+
+    FirstPromoter encrypts the token. The field is blank when you reopen the integration; the saved token is never returned to the browser.
+  </Step>
+  <Step title="Choose the Business profile">
+    If your token can access several Business profiles, select the profile that will pay your affiliates and select **Save profile**. A single Business profile is selected automatically.
+  </Step>
+  <Step title="Enable payouts">
+    Test the connection, then select **Enable payouts** and confirm the change.
+  </Step>
+</Steps>
+
+## Affiliates choose where to receive money
+
+In the affiliate portal, open **My payouts → Payout methods**, add or edit Wise, and choose a receiving destination:
+
+- **Wise balance:** choose **Wisetag**, **Email** or **Phone number**, enter your identifier, and wait for the green checkmark and recipient name. Check the name, then save the payout method to confirm it. FirstPromoter sends to that Wise balance; bank details are not required. For phone numbers, include the country code.
+- **Wise balance using receiving details:** if lookup is unavailable, select **Use Wise receiving account details instead**. In Wise, open **Home → the payout currency → Account details** and copy the receiving details for the selected payment route. Availability depends on country and currency; see [Wise's receiving guide](https://wise.com/help/articles/2898124/how-do-i-receive-money-to-my-wise-account-details).
+- **Bank account:** provide your own bank account's receiving details for the payout currency. The payout goes to that bank account.
+- **Arrange with the company (email only):** keep the existing email-based CSV or admin-assisted setup.
+
+Payouts use the FirstPromoter company currency automatically. The form shows **Paid in [currency]**; there is no separate currency selection or confirmation.
+
+For account details, FirstPromoter asks Wise which fields the payment route requires and updates the form when you choose your country or recipient type. Save the method and complete the verification prompt if requested. For a balance lookup, FirstPromoter keeps the confirmed Wise contact and checks the quoted balance recipient before each transfer. For receiving details, it creates the recipient on the company's paying Business profile. You do not share an API token or sign in to Wise through FirstPromoter.
+
+Authorized admins can add or edit the same Wise destination from **Affiliates → the affiliate → Payout methods**. They use the same identifier and receiving-details form, then save and complete their verification prompt when required. Only you and authorized company users can access your payout details. Affiliates cannot browse the company's Wise recipient list. Changing the destination clears the old fields so you can enter the new account details.
+
+### If Wise cannot find an email
+
+Open **Settings → Privacy and security → Find me by** in Wise. Enable **Wisetag** and copy it exactly. If email or phone discovery options are available, you can enable them too. Some accounts only show Wisetag, so an email toggle is not required. Check that you are sharing the identifier for the intended Wise profile. [Wise's discoverability guide](https://wise.com/help/articles/6QCvTerNg7bhJGr7KzpQm5/how-do-i-manage-my-discoverability-settings-on-wise) explains the privacy settings.
+
+You can keep discoverability off and use your Wise currency account details instead. The email-only manual option does not verify a Wise account or select a balance. The balance lookup must return a verified recipient before the destination can be saved. The account-details workflow above does not depend on email discovery.
+
+<Note>
+  Balance lookup only works when Wise can resolve an existing discoverable recipient and permits the route for the paying account. If lookup is unavailable, use receiving account details. Wise's separate email-claim transfer flow is not used for automated batches. Its availability depends on the transaction, and Wise does not support testing email-recipient transfers in sandbox. See [Wise's recipient reference](https://docs.wise.com/api-reference/recipient/recipientcreate).
+</Note>
+
+### Admin-assisted recipient assignment
+
+For affiliates using the email-only option, open their Wise payout method in the admin dashboard and select **Load Wise recipients**. Choose the recipient that matches the receiving details the affiliate has confirmed. A saved bank recipient can represent their Wise currency account details or an external bank account.
+
+If the recipient is missing, add those details in Wise and reload. Only active recipients from your selected Business profile, in your company currency, are selectable. Supported routes include USD local transfers, GBP accounts, IBAN and SWIFT where Wise supports the route. Wise validates each actual quote and transfer when the batch is prepared.
+
+Leave the recipient unassigned to continue using CSV. Changing an email-only method's email clears the saved assignment for review. Admins can also switch to **Wise balance** or **Bank account** to enter and verify new receiving details directly.
+
+## Prepare and approve a batch
+
+1. Select the affiliate payouts in FirstPromoter and choose Wise.
+2. Confirm the payout with your verification code.
+3. FirstPromoter prepares the transfers and displays **Approve in Wise**.
+4. Open the batch in Wise, review its recipients, amounts and fees, then fund it using Wise's available payment methods.
+5. FirstPromoter checks transfer statuses and updates the payouts automatically.
+
+Each batch group contains at most 1,000 transfers. Larger batches have a separate Wise link for each group. Amounts are sent in the company currency; currency conversion is not offered by this version.
+
+Approving the payout in FirstPromoter does not fund the Wise batch. This integration always leaves funding to you in Wise, including in countries where Wise may permit API funding.
+
+## Statuses and recovery
+
+- **Awaiting funds:** open the Wise batch and finish funding it.
+- **Processing:** Wise has not reported a final result. Do not pay the same affiliate again outside the batch without checking Wise first.
+- **Completed:** Wise reported the transfer as sent; FirstPromoter updates the payout and creates its invoice where self-billing is enabled.
+- **Failed:** Wise rejected the transfer or confirmed a cancellation/refund. Review the error before retrying.
+
+A bounced transfer stays processing until Wise confirms the refund. A transfer that remains unresolved for 30 days receives a warning and continues to be checked; elapsed time alone never makes it eligible for another payment.
+
+## Change or disconnect the connection
+
+Finish or cancel active payout batches before switching Business profiles, changing environments, or disconnecting. You can replace a token while payouts are pending if the new token accesses the same Business profile in the same environment. Selecting another profile clears saved recipient assignments.
+
+Disconnecting removes the token from FirstPromoter. You can also revoke the token in Wise. Revoking it before transfers settle prevents FirstPromoter from checking their status until a working token is saved again.
+
+## Sandbox testing
+
+Use **Sandbox** with a token created at [wise-sandbox.com](https://wise-sandbox.com). Production tokens and sandbox tokens are separate. Sandbox transfers do not move real money; settlement tests use Wise's simulation endpoints.
