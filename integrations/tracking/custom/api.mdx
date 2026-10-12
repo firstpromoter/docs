@@ -3,6 +3,8 @@ title: "API Integration"
 description: "Track referrals server-side with the FirstPromoter Tracking API"
 ---
 
+import TidForVisitData from '/snippets/tid-for-visit-data.mdx';
+
 `Difficulty: Intermediate`<br/>
 `Developer Required: Yes`
 
@@ -17,6 +19,8 @@ With the FirstPromoter Tracking API you can track signups, sales, refunds, and c
 | `POST /api/v1/track/refund` | Track a refund and reverse a commission |
 | `POST /api/v1/track/cancellation` | Track a subscription cancellation |
 
-See the [Tracking API reference](/api-reference-v1/tracking-api/signup) for full parameter documentation including deduplication via `event_id`, recurring commission scheduling, and custom fields.
+See the [Tracking API reference](/api-reference-v1/tracking-api/leads-and-signups) for full parameter documentation including deduplication via `event_id`, recurring commission scheduling, and custom fields.
+
+<TidForVisitData />
 
 Click [here](https://login.firstpromoter.com?redirect=%2Finstructions%2Fapi) to view the in-app setup guide.

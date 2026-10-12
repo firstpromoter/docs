@@ -1,0 +1,74 @@
+## Using sub IDs, postbacks or ad tracking with the API
+
+If you want to use **sub IDs**, **postbacks** or **ad tracking**, sending `ref_id` to `track/signup` is not enough. These features rely on data captured when the visitor clicks the referral link: the sub ID (`fp_sid`) from the link, the landing page URL with any ad click IDs, and the visit itself. FirstPromoter only records that data when the click is tracked by the tracking script, and only links it to the referral when you send the visit's `tid`.
+
+<Warning>
+A signup tracked with only `ref_id` is credited to the right affiliate, but it has no click attached. Its sub ID will be empty, postback values that come from the visit will be blank, and ad traffic can't be detected.
+</Warning>
+
+To keep this data, use the tracking script for clicks and the API for signups:
+
+<Steps>
+  <Step title="Install the main tracking script">
+    Add the [main tracking script](/guides/tracking-with-fprjs#installation) to every page a referral link can land on. When a visitor arrives through a referral link, the script tracks the click and sets the `_fprom_ref` and `_fprom_tid` cookies.
+
+    If visitors land on one domain and sign up on another, set up [cross-domain tracking](/script-docs/fpr-js-docs) so the cookies are available where the signup happens.
+  </Step>
+  <Step title="Read the _fprom_tid cookie at signup">
+    When the visitor signs up, read the `_fprom_tid` cookie on your server (or in the browser and send it to your server with the signup form).
+  </Step>
+  <Step title="Send it as tid to track/signup">
+    Pass the cookie value in the `tid` parameter of [track/signup](/api-reference-v2/api-admin/tracking-api/leads-and-signups). FirstPromoter uses it to find the tracked click, credit the right affiliate, and attach the sub ID, landing URL and ad data to the referral.
+  </Step>
+</Steps>
+
+<CodeGroup>
+
+```javascript Server side (Express)
+const express = require('express');
+const cookieParser = require('cookie-parser');
+
+const app = express();
+app.use(cookieParser());
+app.use(express.json());
+
+app.post('/signup', async (req, res) => {
+  // Set by the FirstPromoter tracking script when the visitor clicked a referral link
+  const tid = req.cookies['_fprom_tid'];
+
+  // ...create the user in your app...
+
+  if (tid) {
+    await fetch('https://api.firstpromoter.com/api/v2/track/signup', {
+      method: 'POST',
+      headers: {
+        'Account-ID': '<account-id>',
+        'Authorization': 'Bearer <token>',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email: req.body.email, uid: req.body.uid, tid }),
+    });
+  }
+
+  res.sendStatus(201);
+});
+```
+
+```sh cURL
+curl --request POST \
+  --url https://api.firstpromoter.com/api/v2/track/signup \
+  --header 'Account-ID: <account-id>' \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "email": "customer1@gmail.com",
+    "uid": "cus_000001",
+    "tid": "<value of the _fprom_tid cookie>"
+}'
+```
+
+</CodeGroup>
+
+<Tip>
+If there is no `_fprom_tid` cookie, the visitor didn't arrive through a tracked referral link (or their browser blocked the cookie), so don't send an empty `tid`. If you still know the referral ID, you can send it as `ref_id` instead, but sub IDs, postback visit data and ad tracking won't be available for that referral.
+</Tip>
