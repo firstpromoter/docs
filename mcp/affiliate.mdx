@@ -1,0 +1,121 @@
+---
+title: "Affiliate MCP Server"
+description: "Connect AI tools like Claude Code, Claude Desktop and Cursor to your own affiliate data."
+---
+
+<Warning>
+  The FirstPromoter Affiliate MCP server is experimental. Tool names and parameters may change without notice.
+</Warning>
+
+The Affiliate MCP server lets you, as an affiliate, ask an AI assistant about your own performance in a FirstPromoter program: referrals, commissions, payouts, links, promo codes and reports. It is available to every affiliate.
+
+<Note>
+  This page is for **affiliates**. If you run an affiliate program, use the [MCP server for program admins](/mcp/overview) instead. It connects with OAuth and covers the whole program.
+</Note>
+
+## Example prompts
+
+- "How much have I earned this month, and how much is still pending?"
+- "List my referrals from the last 30 days that became customers."
+- "When is my next payout and how much will it be?"
+- "Which of my referral links brings the most clicks?"
+- "Compare my clicks, referrals and revenue over the last three months."
+
+## What it can do
+
+- **Read-only.** The tools only read data. They cannot create, change or delete anything, and they cannot move money.
+- **Your data only.** Every answer is scoped to your own affiliate account in one program, the same data you see in your affiliate dashboard.
+- **One program per key.** The server uses the API key from the program you created it in. If you promote several programs, add one server entry per program, each with that program's key.
+
+## Connection details
+
+| | |
+|---|---|
+| **URL** | `https://mcp.firstpromoter.com/affiliate` |
+| **Transport** | Streamable HTTP |
+| **Authentication** | `Authorization: Bearer {your_api_key}` header |
+
+Get the API key in your affiliate dashboard under **Profile** → **API & AI tools**; see [Authentication](/api-reference-v2/api-affiliate/authentication#get-your-api-key). The key already identifies the program, so the MCP server does not need an Account ID.
+
+<Note>
+  The affiliate server authenticates with an API key header, so it works with MCP clients that let you set custom headers. Connectors that only support OAuth (such as custom connectors on Claude web or ChatGPT) cannot connect to it yet.
+</Note>
+
+## Connect
+
+### Claude Code (CLI)
+
+```bash
+claude mcp add --transport http firstpromoter-affiliate https://mcp.firstpromoter.com/affiliate \
+  --header "Authorization: Bearer {your_api_key}"
+```
+
+Run `/mcp` inside a session to verify the connection and browse the available tools.
+
+### Cursor
+
+Add the server to `~/.cursor/mcp.json` (or `.cursor/mcp.json` in a project):
+
+```json
+{
+  "mcpServers": {
+    "firstpromoter-affiliate": {
+      "url": "https://mcp.firstpromoter.com/affiliate",
+      "headers": {
+        "Authorization": "Bearer {your_api_key}"
+      }
+    }
+  }
+}
+```
+
+Other MCP clients that support streamable HTTP with custom headers use the same URL and `Authorization` header.
+
+### Claude Desktop
+
+Claude Desktop's configuration file starts local servers, so use the [`mcp-remote`](https://www.npmjs.com/package/mcp-remote) bridge (requires Node.js). Open **Settings** → **Developer** → **Edit Config** and add:
+
+```json
+{
+  "mcpServers": {
+    "firstpromoter-affiliate": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://mcp.firstpromoter.com/affiliate",
+        "--header",
+        "Authorization:${AUTH_HEADER}"
+      ],
+      "env": {
+        "AUTH_HEADER": "Bearer {your_api_key}"
+      }
+    }
+  }
+}
+```
+
+Restart Claude Desktop after saving the file.
+
+### Several programs
+
+Add one entry per program, each with its own key, for example `firstpromoter-acme` and `firstpromoter-globex`. The assistant then sees each program as a separate set of tools.
+
+## Available tools
+
+| Tool | Description |
+|---|---|
+| `get_me` | Your affiliate profile in the program: name, email, balances, campaigns you belong to. |
+| `list_referrals` | Your referrals (leads and customers), filterable by state and date. |
+| `list_commissions` | Your commissions, filterable by status, paid state and date. |
+| `list_payouts` | Your payouts and their status, plus amounts that are due. |
+| `list_referral_links` | Your referral links per campaign. |
+| `list_promo_codes` | Promo codes assigned to you. |
+| `list_campaigns` | Campaigns you are part of. |
+| `get_reports` | Performance reports (clicks, referrals, customers, revenue, earnings) for a date range. |
+
+## Security
+
+- Anyone with your API key can read your data in the program. Do not share it or commit it to a repository.
+- If a key is exposed, **regenerate** it in **Profile** → **API & AI tools**. The old key stops working for both the API and the MCP server, so update your MCP configuration with the new key.
+- **Disable** API access to cut off every connected AI tool at once.
