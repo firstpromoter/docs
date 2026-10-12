@@ -32,7 +32,7 @@ The Affiliate MCP server lets you, as an affiliate, ask an AI assistant about yo
 | | |
 |---|---|
 | **URL** | `https://mcp.firstpromoter.com/affiliate` |
-| **Transport** | Streamable HTTP |
+| **Transport** | Streamable HTTP (stateless) |
 | **Authentication** | `Authorization: Bearer {your_api_key}` header |
 
 Get the API key in your affiliate dashboard under **Profile** → **API & AI tools**; see [Authentication](/api-reference-v2/api-affiliate/authentication#get-your-api-key). The key already identifies the program, so the MCP server does not need an Account ID.
@@ -105,14 +105,23 @@ Add one entry per program, each with its own key, for example `firstpromoter-acm
 
 | Tool | Description |
 |---|---|
-| `get_me` | Your affiliate profile in the program: name, email, balances, campaigns you belong to. |
-| `list_referrals` | Your referrals (leads and customers), filterable by state and date. |
-| `list_commissions` | Your commissions, filterable by status, paid state and date. |
-| `list_payouts` | Your payouts and their status, plus amounts that are due. |
-| `list_referral_links` | Your referral links per campaign. |
-| `list_promo_codes` | Promo codes assigned to you. |
+| `get_me` | Your affiliate profile in the program: name, email, balances and the campaigns you belong to. |
 | `list_campaigns` | Campaigns you are part of. |
-| `get_reports` | Performance reports (clicks, referrals, customers, revenue, earnings) for a date range. |
+| `list_referrals` | Your referrals. Filter by `type`, `state`, `campaign_id` and a `created_from` / `created_to` date range. |
+| `list_commissions` | Your commissions. Filter by `status`, `paid`, `campaign_id` and a `created_from` / `created_to` date range. |
+| `list_payouts` | Your payouts. Filter by `status` and `campaign_id`. |
+| `get_payout_stats` | Amounts due in your next payout, overdue, and on a custom schedule. |
+| `list_referral_links` | Your referral links, optionally for one `promoter_campaign_id`. |
+| `list_promo_codes` | Promo codes assigned to you, optionally for one `promoter_campaign_id`. |
+| `get_performance_report` | Clicks, referrals, customers, revenue and earnings between `start_date` and `end_date`, grouped by `group_by`, optionally for one `campaign_id`. |
+
+List tools are paginated with `page` and `per_page` (default 20, maximum 50) and return the same fields as the [Affiliate API](/api-reference-v2/api-affiliate/introduction).
+
+## Errors
+
+- **401 Unauthorized**: the `Authorization` header is missing, or the key is wrong, regenerated or disabled.
+- **403 Forbidden**: the token is not an affiliate API key (for example a dashboard session or a program admin's token), your affiliate account is archived, or your email is not confirmed yet.
+- A tool can also return an error with the same message the dashboard shows, for example when you still need to add a payout method before you can see your data.
 
 ## Security
 
