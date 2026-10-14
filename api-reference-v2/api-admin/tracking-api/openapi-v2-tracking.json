@@ -259,6 +259,11 @@
                     "type": "string",
                     "description": "For promo code tracking."
                   },
+                  "billing_country": {
+                    "type": "string",
+                    "description": "Customer's billing country as an ISO 3166-1 alpha-2 code (e.g. `US`). Alpha-3 codes and English country names are also accepted. Unrecognized values are ignored. Shown as the referral and commission country in the dashboard.",
+                    "example": "US"
+                  },
                   "tid": {
                     "type": "string",
                     "description": "Visitor tracking ID from _fprom_tid cookie."
