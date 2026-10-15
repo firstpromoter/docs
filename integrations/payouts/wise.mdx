@@ -5,6 +5,8 @@ description: Prepare affiliate payout batches with your Wise Business API token,
 
 FirstPromoter can prepare payout batches in your own Wise Business account and track each transfer until it settles. You review and fund the batch in Wise. FirstPromoter does not hold your money.
 
+The integration is optional. Without it, Wise works as before: affiliates add their Wise email and you pay them with a Wise CSV file (see [Pay Wise affiliates without the integration](#pay-wise-affiliates-without-the-integration)).
+
 ## Requirements
 
 - A Wise Business account with access to API tokens.
@@ -35,7 +37,7 @@ You do not need a Wise Platform partner agreement, an OAuth client ID or secret,
 
 ## Affiliates choose where to receive money
 
-In the affiliate portal, open **My payouts → Payout methods**, add or edit Wise, and choose a receiving destination:
+When Wise payouts are enabled, affiliates open **My payouts → Payout methods** in the affiliate portal, add or edit Wise, and choose a receiving destination under **Send payouts to**:
 
 - **Wise balance:** choose **Wisetag**, **Email** or **Phone number**, enter your identifier, and wait for the green checkmark and recipient name. Check the name, then save the payout method to confirm it. FirstPromoter sends to that Wise balance; bank details are not required. For phone numbers, include the country code.
 - **Wise balance using receiving details:** if lookup is unavailable, select **Use Wise receiving account details instead**. In Wise, open **Home → the payout currency → Account details** and copy the receiving details for the selected payment route. Availability depends on country and currency; see [Wise's receiving guide](https://wise.com/help/articles/2898124/how-do-i-receive-money-to-my-wise-account-details).
@@ -60,7 +62,7 @@ You can keep discoverability off and use your Wise currency account details inst
 
 ### Admin-assisted recipient assignment
 
-For affiliates using the email-only option, open their Wise payout method in the admin dashboard and select **Load Wise recipients**. Choose the recipient that matches the receiving details the affiliate has confirmed. A saved bank recipient can represent their Wise currency account details or an external bank account.
+For affiliates using the email-only option, open their Wise payout method in the admin dashboard and select **Load Wise recipients** (shown while Wise payouts are enabled). Choose the recipient that matches the receiving details the affiliate has confirmed. A saved bank recipient can represent their Wise currency account details or an external bank account.
 
 If the recipient is missing, add those details in Wise and reload. Only active recipients from your selected Business profile, in your company currency, are selectable. Supported routes include USD local transfers, GBP accounts, IBAN and SWIFT where Wise supports the route. Wise validates each actual quote and transfer when the batch is prepared.
 
@@ -68,7 +70,7 @@ Leave the recipient unassigned to continue using CSV. Changing an email-only met
 
 ## Prepare and approve a batch
 
-1. Select the affiliate payouts in FirstPromoter and choose Wise.
+1. Select the affiliate payouts in FirstPromoter, select **Pay**, and choose **Prepare Wise batch**. This option appears only while the integration is connected and Wise payouts are enabled.
 2. Confirm the payout with your verification code.
 3. FirstPromoter prepares the transfers and displays **Approve in Wise**.
 4. Open the batch in Wise, review its recipients, amounts and fees, then fund it using Wise's available payment methods.
@@ -87,7 +89,20 @@ Approving the payout in FirstPromoter does not fund the Wise batch. This integra
 
 A bounced transfer stays processing until Wise confirms the refund. A transfer that remains unresolved for 30 days receives a warning and continues to be checked; elapsed time alone never makes it eligible for another payment.
 
+## Pay Wise affiliates without the integration
+
+If you have not connected Wise, or Wise payouts are disabled, the Wise payout method stays available to affiliates with a single **Wise email** field. Pay them as before:
+
+1. Select the payouts and select **Pay**.
+2. Choose **Externally in bulk** and download **Pay in bulk_WISE.csv**, or choose **Externally one-by-one** to pay each affiliate separately.
+3. In Wise, select **Send money → Batch**, upload the file, review it and pay.
+4. Back in FirstPromoter, select **Mark As Paid**.
+
+Affiliates who saved a **Wise balance** or **Bank account** destination while Wise payouts were enabled are asked for their Wise email the next time they edit the method. Until they add it, their row in the CSV file has no email, so Wise cannot pay it.
+
 ## Change or disconnect the connection
+
+Disabling Wise payouts keeps the Wise payout method available for the CSV flow above. Finish or cancel active Wise batches before disabling payouts.
 
 Finish or cancel active payout batches before switching Business profiles, changing environments, or disconnecting. You can replace a token while payouts are pending if the new token accesses the same Business profile in the same environment. Selecting another profile clears saved recipient assignments.
 
