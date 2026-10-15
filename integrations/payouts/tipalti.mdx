@@ -1,0 +1,294 @@
+---
+title: "Tipalti"
+description: "Pay your promoters from your own Tipalti account, one click at a time, without leaving FirstPromoter."
+---
+
+<Note>
+  **Beta.** The Tipalti payout integration is available as a beta feature and appears with a **Beta** label in
+  **Settings → Integrations**. The setup flow and field names described here may still change.
+</Note>
+
+# What it does
+
+Tipalti is a mass-payout platform. If you already pay your affiliates through your own Tipalti account, this
+integration removes the CSV round trip: instead of exporting payouts from FirstPromoter, uploading them to Tipalti and
+marking them as paid by hand, FirstPromoter sends the payment instructions to Tipalti for you and keeps each payout's
+status in sync.
+
+Once connected:
+
+- Promoters onboard as **payees** in your Tipalti account, through Tipalti's own secure hosted page — they choose their
+  payment method and complete their tax forms there.
+- Paying a batch of payouts becomes a **one-click** action in FirstPromoter.
+- Payout statuses (paid, failed, deferred) flow back into FirstPromoter automatically.
+
+<Warning>
+  FirstPromoter never holds or moves your money. Payments are made **by your own Tipalti account, from your own
+  funds** — FirstPromoter only sends the payment instructions and tracks what Tipalti reports back. Funding,
+  compliance, tax forms and payment fees stay between you and Tipalti.
+</Warning>
+
+# Requirements
+
+| What you need | Where it comes from |
+| --- | --- |
+| A Tipalti account | [tipalti.com](https://tipalti.com) — sandbox and production accounts are separate |
+| A Developer Hub application | `developer.sandbox.tipalti.com` (sandbox) or `developer.tipalti.com` (production) → **Applications**. Gives you a **client ID** and **client secret** |
+| Your payer name | Your Tipalti payer dashboard. This is the `payer` value Tipalti uses to identify your account |
+| iFrame master key (encryption key) | Tipalti → **Administration → API integration**. Used to sign the promoter onboarding links |
+| Webhook signing secret | Tipalti → **Administration → API integration → Secrets management**. Used to verify that incoming events really come from Tipalti |
+| Payer entity ID *(optional)* | Only if your Tipalti account uses multiple paying entities and you want FirstPromoter to pay from a specific one |
+
+Your Developer Hub application must be granted all six of these scopes:
+
+```
+tipalti.api.payee.read
+tipalti.api.payee.write
+tipalti.api.payment-batch.read
+tipalti.api.payment-batch.write
+tipalti.api.payment.read
+tipalti.api.payer-entity.read
+```
+
+<Tip>
+  Missing a scope is the most common cause of a failed **Test connection**. If you add a scope in the Developer Hub
+  after creating the application, save the credentials in FirstPromoter again so a fresh token is requested.
+</Tip>
+
+# Connecting Tipalti in FirstPromoter
+
+<Steps>
+  <Step title="Open the integration">
+    In FirstPromoter, go to **Settings → Integrations** and open the **Tipalti** card (labelled **Beta**).
+  </Step>
+  <Step title="Choose the environment">
+    Select **Sandbox** or **Production**. Sandbox credentials only work against Tipalti's sandbox, and production
+    credentials only against production — they are never interchangeable.
+  </Step>
+  <Step title="Enter your credentials">
+    Fill in your **payer name**, **client ID**, **client secret**, **iFrame key** and **webhook secret**, plus a
+    **payer entity ID** if you use one.
+
+    Secrets are stored encrypted and never shown again. Once saved, the fields display a "configured" placeholder —
+    leaving them empty on a later save keeps the existing value, so you only re-enter a secret when you actually
+    want to replace it.
+  </Step>
+  <Step title="Pick how promoters are identified in Tipalti">
+    The **payee identifier** decides what FirstPromoter uses as each promoter's payee reference code in Tipalti.
+
+    | Option | Payee reference becomes | Use it when |
+    | --- | --- | --- |
+    | **Promoter ID** *(default)* | The promoter's FirstPromoter ID | You are starting fresh in Tipalti |
+    | **Promoter email** | The promoter's email address | Your existing Tipalti payees are keyed by email |
+    | **Promoter custom field** | The value of a custom field on the promoter | Your existing Tipalti payees use your own reference, stored on the promoter |
+
+    You can also set an optional **reference prefix**, which is prepended to every reference. This is useful when
+    several FirstPromoter accounts share one Tipalti payer and you need the references to stay unique.
+
+    <Warning>
+      If you already have payees in Tipalti, choose the option that matches **your current payee reference codes** —
+      FirstPromoter can then reuse those payees instead of creating duplicates. The setting **locks as soon as the
+      first payee exists**, because changing it afterwards would orphan every connected promoter.
+    </Warning>
+  </Step>
+  <Step title="Save and test">
+    Click **Save & test connection**. FirstPromoter requests a token from Tipalti and performs a read-only call to
+    confirm the credentials and scopes are valid.
+  </Step>
+  <Step title="Enable it">
+    Click **Enable**. For your security, enabling a payout integration requires a two-factor verification step.
+  </Step>
+  <Step title="Offer it to promoters">
+    Tipalti now appears in **Payouts → Payout terms** as an available payout method. Enable it there for it to show up
+    in your promoters' affiliate portal.
+  </Step>
+</Steps>
+
+# Registering the webhook
+
+FirstPromoter relies on Tipalti webhooks to learn when a payment succeeded, failed or was deferred, and when a payee's
+details change.
+
+<Steps>
+  <Step title="Copy the webhook URL">
+    The Tipalti form in FirstPromoter shows a read-only **webhook URL** with a copy button. It is unique to your
+    account.
+  </Step>
+  <Step title="Register it in Tipalti">
+    In Tipalti, go to **Administration → API integration → Webhook setup** and add the URL you copied.
+  </Step>
+  <Step title="Enable the events">
+    Enable these events:
+
+    | Event | Why FirstPromoter needs it |
+    | --- | --- |
+    | `paymentSubmitted` | Payment accepted by Tipalti and on its way |
+    | `paymentCompleted` | Payment paid — marks the payout as completed |
+    | `paymentDeferred` | Payment postponed, e.g. waiting for funds |
+    | `paymentError` | Payment failed — marks the payout as failed |
+    | `paymentCanceled` | Payment cancelled in Tipalti |
+    | `paymentGroupApproved` | Payment group approved by an approver |
+    | `paymentGroupDeclined` | Payment group declined — fails the affected payouts |
+    | `payeeDetailsChanged` | Payee became payable, blocked or changed payment method |
+  </Step>
+</Steps>
+
+<Note>
+  Sandbox and production webhooks are configured **separately** in Tipalti, and the FirstPromoter webhook URL differs
+  per environment setting. When you switch from sandbox to production, register the webhook again.
+</Note>
+
+Every incoming event is signature-verified with your webhook secret, and repeated deliveries of the same event are
+ignored, so Tipalti's automatic retries are safe.
+
+# How promoters connect
+
+Promoters set Tipalti up themselves, from the affiliate portal:
+
+<Steps>
+  <Step title="Open payout methods">
+    The promoter goes to **My payouts → Payout methods** and adds **Tipalti**.
+  </Step>
+  <Step title="Continue with Tipalti">
+    They click **Continue with Tipalti**. FirstPromoter creates the payee in your Tipalti account and redirects them to
+    Tipalti's secure page.
+  </Step>
+  <Step title="Complete the Tipalti form">
+    On Tipalti's page, the promoter enters their payment method and completes the required tax forms. This information
+    is entered on Tipalti and is never handled by FirstPromoter.
+  </Step>
+  <Step title="Return to the portal">
+    Tipalti sends them back to the affiliate portal, where their payout method now shows its current status.
+  </Step>
+</Steps>
+
+Statuses shown on the payout method:
+
+| Badge | Meaning |
+| --- | --- |
+| **Pending setup** | The payee exists in Tipalti but is not payable yet — usually a missing payment method, an incomplete tax form or a compliance check still in progress. The reasons Tipalti reports are listed on the payout method. |
+| **Ready** | Tipalti confirms the payee is payable. They can be included in payouts. |
+| **Blocked** | The payee is blocked or suspended in Tipalti, or you disabled the payout method in FirstPromoter. They are excluded from payouts. |
+
+<Note>
+  A promoter is only payable once **Tipalti's own compliance checks pass**. Finishing the form is not always enough —
+  tax form validation and screening can take additional time, and the badge stays **Pending setup** until Tipalti says
+  otherwise. Promoters can reopen the Tipalti page at any time from **Manage in Tipalti** to fix what's missing.
+</Note>
+
+# Paying promoters
+
+Paying works like any other one-click payout method:
+
+<Steps>
+  <Step title="Generate the payouts">
+    Approve commissions and generate payouts as usual.
+  </Step>
+  <Step title="Select and pay">
+    In **Payouts**, select the Tipalti payouts and start the payment. FirstPromoter creates **one Tipalti payment batch
+    per FirstPromoter batch**.
+  </Step>
+  <Step title="Watch the statuses">
+    The batch goes to **processing** while Tipalti works through it, and each payout settles on its own as Tipalti
+    reports back.
+  </Step>
+</Steps>
+
+What the statuses mean:
+
+| Status in FirstPromoter | When |
+| --- | --- |
+| **Processing** | Tipalti accepted the instruction and has not reported a final result yet |
+| **Completed** | Tipalti reported the payment as **paid**. (Tipalti's later bank-settlement update does not change anything in FirstPromoter — a paid payment is already complete here.) |
+| **Failed** | Tipalti rejected or cancelled the payment. Tipalti's own message is shown on the payout |
+
+Failed payouts stay selectable — fix the cause in Tipalti (or with the promoter) and include them in a new payout run.
+
+<Warning>
+  **Deferred or pending payer funds.** If your Tipalti account does not hold enough funds, Tipalti defers the payments
+  instead of failing them. Those payouts stay **processing** in FirstPromoter and the batch shows the reason Tipalti
+  gave. Fund your Tipalti account and Tipalti releases them by itself — there is nothing to re-send from
+  FirstPromoter.
+</Warning>
+
+Promoters whose payee is not payable at the moment you pay (missing payment method, tax form pending, blocked) are not
+sent to Tipalti at all. Their payouts are marked as failed with the reason Tipalti reports, so you can see exactly who
+needs to finish their setup.
+
+# Blocking and unblocking
+
+Blocks are kept in sync in both directions, with a deliberate bias towards safety.
+
+| What happens | Effect |
+| --- | --- |
+| You block a promoter in **all** of their campaigns in FirstPromoter | The payee is blocked in Tipalti |
+| You disable a promoter's Tipalti payout method in FirstPromoter | The payee is blocked in Tipalti |
+| You accept/unblock the promoter again, and their payout method is active | The payee is set back to active in Tipalti |
+| Someone blocks the payee **in Tipalti** | The promoter's Tipalti payout method is disabled in FirstPromoter |
+
+<Warning>
+  A block made **in Tipalti** is never undone from FirstPromoter. Unblocking a promoter in FirstPromoter will not
+  reactivate a payee that Tipalti or your team blocked on the Tipalti side — unblock it in Tipalti first.
+</Warning>
+
+Blocking never touches payments already in flight: Tipalti reports the outcome of those, and FirstPromoter records it
+as usual.
+
+# Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Test connection fails">
+    - **Missing credentials** — one of payer name, client ID, client secret, iFrame key or webhook secret is empty.
+    - **Invalid credentials** — the client ID/secret pair is wrong, or it belongs to the other environment. Sandbox
+      credentials never work against production and vice versa.
+    - **Missing permissions** — the application is missing one of the six required scopes. Add it in the Tipalti
+      Developer Hub, then save the credentials in FirstPromoter again.
+    - **Tipalti error** — Tipalti rejected the request for another reason; the message shown comes straight from
+      Tipalti.
+  </Accordion>
+  <Accordion title="A promoter sees an invalid hashkey or expired link error on Tipalti">
+    The signed onboarding link is short-lived and single-use by design. If a promoter opens an old link, bookmarks it,
+    or leaves the page open too long, Tipalti rejects it. The fix is always the same: go back to **My payouts → Payout
+    methods** in the affiliate portal and start from **Continue with Tipalti** / **Manage in Tipalti** again, which
+    generates a fresh link.
+
+    A persistent invalid-hashkey error for *every* promoter usually means the **iFrame key** or **payer name** in the
+    FirstPromoter form does not match the Tipalti account.
+  </Accordion>
+  <Accordion title="A payout stays processing, or a payee status looks stale">
+    Tipalti retries a failed webhook delivery a limited number of times, so an outage on either side can drop an event.
+    FirstPromoter also **polls Tipalti periodically** for batches that are still processing and for payees that were
+    recently onboarded, so missed events are picked up automatically — it just takes longer than a webhook.
+
+    If statuses stay stale for a long time, check that the webhook URL is registered in the right Tipalti environment
+    and that all eight events listed above are enabled.
+  </Accordion>
+  <Accordion title="Rate limits">
+    Tipalti applies an account-wide API rate limit. FirstPromoter batches its calls (one payment batch per payout run
+    rather than one call per promoter) and backs off when Tipalti asks it to, so large payout runs are safe. If you
+    also call the Tipalti API from your own systems, keep in mind that the limit is shared across everything using
+    your Tipalti account.
+  </Accordion>
+  <Accordion title="Moving from sandbox to production">
+    Switching the environment does **not** carry anything over — the two Tipalti environments have separate
+    applications, payers, payees and webhooks. To go live:
+
+    1. Create a production application at `developer.tipalti.com` with the same six scopes.
+    2. Switch the environment to **Production** in the FirstPromoter form and re-enter all credentials, including the
+       production iFrame key and webhook secret.
+    3. Register the webhook URL again in your production Tipalti account and enable the same events.
+    4. Run **Test connection**, then **Enable**.
+
+    Promoters who onboarded in sandbox exist only in the sandbox account and will need to connect again.
+  </Accordion>
+  <Accordion title="Can I keep using Tipalti manually as well?">
+    Yes. Payments created directly in Tipalti are unaffected, and FirstPromoter only tracks the payments it submitted
+    itself. If you already have payees in Tipalti, set the payee identifier to match your existing reference codes
+    before any promoter connects, so FirstPromoter reuses them instead of creating duplicates.
+  </Accordion>
+</AccordionGroup>
+
+# Related
+
+- [Payouts API](/api-reference-v2/api-admin/payouts/get-all-payouts)
+- [Affiliate payout methods API](/api-reference-v2/api-affiliate/payout-methods/get-all-payout-methods-for-current-promoter)
