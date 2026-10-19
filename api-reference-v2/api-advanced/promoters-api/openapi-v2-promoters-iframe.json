@@ -1,0 +1,217 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "FirstPromoter API",
+        "version": "1.0",
+        "description": "FirstPromoter Admin API Documentation"
+    },
+    "servers": [
+        {
+            "url": "https://v2.firstpromoter.com/api/v2"
+        }
+    ],
+    "security": [
+        {
+            "BearerAuth": []
+        }
+    ],
+    "paths": {
+        "/promoters/iframe_login": {
+            "post": {
+                "summary": "Generate an embedded dashboard access token",
+                "description": "Issues a short-lived bearer token for a specific promoter, for use as the `tk` query parameter when embedding the promoter dashboard in an iframe. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/promoters/iframe_login`</Tip> \n See the [embed & auto-login guide](/advanced/embed-dashboard-login) for the full walkthrough.",
+                "tags": [
+                    "Promoters"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/AccountId"
+                    },
+                    {
+                        "name": "promoter_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "The FirstPromoter promoter ID whose token to generate. Provide this or `cust_id`."
+                    },
+                    {
+                        "name": "cust_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The external customer ID you assigned this promoter. Provide this or `promoter_id`."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "access_token": {
+                                            "type": "string",
+                                            "description": "Short-lived bearer token for this promoter, scoped to your account."
+                                        },
+                                        "expires_in": {
+                                            "type": "integer",
+                                            "description": "Token lifetime in seconds. Defaults to 86400 (24 hours), overridable per-account."
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "access_token": "xxxxxxxxxxxxxxx",
+                                    "expires_in": 86400
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized — the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found — no promoter matched the `promoter_id`/`cust_id` you passed.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "code": "not_found",
+                                    "message": "Record not found"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/promoters/iframe_logout": {
+            "post": {
+                "summary": "End a promoter's embedded dashboard session(s)",
+                "description": "Revokes active `iframe_login` access tokens for a specific promoter. By default this revokes **every** currently active token that promoter has under your account. Pass `session_token` instead to revoke a single session (e.g. one browser tab) and leave the promoter's other sessions active. \n <Tip>**HTTP Request** <br/>`POST https://v2.firstpromoter.com/api/v2/promoters/iframe_logout`</Tip> \n See the [logout guide](/advanced/embed-dashboard-logout) for the full walkthrough.",
+                "tags": [
+                    "Promoters"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/AccountId"
+                    },
+                    {
+                        "name": "promoter_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "The FirstPromoter promoter ID whose session(s) to end. Provide this, `cust_id`, or `session_token`. Ignored if `session_token` is also present and non-blank."
+                    },
+                    {
+                        "name": "cust_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The external customer ID you assigned this promoter. Provide this, `promoter_id`, or `session_token`."
+                    },
+                    {
+                        "name": "session_token",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The `access_token` value returned by a specific `iframe_login` call. When present, only that one session is revoked instead of every active session for the promoter. Must belong to a promoter under the requesting account and not already be revoked, or the request returns 404."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Session(s) revoked. No response body."
+                    },
+                    "401": {
+                        "description": "Unauthorized — the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found — no promoter matched the `promoter_id`/`cust_id` you passed, or the `session_token` doesn't exist, is already revoked, or doesn't belong to a promoter under this account.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "code": "not_found",
+                                    "message": "Record not found"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "parameters": {
+            "AccountId": {
+                "name": "Account-Id",
+                "in": "header",
+                "required": true,
+                "description": "Your FirstPromoter account ID.",
+                "schema": {
+                    "type": "string",
+                    "example": "123456"
+                }
+            }
+        },
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "description": "Your v2 API key, passed as a Bearer token in the Authorization header."
+            },
+            "accountId": {
+                "type": "apiKey",
+                "in": "header",
+                "name": "Account-Id",
+                "description": "Account ID required alongside the bearer token"
+            }
+        }
+    }
+}

@@ -491,6 +491,13 @@
                     ]
                   },
                   {
+                    "group": "Promoters",
+                    "pages": [
+                      "api-reference-v2/api-advanced/promoters-api/iframe-login",
+                      "api-reference-v2/api-advanced/promoters-api/iframe-logout"
+                    ]
+                  },
+                  {
                     "group": "Referrals",
                     "pages": [
                       "api-reference-v2/api-advanced/referrals/split-commissions",
