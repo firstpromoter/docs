@@ -1,60 +1,68 @@
 ---
 title: "Authentication"
-description: "How to authenticate your API"
+description: "Create a personal API key in your affiliate dashboard and use it with your Account ID."
 ---
 
-## Authentication
+## Credentials
 
-### Obtaining Your Credentials
+Every request to the Affiliate API needs two values:
 
-The Affiliate API uses two credentials to authorize requests:
+1. **API key**: a personal key that you create in your affiliate dashboard. It identifies you as the affiliate.
+2. **Account ID**: identifies the affiliate program (the FirstPromoter account) the request is for.
 
-1. **Access Token**: An OAuth2 bearer token tied to the affiliate's session
-2. **Account ID**: Identifies the FirstPromoter company account
+Both are shown on the same page of your affiliate dashboard.
 
-There is currently no UI to retrieve these credentials directly. The easiest way to obtain them is via your browser's **Network tab** while logged into the affiliate dashboard:
+## Get your API key
 
-1. Log in to the affiliate dashboard
-2. Open your browser's DevTools (F12 or right-click → Inspect) and go to the **Network** tab
-3. Reload the page or perform any action to trigger an API request
-4. Click on any request to `api.fprom.io`
-5. Under **Request Headers**, you will find:
-   - `Authorization: Bearer {your_access_token}`
+1. Log in to the affiliate dashboard of the program.
+2. Open your **Profile** settings and go to **API & AI tools**.
+3. Click **Enable** to create your API key.
+4. Copy the **API key** and the **Account ID** shown on the page and store them somewhere safe.
 
-Copy the access token and store it securely.
+From the same page you can:
 
-To get your **Account ID**, check for a request to the `/me` endpoint using your access token and look for the `cid` field in the response:
-
-The `cid` value inside the `company` object in the response is your Account ID.
-
-<Warning>
-  The access token is tied to the affiliate's session and will expire when the session ends or the user logs out. You will need to retrieve a new token each time.
-</Warning>
-
-### Making Authenticated Requests
-
-All API requests must include both credentials in your request headers:
-
-```
-Authorization: Bearer {your_access_token}
-ACCOUNT-ID: {your_account_id}
-```
-
-#### Example Request
-
-```
-GET https://api.firstpromoter.com/api/v2/affiliate/campaigns
-Authorization: Bearer 01234567890abcdef
-ACCOUNT-ID: 123456
-```
+- **Copy** the key again whenever you need it.
+- **Regenerate** the key. A new key is created and the old one stops working immediately, so update any scripts or AI tools that use it.
+- **Disable** API access. The key is deleted and every request made with it is rejected until you enable access again.
 
 <Note>
-  Replace `{your_access_token}` with the bearer token from the Network tab and `{your_account_id}` with the account ID found in the same request headers.
+  The key belongs to your account in **one** program. If you promote several programs on FirstPromoter, you have a separate affiliate account in each one, so you create a separate key in each program's affiliate dashboard and use that program's Account ID with it.
 </Note>
 
-### Security Best Practices
+The key does not expire and is not affected by logging out or ending dashboard sessions. It stays valid until you regenerate it or disable API access.
 
-- Never expose your access token in client-side code or public repositories
-- Use HTTPS for all API communications
-- Retrieve a fresh token if requests start returning `401 Unauthorized`
+## Making authenticated requests
 
+The base URL is `https://api.firstpromoter.com/api/v2/affiliate`. Send both credentials as request headers:
+
+```
+Authorization: Bearer {your_api_key}
+Account-ID: {your_account_id}
+```
+
+The `Account-ID` header is required on every request. Header names are case-insensitive, so `ACCOUNT-ID` works too.
+
+#### Example request
+
+```bash
+curl https://api.firstpromoter.com/api/v2/affiliate/commissions \
+  -H "Authorization: Bearer {your_api_key}" \
+  -H "Account-ID: {your_account_id}"
+```
+
+Every endpoint returns only your own data in that program: your referrals, commissions, payouts, links and reports.
+
+## Errors
+
+| Status | Meaning |
+|---|---|
+| `401 Unauthorized` | The `Account-ID` header is missing, or the API key is missing, wrong, regenerated or disabled. |
+| `403 Forbidden` | The key is valid but cannot be used for this request: the Account ID belongs to a different program than the key, your affiliate account is archived, your email is not confirmed yet, or (for some endpoints) you have not finished onboarding in the dashboard. |
+| `404 Not Found` | No program matches the Account ID. |
+
+## Security best practices
+
+- Treat the API key like a password: anyone who has it can read your data in the program.
+- Never put the key in client-side code, public repositories or shared documents.
+- Use HTTPS for all requests.
+- Regenerate the key if you think it has been exposed, and disable API access when you no longer need it.
