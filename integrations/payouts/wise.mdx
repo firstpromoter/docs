@@ -12,7 +12,6 @@ The integration is optional. Without it, Wise works as before: affiliates add th
 - A Wise Business account with access to API tokens.
 - A full-access personal API token created for that Business account.
 - Two-factor authentication enabled for the FirstPromoter admin managing the connection.
-- A discoverable Wise balance or receiving account details in your FirstPromoter company currency.
 
 You do not need a Wise Platform partner agreement, an OAuth client ID or secret, or API tokens from your affiliates. Wise documents this workflow in its [Business payouts guide](https://docs.wise.com/guides/product/send-money/use-cases/payouts-smbs).
 
@@ -44,7 +43,7 @@ When Wise payouts are enabled, affiliates open **My payouts → Payout methods**
 - **Bank account:** provide your own bank account's receiving details for the payout currency. The payout goes to that bank account.
 - **Arrange with the company (email only):** keep the existing email-based CSV or admin-assisted setup.
 
-Payouts use the FirstPromoter company currency automatically. The form shows **Paid in [currency]**; there is no separate currency selection or confirmation.
+The destination must be able to receive your FirstPromoter company currency. Payouts use that currency automatically. The form shows **Paid in [currency]**; there is no separate currency selection or confirmation.
 
 For account details, FirstPromoter asks Wise which fields the payment route requires and updates the form when you choose your country or recipient type. Save the method and complete the verification prompt if requested. For a balance lookup, FirstPromoter keeps the confirmed Wise contact and checks the quoted balance recipient before each transfer. For receiving details, it creates the recipient on the company's paying Business profile. You do not share an API token or sign in to Wise through FirstPromoter.
 
@@ -78,14 +77,17 @@ Leave the recipient unassigned to continue using CSV. Changing only the Wise ema
 4. Open the batch in Wise, review its recipients, amounts and fees, then fund it using Wise's available payment methods.
 5. FirstPromoter checks transfer statuses and updates the payouts automatically.
 
-Each batch group contains at most 1,000 transfers. Larger batches have a separate Wise link for each group. Amounts are sent in the company currency; currency conversion is not offered by this version.
+Each batch group contains at most 1,000 transfers, so FirstPromoter splits larger batches into several Wise groups that you fund separately. The batch page shows a single **Approve in Wise** button that opens the group still waiting for funds. After Wise reports that group as funded, the button moves to the next unfunded group. Amounts are sent in the company currency; currency conversion is not offered by this version.
 
 Approving the payout in FirstPromoter does not fund the Wise batch. This integration always leaves funding to you in Wise, including in countries where Wise may permit API funding.
 
 ## Statuses and recovery
 
-- **Awaiting funds:** open the Wise batch and finish funding it.
-- **Processing:** Wise has not reported a final result. Do not pay the same affiliate again outside the batch without checking Wise first.
+While a batch is waiting for you to fund it in Wise, the batch page shows **This batch is waiting for your approval** with an **Approve in Wise** button. Once Wise sees the funds, the batch continues processing on its own.
+
+Each payout in the batch has its own status:
+
+- **Processing:** Wise has not reported a final result. This includes payouts in a batch that is still waiting for funds. Do not pay the same affiliate again outside the batch without checking Wise first.
 - **Completed:** Wise reported the transfer as sent; FirstPromoter updates the payout and creates its invoice where self-billing is enabled.
 - **Failed:** Wise rejected the transfer or confirmed a cancellation/refund. Review the error before retrying.
 
@@ -104,11 +106,15 @@ Affiliates who saved a **Wise balance** or **Bank account** destination while Wi
 
 ## Change or disconnect the connection
 
-Disabling Wise payouts keeps the Wise payout method available for the CSV flow above. Finish or cancel active Wise batches before disabling payouts.
+Disabling Wise payouts keeps the Wise payout method available for the CSV flow above. You can disable payouts at any time, except while FirstPromoter is still sending a newly prepared batch to Wise. Batches already in Wise keep being checked until they settle.
 
-Finish or cancel active payout batches before switching Business profiles, changing environments, or disconnecting. You can replace a token while payouts are pending if the new token accesses the same Business profile in the same environment. Selecting another profile or environment clears saved recipient assignments and turns Wise payouts off. Affected payout methods become incomplete until the affiliate or an admin saves their destination again.
+Finish active Wise batches before switching Business profiles or disconnecting. FirstPromoter cannot cancel a batch that is waiting for funds; cancel it in Wise instead. You can replace a token while payouts are pending if the new token accesses the same Business profile in the same environment.
 
-Disconnecting removes the token from FirstPromoter. You can also revoke the token in Wise. Revoking it before transfers settle prevents FirstPromoter from checking their status until a working token is saved again.
+Selecting another Business profile clears every affiliate's saved Wise recipient and turns Wise payouts off. Affected payout methods become incomplete until the affiliate or an admin saves their destination again.
+
+Disconnecting removes the token from FirstPromoter. It also clears every affiliate's saved Wise recipient, the same as selecting another profile. Reconnecting does not restore them; each affiliate or an admin must save their destination again. You can also revoke the token in Wise. Revoking it before transfers settle prevents FirstPromoter from checking their status until a working token is saved again.
+
+To switch between Wise sandbox and production, disconnect first. Each environment has separate credentials, so this also clears saved recipients.
 
 ## Sandbox testing
 
