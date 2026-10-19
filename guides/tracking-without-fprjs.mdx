@@ -3,6 +3,12 @@ title: 'Tracking without fpr.js'
 description: 'Track affiliate leads and sales/payments using API calls'
 ---
 
+import TidForVisitData from '/snippets/tid-for-visit-data.mdx';
+
+<Note>
+Planning to use sub IDs, postbacks or ad tracking? You still need the tracking script for clicks. See [Using sub IDs, postbacks or ad tracking with the API](#using-sub-ids%2C-postbacks-or-ad-tracking-with-the-api) below.
+</Note>
+
 # Tracking Flow
 
 ## 1. Store and retrieve link token (Referral ID):
@@ -157,6 +163,8 @@ curl --request POST \
 }'
 ```
 </CodeGroup>
+
+<TidForVisitData />
 
 
 ## 3. Sales Tracking

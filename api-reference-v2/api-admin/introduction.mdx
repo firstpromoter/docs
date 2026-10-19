@@ -44,4 +44,8 @@ When retrieving multiple affiliates, the API uses pagination to limit the number
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | `page` | Integer | The page number to retrieve (default: 1) |
-| `per_page` | Integer | Number of records per page (default: 20, max: 100) |
+| `per_page` | Integer | Number of records per page (default: 25 for most endpoints, with no enforced maximum) |
+
+<Note>
+Pagination defaults can vary by endpoint. The campaigns list endpoint is a notable exception: it defaults to `10` per page and caps at a maximum of `50`. Check each endpoint's own documentation if you need its exact behavior.
+</Note>

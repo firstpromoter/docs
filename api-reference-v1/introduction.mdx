@@ -3,7 +3,59 @@ title: 'Introduction'
 description: 'This is the public API documentation for FirstPromoter.'
 ---
 
+Welcome to the FirstPromoter V1 API. This is our original REST API for managing promoters, leads, payouts, rewards, and tracking events programmatically.
+
 <Note>
-All our API calls are sent using the usual key-value pair parameters(see in the right), not JSON. The responses however are in JSON format.
+All API calls are sent as key-value pair parameters (query string or form-encoded body — see the parameters listed on the right for each endpoint), not as a JSON request body. Responses are always returned in JSON format.
 </Note>
+
+<Tip>
+Building something new? Consider our [V2 API](/api-reference-v2/api-admin/introduction) instead — it's more robust and actively developed. This V1 API remains fully supported for existing integrations.
+</Tip>
+
+### Base URL
+
+Requests are made directly against `https://firstpromoter.com`, followed by the resource path, for example:
+
+| Resource | Base path |
+|----------|-----------|
+| Promoters | `/api/v1/promoters` |
+| Leads | `/api/v1/leads` |
+| Payouts | `/api/v1/payouts` |
+| Rewards | `/api/v1/rewards` |
+| Reports | `/api/v1/reports` |
+| Tracking | `/api/v1/track` |
+
+### Authentication
+
+All requests must include your account's API key in the `X-API-KEY` header. See the [Authentication](/api-reference-v1/authentication) page for details on finding your key.
+
+### Rate Limits
+
+To ensure fair usage and system stability, requests authenticated with an API key are limited to:
+
+- 450 requests per minute per API key
+
+Exceeding this limit will result in a `429 Too Many Requests` response.
+
+### Pagination
+
+List endpoints (e.g. `GET /promoters`, `GET /leads`, `GET /payouts`, `GET /rewards`) are paginated using `page` and `per_page` query parameters.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `page` | Integer | The page number to retrieve (default: 1) |
+| `per_page` | Integer | Number of records per page (default varies by endpoint — typically 10–50; maximum: 500) |
+
+Pagination metadata (`Total`, `Per-Page`, `Link`) is returned in the response **headers** rather than in the JSON body.
+
+### Errors
+
+Error responses are JSON, but the shape can vary by endpoint:
+
+- Most handled errors (e.g. a referenced campaign or promoter not found) return `{"error": "<message>"}`.
+- Validation failures on create/update endpoints typically return the record's errors directly, e.g. `{"email": ["has already been taken"]}`.
+- An invalid or missing API key returns a `401` with the plain text body `"Bad credentials"`.
+
+Always check the HTTP status code first, and refer to each endpoint's own documentation for its specific error responses.
 
