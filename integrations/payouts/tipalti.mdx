@@ -127,7 +127,6 @@ details change.
     | `paymentDeferred` | Payment postponed, e.g. waiting for funds |
     | `paymentError` | Payment failed — marks the payout as failed |
     | `paymentCanceled` | Payment cancelled in Tipalti |
-    | `paymentGroupApproved` | Payment group approved by an approver |
     | `paymentGroupDeclined` | Payment group declined — fails the affected payouts |
     | `payeeDetailsChanged` | Payee became payable, blocked or changed payment method |
   </Step>
@@ -261,7 +260,7 @@ as usual.
     recently onboarded, so missed events are picked up automatically — it just takes longer than a webhook.
 
     If statuses stay stale for a long time, check that the webhook URL is registered in the right Tipalti environment
-    and that all eight events listed above are enabled.
+    and that all seven events listed above are enabled.
   </Accordion>
   <Accordion title="Rate limits">
     Tipalti applies an account-wide API rate limit. FirstPromoter batches its calls (one payment batch per payout run
