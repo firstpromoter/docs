@@ -1,0 +1,96 @@
+---
+title: "Webflow"
+description: "Track referral clicks and form signups on your Webflow website"
+---
+
+`Difficulty: Easy` <br/>
+`Developer Required: No`
+
+Add two scripts to your Webflow site: the main tracking script records visits from referral links, and the referral tracking script records signups from your Webflow forms.
+
+<Note>
+Webflow only runs custom code on sites with a paid Site plan, and only on the published site, not in the Designer or its preview.
+</Note>
+
+## Main tracking script
+
+Replace `<your-account-id-here>` with your account ID from **Settings > Integrations** in your FirstPromoter dashboard.
+
+<Steps>
+  <Step title="Open your site's custom code settings">
+    Open your site in Webflow, go to **Site settings**, and open the **Custom code** tab.
+  </Step>
+  <Step title="Paste the script into Head code">
+    ```html
+    <script>(function(w){w.fpr=w.fpr||function(){w.fpr.q = w.fpr.q||[];w.fpr.q[arguments[0]=='set'?'unshift':'push'](arguments);};})(window);
+    fpr("init", {cid:"<your-account-id-here>"});
+    fpr("click");
+    </script>
+    <script src="https://cdn.firstpromoter.com/fpr.js" async></script>
+    ```
+  </Step>
+  <Step title="Save and publish">
+    Click **Save changes**, then **Publish** your site.
+  </Step>
+</Steps>
+
+<Tip>
+To add tracking to specific pages only, open the **Pages** panel in the Designer, click the gear icon next to the page, and paste the script into **Custom code > Inside \<head\> tag** instead.
+</Tip>
+
+## Referral tracking script
+
+This script listens for Webflow form submissions (signup, demo request, waitlist and other forms) and sends the email entered in the form to FirstPromoter with [`fpr("referral")`](/script-docs/fpr-js-docs).
+
+<Steps>
+  <Step title="Paste the script into Footer code">
+    In **Site settings > Custom code**, paste the script below into the **Footer code** field (before the closing `</body>` tag).
+
+    ```html
+    <script>
+      // Which forms to track. ".w-form form" matches every Webflow form on the site.
+      var FP_FORM_SELECTOR = ".w-form form";
+
+      document.querySelectorAll(FP_FORM_SELECTOR).forEach(function (form) {
+        form.addEventListener("submit", function () {
+          var emailInput = form.querySelector('input[type="email"]');
+          if (emailInput && emailInput.value) {
+            fpr("referral", { email: emailInput.value.trim() });
+          }
+        });
+      });
+    </script>
+    ```
+  </Step>
+  <Step title="Save and publish">
+    Click **Save changes**, then **Publish** your site.
+  </Step>
+</Steps>
+
+The script reads the first **Email** field in the form. If your form collects the email in a plain text field, select the field in the Designer and set its **Text type** to **Email**.
+
+### Track only specific forms
+
+If you only want signups from certain forms (for example, your signup form but not your newsletter form):
+
+1. In the Designer, select the **Form** element inside the Form Block.
+2. In the **Settings** panel, under **Custom attributes**, add an attribute named `data-fp-referral` with the value `true`.
+3. In the script above, change the first line to `var FP_FORM_SELECTOR = "form[data-fp-referral]";`
+4. Save and publish.
+
+## If users sign up outside Webflow
+
+If Webflow is your marketing site and users create their account in your app, track the referral in your app instead, with the [JavaScript](/guides/tracking-with-fprjs) or [API](/guides/tracking-without-fprjs) method. Keep the main tracking script on your Webflow site so clicks are still recorded.
+
+- **App on a subdomain** (for example `app.yourdomain.com`): nothing else is needed. The tracking cookies are set on your root domain, so your app can read them.
+- **App on a different domain** (for example `yourapp.com`): add [cross-domain tracking](/script-docs/fpr-js-docs) to the Webflow **Footer code** so the tracking details are passed along on links to your app.
+
+```html
+<script>
+  fpr("crossDomain", "yourapp.com");
+</script>
+```
+
+## Sales tracking
+
+Sales are tracked through your [billing integration](/integrations/billing/stripe) (Stripe, Chargebee, Paddle and others), not through Webflow. Make sure the email sent with the referral is the same email your customer uses at checkout, so FirstPromoter can match the sale to the referral.
