@@ -605,7 +605,7 @@
         "tags": [
           "Webhook Deliveries"
         ],
-        "description": "Re-queues a failed delivery for immediate retry. The delivery's `status` is reset to `pending` and `attempts` is reset to `0`. \n\n Returns `422` if the subscription's `max_retries` limit has already been reached. \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/webhooks/{webhook_id}/webhook_deliveries/{id}/retry_delivery`</Tip>",
+        "description": "Re-queues a failed delivery for immediate retry. The delivery's `status` is reset to `pending`; `attempts` keeps the attempts already made, so a manual retry counts toward the subscription's `max_retries`. \n\n Returns `422` if the subscription's `max_retries` limit has already been reached. \n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/webhooks/{webhook_id}/webhook_deliveries/{id}/retry_delivery`</Tip>",
         "parameters": [
           {
             "$ref": "#/components/parameters/AccountId"
