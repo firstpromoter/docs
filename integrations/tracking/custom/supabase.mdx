@@ -1,0 +1,166 @@
+---
+title: "Supabase"
+description: "Track referral signups from Supabase Auth"
+---
+
+`Difficulty: Intermediate` <br/>
+`Developer Required: Yes`
+
+If your app uses Supabase Auth, track the referral right after Supabase creates the new user. The examples use Next.js (App Router) with `@supabase/ssr`, but the same steps work in any framework.
+
+How it works:
+
+1. The main tracking script on your website records the visit from a referral link and stores a `_fprom_tid` cookie on your root domain.
+2. When a new user signs up with Supabase Auth, your server reads the `_fprom_tid` cookie.
+3. Your server sends the user's email, Supabase user ID and the `_fprom_tid` value to the [track/signup](/api-reference-v2/api-admin/tracking-api/leads-and-signups) endpoint.
+
+## Main tracking script
+
+Add the [main tracking script](/guides/tracking-with-fprjs#installation) to the `<head>` of every page a referral link can land on: your marketing site and your app. Replace `<your-account-id-here>` with your account ID from **Settings > Integrations**.
+
+```html
+<script>(function(w){w.fpr=w.fpr||function(){w.fpr.q = w.fpr.q||[];w.fpr.q[arguments[0]=='set'?'unshift':'push'](arguments);};})(window);
+fpr("init", {cid:"<your-account-id-here>"});
+fpr("click");
+</script>
+<script src="https://cdn.firstpromoter.com/fpr.js" async></script>
+```
+
+## Referral tracking
+
+<Steps>
+  <Step title="Add your API credentials">
+    Get your **API key** and **Account ID** from **Settings > Integrations** (create a new API key if you don't have one yet), and add them to your server environment variables.
+
+    ```bash .env
+    FIRSTPROMOTER_API_KEY=your_api_key
+    FIRSTPROMOTER_ACCOUNT_ID=your_account_id
+    ```
+
+    <Warning>Never expose the API key in browser code.</Warning>
+  </Step>
+  <Step title="Add a helper that tracks the signup">
+    ```ts lib/firstpromoter.ts
+    export async function trackFirstPromoterSignup(params: {
+      email?: string;
+      uid: string;
+      tid: string;
+    }) {
+      try {
+        const res = await fetch("https://api.firstpromoter.com/api/v2/track/signup", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.FIRSTPROMOTER_API_KEY}`,
+            "Account-ID": process.env.FIRSTPROMOTER_ACCOUNT_ID!,
+          },
+          body: JSON.stringify(params),
+        });
+        if (!res.ok) {
+          console.error("FirstPromoter signup tracking failed", res.status, await res.text());
+        }
+      } catch (error) {
+        // Never block the signup if tracking fails
+        console.error("FirstPromoter signup tracking failed", error);
+      }
+    }
+    ```
+  </Step>
+  <Step title="Call it when a new user signs up">
+    Pick the tab that matches how users sign up. If you support more than one method, add the code to each.
+  </Step>
+</Steps>
+
+<Tabs>
+  <Tab title="OAuth and magic link">
+    Social logins (Google, GitHub...), magic links and email confirmation links all finish in your auth callback route. This route runs on every login, so the code only tracks users created in the last 10 minutes.
+
+    ```ts app/auth/callback/route.ts
+    import { NextResponse } from "next/server";
+    import { cookies } from "next/headers";
+    import { createClient } from "@/utils/supabase/server";
+    import { trackFirstPromoterSignup } from "@/lib/firstpromoter";
+
+    export async function GET(request: Request) {
+      const { searchParams, origin } = new URL(request.url);
+      const code = searchParams.get("code");
+      const next = searchParams.get("next") ?? "/";
+
+      if (code) {
+        const supabase = await createClient();
+        const { data, error } = await supabase.auth.exchangeCodeForSession(code);
+
+        if (!error) {
+          const { user } = data;
+          const tid = (await cookies()).get("_fprom_tid")?.value;
+          // Only track new signups, not returning users logging in
+          const isNewUser = new Date(user.created_at).getTime() > Date.now() - 10 * 60 * 1000;
+
+          if (tid && isNewUser) {
+            await trackFirstPromoterSignup({ email: user.email, uid: user.id, tid });
+          }
+
+          return NextResponse.redirect(`${origin}${next}`);
+        }
+      }
+
+      return NextResponse.redirect(`${origin}/auth/auth-code-error`);
+    }
+    ```
+  </Tab>
+  <Tab title="Email and password">
+    Track the referral in the server action (or API route) that calls `supabase.auth.signUp`.
+
+    When email confirmation is on, Supabase returns a placeholder user with an empty `identities` list if the email is already registered. The check below skips those so existing users are not tracked again.
+
+    ```ts app/signup/actions.ts
+    "use server";
+
+    import { cookies } from "next/headers";
+    import { redirect } from "next/navigation";
+    import { createClient } from "@/utils/supabase/server";
+    import { trackFirstPromoterSignup } from "@/lib/firstpromoter";
+
+    export async function signup(formData: FormData) {
+      const supabase = await createClient();
+      const email = String(formData.get("email"));
+      const password = String(formData.get("password"));
+
+      const { data, error } = await supabase.auth.signUp({ email, password });
+      if (error || !data.user) {
+        redirect("/error");
+      }
+
+      const tid = (await cookies()).get("_fprom_tid")?.value;
+      const isNewUser = (data.user.identities?.length ?? 0) > 0;
+
+      if (tid && isNewUser) {
+        await trackFirstPromoterSignup({ email: data.user.email ?? email, uid: data.user.id, tid });
+      }
+
+      redirect("/");
+    }
+    ```
+  </Tab>
+  <Tab title="Client-side only">
+    If your app has no server of its own (for example a Vite or React app built with Lovable or Bolt that talks to Supabase directly), track the referral in the browser with [`fpr("referral")`](/script-docs/fpr-js-docs) right after a successful signup. The main tracking script must be loaded on the signup page.
+
+    ```js
+    const { data, error } = await supabase.auth.signUp({ email, password });
+
+    if (!error && data.user && data.user.identities?.length) {
+      fpr("referral", { email: data.user.email, uid: data.user.id });
+    }
+    ```
+
+    <Warning>Ad blockers can block tracking from the browser. Use one of the server-side options when you can.</Warning>
+  </Tab>
+</Tabs>
+
+<Note>
+`uid` is the Supabase user ID. FirstPromoter matches sales to referrals by email or `uid`, so send the same values your billing provider will send when the customer pays.
+</Note>
+
+## Sales tracking
+
+Supabase handles your users, not payments. Sales are tracked through your [billing integration](/integrations/billing/stripe) (Stripe, Chargebee, Paddle and others). If you use another billing provider, track sales with the [sales tracking API](/api-reference-v2/api-admin/tracking-api/sales).

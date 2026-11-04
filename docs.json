@@ -8,6 +8,52 @@
     "dark": "#1A1C25"
   },
   "favicon": "/favicon.png",
+  "redirects": [
+    {
+      "source": "/api-reference-v2/api-admin/commissions/delete-commissions",
+      "destination": "/api-reference-v2/api-advanced/commissions/delete-commissions"
+    },
+    {
+      "source": "/api-reference-v2/api-admin/commissions/generate-payouts",
+      "destination": "/api-reference-v2/api-advanced/commissions/generate-payouts"
+    },
+    {
+      "source": "/api-reference-v2/api-admin/commissions/get-commission",
+      "destination": "/api-reference-v2/api-admin/commissions/update-a-commission"
+    },
+    {
+      "source": "/api-reference-v2/api-admin/payouts/create-payments-batch",
+      "destination": "/api-reference-v2/api-advanced/payouts/create-payments-batch"
+    },
+    {
+      "source": "/api-reference-v2/api-admin/payouts/delete-payouts",
+      "destination": "/api-reference-v2/api-advanced/payouts/delete-payouts"
+    },
+    {
+      "source": "/api-reference-v2/api-admin/payouts/mark-payouts-as-paid",
+      "destination": "/api-reference-v2/api-advanced/payouts/mark-payouts-as-paid"
+    },
+    {
+      "source": "/api-reference-v2/api-admin/payouts/mark-payouts-as-unpaid",
+      "destination": "/api-reference-v2/api-advanced/payouts/mark-payouts-as-unpaid"
+    },
+    {
+      "source": "/api-reference-v2/api-admin/referrals/approve-referrals-based-on-query",
+      "destination": "/api-reference-v2/api-advanced/referrals/approve-referrals-based-on-query"
+    },
+    {
+      "source": "/api-reference-v2/api-admin/referrals/enable-referrals",
+      "destination": "/api-reference-v2/api-advanced/referrals/enable-referrals-based-on-query"
+    },
+    {
+      "source": "/api-reference-v2/api-admin/referrals/disable-referrals",
+      "destination": "/api-reference-v2/api-advanced/referrals/disable-referrals-based-on-query"
+    },
+    {
+      "source": "/api-reference-v2/api-admin/referrals/import-previous-sales-from-stripe",
+      "destination": "/api-reference-v2/api-advanced/referrals/import-previous-sales-from-stripe"
+    }
+  ],
   "navigation": {
     "versions": [
       {
@@ -82,6 +128,7 @@
                             ]
                           },
                           "integrations/tracking/platform/ghost",
+                          "integrations/tracking/platform/webflow",
                           "integrations/tracking/platform/kajabi",
                           "integrations/tracking/platform/thrivecart",
                           "integrations/tracking/platform/samcart",
@@ -115,6 +162,7 @@
                           "integrations/tracking/custom/rails",
                           "integrations/tracking/custom/stripe-checkout",
                           "integrations/tracking/custom/paddle-checkout",
+                          "integrations/tracking/custom/supabase",
                           "integrations/tracking/custom/gtm"
                         ]
                       },
@@ -618,6 +666,7 @@
                             ]
                           },
                           "integrations/tracking/platform/ghost",
+                          "integrations/tracking/platform/webflow",
                           "integrations/tracking/platform/kajabi",
                           "integrations/tracking/platform/thrivecart",
                           "integrations/tracking/platform/samcart",
@@ -651,6 +700,7 @@
                           "integrations/tracking/custom/rails",
                           "integrations/tracking/custom/stripe-checkout",
                           "integrations/tracking/custom/paddle-checkout",
+                          "integrations/tracking/custom/supabase",
                           "integrations/tracking/custom/gtm"
                         ]
                       }
