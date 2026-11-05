@@ -196,7 +196,7 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "Not Found. The visitor (`tid`) or referral could not be found, or the referral belongs to a promoter who can no longer be credited with signups in that campaign (for example inactive), in which case `message` is `This promotion is blocked or does not allow tracking for this event type.`",
             "content": {
               "application/json": {
                 "schema": {
