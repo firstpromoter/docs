@@ -238,74 +238,6 @@
           }
         }
       }
-    },
-    "/payouts/export": {
-      "get": {
-        "summary": "Export payouts",
-        "tags": [
-          "Payouts"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/AccountId"
-          },
-          {
-            "name": "q",
-            "in": "query",
-            "description": "Search params",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "$ref": "#/components/parameters/filters"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Payouts exported successfully",
-            "content": {
-              "text/csv": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "202": {
-            "description": "Export is being processed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                },
-                "example": {}
-              }
-            }
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "422": {
-            "$ref": "#/components/responses/UnprocessableEntity"
-          }
-        }
-      }
     }
   },
   "components": {
@@ -488,7 +420,7 @@
         "name": "Account-ID",
         "in": "header",
         "required": true,
-        "description": "Account identifier that specifies which account is making the request",
+        "description": "Account ID of the affiliate program, shown next to your API key under Profile → API & AI tools",
         "schema": {
           "type": "string",
           "example": "acc_123456"
@@ -576,7 +508,7 @@
       "BearerAuth": {
         "type": "http",
         "scheme": "bearer",
-        "description": "Access token passed as a Bearer token in the Authorization header"
+        "description": "Your affiliate API key (Profile → API & AI tools in the affiliate dashboard), sent as `Authorization: Bearer {api_key}`"
       },
       "accountId": {
         "type": "apiKey",

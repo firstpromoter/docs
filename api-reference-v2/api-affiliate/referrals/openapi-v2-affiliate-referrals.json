@@ -271,77 +271,6 @@
       }
     },
     "/referrals/{id}": {
-      "put": {
-        "summary": "Update referral",
-        "operationId": "updateReferral",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/AccountId"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "email": {
-                    "type": "string",
-                    "format": "email",
-                    "description": "Email of the referral"
-                  },
-                  "uid": {
-                    "type": "string",
-                    "description": "Unique ID of the referral"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Referral"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                },
-                "example": {}
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
       "delete": {
         "summary": "Delete referral",
         "operationId": "deleteReferral",
@@ -385,97 +314,6 @@
           }
         }
       }
-    },
-    "/referrals/export": {
-      "get": {
-        "summary": "Export referrals",
-        "operationId": "exportReferrals",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/AccountId"
-          },
-          {
-            "name": "filters[type]",
-            "in": "query",
-            "description": "Type (lead or customer)",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "lead",
-                "customer"
-              ]
-            }
-          },
-          {
-            "name": "filters[state]",
-            "in": "query",
-            "description": "State",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "subscribed",
-                "signup",
-                "active",
-                "cancelled",
-                "refunded",
-                "denied",
-                "pending",
-                "moved"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "text/csv": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "202": {
-            "description": "Export is being processed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                },
-                "example": {}
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
     }
   },
   "components": {
@@ -484,7 +322,7 @@
         "name": "Account-ID",
         "in": "header",
         "required": true,
-        "description": "Account identifier that specifies which account is making the request",
+        "description": "Account ID of the affiliate program, shown next to your API key under Profile → API & AI tools",
         "schema": {
           "type": "string",
           "example": "acc_123456"
@@ -531,6 +369,46 @@
           },
           "promoter_campaign": {
             "$ref": "#/components/schemas/PromoterCampaign"
+          },
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "visitor_sub_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "first_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "last_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "website": {
+            "type": "string",
+            "nullable": true
+          },
+          "comment": {
+            "type": "string",
+            "nullable": true
+          },
+          "split_details": {
+            "type": "object",
+            "nullable": true
+          },
+          "billing_country": {
+            "type": "string",
+            "nullable": true
+          },
+          "is_expired": {
+            "type": "boolean"
+          },
+          "custom_status": {
+            "type": "object",
+            "nullable": true,
+            "description": "Custom referral status set by the program, if any"
           }
         }
       },
@@ -563,6 +441,10 @@
           },
           "color": {
             "type": "string"
+          },
+          "language": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -595,7 +477,7 @@
       "BearerAuth": {
         "type": "http",
         "scheme": "bearer",
-        "description": "Access token passed as a Bearer token in the Authorization header"
+        "description": "Your affiliate API key (Profile → API & AI tools in the affiliate dashboard), sent as `Authorization: Bearer {api_key}`"
       }
     }
   }
