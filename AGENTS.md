@@ -51,6 +51,7 @@ images/, logo/, downloadables/
 
 - Main branch: `main`. Merging to `main` publishes the site.
 - Open pull requests as **drafts** by default (`gh pr create --draft`). Only mark a PR ready for review (`gh pr ready`) when the user explicitly asks for it.
+- List every related PR in the description as a link: the same story's PRs in other repos, and the PR this one depends on or follows up. State the deploy order when it matters.
 - Never force-push or push directly to `main` without being explicitly asked.
 
 ## Cross-repo
