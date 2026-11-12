@@ -18,8 +18,8 @@ The Affiliate MCP server lets you, as an affiliate, ask an AI assistant about yo
 - "How much have I earned this month, and how much is still pending?"
 - "List my referrals from the last 30 days that became customers."
 - "When is my next payout and how much will it be?"
-- "Which of my referral links brings the most clicks?"
-- "Compare my clicks, referrals and revenue over the last three months."
+- "List my referral links and the campaign each one belongs to."
+- "Compare my clicks, referrals and earnings over the last three months, by month."
 
 ## What it can do
 
@@ -106,16 +106,16 @@ Add one entry per program, each with its own key, for example `firstpromoter-acm
 | Tool | Description |
 |---|---|
 | `get_me` | Your affiliate profile in the program: name, email, balances and the campaigns you belong to. |
-| `list_campaigns` | Campaigns you are part of. |
+| `list_campaigns` | Campaigns you are part of. Takes only `page` and `per_page`. |
 | `list_referrals` | Your referrals. Filter by `type`, `state`, `campaign_id` and a `created_from` / `created_to` date range. |
 | `list_commissions` | Your commissions. Filter by `status`, `paid`, `campaign_id` and a `created_from` / `created_to` date range. |
 | `list_payouts` | Your payouts. Filter by `status` and `campaign_id`. |
-| `get_payout_stats` | Amounts due in your next payout, overdue, and on a custom schedule. |
+| `get_payout_stats` | Amounts of your next and overdue payouts with their period and payment dates, pending payouts without a set period, and the program's payout terms. Takes no arguments. |
 | `list_referral_links` | Your referral links, optionally for one `promoter_campaign_id`. |
 | `list_promo_codes` | Promo codes assigned to you, optionally for one `promoter_campaign_id`. |
-| `get_performance_report` | Clicks, referrals, customers, revenue and earnings between `start_date` and `end_date`, grouped by `group_by`, optionally for one `campaign_id`. |
+| `get_performance_report` | Clicks, referrals, customers and earnings between `start_date` and `end_date` (default: the last 30 days), grouped by `group_by` (`day`, `week`, `month` or `year`; default `day`), optionally for one `campaign_id`. |
 
-List tools are paginated with `page` and `per_page` (default 20, maximum 50) and return the same fields as the [Affiliate API](/api-reference-v2/api-affiliate/introduction).
+Every `list_*` tool, including `list_campaigns` and `list_referral_links`, is paginated with `page` (default 1) and `per_page` (default 20, maximum 50) and returns `page`, `per_page`, `total_count` and `total_pages` in its `meta`. The tools return the same fields as the [Affiliate API](/api-reference-v2/api-affiliate/introduction).
 
 ## Errors
 
