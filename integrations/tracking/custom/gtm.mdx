@@ -1,39 +1,149 @@
 ---
 title: "Google Tag Manager"
-description: "Setting up your Main tracking script in Google Tag Manager (GTM)"
+description: "Set up click and referral tracking with Google Tag Manager (GTM)"
 ---
 
 `Difficulty: Intermediate` <br/>
-`Developer Required: Yes`
+`Developer Required: Depends on your signup flow`
 
-With FirstPromoter you can setup click and signup tracking using our Google Tag Manager option.
-This setup mainly requires you to add tracking scripts into your Google Tag Manager and sending details about the referrals using the script.
-Depending on the complexity of your website it is ideal to have a developer assist you in the setup.
+Use Google Tag Manager (GTM) to add the FirstPromoter scripts to your website without editing its code. You'll add two tags: the main tracking script records visits from referral links, and the referral tracking tag records signups.
 
-<Tip>This procedure assumes you have already set up GTM to work on your website.</Tip>
+<Tip>This guide assumes the GTM container is already installed on your website.</Tip>
 
-1. To get started on FirstPromoter:
-    - [Login](https://login.firstpromoter.com/) to your admin account. 
-    - Navigate to Settings > Integrations > Integrate your website section of your dashboard.
-    - Click on the `Integrate` button.
-    - Click on the `setup` button or click on the `change` link for a new setup instructions.
-    - Under `Custom integration`, select the `JS` option.
-    - Copy the `Main tracking script` under the `JavaScript` tab.
+## Main tracking script
 
-2. Log in to Google Tag Manager:
-    - Navigate to your `Tags` section
-    - Click on `New` button (at top right corner)
-     <img height="150" src="/images/gtm/image-1.png" />
-    - Click on the `Tag configuration` panel to open the TAG type selection panel. 
-     <img height="150" src="/images/gtm/image-2.png" />
-    - Scroll down and select the `Custom HTML` option   
-      <img height="150" src="/images/gtm/image-3.png" />
-    - Add/paste the `Main tracking script` copied from FirstPromoter into the `HTML` Section. As shown in the screenshot below:  
-      <img height="150" src="/images/gtm/image-4.png" /> 
-    - Now, you need to select when Google Tag Manager should trigger the script. To do this, scroll down to the `triggering` section, click on it and choose when to trigger the tag. <Tip>We recommend selecting the `pages trigger` to load the `Main tracking script` on all your landing pages.</Tip>
-      <img height="150" src="/images/gtm/image-5.png" />
-      <img height="150" src="/images/gtm/image-5a.png" /> 
-    - Rename/change the name to `FirstPromoter Main Tracking Script`
-      <img height="150" src="/images/gtm/image-6.png" /> 
-    - Save and publish your changes.  
-      <img height="150" src="/images/gtm/image-7.png" /> 
+<Steps>
+  <Step title="Copy the main tracking script">
+    In FirstPromoter, go to **Settings > Integrations**, open the website integration setup, choose the **JS** option under **Custom integration**, and copy the **Main tracking script**. It looks like this, with your account ID filled in:
+
+    ```html
+    <script>(function(w){w.fpr=w.fpr||function(){w.fpr.q = w.fpr.q||[];w.fpr.q[arguments[0]=='set'?'unshift':'push'](arguments);};})(window);
+    fpr("init", {cid:"<your-account-id-here>"});
+    fpr("click");
+    </script>
+    <script src="https://cdn.firstpromoter.com/fpr.js" async></script>
+    ```
+  </Step>
+  <Step title="Create a Custom HTML tag">
+    In your GTM workspace, go to **Tags** and click **New**. Click **Tag Configuration** and choose **Custom HTML**.
+
+    <img height="150" src="/images/gtm/image-1.png" />
+    <img height="150" src="/images/gtm/image-3.png" />
+  </Step>
+  <Step title="Paste the script">
+    Paste the main tracking script into the **HTML** field.
+
+    <img height="150" src="/images/gtm/image-4.png" />
+  </Step>
+  <Step title="Set the trigger">
+    Click **Triggering** and select **Initialization - All Pages**. This loads FirstPromoter before your other tags, so the referral tag can use it.
+
+    <img height="150" src="/images/gtm/image-5a.png" />
+  </Step>
+  <Step title="Save and publish">
+    Name the tag **FirstPromoter - Main tracking script** and click **Save**. Then click **Submit** and **Publish** to make the change live.
+
+    <img height="150" src="/images/gtm/image-7.png" />
+  </Step>
+</Steps>
+
+## Referral tracking
+
+When a visitor signs up or submits an opt-in form, send their email to FirstPromoter with [`fpr("referral")`](/script-docs/fpr-js-docs). Pick the option that matches how your signup works.
+
+<Tabs>
+  <Tab title="Thank-you page">
+    Use this when your form redirects to a thank-you page that has the email in its URL, for example `https://yoursite.com/thank-you?email=jane@example.com`.
+
+    1. Create a new **Custom HTML** tag and paste the script below.
+    2. Click **Triggering**, click **+** to create a new trigger, and choose **Page View**.
+    3. Select **Some Page Views** and add a condition matching your thank-you page, for example **Page Path** contains `/thank-you`.
+    4. Name the tag **FirstPromoter - Referral tracking**, save it, then submit and publish your container.
+
+    ```html
+    <script>
+      (function () {
+        var email = new URLSearchParams(window.location.search).get("email");
+        if (email && window.fpr) {
+          fpr("referral", { email: email });
+        }
+      })();
+    </script>
+    ```
+
+    If the URL parameter is not called `email`, change `get("email")` to match it.
+  </Tab>
+  <Tab title="Form submission">
+    Use this when your signup or opt-in form is on your site and has an email field.
+
+    1. Go to **Variables**, click **Configure** under **Built-In Variables**, and enable **Form Element** and **Form ID**.
+    2. Create a new **Custom HTML** tag and paste the script below.
+    3. Click **Triggering**, click **+** to create a new trigger, and choose **Form Submission**.
+    4. Enable **Wait for Tags** (keep the 2000 ms default) so the referral is sent before the page changes.
+    5. If your form submits without reloading the page (an AJAX or JavaScript form), turn off **Check Validation**.
+    6. Select **Some Forms** and add a condition matching your form, for example **Form ID** equals `signup-form`.
+    7. Name the tag **FirstPromoter - Referral tracking**, save it, then submit and publish your container.
+
+    ```html
+    <script>
+      (function () {
+        var form = {{Form Element}};
+        var emailInput = form && form.querySelector('input[type="email"], input[name="email"]');
+        if (emailInput && emailInput.value && window.fpr) {
+          fpr("referral", { email: emailInput.value.trim() });
+        }
+      })();
+    </script>
+    ```
+
+    The script reads the first email field in the submitted form. If your email field has a different `name`, update the selector to match it.
+  </Tab>
+  <Tab title="Data layer event">
+    Use this when signups happen in your app and a developer can push an event to the GTM data layer. This is the most reliable option, and it lets you send the user ID as well as the email.
+
+    1. Ask your developer to run the code below right after a successful signup, using the new user's details.
+
+       ```js
+       window.dataLayer = window.dataLayer || [];
+       window.dataLayer.push({
+         event: "fp_signup",
+         fp_email: user.email,
+         fp_uid: user.id,
+       });
+       ```
+
+    2. In GTM, go to **Variables** and create two **Data Layer Variable** variables: one with the name `fp_email` (save it as **DLV - fp_email**) and one with the name `fp_uid` (save it as **DLV - fp_uid**).
+    3. Create a new **Custom HTML** tag and paste the script below.
+    4. Click **Triggering**, click **+** to create a new trigger, choose **Custom Event**, and set **Event name** to `fp_signup`.
+    5. Name the tag **FirstPromoter - Referral tracking**, save it, then submit and publish your container.
+
+    ```html
+    <script>
+      if (window.fpr) {
+        fpr("referral", { email: {{DLV - fp_email}}, uid: {{DLV - fp_uid}} });
+      }
+    </script>
+    ```
+  </Tab>
+</Tabs>
+
+<Note>
+If your signup creates the account on your server, you can track the referral with the [API](/guides/tracking-without-fprjs) instead. Keep the main tracking script in GTM so clicks are still recorded.
+</Note>
+
+## Testing your setup
+
+1. In GTM, click **Preview**, enter your website URL with a referral link from one of your affiliates (for example `https://yoursite.com/?fpr=joe13`), and click **Connect**.
+2. In Tag Assistant, check that **FirstPromoter - Main tracking script** fired. In your browser's developer tools, the `_fprom_tid` and `_fprom_ref` cookies should now be set.
+3. Sign up or submit your form, and check that **FirstPromoter - Referral tracking** fired.
+4. Open the affiliate in your FirstPromoter dashboard and confirm the new referral appears.
+
+### Common issues
+
+- **Tag not firing:** check that the trigger conditions match your page or form, and that you published the container. Preview mode does not change your live site.
+- **Referral tag fired but nothing appears in FirstPromoter:** the visitor must have arrived through a referral link first, in the same browser. Ad blockers can also block tracking requests. To avoid that, set up a [proxy](/guides/proxy-setup).
+- **Consent banner:** if your consent tool blocks tags until the visitor accepts, configure the FirstPromoter tags to follow the same consent settings as your other analytics tags.
+
+## Sales tracking
+
+Sales are tracked through your [billing integration](/integrations/billing/stripe) (Stripe, Chargebee, Paddle and others), not through GTM. Make sure the email (or user ID) sent with the referral is the same one your billing provider sends, so FirstPromoter can match the sale to the referral.

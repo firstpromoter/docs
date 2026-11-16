@@ -1,0 +1,8 @@
+User-agent: *
+Content-Signal: ai-train=yes, search=yes, ai-input=yes
+Disallow: /cdn-cgi/
+Allow: /_next/image
+Disallow: /_next/
+Disallow: /api-reference-v2/api-advanced/
+Disallow: /api-reference-v2/api-affiliate/
+Sitemap: https://docs.firstpromoter.com/sitemap.xml

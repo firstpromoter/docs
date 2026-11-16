@@ -7,14 +7,14 @@ description: "Setting up / implementing your Referral tracking in Google Tag Man
 `Developer Required: Yes`
 
 <Tip> 
-This guide assumes that you have already set up GTM to work on your website and as well setup the [Main tracking script](/integrations/tracking/custom/gtm-main-tracking).
+This guide assumes that you have already set up GTM to work on your website and as well setup the [Main tracking script](/integrations/tracking/custom/gtm).
 </Tip> 
 
-With FirstPromoter, you can setup Referral tracking using our Google Tag Manager option. However, this setup requires the [GTM - Main tracking script](/integrations/tracking/custom/gtm-main-tracking) to be in place in order for the referral tracking to work as expected.
+With FirstPromoter, you can setup Referral tracking using our Google Tag Manager option. However, this setup requires the [GTM - Main tracking script](/integrations/tracking/custom/gtm) to be in place in order for the referral tracking to work as expected.
 This setup mainly requires you to add `Referral tracking script` implementation into your GTM to enable sending details about the referrals to FirstPromoter using the script. Depending on the complexity of your website, it would be ideal to have a developer assist you with the setup.
 
 <Note>
-Adding your `Referral tracking script` implementation in GTM, requires the same steps/ procedures used in adding the [Main tracking script](/integrations/tracking/custom/gtm-main-tracking).
+Adding your `Referral tracking script` implementation in GTM, requires the same steps/ procedures used in adding the [Main tracking script](/integrations/tracking/custom/gtm).
 </Note>
 
 To track the referrals, you'll need to make a request FirstPromoter to capture the lead. This can mainly be done by calling the `fpr` JavaScript function defined by the `Main tracking script` and inserting the `email` of the user/lead/customer:
