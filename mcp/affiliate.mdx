@@ -125,6 +125,6 @@ Every `list_*` tool, including `list_campaigns` and `list_referral_links`, is pa
 
 ## Security
 
-- Anyone with your API key can read your data in the program. Do not share it or commit it to a repository.
+- The MCP server is read-only, but the key behind it is not: anyone who has it can read your data in the program and change it through the [Affiliate API](/api-reference-v2/api-affiliate/authentication#security-best-practices). Do not share it or commit it to a repository.
 - If a key is exposed, **regenerate** it in **Profile** → **API & AI tools**. The old key stops working for both the API and the MCP server, so update your MCP configuration with the new key.
 - **Disable** API access to cut off every connected AI tool at once.

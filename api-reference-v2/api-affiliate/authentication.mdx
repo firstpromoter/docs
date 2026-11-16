@@ -63,7 +63,7 @@ Every endpoint returns only your own data in that program: your referrals, commi
 
 ## Security best practices
 
-- Treat the API key like a password: anyone who has it can read your data in the program.
+- Treat the API key like a password: anyone who has it can read your data in the program and change it through the API. That includes adding or deleting referrals, referral links and promo codes, and editing your payout methods and email settings.
 - Never put the key in client-side code, public repositories or shared documents.
 - Use HTTPS for all requests.
 - Regenerate the key if you think it has been exposed, and disable API access when you no longer need it.
