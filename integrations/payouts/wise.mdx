@@ -19,7 +19,7 @@ You do not need a Wise Platform partner agreement, an OAuth client ID or secret,
 
 <Steps>
   <Step title="Create an API token in Wise">
-    In Wise, open **Connect and manage apps → API tokens**, add a token, and select full access. Complete Wise's verification and copy the token.
+    In Wise, select your profile name, open **Accounting integrations**, scroll to **Developer tools** and choose **API tokens**. Select **Add new token**, give it full access, complete Wise's 2-step verification and copy the token. See [Wise's personal token guide](https://docs.wise.com/guides/developer/auth-and-security/personal-api-token).
   </Step>
   <Step title="Save the token in FirstPromoter">
     Open **Settings → Integrations → Wise**. Choose **Production** for a real Wise account, paste your token, and select **Save token**. Confirm with your FirstPromoter verification code.
@@ -38,7 +38,7 @@ You do not need a Wise Platform partner agreement, an OAuth client ID or secret,
 
 When Wise payouts are enabled, affiliates open **My payouts → Payout methods** in the affiliate portal, add or edit Wise, and choose a receiving destination under **Send payouts to**:
 
-- **Wise balance:** choose **Wisetag**, **Email** or **Phone number**, enter your identifier, and wait for the green checkmark and recipient name. Check the name, then save the payout method to confirm it. FirstPromoter sends to that Wise balance; bank details are not required. For phone numbers, include the country code.
+- **Wise balance:** where Wise offers lookup, choose **Wisetag**, **Email** or **Phone number**, enter your identifier, and wait for the green checkmark and recipient name. Lookup depends on Wise and on your discoverability settings; if it is unavailable or can't find you, use your receiving details (next option) instead. Check the name, then save the payout method to confirm it. FirstPromoter sends to that Wise balance; bank details are not required. For phone numbers, include the country code.
 - **Wise balance using receiving details:** if lookup is unavailable, select **Use Wise receiving account details instead**. In Wise, open **Home → the payout currency → Account details** and copy the receiving details for the selected payment route. Availability depends on country and currency; see [Wise's receiving guide](https://wise.com/help/articles/2898124/how-do-i-receive-money-to-my-wise-account-details).
 - **Bank account:** provide your own bank account's receiving details for the payout currency. The payout goes to that bank account.
 - **Arrange with the company (email only):** keep the existing email-based CSV or admin-assisted setup.
