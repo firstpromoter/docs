@@ -738,6 +738,7 @@
                     "group": "Tracking",
                     "pages": [
                       "api-reference-v1/tracking-api/leads-and-signups",
+                      "api-reference-v1/tracking-api/subscriber",
                       "api-reference-v1/tracking-api/sales",
                       "api-reference-v1/tracking-api/refund",
                       "api-reference-v1/tracking-api/cancellation"

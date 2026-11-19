@@ -177,6 +177,22 @@
             }
           },
           {
+            "name": "created_at",
+            "in": "query",
+            "description": "ISO datetime when the referral was created. A lead that has not bought yet expires once its creation date is older than the company's lead expiry window, so changing this date also moves that window. It has no effect on a cancelled customer's expiry; use `reset_expiry` to clear either kind.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "reset_expiry",
+            "in": "query",
+            "description": "Set this to `true` to clear the referral's **expired** status. It restarts both expiry windows from now: the lead window (no sale since signup) and the cancelled-customer window (time since cancellation). The referral's state, creation date, `customer_since` and cancellation date don't change, and it can expire again once the company's expiry window has passed.\n\nOnly relevant when the company has referral expiry set.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
             "name": "plan_name",
             "in": "query",
             "description": "Id of the plan the customer was assigned to. Needs to match with the plans set on FirstPromoter",
