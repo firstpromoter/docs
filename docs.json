@@ -2,12 +2,32 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
   "name": "FirstPromoter Docs",
+  "description": "FirstPromoter developer docs: set up affiliate and referral tracking, connect billing and payout providers, receive webhooks, and use the REST API and MCP server.",
   "colors": {
     "primary": "#2497F3",
     "light": "#42A5F5",
     "dark": "#1A1C25"
   },
   "favicon": "/favicon.png",
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "cursor",
+      "mcp"
+    ]
+  },
+  "seo": {
+    "indexing": "navigable",
+    "metatags": {
+      "canonical": "https://docs.firstpromoter.com"
+    }
+  },
+  "search": {
+    "prompt": "Search guides, integrations and API endpoints..."
+  },
   "redirects": [
     {
       "source": "/api-reference-v2/api-admin/commissions/delete-commissions",
@@ -791,7 +811,8 @@
                       "webhooks/event-types",
                       "webhooks/payload",
                       "webhooks/deliveries"
-                    ]
+                    ],
+                    "boost": 0.5
                   }
                 ]
               },
@@ -803,7 +824,8 @@
                     "pages": [
                       "api-reference-v1/introduction",
                       "api-reference-v1/authentication"
-                    ]
+                    ],
+                    "boost": 0.5
                   },
                   {
                     "group": "Tracking",
@@ -813,7 +835,8 @@
                       "api-reference-v1/tracking-api/sales",
                       "api-reference-v1/tracking-api/refund",
                       "api-reference-v1/tracking-api/cancellation"
-                    ]
+                    ],
+                    "boost": 0.5
                   },
                   {
                     "group": "Leads",
@@ -822,7 +845,8 @@
                       "api-reference-v1/leads-api/list",
                       "api-reference-v1/leads-api/show",
                       "api-reference-v1/leads-api/delete"
-                    ]
+                    ],
+                    "boost": 0.5
                   },
                   {
                     "group": "Promoters",
@@ -835,7 +859,8 @@
                       "api-reference-v1/promoters-api/add-to-campaign",
                       "api-reference-v1/promoters-api/refresh-token",
                       "api-reference-v1/promoters-api/delete"
-                    ]
+                    ],
+                    "boost": 0.5
                   },
                   {
                     "group": "Rewards",
@@ -843,7 +868,8 @@
                       "api-reference-v1/rewards-api/create",
                       "api-reference-v1/rewards-api/list",
                       "api-reference-v1/rewards-api/update"
-                    ]
+                    ],
+                    "boost": 0.5
                   },
                   {
                     "group": "Payouts",
@@ -851,7 +877,8 @@
                       "api-reference-v1/payouts-api/list",
                       "api-reference-v1/payouts-api/create",
                       "api-reference-v1/payouts-api/update"
-                    ]
+                    ],
+                    "boost": 0.5
                   },
                   {
                     "group": "Reports",
@@ -859,7 +886,8 @@
                       "api-reference-v1/reports-api/overview",
                       "api-reference-v1/reports-api/campaign",
                       "api-reference-v1/reports-api/promoter"
-                    ]
+                    ],
+                    "boost": 0.5
                   }
                 ]
               }
@@ -899,7 +927,90 @@
   "footer": {
     "socials": {
       "x": "https://x.com/firstpromoter",
-      "linkedin": "https://www.linkedin.com/company/first-promoter"
-    }
+      "linkedin": "https://www.linkedin.com/company/first-promoter",
+      "facebook": "https://www.facebook.com/firstpromoter/"
+    },
+    "links": [
+      {
+        "header": "Product",
+        "items": [
+          {
+            "label": "Features",
+            "href": "https://firstpromoter.com/features"
+          },
+          {
+            "label": "Integrations",
+            "href": "https://firstpromoter.com/integrations"
+          },
+          {
+            "label": "Pricing",
+            "href": "https://firstpromoter.com/pricing"
+          },
+          {
+            "label": "Changelog",
+            "href": "https://changelog.firstpromoter.com/"
+          },
+          {
+            "label": "Stripe app",
+            "href": "https://marketplace.stripe.com/apps/firstpromoter"
+          }
+        ]
+      },
+      {
+        "header": "Company",
+        "items": [
+          {
+            "label": "About us",
+            "href": "https://firstpromoter.com/about-us"
+          },
+          {
+            "label": "Careers",
+            "href": "https://firstpromoter.com/careers"
+          },
+          {
+            "label": "Blog",
+            "href": "https://firstpromoter.com/blog"
+          },
+          {
+            "label": "Case studies",
+            "href": "https://firstpromoter.com/casestudy"
+          },
+          {
+            "label": "Affiliate program",
+            "href": "https://firstpromoter.com/affiliate-program"
+          }
+        ]
+      },
+      {
+        "header": "Help",
+        "items": [
+          {
+            "label": "Help center",
+            "href": "https://help.firstpromoter.com/en/"
+          },
+          {
+            "label": "Contact support",
+            "href": "mailto:support@firstpromoter.com"
+          },
+          {
+            "label": "Log in",
+            "href": "https://app.firstpromoter.com/login"
+          }
+        ]
+      },
+      {
+        "header": "Legal",
+        "items": [
+          {
+            "label": "Privacy policy",
+            "href": "https://firstpromoter.com/privacy"
+          },
+          {
+            "label": "Terms of service",
+            "href": "https://firstpromoter.com/terms"
+          }
+        ]
+      }
+    ]
   }
 }
