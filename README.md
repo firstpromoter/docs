@@ -1,32 +1,29 @@
-# FirstPromoter Mintlify docs
+# FirstPromoter docs
 
-Click on `Use this template` to copy the Mintlify starter kit. The starter kit contains examples including
+Source of the public FirstPromoter documentation at [docs.firstpromoter.com](https://docs.firstpromoter.com), built with [Mintlify](https://mintlify.com). It covers the product guides, integration how-tos, the `fpr.js` tracking script, webhooks, the MCP server and the REST API references (v2 and legacy v1).
 
-- Guide pages
-- Navigation
-- Customizations
-- API Reference pages
-- Use of popular components
+`docs.json` holds the site configuration and the whole navigation. Contributor and agent conventions are in [AGENTS.md](AGENTS.md).
 
-### Development
+## Local development
 
-Install the [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the documentation changes locally. To install, use the following command
+Requires Node.js 20.17 or later, on an LTS release (the Mintlify CLI does not run on Node 25).
 
-```
-npm i -g mintlify
+```bash
+npm i -g mint
+mint dev --port 3003   # preview at http://localhost:3003
 ```
 
-Run the following command at the root of your documentation (where mint.json is)
+Inside the FirstPromoter monorepo, `make start` at its root serves the docs on the same port.
 
+## Checks
+
+Run both before opening a pull request. CI runs them on every pull request.
+
+```bash
+mint validate       # MDX, docs.json and OpenAPI build checks
+mint broken-links   # internal links
 ```
-mintlify dev
-```
 
-### Publishing Changes
+## Publishing
 
-Install our Github App to auto propagate changes from your repo to your deployment. Changes will be deployed to production automatically after pushing to the default branch. Find the link to install on your dashboard.
-
-#### Troubleshooting
-
-- Mintlify dev isn't running - Run `mintlify install` it'll re-install dependencies.
-- Page loads as a 404 - Make sure you are running in a folder with `mint.json`
+Merging to `main` publishes the site automatically through the Mintlify GitHub app. Open pull requests as drafts and coordinate API reference changes with the matching API release.
