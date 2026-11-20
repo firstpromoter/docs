@@ -285,7 +285,8 @@
                     "group": "MCP Server (Experimental)",
                     "pages": [
                       "mcp/overview",
-                      "mcp/tools"
+                      "mcp/tools",
+                      "mcp/affiliate"
                     ]
                   }
                 ]
@@ -402,7 +403,6 @@
               },
               {
                 "tab": "Affiliate API Reference",
-                "hidden": true,
                 "groups": [
                   {
                     "group": "Affiliate API Documentation",
@@ -427,8 +427,7 @@
                   {
                     "group": "Affiliate Commissions",
                     "pages": [
-                      "api-reference-v2/api-affiliate/commissions/get-all-commissions-for-current-promoter",
-                      "api-reference-v2/api-affiliate/commissions/export-all-commissions-for-current-promoter"
+                      "api-reference-v2/api-affiliate/commissions/get-all-commissions-for-current-promoter"
                     ]
                   },
                   {
@@ -452,8 +451,7 @@
                     "group": "Affiliate Payouts",
                     "pages": [
                       "api-reference-v2/api-affiliate/payouts/get-all-payouts-for-current-promoter",
-                      "api-reference-v2/api-affiliate/payouts/get-due-payout-stats-for-current-promoter",
-                      "api-reference-v2/api-affiliate/payouts/export-payouts"
+                      "api-reference-v2/api-affiliate/payouts/get-due-payout-stats-for-current-promoter"
                     ]
                   },
                   {
@@ -492,9 +490,7 @@
                     "pages": [
                       "api-reference-v2/api-affiliate/referrals/get-available-referrals-for-current-promoter",
                       "api-reference-v2/api-affiliate/referrals/create-referral-for-current-promoter",
-                      "api-reference-v2/api-affiliate/referrals/update-referral",
-                      "api-reference-v2/api-affiliate/referrals/delete-referral",
-                      "api-reference-v2/api-affiliate/referrals/export-referrals"
+                      "api-reference-v2/api-affiliate/referrals/delete-referral"
                     ]
                   },
                   {

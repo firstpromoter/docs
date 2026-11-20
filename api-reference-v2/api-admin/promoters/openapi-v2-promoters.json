@@ -3540,7 +3540,7 @@
           },
           "inactivity": {
             "type": "object",
-            "description": "Filter promoters by inactivity — promoters who have not performed the specified metric within the given number of days",
+            "description": "Filter promoters by their last activity. Give the period as either `days` or `from`/`to`, never both. A promoter with no recorded activity is measured from the date they last joined a campaign",
             "properties": {
               "metric": {
                 "type": "string",
@@ -3548,14 +3548,25 @@
                   "referral",
                   "customer",
                   "click",
-                  "sale"
+                  "any"
                 ],
-                "description": "The activity metric to measure inactivity against"
+                "description": "The activity to measure. `any` uses the latest of referral, customer and click"
               },
               "days": {
                 "type": "integer",
                 "minimum": 1,
-                "description": "Number of days of inactivity"
+                "maximum": 9999,
+                "description": "Promoters whose last activity is more than this many days ago"
+              },
+              "from": {
+                "type": "string",
+                "format": "date",
+                "description": "Promoters whose last activity is on or after this date (YYYY-MM-DD)"
+              },
+              "to": {
+                "type": "string",
+                "format": "date",
+                "description": "Promoters whose last activity is on or before this date (YYYY-MM-DD)"
               }
             }
           },
