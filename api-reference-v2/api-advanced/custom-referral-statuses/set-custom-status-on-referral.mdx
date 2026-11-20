@@ -1,4 +1,9 @@
 ---
 title: 'Set custom status on a referral'
+description: "Assign a custom status to a referral, or clear it, by passing custom_status_id."
 openapi: 'openapi-v2-referral-custom-status PUT /referrals/{id}'
 ---
+
+Assign or clear a custom status on an existing referral by passing `custom_status_id`. 
+
+First use `GET /api/admin/v1/custom_referral_statuses` to retrieve the IDs of your available statuses, then pass the desired `id` here. Pass `null` to remove the status.

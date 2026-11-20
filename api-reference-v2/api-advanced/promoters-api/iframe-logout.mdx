@@ -1,4 +1,8 @@
 ---
 title: 'End embedded dashboard session(s) (iframe logout)'
+description: "Revoke a promoter's embedded dashboard sessions, either all of them or a single session token."
 openapi: 'openapi-v2-promoters-iframe POST /promoters/iframe_logout'
 ---
+
+Revokes active `iframe_login` access tokens for a specific promoter. By default this revokes **every** currently active token that promoter has under your account. Pass `session_token` instead to revoke a single session (e.g. one browser tab) and leave the promoter's other sessions active.
+See the [logout guide](/advanced/embed-dashboard-logout) for the full walkthrough.

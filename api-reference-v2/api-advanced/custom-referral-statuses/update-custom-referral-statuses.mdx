@@ -1,4 +1,13 @@
 ---
 title: 'Create, update, or delete custom referral statuses'
+description: "Create, update and delete custom referral statuses in a single batch request."
 openapi: 'openapi-v2-custom-referral-statuses PUT /custom_referral_statuses/update'
 ---
+
+Batch operation to create, update, and/or delete custom referral statuses in a single request. Pass an array of status objects under the `custom_referral_statuses` key.
+
+- **Create**: omit `id`
+- **Update**: include the existing `id`
+- **Delete**: include `id` and set `_destroy` to `true`
+
+ <Note>Both `name` and `order` must be unique within your account. Leading and trailing whitespace is stripped from `name`.</Note>

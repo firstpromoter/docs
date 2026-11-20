@@ -1,3 +1,7 @@
 ---
+description: "Approve one or more pending commissions by ID; more than five IDs are processed as an asynchronous batch."
 openapi: 'openapi-v2-commissions post /commissions/approve'
 ---
+
+With this endpoint you can approve commissions. 
+ <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note>

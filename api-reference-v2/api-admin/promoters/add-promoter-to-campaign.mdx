@@ -1,3 +1,7 @@
 ---
+description: "Add promoters to an additional campaign, optionally sending the campaign's drip emails."
 openapi: 'openapi-v2-promoters post /promoters/add_to_campaign'
 ---
+
+With this endpoint you can add promoters to a campaign. 
+ <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note>

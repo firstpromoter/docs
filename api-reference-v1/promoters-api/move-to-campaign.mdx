@@ -1,4 +1,7 @@
 ---
 title: 'Move/switch a promoter from one campaign to another'
+description: "Move a promoter to a different campaign while keeping the same referral ID and link (legacy v1 API)."
 openapi: 'openapi-promoters POST /move_to_campaign'
 ---
+
+This endpoint will change the promoter's campaign to another one, keeping the referral ID the same (the affiliate won’t need to update the referral link). It serves the same function as moving the promoter to another campaign from the UI.More details on how it works can be found [here](https://help.firstpromoter.com/en/articles/2509650-moving-promoters-from-one-campaign-to-another).<br/><br/>You can identify promoters by: `id`, `cust_id`, `auth_token`, `promoter_email` or `ref_id`(referral id).

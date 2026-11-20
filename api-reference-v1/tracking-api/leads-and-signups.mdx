@@ -1,4 +1,7 @@
 ---
 title: 'Tracking leads and sign-ups'
+description: "Track a lead or signup from your backend and attribute it to a promoter with the visitor's tid or ref_id (legacy v1 API)."
 openapi: 'openapi-tracking POST /signup'
 ---
+
+Capture a lead when they sign-up or fill an optin form. This endpoint is used to track leads and sign-ups. It's not for tracking the actual sales and commissions. <br/>  <br/> Sign-ups are tracked as leads in FirstPromoter so when a person referred by the promoter/affiliate signs up, a new referral should be added inside FirstPromoter **(you can see them inside the `Referrals` section as `Leads`)**. <br/><br/><Tip>Using sub IDs, postbacks or ad tracking? Install the tracking script so it sets the `_fprom_tid` cookie when a visitor clicks a referral link, then send that cookie's value in the `tid` parameter.</Tip>

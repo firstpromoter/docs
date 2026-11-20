@@ -1,3 +1,10 @@
 ---
+description: "Send a sample payload for an event type to any URL to check that your endpoint receives and handles it."
 openapi: 'openapi-v2-webhooks post /webhooks/test'
 ---
+
+Sends a sample payload for the given event type to the specified URL immediately. Useful for verifying that your endpoint is reachable and processing payloads correctly before creating a subscription. 
+
+ The signature in the test request is generated with a random secret (not a saved subscription's secret), so signature verification will fail — this is expected during testing. 
+
+ Returns the HTTP status and body received from your endpoint.

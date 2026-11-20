@@ -1,4 +1,7 @@
 ---
 title: 'Promoter reports'
+description: "Get paginated report data grouped by promoter, refreshed daily at midnight (legacy v1 API)."
 openapi: 'openapi-reports GET /promoters'
 ---
+
+<Note>With this endpoint you can get the report data grouped by promoters. Data is updated once a day, at midnight. This endpoint supports pagination, similar to other endpoints, by passing `page` param.<br/><br/>If you want to iterate through all promoters, you **must start with** `page=1` and continue to next pages based on header pagination links from the response. The paginated promoters are always ordered by the total revenue made (not the revenue brought during the selected period).<br/><br/>If **page param is omitted**, we'll return **top 50 promoters** by **revenue amount** on the selected period. You can get the **top 50 promoters** sorted by a different metric using the `top_50` parameter.</Note>
