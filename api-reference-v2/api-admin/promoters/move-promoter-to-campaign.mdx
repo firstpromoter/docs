@@ -1,3 +1,7 @@
 ---
+description: "Move promoters from one campaign to another, optionally moving their referrals and sending drip emails."
 openapi: 'openapi-v2-promoters post /promoters/move_to_campaign'
 ---
+
+With this endpoint you can move promoters from one campaign to another. 
+ <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note>

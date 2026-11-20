@@ -1,3 +1,7 @@
 ---
+description: "Set a parent promoter for one or more promoters to build multi-tier (sub-affiliate) relationships."
 openapi: 'openapi-v2-promoters post /promoters/assign_parent'
 ---
+
+With this endpoint you can assign a parent promoter to your promoters. 
+ <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note>

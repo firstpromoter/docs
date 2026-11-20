@@ -1,3 +1,7 @@
 ---
+description: "Archive promoters by ID to remove them from active lists without deleting their history."
 openapi: 'openapi-v2-promoters post /promoters/archive'
 ---
+
+With this endpoint you can archive promoters. 
+ <Note>If there are more than __5__ ids on the __ids__ param/field, the action will be processed asynchronously. The response for the batch status will most likely be `in_progress`. The available statuses are `pending`, `in_progress`, `completed`, `failed` and `stopped`</Note>

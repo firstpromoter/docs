@@ -1,0 +1,16 @@
+name: Docs checks
+
+on:
+  pull_request:
+
+jobs:
+  mint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22 # mint does not support Node 25+
+      - run: npm i -g mint
+      - run: mint validate
+      - run: mint broken-links

@@ -1,4 +1,7 @@
 ---
 title: 'Tracking subscribers'
+description: "Attribute a newsletter or free-plan subscriber to a promoter before they sign up for a paid plan (legacy v1 API)."
 openapi: 'openapi-tracking POST /subscriber'
 ---
+
+Track a subscriber event — use this to attribute a newsletter or free-plan subscription to a promoter before the lead signs up for a paid plan. Unlike the `signup` endpoint, `subscriber` does not require the visitor to have been tracked by the FirstPromoter JS script (no `tid` required when using `ref_id`). <Note>**Expired referrals.** If the company has referral expiry set and the referral for this email or uid has expired, a call that names its current promoter (`ref_id`, `tid`, `promo_code` or `promoter_email`) restarts it for that promoter: a referral that never bought becomes a fresh lead dated now, and an expired customer gets a new referral with no `customer_since`, while the old one keeps its history. A call that names a different promoter moves the customer to that promoter. A call that names no promoter leaves an expired referral as it is.</Note>

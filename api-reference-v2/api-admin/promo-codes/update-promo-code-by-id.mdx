@@ -1,3 +1,6 @@
 ---
+description: "Update a promo code's code, description, promoter campaign or metadata; archived codes synced to Stripe cannot be changed."
 openapi: 'openapi-v2-promocodes put /promo_codes/{id}'
 ---
+
+Update promo code by id. Can not be updated if archived and ext_id present.

@@ -1,4 +1,7 @@
 ---
 title: 'Update a reward or commission'
+description: "Change the status of a reward or commission, identified by its id or the event that generated it (legacy v1 API)."
 openapi: 'openapi-rewards PUT /update'
 ---
+
+You can use this endpoint to change the status of a reward or commission. You can identify the reward or commission by its id or the id of the event that generated the reward.<Note>For Stripe, Recurly and Chargebee subscription the `event_id` value is the Invoice id, for Stripe one time charges is the charge id.</Note>
