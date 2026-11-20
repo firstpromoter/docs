@@ -38,6 +38,43 @@ Every webhook request is a `POST` with a `Content-Type: application/json` body. 
   ```
 </ResponseField>
 
+<ResponseField name="performed_by" type="object">
+  Who made the change. Every event includes it, so you can tell a change someone made by hand from one FirstPromoter made automatically. It names the same person as the change's entry in Activity Logs.
+
+  <Expandable title="properties">
+    <ResponseField name="type" type="string">
+      When a member of your account made the change, their role, the same one Activity Logs show:
+      - `super_admin`, `admin_plus`, `admin`, `manager` or `affiliate_manager`: a member of your team, in the dashboard.
+      - `promoter`: the affiliate, in their portal.
+      - `api`: an API user, through one of their API keys.
+      - `support`: the FirstPromoter support team, acting on your behalf. `name` is `FirstPromoter team` and `email` is `support@firstpromoter.com`.
+
+      When no member made the change:
+      - `system`: FirstPromoter itself, for example tracking, billing integrations and scheduled jobs.
+      - `api`: a legacy API key that belongs to no API user.
+      - `other`: someone FirstPromoter can't identify as a member of your account.
+    </ResponseField>
+    <ResponseField name="id" type="number | null">
+      The ID of the member who made the change. `null` when no member made it.
+    </ResponseField>
+    <ResponseField name="name" type="string | null">
+      Their name. `null` when no member made the change or they have no name.
+    </ResponseField>
+    <ResponseField name="email" type="string | null">
+      Their email. `null` when no member made the change.
+    </ResponseField>
+  </Expandable>
+
+  ```json
+  {
+    "type": "admin",
+    "id": 812,
+    "name": "Maria Lopez",
+    "email": "maria@example.com"
+  }
+  ```
+</ResponseField>
+
 <ResponseField name="data" type="object">
   The full serialized state of the resource at the time of the event. The exact fields depend on the `entity_type`. See the examples below.
 </ResponseField>
@@ -59,6 +96,12 @@ Every webhook request is a `POST` with a `Content-Type: application/json` body. 
   "entity_type": "promoter",
   "entity_id": 12345,
   "changes": {},
+  "performed_by": {
+    "type": "promoter",
+    "id": 2201,
+    "name": "Jane Smith",
+    "email": "jane@example.com"
+  },
   "data": {
     "id": 12345,
     "email": "jane@example.com",
@@ -96,6 +139,12 @@ Every webhook request is a `POST` with a `Content-Type: application/json` body. 
     "state": ["signup", "active"],
     "customer_since": [null, "2025-01-20T14:00:00Z"]
   },
+  "performed_by": {
+    "type": "system",
+    "id": null,
+    "name": null,
+    "email": null
+  },
   "data": {
     "id": 55678,
     "state": "active",
@@ -120,6 +169,12 @@ Every webhook request is a `POST` with a `Content-Type: application/json` body. 
   "entity_id": 88901,
   "changes": {
     "status": ["pending", "approved"]
+  },
+  "performed_by": {
+    "type": "admin",
+    "id": 812,
+    "name": "Maria Lopez",
+    "email": "maria@example.com"
   },
   "data": {
     "id": 88901,
@@ -148,6 +203,12 @@ Every webhook request is a `POST` with a `Content-Type: application/json` body. 
   "entity_id": 4421,
   "changes": {
     "signed_at": [null, "2025-01-22T08:45:00Z"]
+  },
+  "performed_by": {
+    "type": "promoter",
+    "id": 2201,
+    "name": "Jane Smith",
+    "email": "jane@example.com"
   },
   "data": {
     "id": 4421,
