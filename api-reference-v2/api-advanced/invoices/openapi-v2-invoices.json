@@ -86,6 +86,67 @@
             "description": "Forbidden"
           }
         }
+      },
+      "delete": {
+        "summary": "Destroy invoices",
+        "description": "Deletes invoices \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/invoices`</Tip>",
+        "tags": [
+          "Invoices"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Delete operation completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchResponse"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Delete operation accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "422": {
+            "description": "Invalid parameters"
+          }
+        }
       }
     },
     "/invoices/{id}": {
@@ -292,69 +353,6 @@
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "/invoices/destroy": {
-      "delete": {
-        "summary": "Destroy invoices",
-        "description": "Deletes invoices \n <Tip>**HTTP Request** <br/>`DELETE https://api.firstpromoter.com/api/v2/company/invoices/destroy`</Tip>",
-        "tags": [
-          "Invoices"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/AccountId"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BatchRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Delete operation completed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BatchResponse"
-                }
-              }
-            }
-          },
-          "202": {
-            "description": "Delete operation accepted",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BatchResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                },
-                "example": {}
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "422": {
-            "description": "Invalid parameters"
           }
         }
       }
