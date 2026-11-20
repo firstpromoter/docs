@@ -72,7 +72,6 @@
         }
       },
       "post": {
-        "noindex": true,
         "summary": "Creates a referral link",
         "operationId": "createReferralLink",
         "parameters": [
@@ -153,12 +152,16 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
     "/referral_links/{id}": {
       "put": {
-        "noindex": true,
         "summary": "Updates a referral link",
         "operationId": "updateReferralLink",
         "parameters": [
@@ -227,10 +230,14 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       },
       "delete": {
-        "noindex": true,
         "summary": "Destroys a referral link",
         "operationId": "deleteReferralLink",
         "parameters": [
@@ -271,6 +278,11 @@
                 }
               }
             }
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
