@@ -14,3 +14,17 @@ Every affiliate can use it. Create a personal API key in your affiliate dashboar
 <Tip>
   Want to ask an AI assistant about your earnings instead of writing code? Use the same API key with the [Affiliate MCP server](/mcp/affiliate).
 </Tip>
+
+## Columns hidden by the program
+
+A program can choose which columns its affiliates see in the affiliate dashboard tables (referrals, commissions,
+payouts, invoices, reports and sub-affiliates). When it turns a column off, the Affiliate API applies the same
+choice:
+
+- The fields behind that column are left out of the responses, for example `email` and `username` for a referral's
+  email, or `billing_country`. A field the program never turned off is returned as before.
+- Filtering, sorting or searching on that column returns `403 Forbidden`, with a message naming the hidden columns.
+- Report metrics the program hides, and metrics calculated from them (such as conversion rates or EPC), can't be
+  requested, and are left out of chart totals and promoter stats.
+
+Treat any field tied to a dashboard column as optional in your integration.
