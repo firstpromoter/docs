@@ -28,6 +28,7 @@ choice:
   for that table; any other returns `403 Forbidden`, with a message naming them. Commissions also follow the
   referrals table, and payouts the invoices table.
 - Payout amounts the program hides are also left out of the due payout totals and the unclaimed payment links.
+- While referral sub IDs are hidden, the sub IDs report (and its download) returns `403 Forbidden`.
 - Report metrics the program hides, and metrics calculated from them (such as conversion rates or EPC), can't be
   requested, and are left out of chart totals and promoter stats.
 
