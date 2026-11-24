@@ -18,15 +18,22 @@ Every affiliate can use it. Create a personal API key in your affiliate dashboar
 ## Columns hidden by the program
 
 A program can choose which columns its affiliates see in the affiliate dashboard tables (referrals, commissions,
-payouts, invoices, reports and sub-affiliates). When it turns a column off, the Affiliate API applies the same
-choice:
+payouts, invoices, reports and sub-affiliates), each table on its own. When it turns a column off, the Affiliate API
+applies the same choice:
 
 - The fields behind that column are left out of the responses, for example `email` and `username` for a referral's
   email, or `billing_country`. A field the program never turned off is returned as before.
-- Filtering, sorting or searching on that column returns `403 Forbidden`, with a message naming the hidden columns.
+- Some columns carry data affiliates didn't get before, such as a commission's internal note, who created a record,
+  or a sub-affiliate's profile details. Their fields (for example `internal_note`, `created_by_user_email`,
+  `entry_source`, `country`) are only returned once the program turns the column on.
+- Filtering, sorting or searching on a column turned off returns `403 Forbidden`, with a message naming the hidden
+  columns.
 - Once a table has a hidden column, its endpoints accept only the filters and sorts the affiliate dashboard offers
-  for that table; any other returns `403 Forbidden`, with a message naming them. Commissions also follow the
-  referrals table, and payouts the invoices table.
+  for that table; any other returns `403 Forbidden`, with a message naming them. Payouts also follow the invoices
+  table.
+- A table with every column turned off is hidden: its list and export endpoints return `403 Forbidden`.
+- Once the program has set a table's columns, that table's CSV export contains exactly the columns it shows. A table
+  the program never set keeps its usual export.
 - Payout amounts the program hides are also left out of the due payout totals and the unclaimed payment links.
 - While referral sub IDs are hidden, the sub IDs report (and its download) returns `403 Forbidden`.
 - Report metrics the program hides, and metrics calculated from them (such as conversion rates or EPC), can't be
