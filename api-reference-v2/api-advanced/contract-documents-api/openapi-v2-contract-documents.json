@@ -111,6 +111,288 @@
           }
         }
       }
+    },
+    "/contract_documents/{id}/sign": {
+      "post": {
+        "summary": "Sign a contract document on the promoter's behalf",
+        "description": "Accepts one contract document for the promoter, for example when your own site shows your affiliate terms. The promoter's IP is stored as proof of acceptance, and the signature is logged and sent to your webhooks as if the promoter had signed it. A document that is already signed is returned unchanged. Requires update access to contracts.\n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/contract_documents/{id}/sign`</Tip>",
+        "tags": [
+          "Contract Documents"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Contract document ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "ip"
+                ],
+                "properties": {
+                  "ip": {
+                    "type": "string",
+                    "description": "The promoter's IP address, stored on the signed document as proof of acceptance."
+                  }
+                }
+              },
+              "example": {
+                "ip": "203.0.113.7"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The signed document",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContractDocument"
+                },
+                "example": {
+                  "id": 123,
+                  "status": "signed",
+                  "signed_ip": "203.0.113.7",
+                  "contract_version_id": 45,
+                  "signed_at": "2026-11-25T10:00:00.000Z",
+                  "promoter": {
+                    "id": 678,
+                    "email": "jane@example.com",
+                    "name": "Jane Doe",
+                    "profile": {
+                      "avatar": null
+                    }
+                  },
+                  "contract_version": {
+                    "added_at": "2026-10-01T09:00:00.000Z",
+                    "changes_made": null,
+                    "external_link": "https://example.com/terms",
+                    "content_hosted": false
+                  },
+                  "contract": {
+                    "id": 9,
+                    "name": "Affiliate terms"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The IP is malformed, or a profile field the contract uses is blank",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
+          },
+          "403": {
+            "description": "The API key can't update contracts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such document in this account",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "`ip` is missing",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contract_documents/sign_pending": {
+      "post": {
+        "summary": "Sign a promoter's pending contract documents on their behalf",
+        "description": "Accepts every contract the promoter still has to sign for the campaigns they are accepted into (the current version of each), or only `contract_id`. Use it right after creating a promoter: documents that don't exist yet are created first. All or none are signed. Contracts already signed are left untouched, so the call is safe to retry; FirstPromoter's own platform partner agreement is never signed. When you publish a new contract version, call it again.\n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/contract_documents/sign_pending`</Tip>",
+        "tags": [
+          "Contract Documents"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AccountId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "promoter_id",
+                  "ip"
+                ],
+                "properties": {
+                  "promoter_id": {
+                    "type": "integer",
+                    "description": "Promoter ID"
+                  },
+                  "ip": {
+                    "type": "string",
+                    "description": "The promoter's IP address, stored on the signed document as proof of acceptance."
+                  },
+                  "contract_id": {
+                    "type": "integer",
+                    "description": "Sign only this contract's pending document"
+                  }
+                }
+              },
+              "example": {
+                "promoter_id": 678,
+                "ip": "203.0.113.7"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The documents this call signed (an empty list when nothing was pending)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ContractDocument"
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "data": [
+                    {
+                      "id": 123,
+                      "status": "signed",
+                      "signed_ip": "203.0.113.7",
+                      "contract_version_id": 45,
+                      "signed_at": "2026-11-25T10:00:00.000Z",
+                      "promoter": {
+                        "id": 678,
+                        "email": "jane@example.com",
+                        "name": "Jane Doe",
+                        "profile": {
+                          "avatar": null
+                        }
+                      },
+                      "contract_version": {
+                        "added_at": "2026-10-01T09:00:00.000Z",
+                        "changes_made": null,
+                        "external_link": "https://example.com/terms",
+                        "content_hosted": false
+                      },
+                      "contract": {
+                        "id": 9,
+                        "name": "Affiliate terms"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized \u2014 the Bearer access token is missing, invalid, expired, or revoked. No JSON response body is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
+          },
+          "403": {
+            "description": "The API key can't update contracts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such promoter or contract in this account",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "`promoter_id` or `ip` is missing, `ip` is malformed, or a contract can't be signed yet (for example, a profile field its template uses is blank). Nothing was signed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SignPendingError"
+                },
+                "example": {
+                  "message": "Contract \"Affiliate terms\" can't be signed: Address is required",
+                  "code": "contract_not_signable",
+                  "meta": {
+                    "contract_id": 9,
+                    "contract_document_id": 123,
+                    "errors": {
+                      "content": [
+                        "Address is required"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -161,6 +443,152 @@
               "asc",
               "desc"
             ]
+          }
+        }
+      },
+      "ContractDocument": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "signed"
+            ]
+          },
+          "signed_ip": {
+            "type": "string",
+            "nullable": true
+          },
+          "contract_version_id": {
+            "type": "integer"
+          },
+          "signed_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "promoter": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "email": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "profile": {
+                "type": "object",
+                "nullable": true,
+                "properties": {
+                  "avatar": {
+                    "type": "string",
+                    "nullable": true
+                  }
+                }
+              }
+            }
+          },
+          "contract_version": {
+            "type": "object",
+            "properties": {
+              "added_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "changes_made": {
+                "type": "string",
+                "nullable": true
+              },
+              "external_link": {
+                "type": "string",
+                "nullable": true
+              },
+              "content_hosted": {
+                "type": "boolean"
+              }
+            }
+          },
+          "contract": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "ValidationError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "errors": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "SignPendingError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string",
+            "description": "`invalid_params`, or `contract_not_signable` when a contract can't be signed yet. Nothing is signed then."
+          },
+          "meta": {
+            "type": "object",
+            "description": "Present with `contract_not_signable`.",
+            "properties": {
+              "contract_id": {
+                "type": "integer"
+              },
+              "contract_document_id": {
+                "type": "integer"
+              },
+              "errors": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
           }
         }
       }
