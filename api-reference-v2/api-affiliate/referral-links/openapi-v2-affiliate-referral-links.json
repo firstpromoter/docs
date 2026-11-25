@@ -261,6 +261,25 @@
               }
             }
           },
+          "400": {
+            "description": "Validation failed, for example an invalid URL or name. Nothing is saved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                },
+                "example": {
+                  "message": "Validation failed: Name is invalid",
+                  "errors": {
+                    "name": [
+                      "is invalid"
+                    ]
+                  },
+                  "code": "invalid_record"
+                }
+              }
+            }
+          },
           "401": {
             "description": "Unauthorized \u2014 the API key is missing, wrong, regenerated or disabled (no JSON response body is returned), or the `Account-ID` header is missing.",
             "content": {
