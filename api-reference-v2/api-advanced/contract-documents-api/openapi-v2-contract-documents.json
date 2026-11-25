@@ -115,7 +115,7 @@
     "/contract_documents/{id}/sign": {
       "post": {
         "summary": "Sign a contract document on the promoter's behalf",
-        "description": "Accepts one contract document for the promoter, for example when your own site shows your affiliate terms. The promoter's IP is stored as proof of acceptance, and the signature is logged and sent to your webhooks as if the promoter had signed it. A document that is already signed is returned unchanged. Requires update access to contracts.\n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/contract_documents/{id}/sign`</Tip>",
+        "description": "Accepts one contract document for the promoter, for example when your own site shows your affiliate terms. The promoter's IP is stored as proof of acceptance, and the signature is logged and sent to your webhooks as if the promoter had signed it. A document that is already signed is returned unchanged. Requires read and update access to contracts; a key limited to some campaigns can only sign documents of contracts in those campaigns.\n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/contract_documents/{id}/sign`</Tip>",
         "tags": [
           "Contract Documents"
         ],
@@ -213,7 +213,7 @@
             }
           },
           "403": {
-            "description": "The API key can't update contracts",
+            "description": "The API key can't read and update contracts",
             "content": {
               "application/json": {
                 "schema": {
@@ -248,7 +248,7 @@
     "/contract_documents/sign_pending": {
       "post": {
         "summary": "Sign a promoter's pending contract documents on their behalf",
-        "description": "Accepts every contract the promoter still has to sign for the campaigns they are accepted into (the current version of each), or only `contract_id`. Use it right after creating a promoter: documents that don't exist yet are created first. All or none are signed. Contracts already signed are left untouched, so the call is safe to retry; FirstPromoter's own platform partner agreement is never signed. When you publish a new contract version, call it again.\n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/contract_documents/sign_pending`</Tip>",
+        "description": "Accepts every contract the promoter still has to sign for the campaigns they are accepted into (the current version of each), or only `contract_id`. Use it right after creating a promoter: documents that don't exist yet are created first. All or none are signed. Contracts already signed are left untouched, so the call is safe to retry; FirstPromoter's own platform partner agreement is never signed. Requires read and update access to contracts; a key limited to some campaigns signs only the contracts of those campaigns. When you publish a new contract version, call it again.\n <Tip>**HTTP Request** <br/>`POST https://api.firstpromoter.com/api/v2/company/contract_documents/sign_pending`</Tip>",
         "tags": [
           "Contract Documents"
         ],
@@ -349,7 +349,7 @@
             }
           },
           "403": {
-            "description": "The API key can't update contracts",
+            "description": "The API key can't read and update contracts",
             "content": {
               "application/json": {
                 "schema": {
