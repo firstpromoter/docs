@@ -24,4 +24,30 @@ FirstPromoter enables you to automatically track sales, refunds, and cancellatio
 Charges with an amount of zero, or with no associated customer email, are ignored. Invoices with `amount_paid` of zero are also skipped.
 </Note>
 
+## Skipping specific payments
+
+Some Stripe payments shouldn't count as sales. Examples are a small charge that checks a new card, a hold that is released straight away, or an internal top-up. To have FirstPromoter ignore one, add `fp_skip_tracking` to its metadata with the value `true` (`1` and `yes` also work).
+
+| Payment type | Where to add the metadata |
+|---|---|
+| One-time charge | The PaymentIntent, when you create it. Stripe copies it to the charge. For Stripe Checkout, use `payment_intent_data.metadata`. |
+| Subscription invoice | The invoice, or the subscription. |
+
+```js
+const paymentIntent = await stripe.paymentIntents.create({
+  amount: 100,
+  currency: 'usd',
+  customer: 'cus_123',
+  capture_method: 'manual',
+  description: 'Card verification',
+  metadata: { fp_skip_tracking: 'true' },
+});
+```
+
+When a one-time charge has the flag, FirstPromoter ignores the charge and any refund of it. The referral doesn't change and no commission is created. The flag is also respected when you [import previous sales from Stripe](/api-reference-v2/api-advanced/referrals/import-previous-sales-from-stripe).
+
+<Warning>
+Add the metadata when you create the payment. FirstPromoter reads it from Stripe's webhook as soon as the payment is made, so metadata you add later is not picked up. Only flag payments that should never earn commission.
+</Warning>
+
 Click [here](https://login.firstpromoter.com?redirect=%2Fintegration%2Fstripe) to view the setup guide.
