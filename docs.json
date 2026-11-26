@@ -282,9 +282,10 @@
                     ]
                   },
                   {
-                    "group": "MCP Server (Experimental)",
+                    "group": "AI & Agents",
                     "pages": [
                       "mcp/overview",
+                      "ai/agent-skills",
                       "mcp/tools",
                       "mcp/affiliate"
                     ]
@@ -912,6 +913,10 @@
       {
         "label": "Support",
         "href": "mailto:support@firstpromoter.com"
+      },
+      {
+        "label": "GitHub skills",
+        "href": "https://github.com/firstpromoter/skills"
       }
     ],
     "primary": {
