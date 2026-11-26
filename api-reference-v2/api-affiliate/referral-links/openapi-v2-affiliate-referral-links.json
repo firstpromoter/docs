@@ -88,23 +88,29 @@
                 "properties": {
                   "promoter_campaign_id": {
                     "type": "integer",
-                    "description": "Promoter campaign of the link"
-                  },
-                  "sub_id": {
-                    "type": "string",
-                    "description": "Sub id"
+                    "description": "ID of one of the promoter's promoter campaigns"
                   },
                   "name": {
                     "type": "string",
-                    "description": "Name"
+                    "maxLength": 80,
+                    "pattern": "^[a-zA-Z0-9_ -]+$",
+                    "description": "Name of the link: letters, numbers, spaces, `_` and `-`, up to 80 characters"
                   },
                   "url": {
                     "type": "string",
-                    "description": "Url"
+                    "description": "Destination URL of the link. Must be a valid URL on a registrable domain (for example `https://example.com/pricing`)."
+                  },
+                  "sub_id": {
+                    "type": "string",
+                    "maxLength": 16,
+                    "pattern": "^[a-zA-Z0-9_]+$",
+                    "description": "Sub id that identifies this link in reports: letters, numbers and `_`, up to 16 characters, saved in lowercase. Must be unique among the promoter's links in the campaign."
                   }
                 },
                 "required": [
-                  "promoter_campaign_id"
+                  "promoter_campaign_id",
+                  "name",
+                  "url"
                 ]
               }
             }
@@ -142,12 +148,50 @@
               }
             }
           },
-          "422": {
-            "description": "Unprocessable Entity",
+          "400": {
+            "description": "Validation failed, for example an invalid URL or name",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                },
+                "example": {
+                  "message": "Validation failed: Url must be a valid URL, Url Invalid domain",
+                  "errors": {
+                    "url": [
+                      "must be a valid URL",
+                      "Invalid domain"
+                    ]
+                  },
+                  "code": "invalid_record"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Promoter campaign not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Record not found",
+                  "code": "not_found"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "`promoter_campaign_id` is missing",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "param is missing or the value is empty or invalid: promoter_campaign_id",
+                  "code": "invalid_params"
                 }
               }
             }
@@ -185,13 +229,21 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "sub_id": {
-                    "type": "string",
-                    "description": "Sub id"
-                  },
                   "name": {
                     "type": "string",
-                    "description": "Name"
+                    "maxLength": 80,
+                    "pattern": "^[a-zA-Z0-9_ -]+$",
+                    "description": "Name of the link: letters, numbers, spaces, `_` and `-`, up to 80 characters"
+                  },
+                  "url": {
+                    "type": "string",
+                    "description": "Destination URL of the link. Must be a valid URL on a registrable domain (for example `https://example.com/pricing`)."
+                  },
+                  "sub_id": {
+                    "type": "string",
+                    "maxLength": 16,
+                    "pattern": "^[a-zA-Z0-9_]+$",
+                    "description": "Sub id that identifies this link in reports: letters, numbers and `_`, up to 16 characters, saved in lowercase. Must be unique among the promoter's links in the campaign."
                   }
                 }
               }
@@ -205,6 +257,25 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ReferralLink"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed, for example an invalid URL or name. Nothing is saved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                },
+                "example": {
+                  "message": "Validation failed: Name is invalid",
+                  "errors": {
+                    "name": [
+                      "is invalid"
+                    ]
+                  },
+                  "code": "invalid_record"
                 }
               }
             }
@@ -226,6 +297,20 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Referral link not found. Only links the promoter created can be changed or deleted; the campaign's links return 404.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Record not found",
+                  "code": "not_found"
                 }
               }
             }
@@ -278,6 +363,20 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "Referral link not found. Only links the promoter created can be changed or deleted; the campaign's links return 404.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Record not found",
+                  "code": "not_found"
+                }
+              }
+            }
           }
         },
         "x-mint": {
@@ -307,24 +406,33 @@
         "properties": {
           "id": {
             "type": "integer",
-            "nullable": true
+            "nullable": true,
+            "description": "ID of the link. `null` for the campaign's default link."
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "Name of the link. `Default` for the campaign's default link."
           },
           "url": {
-            "type": "string"
+            "type": "string",
+            "description": "In the list response, the promoter's shareable tracking link for this destination. In the create and update responses, the destination page without tracking parameters; call the list endpoint for the tracking link."
+          },
+          "destination_url": {
+            "type": "string",
+            "description": "The page the link sends visitors to, without tracking parameters."
           },
           "is_default": {
             "type": "boolean",
-            "nullable": true
+            "nullable": true,
+            "description": "`true` for the campaign's default link, `null` otherwise."
           },
           "source": {
             "type": "string",
             "enum": [
               "campaign",
               "promoter"
-            ]
+            ],
+            "description": "`campaign` for links the campaign provides, `promoter` for links the promoter created."
           },
           "sub_id": {
             "type": "string",
@@ -342,6 +450,10 @@
               "color": {
                 "type": "string",
                 "nullable": true
+              },
+              "language": {
+                "type": "string",
+                "nullable": true
               }
             }
           }
@@ -355,6 +467,32 @@
           },
           "code": {
             "type": "string"
+          }
+        },
+        "required": [
+          "message",
+          "code"
+        ]
+      },
+      "ValidationError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "errors": {
+            "type": "object",
+            "description": "Validation errors by field",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "code": {
+            "type": "string",
+            "example": "invalid_record"
           }
         },
         "required": [
