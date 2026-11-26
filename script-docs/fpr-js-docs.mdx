@@ -25,6 +25,23 @@ For WordPress websites, you can add the scripts to your header.php file before t
 
 To get the best performance, it is ideal that you have the scripts added to all the pages where you need tracking to take place. Also, the Scripts are loaded asynchronously and will not affect the website loading speed.
 
+## Content Security Policy
+
+If your site sends a `Content-Security-Policy` header, allow both FirstPromoter domains or tracking will be blocked:
+
+- `https://cdn.firstpromoter.com` in `script-src`, to load fpr.js
+- `https://t.firstpromoter.com` in `connect-src`, for tracking requests
+
+```
+Content-Security-Policy: script-src 'self' https://cdn.firstpromoter.com; connect-src 'self' https://t.firstpromoter.com
+```
+
+If you route tracking through your own domain with a [proxy](/guides/proxy-setup), allow that domain in `connect-src` instead of `t.firstpromoter.com`.
+
+## Cookie consent
+
+fpr.js sets a marketing (tracking) cookie. If you use a consent tool, load fpr.js under your marketing cookies category. Visitors who decline marketing cookies won't be tracked.
+
 
 # Functions
 

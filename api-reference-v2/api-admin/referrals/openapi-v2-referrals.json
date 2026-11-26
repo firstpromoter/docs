@@ -1109,7 +1109,7 @@
               "same_promoter_email",
               "ad_source"
             ],
-            "description": "Fraud check (suspicion) status of the referral. `no_suspicion` means the referral is clean or was manually cleared. `same_ip_suspicion` means the referral shares an IP with the promoter. `same_promoter_email` means the referral email matches the promoter email. `ad_source` means the referral arrived via a paid ad click."
+            "description": "Fraud check (suspicion) status of the referral. `no_suspicion` means the referral is clean or was manually cleared. `same_ip_suspicion` means the referral shares an IP with the promoter. `same_promoter_email` means the referral email matches the promoter email. `ad_source` means the referral arrived via a paid ad click. The MCP tools return the same values in a field named `suspicion`."
           },
           "created_by_user_email": {
             "type": "string",

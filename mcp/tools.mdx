@@ -40,8 +40,8 @@ description: 'Full reference for every tool exposed by the FirstPromoter MCP ser
 | `update_promoter` | Every field the admin Edit modal exposes: email, name, website, company name and number, VAT ID, phone, address, country, PayPal email, social URLs (Facebook, Twitter, Instagram, YouTube, LinkedIn, Twitch, TikTok), admin note, custom fields, and behaviour flags. |
 | `accept_promoter` | State change scoped to a single campaign. Verifies the per-campaign state actually persisted before reporting success. |
 | `reject_promoter` | State change scoped to a single campaign. |
-| `block_promoter` | State change scoped to a single campaign. |
-| `add_promoter_to_campaign` | Enrol in an additional campaign without affecting existing memberships. |
+| `block_promoter` | State change scoped to a single campaign. Stops all tracking and recurring commissions for the promoter on that campaign; nothing is deleted. Undo it with `add_promoter_to_campaign`. |
+| `add_promoter_to_campaign` | Enrol in an additional campaign without affecting existing memberships. On a campaign where the promoter is blocked, it unblocks them and sets the state back to accepted (the inverse of `block_promoter`). |
 | `move_promoter_to_campaign` | Move between campaigns; optionally soft-move existing referrals. |
 | `assign_parent_promoter` | Set or remove the parent in a sub-affiliate hierarchy. |
 | `restore_promoter` | Bring an archived promoter back — history and referrals preserved. |
