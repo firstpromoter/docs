@@ -47,10 +47,9 @@ Every webhook request is a `POST` with a `Content-Type: application/json` body. 
       - `super_admin`, `admin_plus`, `admin`, `manager` or `affiliate_manager`: a member of your team, in the dashboard.
       - `promoter`: the affiliate, in their portal.
       - `api`: an API user, through one of their API keys.
-      - `support`: the FirstPromoter support team, acting on your behalf. `name` is `FirstPromoter team` and `email` is `support@firstpromoter.com`.
 
       When no member made the change:
-      - `system`: FirstPromoter itself, for example tracking, billing integrations and scheduled jobs.
+      - `system`: FirstPromoter itself, for example tracking, billing integrations and scheduled jobs. Changes the FirstPromoter team makes on your behalf, such as a support fix, also arrive as `system`.
       - `api`: a legacy API key that belongs to no API user.
       - `other`: someone FirstPromoter can't identify as a member of your account.
     </ResponseField>
