@@ -48,23 +48,19 @@ The skills that use the MCP server are read-only by default. Before any change, 
   </Tab>
   <Tab title="GitHub Copilot">
     ```bash
-    gh skill install firstpromoter/skills
+    gh skill install firstpromoter/skills --all
     ```
+
+    `gh skill` needs GitHub CLI 2.90.0 or later (`gh --version`).
   </Tab>
   <Tab title="Cursor">
-    Install **FirstPromoter** from the Cursor Marketplace, or copy the repository's `skills/` folder into `.cursor/skills/` in your project.
+    Copy the repository's `skills/` folder into `.cursor/skills/` in your project, and [connect the MCP server](/mcp/overview) for the program skills.
   </Tab>
 </Tabs>
 
 <Note>
   The skills CLI and GitHub Copilot install the skills only. To use `firstpromoter-manage-program` and `firstpromoter-fraud-review`, also [connect the MCP server](/mcp/overview) in your agent.
 </Note>
-
-This docs site serves the same skills, so you can also install them from here:
-
-```bash
-npx skills add https://docs.firstpromoter.com
-```
 
 ## Try it
 

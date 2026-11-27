@@ -180,7 +180,7 @@ curl --request POST \
 See the full [Sales Tracking API reference](/api-reference-v2/api-admin/tracking-api/sales) for all available parameters.
 
 <Note>
-  `amount` is in **cents** (e.g. `4900` = $49.00). `event_id` is required and should be unique per sale, so a retried request is not counted twice.
+  `amount` is in **cents** (e.g. `4900` = $49.00), except for zero-decimal currencies such as JPY, where you send whole values (e.g. `4900` = ¥4,900). `event_id` is required and should be unique per sale, so a retried request is not counted twice.
 </Note>
 
 ---

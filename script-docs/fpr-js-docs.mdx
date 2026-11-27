@@ -32,9 +32,20 @@ If your site sends a `Content-Security-Policy` header, allow both FirstPromoter 
 - `https://cdn.firstpromoter.com` in `script-src`, to load fpr.js
 - `https://t.firstpromoter.com` in `connect-src`, for tracking requests
 
+The inline snippet above also needs to be allowed. If your policy uses a nonce, add the same per-request nonce to the inline `<script>` tag:
+
 ```
-Content-Security-Policy: script-src 'self' https://cdn.firstpromoter.com; connect-src 'self' https://t.firstpromoter.com
+Content-Security-Policy: script-src 'self' 'nonce-RANDOM_PER_REQUEST' https://cdn.firstpromoter.com; connect-src 'self' https://t.firstpromoter.com
 ```
+
+```html
+<script nonce="RANDOM_PER_REQUEST">(function(w){w.fpr=w.fpr||function(){w.fpr.q = w.fpr.q||[];w.fpr.q[arguments[0]=='set'?'unshift':'push'](arguments);};})(window);
+fpr("init", {cid:"xxxxxxxx"});
+fpr("click");
+</script>
+```
+
+Alternatively, move the snippet into a file served from your own domain (allowed by `'self'`). Without either, the browser blocks the snippet and `fpr("init")` never runs.
 
 If you route tracking through your own domain with a [proxy](/guides/proxy-setup), allow that domain in `connect-src` instead of `t.firstpromoter.com`.
 
