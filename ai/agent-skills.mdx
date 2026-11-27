@@ -1,0 +1,82 @@
+---
+title: "Agent skills"
+description: "Official FirstPromoter skills that teach AI coding agents to integrate tracking, run your affiliate program and review fraud."
+---
+
+[FirstPromoter skills](https://github.com/firstpromoter/skills) is an open-source (MIT) set of [Agent Skills](https://agentskills.io): instructions that teach AI agents how to work with FirstPromoter. They work in Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf, Amp and any other agent that supports `SKILL.md`.
+
+## The skills
+
+<CardGroup cols={1}>
+  <Card title="firstpromoter-integrate" icon="code">
+    Adds FirstPromoter click, signup and sales tracking to your website or app, connects billing, and tests a referral end to end. Works from your codebase and these docs; the MCP server is optional and lets it read your real settings and verify tracking.
+  </Card>
+  <Card title="firstpromoter-manage-program" icon="users">
+    Answers affiliate support, commission, payout and reporting questions from live data, and screens applications. Uses the [MCP server](/mcp/overview).
+  </Card>
+  <Card title="firstpromoter-fraud-review" icon="shield-check">
+    Reviews affiliates and referrals for self-referrals, duplicates, refund abuse, leaked codes and spikes. Uses the [MCP server](/mcp/overview).
+  </Card>
+</CardGroup>
+
+The skills that use the MCP server are read-only by default. Before any change, the agent shows what will change and waits for your confirmation, one write at a time.
+
+## Install
+
+<Tabs>
+  <Tab title="Any agent">
+    Install with the [skills CLI](https://skills.sh):
+
+    ```bash
+    npx skills add firstpromoter/skills
+    ```
+  </Tab>
+  <Tab title="Claude Code">
+    Installs the skills and connects the MCP server:
+
+    ```
+    /plugin marketplace add firstpromoter/skills
+    /plugin install firstpromoter@firstpromoter
+    ```
+  </Tab>
+  <Tab title="Codex">
+    ```bash
+    codex plugin marketplace add firstpromoter/skills
+    ```
+
+    This registers the marketplace. Then install **FirstPromoter** from the Codex plugins directory to get the skills and the MCP server.
+  </Tab>
+  <Tab title="GitHub Copilot">
+    ```bash
+    gh skill install firstpromoter/skills --all
+    ```
+
+    `gh skill` needs GitHub CLI 2.90.0 or later (`gh --version`).
+  </Tab>
+  <Tab title="Cursor">
+    Copy the repository's `skills/` folder into `.cursor/skills/` in your project, and [connect the MCP server](/mcp/overview) for the program skills.
+  </Tab>
+</Tabs>
+
+<Note>
+  The skills CLI and GitHub Copilot install the skills only. To use `firstpromoter-manage-program` and `firstpromoter-fraud-review`, also [connect the MCP server](/mcp/overview) in your agent.
+</Note>
+
+## Try it
+
+| You want to... | Ask your agent |
+|---|---|
+| Set up tracking | "Integrate FirstPromoter tracking into this app." |
+| Fix tracking | "We get referrals but no sales in FirstPromoter. Find out why." |
+| Answer an affiliate | "Is jane@example.com one of our affiliates, and which referrals are hers?" |
+| Check a payout | "Why is this affiliate's payout still pending?" |
+| Report | "Who were our top 10 affiliates last month, and what share of revenue did they bring?" |
+| Keep a dashboard fresh | "Every Monday, summarize new referrals, customers and pending commissions." |
+| Screen applicants | "Review pending affiliate applications and summarize each one." |
+| Review fraud | "Review affiliates with pending payouts for self-referrals and refund abuse." |
+
+## Resources
+
+- [GitHub repository](https://github.com/firstpromoter/skills): source, issues and discussions
+- [MCP server](/mcp/overview) and [available tools](/mcp/tools)
+- [llms.txt](https://docs.firstpromoter.com/llms.txt): an index of every docs page for agents

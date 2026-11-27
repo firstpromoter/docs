@@ -171,16 +171,16 @@ curl --request POST \
   --data '{
     "email": "customer@email.com",
     "uid": "cus_12345",
-    "sale_amount": 4900,
-    "currency": "usd",
-    "order_id": "order_001"
+    "event_id": "order_001",
+    "amount": 4900,
+    "currency": "usd"
   }'
 ```
 
 See the full [Sales Tracking API reference](/api-reference-v2/api-admin/tracking-api/sales) for all available parameters.
 
 <Note>
-  `sale_amount` is in **cents** (e.g. `4900` = $49.00).
+  `amount` is in **cents** (e.g. `4900` = $49.00), except for zero-decimal currencies such as JPY, where you send whole values (e.g. `4900` = ¥4,900). `event_id` is required and should be unique per sale, so a retried request is not counted twice.
 </Note>
 
 ---

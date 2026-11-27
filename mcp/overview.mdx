@@ -13,6 +13,10 @@ The FirstPromoter MCP server lets AI clients like Claude and ChatGPT query your 
   This server is for **program admins and team members**: it connects with OAuth through your FirstPromoter login and covers the whole program. **Affiliates** use the separate, read-only [Affiliate MCP server](/mcp/affiliate) at `https://mcp.firstpromoter.com/affiliate`, which authenticates with a personal API key and returns only the affiliate's own data.
 </Note>
 
+<Tip>
+  Install the [FirstPromoter agent skills](/ai/agent-skills) to give your agent ready-made workflows on top of this server: affiliate support, payout questions, reporting and fraud review.
+</Tip>
+
 ## Example prompts
 
 - "Help me create a new campaign with a 20% sale reward."
@@ -25,7 +29,7 @@ The FirstPromoter MCP server lets AI clients like Claude and ChatGPT query your 
 
 ## Core capabilities
 
-53 tools covering reads, mutations, and destructive operations across your entire affiliate program. All mutating tools require explicit user approval through a confirmation card — it resolves IDs to human-readable names and shows a field-level diff before applying any change.
+54 tools covering reads, mutations, and destructive operations across your entire affiliate program. All mutating tools require explicit user approval through a confirmation card — it resolves IDs to human-readable names and shows a field-level diff before applying any change.
 
 Money-movement operations (payouts, invoices, commission creation, payment batches) are intentionally not exposed — they remain dashboard-only. The AI helps you draft and configure; the human commits the money decisions.
 

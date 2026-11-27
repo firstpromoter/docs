@@ -25,6 +25,34 @@ For WordPress websites, you can add the scripts to your header.php file before t
 
 To get the best performance, it is ideal that you have the scripts added to all the pages where you need tracking to take place. Also, the Scripts are loaded asynchronously and will not affect the website loading speed.
 
+## Content Security Policy
+
+If your site sends a `Content-Security-Policy` header, allow both FirstPromoter domains or tracking will be blocked:
+
+- `https://cdn.firstpromoter.com` in `script-src`, to load fpr.js
+- `https://t.firstpromoter.com` in `connect-src`, for tracking requests
+
+The inline snippet above also needs to be allowed. If your policy uses a nonce, add the same per-request nonce to the inline `<script>` tag:
+
+```
+Content-Security-Policy: script-src 'self' 'nonce-RANDOM_PER_REQUEST' https://cdn.firstpromoter.com; connect-src 'self' https://t.firstpromoter.com
+```
+
+```html
+<script nonce="RANDOM_PER_REQUEST">(function(w){w.fpr=w.fpr||function(){w.fpr.q = w.fpr.q||[];w.fpr.q[arguments[0]=='set'?'unshift':'push'](arguments);};})(window);
+fpr("init", {cid:"xxxxxxxx"});
+fpr("click");
+</script>
+```
+
+Alternatively, move the snippet into a file served from your own domain (allowed by `'self'`). Without either, the browser blocks the snippet and `fpr("init")` never runs.
+
+If you route tracking through your own domain with a [proxy](/guides/proxy-setup), allow that domain in `connect-src` instead of `t.firstpromoter.com`.
+
+## Cookie consent
+
+fpr.js sets a marketing (tracking) cookie. If you use a consent tool, load fpr.js under your marketing cookies category. Visitors who decline marketing cookies won't be tracked.
+
 
 # Functions
 
