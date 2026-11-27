@@ -7,7 +7,7 @@ description: "Connect AI tools like Claude Code, Claude Desktop and Cursor to yo
   The FirstPromoter Affiliate MCP server is experimental. Tool names and parameters may change without notice.
 </Warning>
 
-The Affiliate MCP server lets you, as an affiliate, ask an AI assistant about your own performance in a FirstPromoter program: referrals, commissions, payouts, links, promo codes and reports. It is available to every affiliate.
+The Affiliate MCP server lets you, as an affiliate, ask an AI assistant about your own performance in a FirstPromoter program: referrals, commissions, payouts, links, promo codes, sub-affiliates, postbacks and reports. It is available to every affiliate.
 
 <Note>
   This page is for **affiliates**. If you run an affiliate program, use the [MCP server for program admins](/mcp/overview) instead. It connects with OAuth and covers the whole program.
@@ -20,6 +20,10 @@ The Affiliate MCP server lets you, as an affiliate, ask an AI assistant about yo
 - "When is my next payout and how much will it be?"
 - "List my referral links and the campaign each one belongs to."
 - "Compare my clicks, referrals and earnings over the last three months, by month."
+- "Is jane@example.com one of my customers? Did she upgrade, and what did I earn from her?"
+- "Why is there a negative commission on my account?"
+- "Is Alex one of my sub-affiliates?"
+- "Why didn't my postback fire for my last referral?"
 
 ## What it can do
 
@@ -108,12 +112,18 @@ Add one entry per program, each with its own key, for example `firstpromoter-acm
 | `get_me` | Your affiliate profile in the program: name, email, balances and the campaigns you belong to. |
 | `list_campaigns` | Campaigns you are part of. Takes only `page` and `per_page`. |
 | `list_referrals` | Your referrals. Filter by `type`, `state`, `campaign_id` and a `created_from` / `created_to` date range. |
-| `list_commissions` | Your commissions. Filter by `status`, `paid`, `campaign_id` and a `created_from` / `created_to` date range. |
+| `find_referral` | Checks whether a customer or lead is one of your referrals, by their exact `email` or `uid`. Returns the matching referral, or nothing when it is not yours. Looking up by email is not available while the program hides referral emails. |
+| `list_commissions` | Your commissions. Filter by `status`, `paid`, `campaign_id`, `referral_id` (the commissions of one referral, for example its upgrades and refunds) and a `created_from` / `created_to` date range. |
 | `list_payouts` | Your payouts. Filter by `status` and `campaign_id`. |
 | `get_payout_stats` | Amounts of your next and overdue payouts with their period and payment dates, pending payouts without a set period, and the program's payout terms. Takes no arguments. |
 | `list_referral_links` | Your referral links, optionally for one `promoter_campaign_id`. |
 | `list_promo_codes` | Promo codes assigned to you, optionally for one `promoter_campaign_id`. |
 | `get_performance_report` | Clicks, referrals, customers and earnings between `start_date` and `end_date` (default: the last 30 days), grouped by `group_by` (`day`, `week`, `month` or `year`; default `day`), optionally for one `campaign_id`. |
+| `list_sub_affiliates` | Affiliates you referred to the program (your sub-affiliates), top sellers first. Names and emails are masked when the program masks sub-affiliate details. |
+| `list_postbacks` | Your postbacks: the URL, campaign and event each one sends. Postbacks are added and changed in your affiliate dashboard. |
+| `list_postback_events` | The deliveries of one postback (`postback_id`, required), newest first: status, tries, the error your URL answered with, and the referral or commission that triggered it. |
+
+Tools follow the program's settings for your dashboard: a column the program hides from you cannot be used as a filter or lookup, and the tool returns an error instead.
 
 Every `list_*` tool, including `list_campaigns` and `list_referral_links`, is paginated with `page` (default 1) and `per_page` (default 20, maximum 50) and returns `page`, `per_page`, `total_count` and `total_pages` in its `meta`. The tools return the same fields as the [Affiliate API](/api-reference-v2/api-affiliate/introduction).
 
