@@ -42,6 +42,45 @@ ACCOUNT-ID: 123456
   You must replace `{apikey}` with your account API key and  `{account_id}` with your account ID
 </Note>
 
+### Access levels
+
+Each API key has an access level that you choose when you create or edit the key under **Settings** → **Integrations** → **Manage API keys**. New keys, and keys created before access levels existed, are **Full access** by default.
+
+| Level | What the key can do |
+|---|---|
+| Full access | Everything, as before. |
+| Read-only | Read every resource except impersonation, API keys, SSO settings and the AI assistant. Any request that is not `GET` or `HEAD` is refused. |
+| Admin Plus, Admin, Manager | What that built-in team role allows. |
+| A custom role | What that custom role allows. Custom roles are the ones your company created under **Team** → **Roles**. |
+
+Every level except Full access follows these rules:
+
+- The key can never list, create, edit or reveal API keys, and it can't see or rotate the legacy v1 API key.
+- Team members, groups and roles are read-only for the key, and it can't read or change SSO settings.
+- The tracking endpoints (`POST /api/v2/track/...` and `POST /api/v1/track/...`) need the "create referrals" permission, so Read-only and Manager keys can't track.
+- `iframe_login` and `iframe_logout` need the impersonation permission.
+- The key is refused on the legacy v1 API, except v1 tracking, which follows the tracking rule above.
+- The key can't be used to connect the MCP server or the AI assistant.
+
+When a key's access level doesn't allow a request, the API returns HTTP 403. The name in brackets is the key's access level:
+
+```json
+{
+  "message": "This API key's access level (Read-only) doesn't allow this action.",
+  "code": "forbidden"
+}
+```
+
+On the legacy v1 API, a key with an access level other than Full access gets HTTP 403 with this body:
+
+```json
+{
+  "error": "This API key's access level (Read-only) can't be used with the v1 API. Use the v2 API instead."
+}
+```
+
+Changing a key's access level takes effect on its next request. The key itself doesn't change, so you don't need to update your integration.
+
 ### Security Best Practices
 
 - Keep your API key secure and never expose it in client-side code

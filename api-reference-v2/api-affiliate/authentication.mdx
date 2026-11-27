@@ -32,6 +32,22 @@ From the same page you can:
 
 The key does not expire and is not affected by logging out or ending dashboard sessions. It stays valid until you regenerate it or disable API access.
 
+## Access levels
+
+On the same **API & AI tools** page, under the key, choose its **Access**:
+
+- **Full access** (default): the key can make any request the Affiliate API supports.
+- **Read-only**: the key can only read, with `GET` and `HEAD` requests. Any other request returns `403 Forbidden` with the body below.
+
+```json
+{
+  "message": "This API key's access level (Read-only) doesn't allow this action.",
+  "code": "forbidden"
+}
+```
+
+Changing the setting applies at once and keeps the same key. It stays in place when you regenerate the key, or disable API access and enable it again. The [affiliate MCP server](/mcp/affiliate) only reads data, so it works with either setting.
+
 ## Making authenticated requests
 
 The base URL is `https://api.firstpromoter.com/api/v2/affiliate`. Send both credentials as request headers:
@@ -58,12 +74,13 @@ Every endpoint returns only your own data in that program: your referrals, commi
 | Status | Meaning |
 |---|---|
 | `401 Unauthorized` | The `Account-ID` header is missing, or the API key is missing, wrong, regenerated or disabled. |
-| `403 Forbidden` | The key is valid but cannot be used for this request: the Account ID belongs to a different program than the key, your affiliate account is archived, your email is not confirmed yet, or (for some endpoints) you have not finished onboarding in the dashboard. |
+| `403 Forbidden` | The key is valid but cannot be used for this request: the Account ID belongs to a different program than the key, your affiliate account is archived, your email is not confirmed yet, (for some endpoints) you have not finished onboarding in the dashboard, or the key is set to **Read-only** and the request would change data. |
 | `404 Not Found` | No program matches the Account ID. |
 
 ## Security best practices
 
-- Treat the API key like a password: anyone who has it can read your data in the program and change it through the API. That includes adding or deleting referrals, referral links and promo codes, and editing your payout methods and email settings.
+- Treat the API key like a password: anyone who has it can read your data in the program. If the key is set to **Full access**, they can also change it through the API. That includes adding or deleting referrals, referral links and promo codes, and editing your payout methods and email settings.
+- Set the key to **Read-only** when a script or AI tool only needs to read your data.
 - Never put the key in client-side code, public repositories or shared documents.
 - Use HTTPS for all requests.
 - Regenerate the key if you think it has been exposed, and disable API access when you no longer need it.
