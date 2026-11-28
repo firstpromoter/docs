@@ -1,0 +1,82 @@
+---
+title: "Slack app"
+description: "Ask about your affiliate program and make changes from Slack, with your own FirstPromoter permissions."
+---
+
+<Note>
+  The FirstPromoter Slack app is in **beta**. Add it from **Settings › Integrations › Slack** in FirstPromoter.
+</Note>
+
+The FirstPromoter Slack app brings FirstPromoter's AI assistant into your Slack workspace. Your team asks about promoters, referrals, commissions, payouts and reports right in Slack, answered from your live program data, and can make changes, each only after they approve it.
+
+## Example prompts
+
+- "Who are my top 10 promoters by revenue this month?"
+- "Which promoters are waiting for approval?"
+- "How much commission is pending right now, per campaign?"
+- "How is the Spring campaign doing compared with last month?"
+- "Block alex@example.com in the Affiliate Program."
+
+## Add it to Slack
+
+1. In FirstPromoter, open **Settings › Integrations** and find **Slack** under **Communication**.
+2. Click **Add to Slack**, pick your workspace and click **Allow**.
+3. You're back in FirstPromoter with **Connected to &lt;your workspace&gt;**.
+
+You need permission to update integrations. One Slack workspace connects to one FirstPromoter account. On Enterprise Grid, the app can be installed on the whole org; an org admin then adds it to workspaces, and each workspace connects from FirstPromoter.
+
+## Link your account
+
+Each person links their own FirstPromoter account once. The first time you ask the app something, it sends you a private **Link my FirstPromoter account** button:
+
+1. Click it. FirstPromoter opens (sign in if asked).
+2. **Sign in with Slack** as yourself. Slack confirms you are the person the button was sent to, so a forwarded button can't link anyone else.
+3. Back in Slack, your question is answered.
+
+The app answers with your FirstPromoter permissions: it shows only what your role and campaign access let you see in FirstPromoter. Unlink yourself anytime from the app's **Home** tab.
+
+## Ask
+
+- **Direct message**: open **FirstPromoter** in Slack's sidebar (the agent's **Messages** tab) and ask. Suggested prompts are built from your program, such as promoters waiting for approval.
+- **In a channel**: mention `@FirstPromoter`. Answers appear in a thread under your message and are visible to everyone in the channel, so the first time, a linked member allows FirstPromoter in that channel. In a channel, mention it again for a follow-up.
+
+While it works, the thread shows **Working…** with a **Stop** button. Send `help` for a reminder of what it can do.
+
+<Note>
+  The agent's Messages tab needs a paid Slack plan. On free plans, mention `@FirstPromoter` in a channel or use its Home tab. Workspace guests can't use agent apps.
+</Note>
+
+## Make changes
+
+Ask for a change ("block this promoter", "accept these applications", "update the campaign's reward") and the app shows an approval card first: exactly what will change, by name. It runs only when you click the button, as you, and appears in your Activity Log like a change made in the dashboard.
+
+- Only the person who asked can approve or cancel the card. In a channel, the card is visible only to you.
+- If nobody answers within 5 minutes, or you press Stop, nothing changes.
+- Payouts are never sent from Slack.
+
+## Manage
+
+In FirstPromoter, **Settings › Integrations › Slack › Manage** shows:
+
+- **Workspace**: what's connected, by whom and when.
+- **Linked members**: who has linked which Slack user, with **Unlink** (for example when someone leaves).
+- **Channels**: where the app may answer, with **Remove**.
+
+**Disconnect** stops it at once and deletes the workspace's connection, links, channel approvals and its Slack conversations. The app then can't do anything in Slack; to remove it from the workspace's app list too, a Slack admin removes **FirstPromoter** under **Apps** in Slack. Removing the app in Slack first disconnects it the same way.
+
+## AI and your data
+
+- Answers are generated with Anthropic's Claude, from your live FirstPromoter data. Answers can be inaccurate: check important figures in FirstPromoter.
+- Your questions and our answers are kept as assistant conversations, like in-app assistant chats, and are deleted when the workspace disconnects. Slack and FirstPromoter data are never used to train AI models.
+- The app reads only messages sent to it: direct messages and messages that mention it.
+- It uses the company's AI assistant setting and monthly quota, the same as the in-app assistant.
+
+## Troubleshooting
+
+| You see | What to do |
+| --- | --- |
+| "This link has expired" | Ask `@FirstPromoter` again for a new Link button (they last 15 minutes). |
+| "This link isn't yours" | Each person uses their own button: ask the app yourself. |
+| "This link is for another FirstPromoter account" | Switch to the company the workspace is connected to, then open the link again. |
+| "The AI assistant is not available for your account" | Your role can't use the AI assistant, or it's turned off for the company. |
+| No answer in a channel | Mention `@FirstPromoter` (it hears only mentions in channels) and allow the channel if asked. |
